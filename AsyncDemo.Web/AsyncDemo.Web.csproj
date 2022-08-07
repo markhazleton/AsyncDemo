@@ -13,7 +13,12 @@
 		<SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</SourceRevisionId>
 		<AssemblyVersion>6.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<ApplicationIcon>favicon.ico</ApplicationIcon>
 	</PropertyGroup>
+	
+	<ItemGroup>
+	  <Content Include="favicon.ico" />
+	</ItemGroup>
 	
 	<ItemGroup>
 		<PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.2.2" />
