@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:28633",
+      "sslPort": 44342
+    }
+  },
+  "profiles": {
+    "AsyncDemo.Web": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://hellioworldkeyvault.vault.azure.net/",
+        "AZURE_USERNAME": "MAH0190@BSWHealth.org"
+      },
+      "applicationUrl": "https://localhost:7128;http://localhost:5128",
+      "dotnetRunMessages": true
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "home/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VaultUri": "https://hellioworldkeyvault.vault.azure.net/",
+        "AZURE_USERNAME": "MAH0190@BSWHealth.org"
+      }
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/home/",
+      "publishAllPorts": true,
+      "useSSL": true,
+      "environmentVariables": {
+        "VaultUri": "https://hellioworldkeyvault.vault.azure.net/",
+        "AZURE_USERNAME": "MAH0190@BSWHealth.org"
+      }
+    }
+  }
+}

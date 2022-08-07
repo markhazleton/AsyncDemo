@@ -1,0 +1,84 @@
+﻿@model AsyncDemo.Models.MockResults
+@{
+    ViewData["Title"] = "Async Api Polly Page";
+    var bgColor = Model?.ResultValue == "RequestTimeout" ? "red" :"green";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="display-4">Polly Async Api Demo</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <dl style="background-color:@bgColor;color:white;">
+                <dt>Loop Count</dt>
+                <dd>@Model?.LoopCount</dd>
+                <dt>Max Time (ms)</dt>
+                <dd>@Model?.MaxTimeMS</dd>
+                <dt>Result</dt>
+                <dd>@Model?.ResultValue</dd>
+                <dt>RunTime (ms)</dt>
+                <dd>@Model?.RunTimeMS</dd>
+                <dt>Message</dt>
+                <dd>@Model?.Message</dd>
+            </dl>
+        </div>
+        <div class="col-md-4">
+            <div class="text-center">
+                <div class="test-list">
+                    Test the Api with Polly Timeouts
+                    <ul>
+                        <li><a href="/polly?loopCount=35&maxTimeMs=1500">35 Loops, max 1.5 seconds</a></li>
+                        <li><a href="/polly?loopCount=35&maxTimeMs=1000">35 Loops, max 1 second</a></li>
+                        <li><a href="/polly?loopCount=35&maxTimeMs=500">35 Loops, max 1/2 second</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <form class="form-horizontal" action="/polly" method="get">
+                    <fieldset>
+                        <!-- Form Name -->
+                        <legend>Submit Timeout Test</legend>
+                        <!-- Select Basic -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="loopCount">Number of Loops</label>
+                            <div class="col-md-4">
+                                <select id="loopCount" name="loopCount" class="form-control">
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="30">30</option>
+                                    <option value="40">40</option>
+                                    <option value="50">50</option>
+                                    <option value="60">60</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Select Basic -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="maxTimeMs">Max Response Time</label>
+                            <div class="col-md-4">
+                                <select id="maxTimeMs" name="maxTimeMs" class="form-control">
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                    <option value="400">400</option>
+                                    <option value="800">800</option>
+                                    <option value="1600">1600</option>
+                                    <option value="3200">3200</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Button -->
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="singlebutton">Submit Request</label>
+                            <div class="col-md-4">
+                                <button id="singlebutton" name="singlebutton" class="btn btn-primary">Submit Request</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
