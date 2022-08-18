@@ -13,7 +13,7 @@ public class AsyncMockServiceTests
         CancellationToken cancellationToken = default(global::System.Threading.CancellationToken);
 
         // Act
-        var result = await asyncMock.LongRunningCancellableOperation(
+        var result = await AsyncMockService.LongRunningCancellableOperation(
             loop,
             cancellationToken);
 

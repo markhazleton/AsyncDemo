@@ -5,6 +5,7 @@ namespace AsyncDemo.Services;
 /// Samples for Async Methods
 /// Supporting Video: https://channel9.msdn.com/Series/Three-Essential-Tips-for-Async/Three-Essential-Tips-For-Async-Introduction
 /// Supporting Blog: https://johnthiriet.com/configure-await/
+/// https://docs.microsoft.com/en-us/shows/three-essential-tips-for-async/
 /// </summary>
 public class AsyncMockService
 {
@@ -14,9 +15,9 @@ public class AsyncMockService
     /// <returns>The value computed.</returns>
     /// <param name="loop">Number of iterations to do.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
-    public Task<decimal> LongRunningCancellableOperation(int loop, CancellationToken cancellationToken)
+    public static Task<decimal> LongRunningCancellableOperation(int loop, CancellationToken cancellationToken)
     {
-        Task<decimal> task = null;
+        Task<decimal>? task = null;
         // Start a task a return it
         task = Task.Run(() =>
         {
@@ -29,7 +30,9 @@ public class AsyncMockService
                 if (cancellationToken.IsCancellationRequested)
                     throw new TaskCanceledException(task);
 
+
                 cancellationToken.ThrowIfCancellationRequested();
+
 
                 // Do something that takes times.
                 Thread.Sleep(i);

@@ -1,4 +1,9 @@
-﻿public static class Helpers
+﻿namespace AsyncDemo;
+
+/// <summary>
+/// Helpers
+/// </summary>
+public static class Helpers
 {
     public static async Task CancelANonCancellableTaskAsync(this AsyncMockService asyncMock)
     {
@@ -44,7 +49,7 @@
 
         try
         {
-            var longRunningTask = asyncMock.LongRunningCancellableOperation(500, cancellationTokenSource.Token).ConfigureAwait(false);
+            var longRunningTask = AsyncMockService.LongRunningCancellableOperation(500, cancellationTokenSource.Token).ConfigureAwait(false);
             var result = await longRunningTask;
             Console.WriteLine("Result {0}", result);
             Console.WriteLine("Press enter to continue");
@@ -58,14 +63,10 @@
 
     public static async Task ExecuteTaskAsync(this AsyncMockService asyncMock, bool ConfigureAwait)
     {
-        Console.WriteLine($"{nameof(ExecuteTaskAsync)} START ConfigureAwait:{ConfigureAwait}  Thread:{Environment.CurrentManagedThreadId}"   );
+        Console.WriteLine($"{nameof(ExecuteTaskAsync)} START ConfigureAwait:{ConfigureAwait}  Thread:{Environment.CurrentManagedThreadId}");
         Console.WriteLine("Result {0}", await asyncMock.LongRunningOperation(1000).ConfigureAwait(ConfigureAwait));
         Console.WriteLine($"{nameof(ExecuteTaskAsync)} END ConfigureAwait:{ConfigureAwait}  Thread:{Environment.CurrentManagedThreadId}\n");
     }
-
-    public static async Task ExecuteTaskWithTimeoutAsync(TimeSpan timeSpan)
-    {
-    } 
 
     public static async Task ExecuteTaskWithTimeoutAsync(this AsyncMockService asyncMock, TimeSpan timeSpan)
     {
@@ -74,7 +75,7 @@
         {
             try
             {
-                var result = await asyncMock.LongRunningCancellableOperation(500, cancellationTokenSource.Token).ConfigureAwait(false);
+                var result = await AsyncMockService.LongRunningCancellableOperation(500, cancellationTokenSource.Token).ConfigureAwait(false);
                 Console.WriteLine("Result {0}", result);
             }
             catch (TaskCanceledException)

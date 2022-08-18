@@ -1,4 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using AsyncDemo;
+
 Console.WriteLine($"Program Start:  Thread:{Environment.CurrentManagedThreadId}");
 
 var asyncMock = new AsyncMockService();
