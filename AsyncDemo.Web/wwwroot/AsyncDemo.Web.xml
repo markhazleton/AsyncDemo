@@ -169,9 +169,18 @@
             ConfigurationExtensions
             </summary>
         </member>
-        <member name="M:AsyncDemo.Web.Extensions.ConfigurationExtensions.GetStringList(Microsoft.Extensions.Configuration.IConfiguration,System.String,System.String)">
+        <member name="M:AsyncDemo.Web.Extensions.ConfigurationExtensions.GetInt(Microsoft.Extensions.Configuration.IConfiguration,System.String,System.String)">
             <summary>
-            Get a List of string from Configuration
+            
+            </summary>
+            <param name="_config"></param>
+            <param name="configKey"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsyncDemo.Web.Extensions.ConfigurationExtensions.GetIntList(Microsoft.Extensions.Configuration.IConfiguration,System.String,System.String)">
+            <summary>
+            
             </summary>
             <param name="_config"></param>
             <param name="configKey"></param>
@@ -187,9 +196,9 @@
             <param name="defaultValue"></param>
             <returns></returns>
         </member>
-        <member name="M:AsyncDemo.Web.Extensions.ConfigurationExtensions.GetIntList(Microsoft.Extensions.Configuration.IConfiguration,System.String,System.String)">
+        <member name="M:AsyncDemo.Web.Extensions.ConfigurationExtensions.GetStringList(Microsoft.Extensions.Configuration.IConfiguration,System.String,System.String)">
             <summary>
-            
+            Get a List of string from Configuration
             </summary>
             <param name="_config"></param>
             <param name="configKey"></param>
