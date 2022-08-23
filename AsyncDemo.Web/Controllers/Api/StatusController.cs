@@ -22,7 +22,7 @@ public class StatusController : BaseApiController
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    [Route("/")]
+    [Route("")]
     public ApplicationStatus Get()
     {
         return GetApplicationStatus();
@@ -33,7 +33,7 @@ public class StatusController : BaseApiController
     /// </summary>
     /// <returns></returns>
     [HttpGet]
-    [Route("/appsettings")]
+    [Route("appsettings")]
     public object GetAppSettings()
     {
         string[] TestIdList = _config.GetStringList("Async:TestIds");
