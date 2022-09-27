@@ -8,8 +8,15 @@ var builder = WebApplication.CreateBuilder(args);
 var vaultUri = Environment.GetEnvironmentVariable("vaultUri");
 if (!string.IsNullOrEmpty(vaultUri))
 {
-    var keyVaultEndpoint = new Uri(vaultUri);
-    builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
+    try
+    {
+        var keyVaultEndpoint = new Uri(vaultUri);
+        builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
 }
 
 // Add services to the container.
