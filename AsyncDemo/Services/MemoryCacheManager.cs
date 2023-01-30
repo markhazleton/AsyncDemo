@@ -3,39 +3,20 @@ using Microsoft.Extensions.Primitives;
 using System.Collections.Concurrent;
 
 namespace AsyncDemo.Services;
-
-public interface IMemoryCacheManager
-{
-    void Clear();
-    void Dispose();
-    T Get<T>(string key, Func<T> acquire, int? cacheTime = null);
-    IList<string> GetKeys();
-    bool IsSet(string key);
-    bool PerformActionWithLock(string key, TimeSpan expirationTime, Action action);
-    void Remove(string key);
-    void Set(string key, object data, int cacheTime);
-}
-
 public class MemoryCacheManager : IMemoryCacheManager
 {
-    #region Fields
-
-    private readonly IMemoryCache _cache;
 
     /// <summary>
     /// All keys of cache
     /// </summary>
     /// <remarks>Dictionary value indicating whether a key still exists in cache</remarks> 
     protected static readonly ConcurrentDictionary<string, bool> _allKeys;
+    private readonly IMemoryCache _cache;
 
     /// <summary>
     /// Cancellation token for clear cache
     /// </summary>
     protected CancellationTokenSource _cancellationTokenSource;
-
-    #endregion
-
-    #region Ctor
 
     static MemoryCacheManager()
     {
@@ -48,9 +29,48 @@ public class MemoryCacheManager : IMemoryCacheManager
         _cancellationTokenSource = new CancellationTokenSource();
     }
 
-    #endregion
+    /// <summary>
+    /// Remove all keys marked as not existing
+    /// </summary>
+    private void ClearKeys()
+    {
+        foreach (var key in _allKeys.Where(p => !p.Value).Select(p => p.Key).ToList())
+        {
+            RemoveKey(key);
+        }
+    }
 
-    #region Utilities
+    /// <summary>
+    /// Post eviction
+    /// </summary>
+    /// <param name="key">Key of cached item</param>
+    /// <param name="value">Value of cached item</param>
+    /// <param name="reason">Eviction reason</param>
+    /// <param name="state">State</param>
+    private void PostEviction(object key, object value, EvictionReason reason, object state)
+    {
+        //if cached item just change, then nothing doing
+        if (reason == EvictionReason.Replaced)
+            return;
+
+        //try to remove all keys marked as not existing
+        ClearKeys();
+
+        //try to remove this key from dictionary
+        TryRemoveKey(key.ToString());
+    }
+
+    /// <summary>
+    /// Add key to dictionary
+    /// </summary>
+    /// <param name="key">Key of cached item</param>
+    /// <returns>Itself key</returns>
+    protected string AddKey(string key)
+    {
+        _allKeys.TryAdd(key, true);
+        return key;
+    }
+
 
     /// <summary>
     /// Create entry options to item of memory cache
@@ -71,17 +91,6 @@ public class MemoryCacheManager : IMemoryCacheManager
     }
 
     /// <summary>
-    /// Add key to dictionary
-    /// </summary>
-    /// <param name="key">Key of cached item</param>
-    /// <returns>Itself key</returns>
-    protected string AddKey(string key)
-    {
-        _allKeys.TryAdd(key, true);
-        return key;
-    }
-
-    /// <summary>
     /// Remove key from dictionary
     /// </summary>
     /// <param name="key">Key of cached item</param>
@@ -91,12 +100,6 @@ public class MemoryCacheManager : IMemoryCacheManager
         TryRemoveKey(key);
         return key;
     }
-
-    /// <summary>
-    /// Get All Keys
-    /// </summary>
-    /// <returns></returns>
-    public IList<string> GetKeys() => _allKeys.Keys.ToList();
 
 
     /// <summary>
@@ -112,39 +115,27 @@ public class MemoryCacheManager : IMemoryCacheManager
     }
 
     /// <summary>
-    /// Remove all keys marked as not existing
+    /// Clear all cache data
     /// </summary>
-    private void ClearKeys()
+    public virtual void Clear()
     {
-        foreach (var key in _allKeys.Where(p => !p.Value).Select(p => p.Key).ToList())
-        {
-            RemoveKey(key);
-        }
+        //send cancellation request
+        _cancellationTokenSource.Cancel();
+
+        //releases all resources used by this cancellation token
+        _cancellationTokenSource.Dispose();
+
+        //recreate cancellation token
+        _cancellationTokenSource = new CancellationTokenSource();
     }
 
     /// <summary>
-    /// Post eviction (срабытывает тогда когда ключ key инвалидируется)
+    /// Dispose cache manager
     /// </summary>
-    /// <param name="key">Key of cached item</param>
-    /// <param name="value">Value of cached item</param>
-    /// <param name="reason">Eviction reason</param>
-    /// <param name="state">State</param>
-    private void PostEviction(object key, object value, EvictionReason reason, object state)
+    public virtual void Dispose()
     {
-        //if cached item just change, then nothing doing
-        if (reason == EvictionReason.Replaced)
-            return;
-
-        //try to remove all keys marked as not existing
-        ClearKeys();
-
-        //try to remove this key from dictionary
-        TryRemoveKey(key.ToString());
+        //nothing special
     }
-
-    #endregion
-
-    #region Methods
 
     /// <summary>
     /// Get a cached item. If it's not in the cache yet, then load and cache it
@@ -171,18 +162,10 @@ public class MemoryCacheManager : IMemoryCacheManager
     }
 
     /// <summary>
-    /// Adds the specified key and object to the cache
+    /// Get All Keys
     /// </summary>
-    /// <param name="key">Key of cached item</param>
-    /// <param name="data">Value for caching</param>
-    /// <param name="cacheTime">Cache time in minutes</param>
-    public virtual void Set(string key, object data, int cacheTime)
-    {
-        if (data != null)
-        {
-            _cache.Set(AddKey(key), data, GetMemoryCacheEntryOptions(TimeSpan.FromMinutes(cacheTime)));
-        }
-    }
+    /// <returns></returns>
+    public IList<string> GetKeys() => _allKeys.Keys.ToList();
 
     /// <summary>
     /// Gets a value indicating whether the value associated with the specified key is cached
@@ -232,30 +215,18 @@ public class MemoryCacheManager : IMemoryCacheManager
         _cache.Remove(RemoveKey(key));
     }
 
-
-
     /// <summary>
-    /// Clear all cache data
+    /// Adds the specified key and object to the cache
     /// </summary>
-    public virtual void Clear()
+    /// <param name="key">Key of cached item</param>
+    /// <param name="data">Value for caching</param>
+    /// <param name="cacheTime">Cache time in minutes</param>
+    public virtual void Set(string key, object data, int cacheTime)
     {
-        //send cancellation request
-        _cancellationTokenSource.Cancel();
-
-        //releases all resources used by this cancellation token
-        _cancellationTokenSource.Dispose();
-
-        //recreate cancellation token
-        _cancellationTokenSource = new CancellationTokenSource();
+        if (data != null)
+        {
+            _cache.Set(AddKey(key), data, GetMemoryCacheEntryOptions(TimeSpan.FromMinutes(cacheTime)));
+        }
     }
 
-    /// <summary>
-    /// Dispose cache manager
-    /// </summary>
-    public virtual void Dispose()
-    {
-        //nothing special
-    }
-
-    #endregion
 }

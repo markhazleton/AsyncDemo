@@ -130,7 +130,7 @@
             
             </summary>
         </member>
-        <member name="M:AsyncDemo.Web.Controllers.OpenWeatherController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.HomeController},OpenWeatherMapClient.Interfaces.IOpenWeatherMapClient,Microsoft.Extensions.Caching.Memory.IMemoryCache,AsyncDemo.Services.IMemoryCacheManager)">
+        <member name="M:AsyncDemo.Web.Controllers.OpenWeatherController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.HomeController},OpenWeatherMapClient.Interfaces.IOpenWeatherMapClient,Microsoft.Extensions.Caching.Memory.IMemoryCache)">
             <summary>
             
             </summary>

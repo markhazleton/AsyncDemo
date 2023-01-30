@@ -6,7 +6,7 @@ namespace AsyncDemo.Models;
 /// </summary>
 public class WeatherForecast
 {
-    private Random rng = new Random();
+    private Random rng = new();
 
     /// <summary>
     ///

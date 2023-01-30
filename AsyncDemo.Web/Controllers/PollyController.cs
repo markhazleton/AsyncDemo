@@ -24,7 +24,7 @@ public class PollyController : BaseController
     /// <param name="maxTimeMs"></param>
     /// <returns></returns>
     [HttpGet]
-    public async Task<IActionResult> Index(int loopCount = 0, int maxTimeMs = 0)
+    public async Task<IActionResult> Index(int loopCount = 1, int maxTimeMs = 1000)
     {
         // Start timing.
         stopWatch.Reset();

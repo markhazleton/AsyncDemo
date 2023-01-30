@@ -6,7 +6,6 @@ public class OpenWeatherController : BaseController
 {
     private const string LocationCacheKey = "LocationCacheKey";
     private readonly IMemoryCache _cache;
-    private readonly IMemoryCacheManager _cacheManager;
     private readonly ILogger<HomeController> _logger;
     private readonly IOpenWeatherMapClient _weatherService;
 
@@ -16,12 +15,11 @@ public class OpenWeatherController : BaseController
     /// <param name="logger"></param>
     /// <param name="weatherService"></param>
     /// <param name="cache"></param>
-    public OpenWeatherController(ILogger<HomeController> logger, IOpenWeatherMapClient weatherService, IMemoryCache cache, IMemoryCacheManager cacheManager)
+    public OpenWeatherController(ILogger<HomeController> logger, IOpenWeatherMapClient weatherService, IMemoryCache cache)
     {
         _logger = logger;
         _weatherService = weatherService;
         _cache = cache;
-        _cacheManager = cacheManager;
     }
     private string VerifyLocation(string? location)
     {
@@ -87,6 +85,8 @@ public class OpenWeatherController : BaseController
         var myList = GetCurrentWeatherList();
         string theLocation = VerifyLocation(location);
 
+        CallEndpointMultipleTimes();
+
         if (myList.Where(w => w.Location?.Name == theLocation).Any())
         {
             // Location is already in list
@@ -105,5 +105,49 @@ public class OpenWeatherController : BaseController
         // await GetCachedWeather(myList);
 
         return View(myList);
+    }
+
+
+    public async Task CallEndpointMultipleTimes(int maxThreads = 10, int itterationCount = 100, string endpoint = "https://asyncdemoweb.azurewebsites.net/status")
+    {
+        // Create a SemaphoreSlim with a maximum of 10 concurrent requests
+        SemaphoreSlim semaphore = new(maxThreads);
+
+        // Create a list of tasks to make the 1000 REST calls
+        List<Task> tasks = new();
+        for (int i = 0; i < itterationCount; i++)
+        {
+            // Acquire the semaphore before making the request
+            await semaphore.WaitAsync();
+
+            // Create a task to make the request
+            tasks.Add(Task.Run(async () =>
+            {
+                try
+                {
+                    // Make the REST call
+                    await GetAsync(endpoint = "https://asyncdemoweb.azurewebsites.net/status");
+                }
+                finally
+                {
+                    // Release the semaphore
+                    semaphore.Release();
+                }
+            }));
+        }
+
+        // Wait for all tasks to complete
+        await Task.WhenAll(tasks);
+
+        // Log a message when all calls are complete
+        Console.WriteLine("All calls complete");
+    }
+
+    public async Task<string> GetAsync(string url)
+    {
+        using var httpClient = HttpClientFactory.Create();
+        var response = await httpClient.GetAsync(url);
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStringAsync();
     }
 }
