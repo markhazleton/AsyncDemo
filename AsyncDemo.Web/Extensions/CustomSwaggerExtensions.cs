@@ -27,7 +27,7 @@ public static class CustomSwaggerExtensions
                 new OpenApiContact
                 {
                     Name = "Mark Hazleton",
-                    Url = new Uri("https://linkedin.com/in/markhazleton/"),
+                    Url = new Uri("https://markhazleton.controlorigins.com/"),
                     Email = "mark.hazleton@controlorigins.com",
                 },
                                License = new OpenApiLicense { Name = "MIT", },

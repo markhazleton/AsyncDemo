@@ -29,6 +29,7 @@
 		<PackageReference Include="Polly" Version="7.2.3" />
 		<PackageReference Include="Polly.Extensions.Http" Version="3.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.10.0" />
 	</ItemGroup>
 
 	<ItemGroup>

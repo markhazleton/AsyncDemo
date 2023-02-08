@@ -1,10 +1,11 @@
+
 // Helpful URLs
 // https://www.wardvanbesien.info/post/using-key-vault-when-developing-locally/ 
 // 
 using Azure.Identity;
+using Westwind.AspNetCore.Markdown;
 
 var builder = WebApplication.CreateBuilder(args);
-
 var vaultUri = Environment.GetEnvironmentVariable("vaultUri");
 if (!string.IsNullOrEmpty(vaultUri))
 {
@@ -29,6 +30,7 @@ builder.Services.AddHealthChecks();
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.TryAddSingleton<IMemoryCacheManager, MemoryCacheManager>();
 builder.Services.AddCustomSwagger();
+builder.Services.AddMarkdown();
 builder.Services.AddSession();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
@@ -58,6 +60,7 @@ app.UseCustomSwagger();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseMarkdown();
 app.MapHealthChecks("/health");
 app.UseStaticFiles();
 app.UseMvc(routes =>
