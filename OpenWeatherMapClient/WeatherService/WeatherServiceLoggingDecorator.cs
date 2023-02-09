@@ -7,7 +7,6 @@ public class WeatherServiceLoggingDecorator : IOpenWeatherMapClient
         _innerWeatherService = weatherService;
         _logger = logger;
     }
-
     private IOpenWeatherMapClient _innerWeatherService;
     private ILogger<WeatherServiceLoggingDecorator> _logger;
 
@@ -16,11 +15,10 @@ public class WeatherServiceLoggingDecorator : IOpenWeatherMapClient
         var sw = Stopwatch.StartNew();
         var currentWeather = await _innerWeatherService.GetCurrentWeatherAsync(location);
         sw.Stop();
-        var elapsedMillis = sw.ElapsedMilliseconds;
-        _logger.LogWarning("Retrieved weather data for {location} - Elapsed ms: {elapsedMillis} {currentWeather}", location, elapsedMillis, currentWeather?.Location?.Name);
-        return currentWeather;
+        var elapsedMS = sw.ElapsedMilliseconds;
+        _logger.LogWarning("Retrieved weather data for {location} - Elapsed ms: {elapsedMS} {currentWeather}", location, elapsedMS, currentWeather?.Location?.Name);
+        return currentWeather ?? new CurrentWeather();
     }
-
     public async Task<LocationForecast> GetForecastAsync(string location)
     {
         return await _innerWeatherService.GetForecastAsync(location);

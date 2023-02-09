@@ -2,6 +2,7 @@
 // Helpful URLs
 // https://www.wardvanbesien.info/post/using-key-vault-when-developing-locally/ 
 // 
+using AsyncDemo.HttpGetCall;
 using Azure.Identity;
 using Westwind.AspNetCore.Markdown;
 
@@ -34,9 +35,21 @@ builder.Services.AddMarkdown();
 builder.Services.AddSession();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
+builder.Services.AddScoped<IHttpGetCallService>(serviceProvider =>
+{
+    var logger = serviceProvider.GetRequiredService<ILogger<HttpGetCallService>>();
+    var telemetryLogger = serviceProvider.GetRequiredService<ILogger<HttpGetCallServiceTelemetry>>();
+    var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
+    IHttpGetCallService baseService = new HttpGetCallService(logger, httpClientFactory);
+    IHttpGetCallService telemetryService = new HttpGetCallServiceTelemetry(telemetryLogger, baseService);
+    return telemetryService;
+});
+
+
+
 builder.Services.AddScoped<IOpenWeatherMapClient>(serviceProvider =>
 {
-    String apiKey = builder.Configuration["OpenWeatherMapApiKey"];
+    String apiKey = builder.Configuration["OpenWeatherMapApiKey"] ?? "KEYMISSING";
     var logger = serviceProvider.GetRequiredService<ILogger<WeatherServiceClient>>();
     var loggerLogging = serviceProvider.GetRequiredService<ILogger<WeatherServiceLoggingDecorator>>();
     var loggerCaching = serviceProvider.GetRequiredService<ILogger<WeatherServiceCachingDecorator>>();

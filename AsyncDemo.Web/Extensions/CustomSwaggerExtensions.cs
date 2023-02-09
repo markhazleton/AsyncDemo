@@ -18,20 +18,20 @@ public static class CustomSwaggerExtensions
         services.AddSwaggerGen(cfg =>
         {
             cfg.SwaggerDoc("v1",
-                           new OpenApiInfo
-                           {
-                               Title = "AsyncDemo.Web API",
-                               Version = "v1",
-                               Description = "AsyncDemo.Web API built with ASP.NET 6.0 to show how to create RESTful services using a decoupled, maintainable architecture. <br/><a href='/'>Back To Home</a>",
-                               Contact =
-                new OpenApiContact
+                new OpenApiInfo
                 {
-                    Name = "Mark Hazleton",
-                    Url = new Uri("https://markhazleton.controlorigins.com/"),
-                    Email = "mark.hazleton@controlorigins.com",
-                },
-                               License = new OpenApiLicense { Name = "MIT", },
-                           });
+                    Title = "AsyncDemo.Web API",
+                    Version = "v1",
+                    Description = "AsyncDemo.Web API built with ASP.NET 6.0 to show how to create RESTful services using a decoupled, maintainable architecture. <br/><a href='/'>Back To Home</a>",
+                    Contact =
+                    new OpenApiContact
+                    {
+                        Name = "Mark Hazleton",
+                        Url = new Uri("https://markhazleton.controlorigins.com/"),
+                        Email = "mark.hazleton@controlorigins.com",
+                    },
+                    License = new OpenApiLicense { Name = "MIT", },
+                });
 
             var xmlFile = $"AsyncDemo.Web.xml";
             string xmlPath = String.Empty;

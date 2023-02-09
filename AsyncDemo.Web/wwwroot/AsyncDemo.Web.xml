@@ -108,6 +108,33 @@
             Base Controller Constructor
             </summary>
         </member>
+        <member name="T:AsyncDemo.Web.Controllers.BulkCallsController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AsyncDemo.Web.Controllers.BulkCallsController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.BulkCallsController},AsyncDemo.HttpGetCall.IHttpGetCallService)">
+            <summary>
+            
+            </summary>
+            <param name="logger"></param>
+            <param name="getCallService"></param>
+        </member>
+        <member name="M:AsyncDemo.Web.Controllers.BulkCallsController.CallEndpointMultipleTimes(System.Int32,System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="maxThreads"></param>
+            <param name="itterationCount"></param>
+            <param name="endpoint"></param>
+            <returns></returns>
+        </member>
+        <member name="M:AsyncDemo.Web.Controllers.BulkCallsController.Index">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:AsyncDemo.Web.Controllers.HomeController">
             <summary>
             Home Controller
@@ -253,6 +280,11 @@
         <member name="T:AsyncDemo.Web.Models.ApplicationStatus">
             <summary>
             ApplicationStatus
+            </summary>
+        </member>
+        <member name="M:AsyncDemo.Web.Models.ApplicationStatus.#ctor">
+            <summary>
+            
             </summary>
         </member>
         <member name="M:AsyncDemo.Web.Models.ApplicationStatus.#ctor(System.Reflection.Assembly)">

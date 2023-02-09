@@ -9,6 +9,13 @@ public sealed class ApplicationStatus
     /// <summary>
     /// 
     /// </summary>
+    public ApplicationStatus()
+    {
+
+    }
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="assembly"></param>
     public ApplicationStatus(Assembly assembly)
     {

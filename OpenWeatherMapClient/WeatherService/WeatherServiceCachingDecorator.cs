@@ -27,7 +27,7 @@ public class WeatherServiceCachingDecorator : IOpenWeatherMapClient
             currentWeather = await _innerWeatehrService.GetCurrentWeatherAsync(location);
             if (currentWeather.Success)
             {
-                if (location == currentWeather?.Location?.Name)
+                if (location.ToLower() == currentWeather?.Location?.Name?.ToLower())
                 {
                     _cache.Set(cacheKey, currentWeather, TimeSpan.FromMinutes(90));
                 }

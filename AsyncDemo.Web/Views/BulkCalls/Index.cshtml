@@ -1,0 +1,41 @@
+﻿@model IEnumerable<AsyncDemo.HttpGetCall.HttpGetCallResults>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Iteration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElapsedMilliseconds)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompletionDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Iteration)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.ElapsedMilliseconds)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.CompletionDate)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

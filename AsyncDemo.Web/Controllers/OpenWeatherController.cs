@@ -74,7 +74,6 @@ public class OpenWeatherController : BaseController
         return theList ?? new List<CurrentWeather>();
     }
 
-
     /// <summary>
     /// 
     /// </summary>
@@ -85,11 +84,9 @@ public class OpenWeatherController : BaseController
         var myList = GetCurrentWeatherList();
         string theLocation = VerifyLocation(location);
 
-        CallEndpointMultipleTimes();
-
         if (myList.Where(w => w.Location?.Name == theLocation).Any())
         {
-            // Location is already in list
+            _logger.LogInformation("Location {theLocation} is already in the list", theLocation);
         }
         else
         {
@@ -97,57 +94,13 @@ public class OpenWeatherController : BaseController
             if (!conditions.Success)
             {
                 conditions.ErrorMessage = $"{conditions.ErrorMessage} received for location:{theLocation}";
+                _logger.LogError(conditions.ErrorMessage);
             }
             myList = AddCurrentWeatherList(conditions);
         }
-
-
-        // await GetCachedWeather(myList);
-
         return View(myList);
     }
 
 
-    public async Task CallEndpointMultipleTimes(int maxThreads = 10, int itterationCount = 100, string endpoint = "https://asyncdemoweb.azurewebsites.net/status")
-    {
-        // Create a SemaphoreSlim with a maximum of 10 concurrent requests
-        SemaphoreSlim semaphore = new(maxThreads);
 
-        // Create a list of tasks to make the 1000 REST calls
-        List<Task> tasks = new();
-        for (int i = 0; i < itterationCount; i++)
-        {
-            // Acquire the semaphore before making the request
-            await semaphore.WaitAsync();
-
-            // Create a task to make the request
-            tasks.Add(Task.Run(async () =>
-            {
-                try
-                {
-                    // Make the REST call
-                    await GetAsync(endpoint = "https://asyncdemoweb.azurewebsites.net/status");
-                }
-                finally
-                {
-                    // Release the semaphore
-                    semaphore.Release();
-                }
-            }));
-        }
-
-        // Wait for all tasks to complete
-        await Task.WhenAll(tasks);
-
-        // Log a message when all calls are complete
-        Console.WriteLine("All calls complete");
-    }
-
-    public async Task<string> GetAsync(string url)
-    {
-        using var httpClient = HttpClientFactory.Create();
-        var response = await httpClient.GetAsync(url);
-        response.EnsureSuccessStatusCode();
-        return await response.Content.ReadAsStringAsync();
-    }
 }
