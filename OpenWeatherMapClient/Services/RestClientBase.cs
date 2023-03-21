@@ -96,7 +96,7 @@ public abstract class RestClientBase : IDisposable, IRestClientBase
         else
         {
             _logger.LogError("Bad Response({}) from {}:{}", response.StatusCode, response.RequestMessage.RequestUri, response);
-            IsError=true;
+            IsError = true;
             Status = response?.ReasonPhrase?.ToString() ?? string.Empty;
         }
         return default;

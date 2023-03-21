@@ -49,7 +49,7 @@ public class OpenWeatherController : BaseController
         {
             theList = new List<CurrentWeather>();
         }
-        _cache.Set<List<CurrentWeather>>("CurrentWeatherList", theList ?? new List<CurrentWeather>(), TimeSpan.FromMinutes(30));
+        _cache.Set("CurrentWeatherList", theList ?? new List<CurrentWeather>(), TimeSpan.FromMinutes(30));
         return theList ?? new List<CurrentWeather>();
     }
     private List<CurrentWeather> AddCurrentWeatherList(CurrentWeather currentWeather)

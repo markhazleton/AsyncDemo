@@ -11,7 +11,6 @@ global using OpenWeatherMapClient.WeatherService;
 global using Polly;
 global using Polly.Extensions.Http;
 global using Polly.Retry;
-global using System.Collections;
 global using System.Diagnostics;
 global using System.Globalization;
 global using System.Net;

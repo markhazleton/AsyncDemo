@@ -6,16 +6,16 @@ public class WeatherServiceClient : RestClientBase, IOpenWeatherMapClient
     private string _apiKey;
     private readonly ILogger<WeatherServiceClient> _logger;
 
-    public WeatherServiceClient(String apiKey, IHttpClientFactory clientFactory, ILogger<WeatherServiceClient> logger) : base("http://api.openweathermap.org", "OpenWeatherMap", clientFactory,logger)
+    public WeatherServiceClient(String apiKey, IHttpClientFactory clientFactory, ILogger<WeatherServiceClient> logger) : base("http://api.openweathermap.org", "OpenWeatherMap", clientFactory, logger)
     {
         _apiKey = apiKey;
-        _logger = logger;   
+        _logger = logger;
     }
 
     private CurrentWeather MapCurrentConditionsResponse(CurrentConditionsResponse apiResponse)
     {
-        if (apiResponse == null) return new CurrentWeather() 
-        { 
+        if (apiResponse == null) return new CurrentWeather()
+        {
             ErrorMessage = "Null received from Open Weather Map API",
             Success = false
         };

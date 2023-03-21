@@ -74,8 +74,8 @@ public class RemoteController : BaseApiController
             return StatusCode((int)HttpStatusCode.RequestTimeout, myResult);
         }
 
-        myResult.Message = succeedResults.FirstOrDefault()?.Message??String.Empty;
-        myResult.ResultValue = succeedResults.FirstOrDefault()?.ResultValue??String.Empty;
+        myResult.Message = succeedResults.FirstOrDefault()?.Message ?? String.Empty;
+        myResult.ResultValue = succeedResults.FirstOrDefault()?.ResultValue ?? String.Empty;
         return Ok(myResult);
     }
 }
