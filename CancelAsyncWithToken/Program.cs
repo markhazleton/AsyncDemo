@@ -37,13 +37,29 @@ internal class Program
     {
         Console.WriteLine("Application started.");
         s_cts.CancelAfter(millisecondsDelay: MillisecondsDelay);
-        await SumPageSizesAsync();
+        try
+        {
+            await SumPageSizesAsync(s_cts.Token);
+        }
+        catch (TaskCanceledException ex)
+        {
+            Console.WriteLine($"Main:TaskCanceledException.{ex.Message}");
+        }
+        catch (OperationCanceledException ex)
+        {
+            Console.WriteLine($"Main:OperationCanceledException.{ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Main:Exception.{ex.Message}");
+        }
         Console.WriteLine("Application ending.");
         Console.ReadKey();
     }
 
-    private static async Task SumPageSizesAsync()
+    private static async Task SumPageSizesAsync(CancellationToken ct)
     {
+        ct.ThrowIfCancellationRequested();
         var stopwatch = Stopwatch.StartNew();
         int total = 0;
         int docCount = 0;
@@ -51,14 +67,18 @@ internal class Program
         {
             foreach (string url in s_urlList)
             {
-                int contentLength = await ProcessUrlAsync(url, s_client, s_cts.Token);
+                Thread.Sleep(1000);
+                ct.ThrowIfCancellationRequested();
+
+                int contentLength = await ProcessUrlAsync(url, s_client, ct);
+
                 total += contentLength;
                 docCount++;
             }
         }
         catch (TaskCanceledException)
         {
-            Console.WriteLine($"\nTasks cancelled: timed out.\n{docCount} of {s_urlList.Count()} pages counted.");
+            Console.WriteLine($"\nSumPageSizesAsync:TaskCanceledException: timed out.\n{docCount} of {s_urlList.Count()} pages counted.");
         }
         stopwatch.Stop();
 
