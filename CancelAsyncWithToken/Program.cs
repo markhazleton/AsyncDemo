@@ -90,7 +90,7 @@ internal class Program
     private static async Task<int> ProcessUrlAsync(string url, HttpClient client, CancellationToken token)
     {
         HttpResponseMessage response = await client.GetAsync(url, token);
-        byte[] content = await response.Content.ReadAsByteArrayAsync().ConfigureAwait(true);
+        byte[] content = await response.Content.ReadAsByteArrayAsync(token).ConfigureAwait(true);
         Console.WriteLine($"{url,-60} {content.Length,10:#,#}");
         return content.Length;
     }
