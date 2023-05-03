@@ -3,6 +3,9 @@ Various demos, tips and tricks for using async in C#
 
 Sample code for making and canceling Async Calls. 
 
+Cancellation Token Article
+[https://markhazleton.controlorigins.com/cancellation-token.html](https://markhazleton.controlorigins.com/cancellation-token.html)
+
 Sample source code for the following blog post 
 [https://johnthiriet.com/cancel-asynchronous-operation-in-csharp/](https://johnthiriet.com/cancel-asynchronous-operation-in-csharp/)
 
