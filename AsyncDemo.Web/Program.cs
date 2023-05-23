@@ -46,7 +46,7 @@ builder.Services.AddScoped<IHttpGetCallService>(serviceProvider =>
 });
 
 
-
+// Register the OpenWeatherMapClient with Decorator Pattern
 builder.Services.AddScoped<IOpenWeatherMapClient>(serviceProvider =>
 {
     String apiKey = builder.Configuration["OpenWeatherMapApiKey"] ?? "KEYMISSING";
