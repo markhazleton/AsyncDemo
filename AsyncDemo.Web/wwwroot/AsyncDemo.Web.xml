@@ -9,6 +9,12 @@
             Base for all Api Controllers in this project
             </summary>
         </member>
+        <member name="M:AsyncDemo.Web.Controllers.Api.BaseApiController.#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="memoryCache"></param>
+        </member>
         <member name="M:AsyncDemo.Web.Controllers.Api.BaseApiController.GetApplicationStatus">
             <summary>
             GetApplicationStatus
@@ -20,7 +26,7 @@
             Remote Server MOCK
             </summary>
         </member>
-        <member name="M:AsyncDemo.Web.Controllers.Api.RemoteController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.Api.RemoteController})">
+        <member name="M:AsyncDemo.Web.Controllers.Api.RemoteController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.Api.RemoteController},Microsoft.Extensions.Caching.Memory.IMemoryCache)">
              <summary>
             
              </summary>
@@ -40,7 +46,7 @@
             Status Controller
             </summary>
         </member>
-        <member name="M:AsyncDemo.Web.Controllers.Api.StatusController.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+        <member name="M:AsyncDemo.Web.Controllers.Api.StatusController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Caching.Memory.IMemoryCache)">
             <summary>
             Status Controller
             </summary>

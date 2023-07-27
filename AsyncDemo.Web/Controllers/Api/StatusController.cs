@@ -13,7 +13,7 @@ public class StatusController : BaseApiController
     /// Status Controller
     /// </summary>
     /// <param name="configuration"></param>
-    public StatusController(IConfiguration configuration)
+    public StatusController(IConfiguration configuration, IMemoryCache memoryCache) : base(memoryCache)
     {
         this._config = configuration;
     }
