@@ -1,35 +1,34 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
-namespace AsyncDemo.HttpGetCall
-{
-    public class HttpGetCallServiceTelemetry : IHttpGetCallService
-    {
-        private readonly ILogger<HttpGetCallServiceTelemetry> _logger;
-        private readonly IHttpGetCallService _service;
+namespace AsyncDemo.HttpGetCall;
 
-        public HttpGetCallServiceTelemetry(ILogger<HttpGetCallServiceTelemetry> logger, IHttpGetCallService service)
+public class HttpGetCallServiceTelemetry : IHttpGetCallService
+{
+    private readonly ILogger<HttpGetCallServiceTelemetry> _logger;
+    private readonly IHttpGetCallService _service;
+
+    public HttpGetCallServiceTelemetry(ILogger<HttpGetCallServiceTelemetry> logger, IHttpGetCallService service)
+    {
+        _logger = logger;
+        _service = service;
+    }
+    public async Task<HttpGetCallResults> GetAsync<T>(HttpGetCallResults statusCall)
+    {
+        Stopwatch sw = new();
+        sw.Start();
+        var response = new HttpGetCallResults(statusCall);
+        try
         {
-            _logger = logger;
-            _service = service;
+            response = await _service.GetAsync<T>(statusCall);
         }
-        public async Task<HttpGetCallResults> GetAsync<T>(HttpGetCallResults statusCall)
+        catch (Exception ex)
         {
-            Stopwatch sw = new();
-            sw.Start();
-            var response = new HttpGetCallResults(statusCall);
-            try
-            {
-                response = await _service.GetAsync<T>(statusCall);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogCritical("Telemetry:GetAsync:Exception", ex.Message);
-            }
-            sw.Stop();
-            response.ElapsedMilliseconds = sw.ElapsedMilliseconds;
-            response.CompletionDate = DateTime.Now;
-            return response;
+            _logger.LogCritical("Telemetry:GetAsync:Exception", ex.Message);
         }
+        sw.Stop();
+        response.ElapsedMilliseconds = sw.ElapsedMilliseconds;
+        response.CompletionDate = DateTime.Now;
+        return response;
     }
 }

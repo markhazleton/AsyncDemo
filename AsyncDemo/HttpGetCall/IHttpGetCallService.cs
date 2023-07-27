@@ -1,8 +1,7 @@
 ﻿
-namespace AsyncDemo.HttpGetCall
+namespace AsyncDemo.HttpGetCall;
+
+public interface IHttpGetCallService
 {
-    public interface IHttpGetCallService
-    {
-        Task<HttpGetCallResults> GetAsync<T>(HttpGetCallResults statusCall);
-    }
+    Task<HttpGetCallResults> GetAsync<T>(HttpGetCallResults statusCall);
 }

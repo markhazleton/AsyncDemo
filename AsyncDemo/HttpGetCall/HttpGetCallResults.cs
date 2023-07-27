@@ -1,8 +1,5 @@
-﻿
-using System.ComponentModel.DataAnnotations;
-
+﻿using System.ComponentModel.DataAnnotations;
 namespace AsyncDemo.HttpGetCall;
-
 /// <summary>
 /// 
 /// </summary>

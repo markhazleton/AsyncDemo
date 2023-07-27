@@ -76,7 +76,7 @@ public class RemoteController : BaseApiController
 
         myResult.Message = succeedResults.FirstOrDefault()?.Message ?? String.Empty;
         myResult.ResultValue = succeedResults.FirstOrDefault()?.ResultValue ?? String.Empty;
-        _logger.LogInformation("GetResults:OK",myResult);
+        _logger.LogInformation("GetResults:OK", myResult);
         return Ok(myResult);
     }
 }
