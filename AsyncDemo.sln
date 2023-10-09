@@ -9,12 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncDemo.Tests", "AsyncDem
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{50310230-0E60-41C1-91B1-AB072CCC3699}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\main_asyncdemoweb.yml = .github\workflows\main_asyncdemoweb.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F7553FB1-47B5-4592-848A-01C1476D296E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncDemo.Console", "AsyncDemo.Console\AsyncDemo.Console.csproj", "{A2862922-D76B-48BC-86C0-430CD7690F2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncDemo.Console", "AsyncDemo.Console\AsyncDemo.Console.csproj", "{A2862922-D76B-48BC-86C0-430CD7690F2F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenWeatherMapClient", "OpenWeatherMapClient\OpenWeatherMapClient.csproj", "{7DFDACA1-F6BE-4CF2-8AF9-2C50E4373EC5}"
 EndProject
