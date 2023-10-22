@@ -15,7 +15,7 @@ public class RemoteController : BaseApiController
     ///
     /// </summary>
     /// <param name="logger"></param>
-    public RemoteController(ILogger<RemoteController> logger, IMemoryCache memoryCache): base(memoryCache)
+    public RemoteController(ILogger<RemoteController> logger, IMemoryCache memoryCache) : base(memoryCache)
     {
         _logger = logger;
     }

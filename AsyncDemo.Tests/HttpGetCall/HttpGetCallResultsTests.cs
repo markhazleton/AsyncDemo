@@ -1,5 +1,4 @@
 ﻿using AsyncDemo.HttpGetCall;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AsyncDemo.Tests.HttpGetCall;
 
