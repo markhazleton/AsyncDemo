@@ -32,7 +32,7 @@ public class MemoryCacheManager : IMemoryCacheManager
     /// <summary>
     /// Remove all keys marked as not existing
     /// </summary>
-    private void ClearKeys()
+    private static void ClearKeys()
     {
         foreach (var key in _allKeys.Where(p => !p.Value).Select(p => p.Key).ToList())
         {
@@ -57,7 +57,7 @@ public class MemoryCacheManager : IMemoryCacheManager
         ClearKeys();
 
         //try to remove this key from dictionary
-        TryRemoveKey(key.ToString());
+        TryRemoveKey(key?.ToString() ?? string.Empty);
     }
 
     /// <summary>
@@ -65,7 +65,7 @@ public class MemoryCacheManager : IMemoryCacheManager
     /// </summary>
     /// <param name="key">Key of cached item</param>
     /// <returns>Itself key</returns>
-    protected string AddKey(string key)
+    protected static string AddKey(string key)
     {
         _allKeys.TryAdd(key, true);
         return key;
@@ -95,7 +95,7 @@ public class MemoryCacheManager : IMemoryCacheManager
     /// </summary>
     /// <param name="key">Key of cached item</param>
     /// <returns>Itself key</returns>
-    protected string RemoveKey(string key)
+    protected static string RemoveKey(string key)
     {
         TryRemoveKey(key);
         return key;
@@ -106,7 +106,7 @@ public class MemoryCacheManager : IMemoryCacheManager
     /// Try to remove a key from dictionary, or mark a key as not existing in cache
     /// </summary>
     /// <param name="key">Key of cached item</param>
-    protected void TryRemoveKey(string key)
+    protected static void TryRemoveKey(string key)
     {
         //try to remove key from dictionary
         if (!_allKeys.TryRemove(key, out _))
@@ -119,6 +119,12 @@ public class MemoryCacheManager : IMemoryCacheManager
     /// </summary>
     public virtual void Clear()
     {
+        foreach (var key in _allKeys.Keys.ToList())
+        {
+            _cache.Remove(key);
+        }
+        _allKeys.Clear(); _allKeys.Clear();
+
         //send cancellation request
         _cancellationTokenSource.Cancel();
 

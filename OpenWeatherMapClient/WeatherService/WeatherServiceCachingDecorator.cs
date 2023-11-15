@@ -1,18 +1,10 @@
 ﻿namespace OpenWeatherMapClient.WeatherService;
 
-public class WeatherServiceCachingDecorator : IOpenWeatherMapClient
+public class WeatherServiceCachingDecorator(IOpenWeatherMapClient weatherService, IMemoryCache cache, ILogger<WeatherServiceCachingDecorator> logger) : IOpenWeatherMapClient
 {
-    private readonly IMemoryCache _cache;
-    private readonly IOpenWeatherMapClient _innerWeatehrService;
-    private readonly ILogger<WeatherServiceCachingDecorator> _logger;
-
-
-    public WeatherServiceCachingDecorator(IOpenWeatherMapClient weatherService, IMemoryCache cache, ILogger<WeatherServiceCachingDecorator> logger)
-    {
-        _innerWeatehrService = weatherService;
-        _cache = cache;
-        _logger = logger;
-    }
+    private readonly IMemoryCache _cache = cache;
+    private readonly IOpenWeatherMapClient _innerWeatherService = weatherService;
+    private readonly ILogger<WeatherServiceCachingDecorator> _logger = logger;
 
     public async Task<CurrentWeather> GetCurrentWeatherAsync(string location)
     {
@@ -24,10 +16,10 @@ public class WeatherServiceCachingDecorator : IOpenWeatherMapClient
         }
         else
         {
-            currentWeather = await _innerWeatehrService.GetCurrentWeatherAsync(location);
+            currentWeather = await _innerWeatherService.GetCurrentWeatherAsync(location);
             if (currentWeather.Success)
             {
-                if (location.ToLower() == currentWeather?.Location?.Name?.ToLower())
+                if (location.Equals(currentWeather?.Location?.Name?.ToLower(), StringComparison.CurrentCultureIgnoreCase))
                 {
                     _cache.Set(cacheKey, currentWeather, TimeSpan.FromMinutes(90));
                 }
@@ -48,7 +40,7 @@ public class WeatherServiceCachingDecorator : IOpenWeatherMapClient
         }
         else
         {
-            var locationForecast = await _innerWeatehrService.GetForecastAsync(location);
+            var locationForecast = await _innerWeatherService.GetForecastAsync(location);
             _cache.Set(cacheKey, locationForecast, TimeSpan.FromMinutes(30));
             return locationForecast;
 
