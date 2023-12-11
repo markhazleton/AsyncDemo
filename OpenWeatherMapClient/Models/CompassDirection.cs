@@ -135,7 +135,7 @@ public class CompassDirection
     public static readonly CompassDirection WEST_NORTHWEST = new("WNW", "West-northwest", 281.25, 292.5, 303.75, 3, StandardDirectionFunction);
     public static readonly CompassDirection NORTHWEST = new("NW", "Northwest", 303.75, 315.0, 326.25, 2, StandardDirectionFunction);
     public static readonly CompassDirection NORTH_NORTHWEST = new("NNW", "North-northwest", 326.25, 337.5, 348.75, 3, StandardDirectionFunction);
-    public static readonly CompassDirection[] COMPASS_POINTS = {
+    public static readonly CompassDirection[] COMPASS_POINTS = [
                 NORTH,
                 EAST,
                 SOUTH,
@@ -152,7 +152,7 @@ public class CompassDirection
                 WEST_SOUTHWEST,
                 WEST_NORTHWEST,
                 NORTH_NORTHWEST
-            };
+            ];
 
 
     /// <summary>
