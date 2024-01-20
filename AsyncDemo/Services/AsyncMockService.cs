@@ -1,4 +1,6 @@
 ﻿
+using System.Diagnostics;
+
 namespace AsyncDemo.Services;
 
 /// <summary>
@@ -9,6 +11,16 @@ namespace AsyncDemo.Services;
 /// </summary>
 public class AsyncMockService
 {
+
+    public static async Task ExampleMethodAsync(CancellationToken ct)
+    {
+        while (true)
+        {
+            ct.ThrowIfCancellationRequested();
+            // Simulate work
+            await Task.Delay(1000, ct);
+        }
+    }
     /// <summary>
     /// Compute a value for a long time.
     /// </summary>
@@ -65,7 +77,6 @@ public class AsyncMockService
             return result;
         });
     }
-
     public async Task<decimal> LongRunningOperationWithCancellationTokenAsync(int loop,
                                                                               CancellationToken cancellationToken)
     {
@@ -95,5 +106,64 @@ public class AsyncMockService
         }
         // Return the result of the TaskCompletionSource.Task
         return await taskCompletionSource.Task;
+    }
+    public static async Task LongRunningTask(
+        string name,
+        int delay,
+        int iterations,
+        bool throwEx,
+        ICommonLogger logger,
+        CancellationToken ct)
+    {
+        Stopwatch sw = new Stopwatch();
+        sw.Start();
+
+        while (true)
+        {
+            for (int i = 0; i < iterations; i++)
+            {
+                try
+                {
+                    ct.ThrowIfCancellationRequested();
+                    await PerformTaskAsync(name, delay, throwEx, ct);
+                }
+                catch (TaskCanceledException ex)
+                {
+                    sw.Stop();
+                    logger.TrackEvent($"{name} TaskCanceledException. {i} of {iterations} completed. Time:{sw.ElapsedMilliseconds}  Exception:{ex.Message}");
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    sw.Stop();
+                    logger.TrackException(ex, $"{name} Exception. {i} of {iterations} completed. Time:{sw.ElapsedMilliseconds} Exception:{ex.Message}");
+                    throw;
+                }
+                finally
+                {
+
+                }
+                // Check for cancellation after the delay
+                if (ct.IsCancellationRequested)
+                {
+                    sw.Stop();
+                    logger.TrackEvent($"{name} ct.IsCancellationRequested. {i} of {iterations} completed. Time:{sw.ElapsedMilliseconds}");
+                    throw new TimeoutException($"{name} Long running task was cancelled.");
+                }
+            }
+            sw.Stop();
+            logger.TrackEvent($"{name} completed. Time:{sw.ElapsedMilliseconds}");
+            return;
+        }
+    }
+    public static async Task PerformTaskAsync(string name, int delay, bool throwEx, CancellationToken ct = default)
+    {
+        await Task.Delay(delay, ct);
+        ct.ThrowIfCancellationRequested();
+
+        if (throwEx)
+        {
+            throw new Exception($"{name} PerformTaskAsync Exception.");
+        }
     }
 }
