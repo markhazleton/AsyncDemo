@@ -13,14 +13,14 @@ public class HttpGetCallService : IHttpGetCallService
         _clientFactory = httpClientFactory;
         _logger = logger;
     }
-    public async Task<HttpGetCallResults> GetAsync<T>(HttpGetCallResults statusCall)
+    public async Task<HttpGetCallResults> GetAsync<T>(HttpGetCallResults statusCall, CancellationToken ct)
     {
         try
         {
             using var httpClient = _clientFactory.CreateClient();
-            var response = await httpClient.GetAsync(statusCall.StatusPath);
+            var response = await httpClient.GetAsync(statusCall.StatusPath,ct);
             response.EnsureSuccessStatusCode();
-            var StatusResults = await response.Content.ReadAsStringAsync();
+            var StatusResults = await response.Content.ReadAsStringAsync(ct);
             try
             {
                 statusCall.StatusResults = JsonSerializer.Deserialize<T>(StatusResults);

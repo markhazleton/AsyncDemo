@@ -13,14 +13,14 @@ public class HttpGetCallServiceTelemetry : IHttpGetCallService
         _logger = logger;
         _service = service;
     }
-    public async Task<HttpGetCallResults> GetAsync<T>(HttpGetCallResults statusCall)
+    public async Task<HttpGetCallResults> GetAsync<T>(HttpGetCallResults statusCall, CancellationToken ct)
     {
         Stopwatch sw = new();
         sw.Start();
         var response = new HttpGetCallResults(statusCall);
         try
         {
-            response = await _service.GetAsync<T>(statusCall);
+            response = await _service.GetAsync<T>(statusCall,ct);
         }
         catch (Exception ex)
         {

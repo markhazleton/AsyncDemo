@@ -3,41 +3,35 @@
 namespace AsyncDemo.Web.Controllers;
 
 /// <summary>
-/// 
+/// Controller for handling bulk HTTP GET calls.
 /// </summary>
-public class BulkCallsController : BaseController
+/// <remarks>
+/// Initializes a new instance of the <see cref="BulkCallsController"/> class.
+/// </remarks>
+/// <param name="logger">The logger.</param>
+/// <param name="getCallService">The HTTP GET call service.</param>
+public class BulkCallsController(ILogger<BulkCallsController> logger, IHttpGetCallService getCallService) : BaseController
 {
-    private readonly ILogger<BulkCallsController> _logger;
-    private readonly IHttpGetCallService _service;
-    private static readonly Object WriteLock = new();
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="logger"></param>
-    /// <param name="getCallService"></param>
-    public BulkCallsController(ILogger<BulkCallsController> logger, IHttpGetCallService getCallService)
-    {
-        _logger = logger;
-        _service = getCallService;
-    }
+    private static readonly object WriteLock = new();
 
     /// <summary>
-    /// 
+    /// Calls the specified endpoint multiple times asynchronously.
     /// </summary>
-    /// <param name="maxThreads"></param>
-    /// <param name="itterationCount"></param>
-    /// <param name="endpoint"></param>
-    /// <returns></returns>
-    private async Task<List<HttpGetCallResults>> CallEndpointMultipleTimes(int maxThreads = 1, int itterationCount = 10, string endpoint = "https://asyncdemoweb.azurewebsites.net/status")
+    /// <param name="maxThreads">The maximum number of concurrent threads.</param>
+    /// <param name="iterationCount">The number of iterations.</param>
+    /// <param name="endpoint">The endpoint URL.</param>
+    /// <returns>A list of HTTP GET call results.</returns>
+    private async Task<List<HttpGetCallResults>> CallEndpointMultipleTimes(int maxThreads = 1, int iterationCount = 10, string endpoint = "https://asyncdemoweb.azurewebsites.net/status")
     {
         int curIndex = 0;
         // Create a SemaphoreSlim with a maximum of maxThreads concurrent requests
         SemaphoreSlim semaphore = new(maxThreads);
-        List<HttpGetCallResults> results = new();
+        List<HttpGetCallResults> results = [];
+        var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
 
         // Create a list of tasks to make the GetAsync calls
-        List<Task> tasks = new();
-        for (int i = 0; i < itterationCount; i++)
+        List<Task> tasks = [];
+        for (int i = 0; i < iterationCount; i++)
         {
             // Acquire the semaphore before making the request
             await semaphore.WaitAsync();
@@ -48,8 +42,8 @@ public class BulkCallsController : BaseController
             {
                 try
                 {
-                    // Get The Async Results
-                    var result = await _service.GetAsync<ApplicationStatus>(statusCall);
+                    // Get the async results
+                    var result = await getCallService.GetAsync<ApplicationStatus>(statusCall, cts.Token);
                     lock (WriteLock)
                     {
                         results.Add(result);
@@ -67,16 +61,15 @@ public class BulkCallsController : BaseController
         await Task.WhenAll(tasks);
 
         // Log a message when all calls are complete
-        _logger.LogInformation("All calls complete");
+        logger.LogInformation("All calls complete");
         return results;
     }
 
-
     // GET: BulkCallsController
     /// <summary>
-    /// 
+    /// Action method for the index page.
     /// </summary>
-    /// <returns></returns>
+    /// <returns>The index view with the results of the bulk HTTP GET calls.</returns>
     public async Task<ActionResult> Index()
     {
         var results = await CallEndpointMultipleTimes();

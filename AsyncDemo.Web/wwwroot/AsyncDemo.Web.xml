@@ -25,19 +25,35 @@
             <summary>
             Remote Server MOCK
             </summary>
+            <remarks>
+            Initializes a new instance of the <see cref="T:AsyncDemo.Web.Controllers.Api.RemoteController"/> class.
+            </remarks>
+            <param name="logger">The logger.</param>
+            <param name="memoryCache">The memory cache.</param>
         </member>
         <member name="M:AsyncDemo.Web.Controllers.Api.RemoteController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.Api.RemoteController},Microsoft.Extensions.Caching.Memory.IMemoryCache)">
-             <summary>
-            
-             </summary>
-             <param name="logger"></param>
+            <summary>
+            Remote Server MOCK
+            </summary>
+            <remarks>
+            Initializes a new instance of the <see cref="T:AsyncDemo.Web.Controllers.Api.RemoteController"/> class.
+            </remarks>
+            <param name="logger">The logger.</param>
+            <param name="memoryCache">The memory cache.</param>
+        </member>
+        <member name="M:AsyncDemo.Web.Controllers.Api.RemoteController.MockResultsAsync(System.Int32)">
+            <summary>
+            Asynchronously performs the long running operation and returns the mock results.
+            </summary>
+            <param name="loopCount">The loop count.</param>
+            <returns>The mock results.</returns>
         </member>
         <member name="M:AsyncDemo.Web.Controllers.Api.RemoteController.GetResults(AsyncDemo.Models.MockResults)">
             <summary>
-            Post Results
+            Posts the results.
             </summary>
-            <param name="model">Instance of the requestModel</param>
-            <returns></returns>
+            <param name="model">The instance of the request model.</param>
+            <returns>The action result.</returns>
             <response code="200">Request Processed successfully.</response>
             <response code="200">Request Timeout.</response>
         </member>
@@ -116,30 +132,38 @@
         </member>
         <member name="T:AsyncDemo.Web.Controllers.BulkCallsController">
             <summary>
-            
+            Controller for handling bulk HTTP GET calls.
             </summary>
+            <remarks>
+            Initializes a new instance of the <see cref="T:AsyncDemo.Web.Controllers.BulkCallsController"/> class.
+            </remarks>
+            <param name="logger">The logger.</param>
+            <param name="getCallService">The HTTP GET call service.</param>
         </member>
         <member name="M:AsyncDemo.Web.Controllers.BulkCallsController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.BulkCallsController},AsyncDemo.HttpGetCall.IHttpGetCallService)">
             <summary>
-            
+            Controller for handling bulk HTTP GET calls.
             </summary>
-            <param name="logger"></param>
-            <param name="getCallService"></param>
+            <remarks>
+            Initializes a new instance of the <see cref="T:AsyncDemo.Web.Controllers.BulkCallsController"/> class.
+            </remarks>
+            <param name="logger">The logger.</param>
+            <param name="getCallService">The HTTP GET call service.</param>
         </member>
         <member name="M:AsyncDemo.Web.Controllers.BulkCallsController.CallEndpointMultipleTimes(System.Int32,System.Int32,System.String)">
             <summary>
-            
+            Calls the specified endpoint multiple times asynchronously.
             </summary>
-            <param name="maxThreads"></param>
-            <param name="itterationCount"></param>
-            <param name="endpoint"></param>
-            <returns></returns>
+            <param name="maxThreads">The maximum number of concurrent threads.</param>
+            <param name="iterationCount">The number of iterations.</param>
+            <param name="endpoint">The endpoint URL.</param>
+            <returns>A list of HTTP GET call results.</returns>
         </member>
         <member name="M:AsyncDemo.Web.Controllers.BulkCallsController.Index">
             <summary>
-            
+            Action method for the index page.
             </summary>
-            <returns></returns>
+            <returns>The index view with the results of the bulk HTTP GET calls.</returns>
         </member>
         <member name="T:AsyncDemo.Web.Controllers.HomeController">
             <summary>
@@ -413,9 +437,58 @@
             
             </summary>
         </member>
+        <member name="T:AsyncDemo.Web.Models.KeyVaultOptions">
+            <summary>
+            Represents the options for accessing Azure Key Vault.
+            </summary>
+        </member>
+        <member name="P:AsyncDemo.Web.Models.KeyVaultOptions.Mode">
+            <summary>
+            Gets or sets the mode of accessing Azure Key Vault.
+            </summary>
+        </member>
+        <member name="P:AsyncDemo.Web.Models.KeyVaultOptions.KeyVaultUri">
+            <summary>
+            Gets or sets the URI of the Azure Key Vault.
+            </summary>
+        </member>
+        <member name="P:AsyncDemo.Web.Models.KeyVaultOptions.ClientId">
+            <summary>
+            Gets or sets the client ID for authenticating with Azure Key Vault.
+            </summary>
+        </member>
+        <member name="P:AsyncDemo.Web.Models.KeyVaultOptions.ClientSecret">
+            <summary>
+            Gets or sets the client secret for authenticating with Azure Key Vault.
+            </summary>
+        </member>
+        <member name="M:AsyncDemo.Web.Models.KeyVaultOptions.#ctor(AsyncDemo.Web.Models.KeyVaultUsage,System.String,System.String,System.String)">
+            <summary>
+            Initialize KeyVaultOptions.
+            </summary>
+            <param name="mode"></param>
+            <param name="keyVaultUri"></param>
+            <param name="clientId"></param>
+            <param name="clientSecret"></param>
+        </member>
         <member name="T:AsyncDemo.Web.Models.KeyVaultUsage">
             <summary>
             Key Vault Usage
+            </summary>
+        </member>
+        <member name="F:AsyncDemo.Web.Models.KeyVaultUsage.UseLocalSecretStore">
+            <summary>
+            Use local secret store
+            </summary>
+        </member>
+        <member name="F:AsyncDemo.Web.Models.KeyVaultUsage.UseClientSecret">
+            <summary>
+            Use client secret
+            </summary>
+        </member>
+        <member name="F:AsyncDemo.Web.Models.KeyVaultUsage.UseMsi">
+            <summary>
+            Use Managed Service Identity (MSI)
             </summary>
         </member>
         <member name="T:AsyncDemo.Web.Models.ServiceStatus">

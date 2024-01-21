@@ -1,12 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using AsyncDemo.FireAndForget;
 
-var logger = new CommonLoggerConsole();
+var logger = new ConsoleLogger();
 var cts = new CancellationTokenSource();
 var fireAndForget = new FireAndForgetUtility(logger);
 
 Console.WriteLine($"Program Start:  Thread:{Environment.CurrentManagedThreadId}");
-
 
 try
 {
