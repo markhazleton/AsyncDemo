@@ -1,7 +1,9 @@
 ﻿@model AsyncDemo.Models.MockResults
 @{
     ViewData["Title"] = "Async Api Polly Page";
-    var bgColor = Model?.ResultValue == "RequestTimeout" ? "red" :"green";
+    var bgColor = Model?.ResultValue == "RequestTimeout" ? "red" : "green";
+    var bgColorClass = Model?.ResultValue == "RequestTimeout" ? "bg-danger" : "bg-success"; // Using Bootstrap background color classes
+
 }
 
 <div class="container-fluid">
@@ -11,65 +13,72 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8">
-            <dl style="background-color:@bgColor;color:white;">
-                <dt>Loop Count</dt>
-                <dd>@Model?.LoopCount</dd>
-                <dt>Max Time (ms)</dt>
-                <dd>@Model?.MaxTimeMS</dd>
-                <dt>Result</dt>
-                <dd>@Model?.ResultValue</dd>
-                <dt>RunTime (ms)</dt>
-                <dd>@Model?.RunTimeMS</dd>
-                <dt>Message</dt>
-                <dd>@Model?.Message</dd>
+        <div class="col-md-4">
+            <!-- Apply Bootstrap classes for styling -->
+            <dl class="@bgColorClass text-white rounded p-3">
+                <dt class="text-start ps-2">Loop Count</dt>
+                <dd class="text-start ps-2 border-bottom">@Model?.LoopCount</dd>
+                <dt class="text-start ps-2">Max Time (ms)</dt>
+                <dd class="text-start ps-2 border-bottom">@Model?.MaxTimeMS</dd>
+                <dt class="text-start ps-2">Result</dt>
+                <dd class="text-start ps-2 border-bottom">@Model?.ResultValue</dd>
+                <dt class="text-start ps-2">RunTime (ms)</dt>
+                <dd class="text-start ps-2 border-bottom">@Model?.RunTimeMS</dd>
+                <dt class="text-start ps-2">Message</dt>
+                <dd class="text-start ps-2">@Model?.Message</dd>
             </dl>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-8">
             <div class="text-center">
                 <div class="test-list">
-                    Test the Api with Polly Timeouts
-                    <ul>
-                        <li><a href="/polly?loopCount=35&maxTimeMs=1500">35 Loops, max 1.5 seconds</a></li>
-                        <li><a href="/polly?loopCount=35&maxTimeMs=1000">35 Loops, max 1 second</a></li>
-                        <li><a href="/polly?loopCount=35&maxTimeMs=500">35 Loops, max 1/2 second</a></li>
-                    </ul>
+                    <h2>Test the Api with Polly Timeouts</h2>
+                    <nav class="nav flex-column nav-pills p-2 border rounded">
+                        <a class="nav-link border-bottom py-2" href="/polly?loopCount=40&maxTimeMs=1500">40 Loops, max 1.5 seconds</a>
+                        <a class="nav-link border-bottom py-2" href="/polly?loopCount=40&maxTimeMs=1000">40 Loops, max 1 second</a>
+                        <a class="nav-link py-2" href="/polly?loopCount=40&maxTimeMs=500">40 Loops, max 1/2 second</a>
+                    </nav>
                 </div>
             </div>
             <div>
                 <form class="form-horizontal" action="/polly" method="get">
                     <fieldset>
-                        <!-- Form Name -->
                         <legend>Submit Timeout Test</legend>
-                        <!-- Select Basic -->
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="loopCount">Number of Loops</label>
                             <div class="col-md-4">
                                 <select id="loopCount" name="loopCount" class="form-control">
-                                    <option value="10">10</option>
-                                    <option value="20">20</option>
-                                    <option value="30">30</option>
-                                    <option value="40">40</option>
-                                    <option value="50">50</option>
-                                    <option value="60">60</option>
+                                    @for (int i = 10; i <= 100; i += 10)
+                                    {
+                                        if (Model?.LoopCount== i)
+                                        {
+                                            <option value="@i" selected>@i</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    }
                                 </select>
                             </div>
                         </div>
-                        <!-- Select Basic -->
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="maxTimeMs">Max Response Time</label>
                             <div class="col-md-4">
                                 <select id="maxTimeMs" name="maxTimeMs" class="form-control">
-                                    <option value="100">100</option>
-                                    <option value="200">200</option>
-                                    <option value="400">400</option>
-                                    <option value="800">800</option>
-                                    <option value="1600">1600</option>
-                                    <option value="3200">3200</option>
+                                    @foreach (var time in new[] { 100,200,500,750,1000,1500,3000,5000 })
+                                    {
+                                        if(Model?.MaxTimeMS == time)
+                                        {
+                                            <option value="@time" selected>@time</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@time" >@time</option>
+                                        }
+                                    }
                                 </select>
                             </div>
                         </div>
-                        <!-- Button -->
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="singlebutton">Submit Request</label>
                             <div class="col-md-4">
