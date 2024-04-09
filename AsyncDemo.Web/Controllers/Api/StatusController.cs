@@ -4,19 +4,14 @@ namespace AsyncDemo.Web.Controllers.Api;
 /// <summary>
 /// Status Controller
 /// </summary>
+/// <remarks>
+/// Status Controller
+/// </remarks>
+/// <param name="configuration"></param>
+/// <param name="memoryCache"></param>
 [Route("/status")]
-public class StatusController : BaseApiController
+public class StatusController(IConfiguration configuration, IMemoryCache memoryCache) : BaseApiController(memoryCache)
 {
-    private readonly IConfiguration _config;
-
-    /// <summary>
-    /// Status Controller
-    /// </summary>
-    /// <param name="configuration"></param>
-    public StatusController(IConfiguration configuration, IMemoryCache memoryCache) : base(memoryCache)
-    {
-        this._config = configuration;
-    }
     /// <summary>
     /// Returns Current Application Status
     /// </summary>
@@ -36,14 +31,14 @@ public class StatusController : BaseApiController
     [Route("appsettings")]
     public object GetAppSettings()
     {
-        string[] TestIdList = _config.GetStringList("Async:TestIds");
-        string[] MissingList = _config.GetStringList("Async:Bad");
-        string[] MissingDefault = _config.GetStringList("Async:Bad", "3,2,1");
-        string[] MissingDefaultSingle = _config.GetStringList("Async:Bad", "99");
-        int[] TestIdIntList = _config.GetIntList("Async:TestIds");
-        int[] MissingIntList = _config.GetIntList("Async:Bad");
-        int[] MissingDefaultInt = _config.GetIntList("Async:Bad", "3,2,1");
-        int[] BadDefaultInt = _config.GetIntList("Async:Bad", "bob,sam,1");
+        string[] TestIdList = configuration.GetStringList("Async:TestIds");
+        string[] MissingList = configuration.GetStringList("Async:Bad");
+        string[] MissingDefault = configuration.GetStringList("Async:Bad", "3,2,1");
+        string[] MissingDefaultSingle = configuration.GetStringList("Async:Bad", "99");
+        int[] TestIdIntList = configuration.GetIntList("Async:TestIds");
+        int[] MissingIntList = configuration.GetIntList("Async:Bad");
+        int[] MissingDefaultInt = configuration.GetIntList("Async:Bad", "3,2,1");
+        int[] BadDefaultInt = configuration.GetIntList("Async:Bad", "bob,sam,1");
         return new { TestIdList, MissingList, MissingDefault, MissingDefaultSingle, TestIdIntList, MissingIntList, MissingDefaultInt, BadDefaultInt };
     }
 }

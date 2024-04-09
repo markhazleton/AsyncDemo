@@ -9,7 +9,7 @@ public class ErrorResource
     ///
     /// </summary>
     /// <param name="messages"></param>
-    public ErrorResource(List<string> messages) { Messages = messages ?? new List<string>(); }
+    public ErrorResource(List<string> messages) { Messages = messages ?? []; }
 
     /// <summary>
     /// Error Resource
@@ -17,7 +17,7 @@ public class ErrorResource
     /// <param name="message"></param>
     public ErrorResource(string message)
     {
-        Messages = new List<string>();
+        Messages = [];
 
         if (!string.IsNullOrWhiteSpace(message))
         {

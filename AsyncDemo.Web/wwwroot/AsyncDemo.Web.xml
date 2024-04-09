@@ -61,12 +61,21 @@
             <summary>
             Status Controller
             </summary>
+            <remarks>
+            Status Controller
+            </remarks>
+            <param name="configuration"></param>
+            <param name="memoryCache"></param>
         </member>
         <member name="M:AsyncDemo.Web.Controllers.Api.StatusController.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Caching.Memory.IMemoryCache)">
             <summary>
             Status Controller
             </summary>
+            <remarks>
+            Status Controller
+            </remarks>
             <param name="configuration"></param>
+            <param name="memoryCache"></param>
         </member>
         <member name="M:AsyncDemo.Web.Controllers.Api.StatusController.Get">
             <summary>
@@ -186,11 +195,20 @@
             <summary>
             
             </summary>
+            <remarks>
+            
+            </remarks>
+            <param name="logger"></param>
+            <param name="weatherService"></param>
+            <param name="cache"></param>
         </member>
         <member name="M:AsyncDemo.Web.Controllers.OpenWeatherController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.HomeController},OpenWeatherMapClient.Interfaces.IOpenWeatherMapClient,Microsoft.Extensions.Caching.Memory.IMemoryCache)">
             <summary>
             
             </summary>
+            <remarks>
+            
+            </remarks>
             <param name="logger"></param>
             <param name="weatherService"></param>
             <param name="cache"></param>

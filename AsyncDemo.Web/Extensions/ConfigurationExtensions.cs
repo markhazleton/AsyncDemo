@@ -61,7 +61,7 @@ public static class ConfigurationExtensions
     }
     private static List<T> Split<T>(this string @this, char separator, out bool AllConverted)
     {
-        List<T> returnVals = new();
+        List<T> returnVals = [];
         AllConverted = true;
         var itens = @this.Split(separator);
         foreach (var item in itens)

@@ -2,31 +2,23 @@
 /// <summary>
 /// 
 /// </summary>
-public class OpenWeatherController : BaseController
+/// <remarks>
+/// 
+/// </remarks>
+/// <param name="logger"></param>
+/// <param name="weatherService"></param>
+/// <param name="cache"></param>
+public class OpenWeatherController(ILogger<HomeController> logger, IOpenWeatherMapClient weatherService, IMemoryCache cache) : BaseController
 {
     private const string LocationCacheKey = "LocationCacheKey";
-    private readonly IMemoryCache _cache;
-    private readonly ILogger<HomeController> _logger;
-    private readonly IOpenWeatherMapClient _weatherService;
+    private readonly ILogger<HomeController> _logger = logger;
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="logger"></param>
-    /// <param name="weatherService"></param>
-    /// <param name="cache"></param>
-    public OpenWeatherController(ILogger<HomeController> logger, IOpenWeatherMapClient weatherService, IMemoryCache cache)
-    {
-        _logger = logger;
-        _weatherService = weatherService;
-        _cache = cache;
-    }
     private string VerifyLocation(string? location)
     {
         string? theLocation = location;
         if (location is null)
         {
-            if (_cache.TryGetValue<string>(LocationCacheKey, out theLocation))
+            if (cache.TryGetValue<string>(LocationCacheKey, out theLocation))
             {
             }
             else
@@ -34,33 +26,33 @@ public class OpenWeatherController : BaseController
                 theLocation = "Dallas";
             }
         }
-        _cache.Set<string>(LocationCacheKey, theLocation ?? "Dallas", TimeSpan.FromMinutes(30));
+        cache.Set<string>(LocationCacheKey, theLocation ?? "Dallas", TimeSpan.FromMinutes(30));
         return theLocation ?? "Dallas";
     }
 
     private List<CurrentWeather> GetCurrentWeatherList()
     {
         List<CurrentWeather>? theList;
-        if (_cache.TryGetValue<List<CurrentWeather>>("CurrentWeatherList", out theList))
+        if (cache.TryGetValue<List<CurrentWeather>>("CurrentWeatherList", out theList))
         {
 
         }
         else
         {
-            theList = new List<CurrentWeather>();
+            theList = [];
         }
-        _cache.Set("CurrentWeatherList", theList ?? new List<CurrentWeather>(), TimeSpan.FromMinutes(30));
-        return theList ?? new List<CurrentWeather>();
+        cache.Set("CurrentWeatherList", theList ?? [], TimeSpan.FromMinutes(30));
+        return theList ?? [];
     }
     private List<CurrentWeather> AddCurrentWeatherList(CurrentWeather currentWeather)
     {
         List<CurrentWeather>? theList;
-        if (_cache.TryGetValue<List<CurrentWeather>>("CurrentWeatherList", out theList))
+        if (cache.TryGetValue<List<CurrentWeather>>("CurrentWeatherList", out theList))
         {
         }
         else
         {
-            theList = new List<CurrentWeather>();
+            theList = [];
         }
         if (theList.Where(w => w.Location?.Name == currentWeather?.Location?.Name).Any())
         {
@@ -70,8 +62,8 @@ public class OpenWeatherController : BaseController
         {
             theList.Add(currentWeather);
         }
-        _cache.Set<List<CurrentWeather>>("CurrentWeatherList", theList ?? new List<CurrentWeather>(), TimeSpan.FromMinutes(30));
-        return theList ?? new List<CurrentWeather>();
+        cache.Set<List<CurrentWeather>>("CurrentWeatherList", theList ?? [], TimeSpan.FromMinutes(30));
+        return theList ?? [];
     }
 
     /// <summary>
@@ -90,7 +82,7 @@ public class OpenWeatherController : BaseController
         }
         else
         {
-            CurrentWeather conditions = await _weatherService.GetCurrentWeatherAsync(theLocation);
+            CurrentWeather conditions = await weatherService.GetCurrentWeatherAsync(theLocation);
             if (!conditions.Success)
             {
                 conditions.ErrorMessage = $"{conditions.ErrorMessage} received for location:{theLocation}";

@@ -4,7 +4,7 @@ public class LocationForecast
 {
     public LocationForecast()
     {
-        Forecasts = new List<WeatherForecast>();
+        Forecasts = [];
     }
     public bool Success { get; set; }
     public String? ErrorMessage { get; set; }

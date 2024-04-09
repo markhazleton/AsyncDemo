@@ -54,11 +54,11 @@ public sealed class ApplicationStatus
     /// <summary>
     /// Features
     /// </summary>
-    public Dictionary<string, string> Features { get; } = new Dictionary<string, string>();
+    public Dictionary<string, string> Features { get; } = [];
     /// <summary>
     /// Messages
     /// </summary>
-    public List<string> Messages { get; } = new List<string>();
+    public List<string> Messages { get; } = [];
     /// <summary>
     /// Region
     /// </summary>
@@ -70,5 +70,5 @@ public sealed class ApplicationStatus
     /// <summary>
     /// Tests 
     /// </summary>
-    public Dictionary<string, string> Tests { get; } = new Dictionary<string, string>();
+    public Dictionary<string, string> Tests { get; } = [];
 }
