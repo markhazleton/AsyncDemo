@@ -21,7 +21,7 @@ public class BulkCallsController(ILogger<BulkCallsController> logger, IHttpGetCa
     /// <param name="iterationCount">The number of iterations.</param>
     /// <param name="endpoint">The endpoint URL.</param>
     /// <returns>A list of HTTP GET call results.</returns>
-    private async Task<List<HttpGetCallResults>> CallEndpointMultipleTimes(int maxThreads = 1, int iterationCount = 10, string endpoint = "https://asyncdemoweb.azurewebsites.net/status")
+    private async Task<List<HttpGetCallResults>> CallEndpointMultipleTimes(int maxThreads = 1, int iterationCount = 10, string endpoint = "https://asyncdemo.azurewebsites.net/status")
     {
         int curIndex = 0;
         // Create a SemaphoreSlim with a maximum of maxThreads concurrent requests

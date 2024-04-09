@@ -1,25 +1,9 @@
-
-// Helpful URLs
-// https://www.wardvanbesien.info/post/using-key-vault-when-developing-locally/ 
-// 
 using AsyncDemo.HttpGetCall;
-using Azure.Identity;
 using Westwind.AspNetCore.Markdown;
 
 var builder = WebApplication.CreateBuilder(args);
-var vaultUri = Environment.GetEnvironmentVariable("vaultUri");
-if (!string.IsNullOrEmpty(vaultUri))
-{
-    try
-    {
-        var keyVaultEndpoint = new Uri(vaultUri);
-        builder.Configuration.AddAzureKeyVault(keyVaultEndpoint, new DefaultAzureCredential());
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine(ex.Message);
-    }
-}
+
+
 
 // Add services to the container.
 builder.Services.AddControllers();
