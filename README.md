@@ -1,13 +1,15 @@
 # AsyncDemo
 Various demos, tips and tricks for using async in C#
 
+[![Build and deploy ASP.Net Core app to Azure Web App - asyncdemo](https://github.com/markhazleton/AsyncDemo/actions/workflows/main_asyncdemo.yml/badge.svg)](https://github.com/markhazleton/AsyncDemo/actions/workflows/main_asyncdemo.yml)
+
 Sample code for making and canceling Async Calls. 
 
 Article on Cancellation Tokens 
-[https://markhazleton.controlorigins.com/cancellation-token.html](https://markhazleton.controlorigins.com/cancellation-token.html)
+[https://markhazleton.com/cancellation-token.html](https://markhazleton.controlorigins.com/cancellation-token.html)
 
 Article on Async and Decorator Pattern
-[https://markhazleton.controlorigins.com/decorator-pattern-http-client.html](https://markhazleton.controlorigins.com/decorator-pattern-http-client.html)
+[https://markhazleton.com/decorator-pattern-http-client.html](https://markhazleton.controlorigins.com/decorator-pattern-http-client.html)
 
 Sample source code for the following blog post 
 [https://johnthiriet.com/cancel-asynchronous-operation-in-csharp/](https://johnthiriet.com/cancel-asynchronous-operation-in-csharp/)
