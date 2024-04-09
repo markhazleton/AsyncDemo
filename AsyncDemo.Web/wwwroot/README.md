@@ -4,7 +4,7 @@ Various demos, tips and tricks for using async in C#
 Sample code for making and canceling Async Calls. 
 
 Cancellation Token Article
-[https://markhazleton.controlorigins.com/cancellation-token.html](https://markhazleton.controlorigins.com/cancellation-token.html)
+[https://markhazleton.com/cancellation-token.html](https://markhazleton.com/cancellation-token.html)
 
 Sample source code for the following blog post 
 [https://johnthiriet.com/cancel-asynchronous-operation-in-csharp/](https://johnthiriet.com/cancel-asynchronous-operation-in-csharp/)
@@ -13,7 +13,7 @@ Another async blog post from John Thiriet
 [https://johnthiriet.com/mvvm-going-async-with-async-command/](https://johnthiriet.com/mvvm-going-async-with-async-command/)
 
 # Hosting
-Current Hosted at [https://asyncdemoweb.azurewebsites.net/](https://asyncdemoweb.azurewebsites.net/)
+Current Hosted at [https://asyncdemo.azurewebsites.net/](https://asyncdemo.azurewebsites.net/)
 # Other Links
 
 [https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/?WT.mc_id=friends-0000-jamont](https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/?WT.mc_id=friends-0000-jamont)
