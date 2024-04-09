@@ -18,7 +18,7 @@ Another async blog post from John Thiriet
 [https://johnthiriet.com/mvvm-going-async-with-async-command/](https://johnthiriet.com/mvvm-going-async-with-async-command/)
 
 # Hosting
-Current Hosted at [https://asyncdemoweb.azurewebsites.net/](https://asyncdemoweb.azurewebsites.net/)
+Current Hosted at [https://asyncdemoweb.azurewebsites.net/](https://asyncdemo.azurewebsites.net/)
 # Other Links
 
 [https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/?WT.mc_id=friends-0000-jamont](https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/?WT.mc_id=friends-0000-jamont)
