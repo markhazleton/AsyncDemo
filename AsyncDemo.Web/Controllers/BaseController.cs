@@ -59,12 +59,9 @@ public abstract class BaseController : Controller
                 .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt) / 2)
                 + TimeSpan.FromSeconds(jitter.Next(0, 3)));
 
-        _httpIndexPolicy = HttpPolicyExtensions.HandleTransientHttpError()
-            .WaitAndRetryAsync(3, retryCount => TimeSpan.FromMilliseconds(retryCount),
-            onRetry: (response, delay, retryCount, context) =>
-            {
-                context[retryCountKey] = retryCount;
-            });
+        _httpIndexPolicy = Policy.HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
+                .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt) / 2)
+                + TimeSpan.FromSeconds(jitter.Next(0, 3)));
     }
 
 }
