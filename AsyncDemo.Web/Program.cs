@@ -1,14 +1,17 @@
 using AsyncDemo.HttpGetCall;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Westwind.AspNetCore.Markdown;
 
 var builder = WebApplication.CreateBuilder(args);
+
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddHttpClient();
 builder.Services.AddMemoryCache();
-builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks()
+    .AddCheck("API Health", () => HealthCheckResult.Healthy("API is healthy"));
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.TryAddSingleton<IMemoryCacheManager, MemoryCacheManager>();
 builder.Services.AddCustomSwagger();
@@ -16,7 +19,7 @@ builder.Services.AddMarkdown();
 builder.Services.AddSession();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
-builder.Services.AddScoped<IHttpGetCallService>(serviceProvider =>
+builder.Services.AddScoped(serviceProvider =>
 {
     var logger = serviceProvider.GetRequiredService<ILogger<HttpGetCallService>>();
     var telemetryLogger = serviceProvider.GetRequiredService<ILogger<HttpGetCallServiceTelemetry>>();
@@ -26,11 +29,10 @@ builder.Services.AddScoped<IHttpGetCallService>(serviceProvider =>
     return telemetryService;
 });
 
-
 // Register the OpenWeatherMapClient with Decorator Pattern
 builder.Services.AddScoped<IOpenWeatherMapClient>(serviceProvider =>
 {
-    String apiKey = builder.Configuration["OpenWeatherMapApiKey"] ?? "KEYMISSING";
+    string apiKey = builder.Configuration["OpenWeatherMapApiKey"] ?? "KEYMISSING";
     var logger = serviceProvider.GetRequiredService<ILogger<WeatherServiceClient>>();
     var loggerLogging = serviceProvider.GetRequiredService<ILogger<WeatherServiceLoggingDecorator>>();
     var loggerCaching = serviceProvider.GetRequiredService<ILogger<WeatherServiceCachingDecorator>>();
@@ -50,13 +52,20 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+else
+{
+    // Global exception handler for production
+    app.UseExceptionHandler("/Home/Error");
+}
+
 app.UseCustomSwagger();
 app.UseHttpsRedirection();
 app.UseAuthorization();
-app.MapControllers();
 app.UseMarkdown();
+app.MapControllers();
 app.MapHealthChecks("/health");
 app.UseStaticFiles();
+app.UseSession();
 app.UseMvc(routes =>
 {
     routes.MapRoute(
