@@ -20,7 +20,7 @@ public class HttpGetCallServiceTelemetry : IHttpGetCallService
         var response = new HttpGetCallResults(statusCall);
         try
         {
-            response = await _service.GetAsync<T>(statusCall,ct);
+            response = await _service.GetAsync<T>(statusCall, ct);
         }
         catch (Exception ex)
         {

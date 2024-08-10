@@ -18,7 +18,7 @@ public class HttpGetCallService : IHttpGetCallService
         try
         {
             using var httpClient = _clientFactory.CreateClient();
-            var response = await httpClient.GetAsync(statusCall.StatusPath,ct);
+            var response = await httpClient.GetAsync(statusCall.StatusPath, ct);
             response.EnsureSuccessStatusCode();
             var StatusResults = await response.Content.ReadAsStringAsync(ct);
             try

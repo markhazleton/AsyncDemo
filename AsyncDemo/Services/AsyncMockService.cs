@@ -115,7 +115,7 @@ public class AsyncMockService
         ICommonLogger logger,
         CancellationToken ct)
     {
-        Stopwatch sw = new Stopwatch();
+        Stopwatch sw = new();
         sw.Start();
 
         while (true)

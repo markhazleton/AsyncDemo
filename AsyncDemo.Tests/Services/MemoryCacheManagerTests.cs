@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using System;
-using Moq;
-using AsyncDemo.Services;
 
 namespace AsyncDemo.Tests.Services;
 
@@ -47,7 +45,7 @@ public class MemoryCacheManagerTests
     public void Remove_ShouldRemoveItemFromCache()
     {
         string key = "testKey";
-        _memoryCacheManager.Set(key, "testValue",30);
+        _memoryCacheManager.Set(key, "testValue", 30);
         _memoryCacheManager.Remove(key);
 
         Assert.IsFalse(_memoryCacheManager.IsSet(key));

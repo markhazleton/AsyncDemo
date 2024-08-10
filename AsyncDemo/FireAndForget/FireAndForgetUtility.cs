@@ -3,44 +3,42 @@
 namespace AsyncDemo.FireAndForget;
 
 /// <summary>
-/// Sealed class for Fire And Forget with Exception Handling and Logging
+/// Utility class for safely executing fire-and-forget tasks with exception handling and logging.
 /// </summary>
-public sealed class FireAndForgetUtility(ILogger logger)
+/// <remarks>
+/// Initializes a new instance of the <see cref="FireAndForgetUtility"/> class.
+/// </remarks>
+/// <param name="logger">The logger instance used for logging exceptions and task statuses.</param>
+public sealed class FireAndForgetUtility(ILogger<FireAndForgetUtility> logger)
 {
-    private readonly ILogger _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    private readonly ILogger<FireAndForgetUtility> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
-    public void SafeFireAndForget(
-        Task task,
-        CancellationToken ct = default)
+    /// <summary>
+    /// Safely executes a fire-and-forget task with logging and exception handling.
+    /// </summary>
+    /// <param name="task">The task to execute.</param>
+    /// <param name="ct">Optional cancellation token.</param>
+    public void SafeFireAndForget(Task task, CancellationToken ct = default)
     {
         ArgumentNullException.ThrowIfNull(task);
 
         task.ContinueWith(t =>
         {
-            if (t.IsFaulted)
+            if (t.IsFaulted && t.Exception != null)
             {
-                // Log all inner exceptions if available
-                if (t.Exception != null)
+                foreach (var ex in t.Exception.InnerExceptions)
                 {
-                    foreach (var ex in t.Exception.InnerExceptions)
-                    {
-                        _logger.LogError(ex, "SafeFireAndForget: Unhandled exception occurred: {ExceptionMessage}", ex.Message);
-                    }
+                    _logger.LogError(ex, "Unhandled exception occurred: {ExceptionMessage}", ex.Message);
                 }
             }
             else if (t.IsCanceled || ct.IsCancellationRequested)
             {
-                _logger.LogInformation("SafeFireAndForget: Task was cancelled.");
-            }
-            else if (t.IsCompleted)
-            {
-                // The task has completed successfully
-                _logger.LogInformation("SafeFireAndForget: Task completed successfully.");
+                _logger.LogInformation("Task was canceled.");
             }
             else
             {
-                _logger.LogInformation("SafeFireAndForget: Task completed successfully.");
+                _logger.LogInformation("Task completed successfully.");
             }
-        }, ct, TaskContinuationOptions.None, TaskScheduler.Default).ConfigureAwait(false);
+        }, ct, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default).ConfigureAwait(false);
     }
 }
