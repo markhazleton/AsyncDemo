@@ -9,11 +9,7 @@ public abstract class BaseController : Controller
     /// <summary>
     /// Retry Count
     /// </summary>
-    protected const string retryCountKey = "retrycount";
-    /// <summary>
-    /// Index Policy
-    /// </summary>
-    protected readonly AsyncRetryPolicy<HttpResponseMessage> _httpIndexPolicy;
+
     /// <summary>
     /// Weather Policy
     /// </summary>
@@ -59,9 +55,7 @@ public abstract class BaseController : Controller
                 .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt) / 2)
                 + TimeSpan.FromSeconds(jitter.Next(0, 3)));
 
-        _httpIndexPolicy = Policy.HandleResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
-                .WaitAndRetryAsync(5, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt) / 2)
-                + TimeSpan.FromSeconds(jitter.Next(0, 3)));
+
     }
 
 }

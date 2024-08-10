@@ -1,8 +1,8 @@
 ﻿@model AsyncDemo.Models.MockResults
 @{
     ViewData["Title"] = "Async Api Polly Page";
-    var bgColor = Model?.ResultValue == "RequestTimeout" ? "red" : "green";
-    var bgColorClass = Model?.ResultValue == "RequestTimeout" ? "bg-danger" : "bg-success"; // Using Bootstrap background color classes
+    var bgColor = Model?.ResultValue == "-1" ? "red" : "green";
+    var bgColorClass = Model?.ResultValue == "-1" ? "bg-danger" : "bg-success"; // Using Bootstrap background color classes
 
 }
 
@@ -25,7 +25,7 @@
                 <dt class="text-start ps-2">RunTime (ms)</dt>
                 <dd class="text-start ps-2 border-bottom">@Model?.RunTimeMS</dd>
                 <dt class="text-start ps-2">Message</dt>
-                <dd class="text-start ps-2">@Model?.Message</dd>
+                <dd class="text-start ps-2">@Html.Raw(Model?.Message)</dd>
             </dl>
             <div class="text-center">
                 <div class="test-list">

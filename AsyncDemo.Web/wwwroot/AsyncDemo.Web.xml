@@ -25,25 +25,15 @@
             <summary>
             Remote Server MOCK
             </summary>
-            <remarks>
-            Initializes a new instance of the <see cref="T:AsyncDemo.Web.Controllers.Api.RemoteController"/> class.
-            </remarks>
-            <param name="logger">The logger.</param>
-            <param name="memoryCache">The memory cache.</param>
         </member>
         <member name="M:AsyncDemo.Web.Controllers.Api.RemoteController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.Api.RemoteController},Microsoft.Extensions.Caching.Memory.IMemoryCache)">
             <summary>
             Remote Server MOCK
             </summary>
-            <remarks>
-            Initializes a new instance of the <see cref="T:AsyncDemo.Web.Controllers.Api.RemoteController"/> class.
-            </remarks>
-            <param name="logger">The logger.</param>
-            <param name="memoryCache">The memory cache.</param>
         </member>
-        <member name="M:AsyncDemo.Web.Controllers.Api.RemoteController.MockResultsAsync(System.Int32)">
+        <member name="M:AsyncDemo.Web.Controllers.Api.RemoteController.MockResultsAsync(System.Int32,System.Threading.CancellationToken)">
             <summary>
-            Asynchronously performs the long running operation and returns the mock results.
+            Asynchronously performs the long-running operation and returns the mock results.
             </summary>
             <param name="loopCount">The loop count.</param>
             <returns>The mock results.</returns>
@@ -54,8 +44,8 @@
             </summary>
             <param name="model">The instance of the request model.</param>
             <returns>The action result.</returns>
-            <response code="200">Request Processed successfully.</response>
-            <response code="200">Request Timeout.</response>
+            <response code="200">Request processed successfully.</response>
+            <response code="408">Request Timeout.</response>
         </member>
         <member name="T:AsyncDemo.Web.Controllers.Api.StatusController">
             <summary>
@@ -94,17 +84,10 @@
             BaseController
             </summary>
         </member>
-        <member name="F:AsyncDemo.Web.Controllers.BaseController.retryCountKey">
+        <member name="F:AsyncDemo.Web.Controllers.BaseController._httpWeatherPolicy">
             <summary>
             Retry Count
             </summary>
-        </member>
-        <member name="F:AsyncDemo.Web.Controllers.BaseController._httpIndexPolicy">
-            <summary>
-            Index Policy
-            </summary>
-        </member>
-        <member name="F:AsyncDemo.Web.Controllers.BaseController._httpWeatherPolicy">
             <summary>
             Weather Policy
             </summary>
@@ -222,22 +205,22 @@
         </member>
         <member name="T:AsyncDemo.Web.Controllers.PollyController">
             <summary>
-            Polly Controller
+            Controller for demonstrating the use of Polly for handling retries in HTTP requests.
             </summary>
         </member>
-        <member name="M:AsyncDemo.Web.Controllers.PollyController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.PollyController})">
-             <summary>
-            
-             </summary>
-             <param name="logger"></param>
+        <member name="M:AsyncDemo.Web.Controllers.PollyController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.PollyController},System.Net.Http.IHttpClientFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AsyncDemo.Web.Controllers.PollyController"/> class.
+            </summary>
+            <param name="logger">The logger instance for logging information.</param>
         </member>
         <member name="M:AsyncDemo.Web.Controllers.PollyController.Index(System.Int32,System.Int32)">
             <summary>
-            Home Page
+            Handles the GET request to the home page. Executes an HTTP POST request with retry logic.
             </summary>
-            <param name="loopCount"></param>
-            <param name="maxTimeMs"></param>
-            <returns></returns>
+            <param name="loopCount">The number of iterations to perform in the mock operation.</param>
+            <param name="maxTimeMs">The maximum time allowed for the operation, in milliseconds.</param>
+            <returns>Returns the result of the operation.</returns>
         </member>
         <member name="T:AsyncDemo.Web.Extensions.ConfigurationExtensions">
             <summary>

@@ -1,83 +1,100 @@
-﻿
-namespace AsyncDemo.Web.Controllers.Api;
+﻿namespace AsyncDemo.Web.Controllers.Api;
 
 /// <summary>
 /// Remote Server MOCK
 /// </summary>
-/// <remarks>
-/// Initializes a new instance of the <see cref="RemoteController"/> class.
-/// </remarks>
-/// <param name="logger">The logger.</param>
-/// <param name="memoryCache">The memory cache.</param>
 [ApiController]
 [Route("api/remote")]
-public class RemoteController(ILogger<RemoteController> logger, IMemoryCache memoryCache) : BaseApiController(memoryCache)
+public class RemoteController(ILogger<RemoteController> _logger, IMemoryCache memoryCache) : BaseApiController(memoryCache)
 {
-    private readonly ILogger<RemoteController> _logger = logger;
-    private readonly AsyncMockService asyncMock = new();
+    private readonly AsyncMockService _asyncMock = new();
 
     /// <summary>
-    /// Asynchronously performs the long running operation and returns the mock results.
+    /// Asynchronously performs the long-running operation and returns the mock results.
     /// </summary>
     /// <param name="loopCount">The loop count.</param>
     /// <returns>The mock results.</returns>
-    private async Task<MockResults> MockResultsAsync(int loopCount)
+    private async Task<MockResults> MockResultsAsync(int loopCount, CancellationToken cancellationToken)
     {
-        MockResults returnMock = new() { LoopCount = loopCount, Message = "init" };
-        using (var cancellationTokenSource = new CancellationTokenSource())
+        var returnMock = new MockResults(loopCount, 0);
+
+        try
         {
-            try
-            {
-                // Running the long running task
-                var result = await asyncMock.LongRunningOperationWithCancellationTokenAsync(loopCount, cancellationTokenSource.Token)
-                    .ConfigureAwait(false);
-                returnMock.Message = $"Task Complete";
-                returnMock.ResultValue = result.ToString();
-            }
-            catch (TaskCanceledException)
-            {
-                returnMock.Message = "TaskCanceledException";
-                returnMock.ResultValue = "-1";
-            }
+            // Running the long-running task with the cancellation token
+            var result = await _asyncMock.LongRunningOperationWithCancellationTokenAsync(loopCount, cancellationToken)
+                .ConfigureAwait(false);
+            returnMock.Message = "Task Complete";
+            returnMock.ResultValue = result.ToString();
+        }
+        catch (TaskCanceledException)
+        {
+            _logger.LogWarning("Task was canceled for LoopCount {LoopCount}", loopCount);
+            throw; // Rethrow the exception to be caught at a higher level
+        }
+        catch (Exception ex)
+        {
+            returnMock.Message = $"Error: {ex.Message}";
+            returnMock.ResultValue = "-1";
+            _logger.LogError(ex, "Error occurred in MockResultsAsync");
         }
         return returnMock;
     }
+
 
     /// <summary>
     /// Posts the results.
     /// </summary>
     /// <param name="model">The instance of the request model.</param>
     /// <returns>The action result.</returns>
-    /// <response code="200">Request Processed successfully.</response>
-    /// <response code="200">Request Timeout.</response>
+    /// <response code="200">Request processed successfully.</response>
+    /// <response code="408">Request Timeout.</response>
     [ProducesResponseType(typeof(MockResults), 200)]
     [ProducesResponseType(typeof(MockResults), 408)]
     [HttpPost]
     [Route("Results")]
     public async Task<IActionResult> GetResults(MockResults model)
     {
-        Stopwatch watch = new();
-        watch.Start();
-
-        MockResults myResult = new() { LoopCount = model.LoopCount, MaxTimeMS = model.MaxTimeMS, Message = "init" };
-        var listOfTasks = new List<Task>();
-        var task1 = MockResultsAsync(model.LoopCount);
-        listOfTasks.Add(task1);
-        var taskResults = await Task.WhenAll(listOfTasks.Select(x => Task.WhenAny(x, Task.Delay(TimeSpan.FromMilliseconds(model.MaxTimeMS)))));
-        var succeedResults = taskResults.OfType<Task<MockResults>>().Select(s => s.Result).ToList();
-
-        watch.Stop();
-        myResult.RunTimeMS = (int)watch.ElapsedMilliseconds;
-        if (succeedResults.Count != listOfTasks.Count)
+        var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(model.MaxTimeMS));
+        var watch = Stopwatch.StartNew();
+        MockResults? result;
+        try
         {
-            myResult.Message = "Time Out Occurred";
-            myResult.ResultValue = "-1";
-            return StatusCode((int)HttpStatusCode.RequestTimeout, myResult);
+            // Pass the cancellation token to MockResultsAsync to allow it to respond to the cancellation
+            result = await MockResultsAsync(model.LoopCount, cts.Token);
+            result.MaxTimeMS = model.MaxTimeMS;
+        }
+        catch (OperationCanceledException)
+        {
+            watch.Stop();
+            result = new MockResults(model.LoopCount, model.MaxTimeMS)
+            {
+                RunTimeMS = watch.ElapsedMilliseconds,
+                Message = "Time Out Occurred",
+                ResultValue = "-1"
+            };
+
+            _logger.LogWarning("GetResults: Request timeout for LoopCount {LoopCount} with MaxTimeMS {MaxTimeMS}", model.LoopCount, model.MaxTimeMS);
+            return StatusCode((int)HttpStatusCode.RequestTimeout, result);
+        }
+        catch (Exception ex)
+        {
+            watch.Stop();
+            result = new MockResults(model.LoopCount, model.MaxTimeMS)
+            {
+                RunTimeMS = watch.ElapsedMilliseconds,
+                Message = $"Error: {ex.Message}",
+                ResultValue = "-1"
+            };
+
+            _logger.LogError(ex, "GetResults: An error occurred for LoopCount {LoopCount} with MaxTimeMS {MaxTimeMS}", model.LoopCount, model.MaxTimeMS);
+            return StatusCode((int)HttpStatusCode.InternalServerError, result);
         }
 
-        myResult.Message = succeedResults.FirstOrDefault()?.Message ?? String.Empty;
-        myResult.ResultValue = succeedResults.FirstOrDefault()?.ResultValue ?? String.Empty;
-        _logger.LogInformation("GetResults:OK", myResult);
-        return Ok(myResult);
+        watch.Stop();
+        result.RunTimeMS = watch.ElapsedMilliseconds;
+
+        _logger.LogInformation("GetResults: OK for LoopCount {LoopCount} with MaxTimeMS {MaxTimeMS}", model.LoopCount, model.MaxTimeMS);
+        return Ok(result);
     }
+
 }

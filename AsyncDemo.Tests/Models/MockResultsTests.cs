@@ -7,14 +7,13 @@
         public void TestMethod1()
         {
             // Arrange
-            var testResults = new MockResults();
-
-            // Act
-            testResults.LoopCount = 1;
-            testResults.MaxTimeMS = 99;
-            testResults.RunTimeMS = 99;
-            testResults.Message = "Message";
-            testResults.ResultValue = "ResultValue";
+            var testResults = new MockResults(1, 99)
+            {
+                // Act
+                RunTimeMS = 99,
+                Message = "Message",
+                ResultValue = "ResultValue"
+            };
 
             // Assert
             Assert.IsNotNull(testResults);
