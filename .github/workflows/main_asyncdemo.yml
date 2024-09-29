@@ -1,3 +1,6 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
 name: Build and deploy ASP.Net Core app to Azure Web App - asyncdemo
 
 on:
@@ -5,10 +8,6 @@ on:
     branches:
       - main
   workflow_dispatch:
-
-env:
-  ACTIONS_STEP_DEBUG: true
-  AZURE_HTTP_USER_AGENT: "GITHUB_ACTIONS"
 
 jobs:
   build:
@@ -18,25 +17,21 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.x'
-          include-prerelease: true
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o myapp
-
-      - name: Debug - List files before uploading artifact
-        run: ls -la myapp
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: asyncdemo-app-artifact # Renamed the artifact here
-          path: myapp
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
     runs-on: ubuntu-latest
@@ -45,36 +40,26 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write
+      id-token: write #This is required for requesting the JWT
 
     steps:
-      - name: Debug - List available artifacts
-        run: ls -la
-
       - name: Download artifact from build job
-        uses: actions/download-artifact@v4.1.7
+        uses: actions/download-artifact@v4
         with:
-          name: asyncdemo-app-artifact # Renamed the artifact here too
-          path: myapp
-        continue-on-error: true  # Continue even if download fails to gather more info
-
-      - name: Debug - List myapp directory contents
-        run: ls -la myapp
-
+          name: .net-app
+      
       - name: Login to Azure
-        uses: azure/login@v1
+        uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_5566E07CFB554849B9E00104D6C8837C }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_00961B2B79B24116869CF73A23B84BF8 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_25C5AF7C5C834607B6903EF990756BD2 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_16608DD007B44633B61794CACCFBAA41 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_FD1A1BFF5DA14D569E4F8C9A9F9CCB7E }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_70680649F5E9442F859FD178497C26E5 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
           app-name: 'asyncdemo'
           slot-name: 'Production'
-          package: myapp
+          package: .
           
-      - name: Debug - List directory contents after deployment
-        run: ls -la
