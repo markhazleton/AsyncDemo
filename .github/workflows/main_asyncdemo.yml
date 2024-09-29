@@ -26,13 +26,13 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: myapp
 
   deploy:
     runs-on: ubuntu-latest
@@ -48,7 +48,8 @@ jobs:
         uses: actions/download-artifact@v4.1.7
         with:
           name: .net-app
-      
+          path: myapp
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -62,5 +63,11 @@ jobs:
         with:
           app-name: 'asyncdemo'
           slot-name: 'Production'
-          package: .
+          package: myapp
           
+      - name: Debug - List myapp directory contents
+        run: ls -la myapp
+
+# Add the following to enable step debug logging if needed
+env:
+  ACTIONS_STEP_DEBUG: true
