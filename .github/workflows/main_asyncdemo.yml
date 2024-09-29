@@ -9,6 +9,10 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  ACTIONS_STEP_DEBUG: true # Enable step debugging for detailed logs
+  AZURE_HTTP_USER_AGENT: "GITHUB_ACTIONS" # Helps track requests coming from GitHub Actions in Azure logs
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -41,7 +45,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write # Required for requesting JWT
 
     steps:
       - name: Download artifact from build job
@@ -57,6 +61,9 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_00961B2B79B24116869CF73A23B84BF8 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_25C5AF7C5C834607B6903EF990756BD2 }}
 
+      - name: Debug - List myapp directory contents
+        run: ls -la myapp
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
@@ -65,9 +72,5 @@ jobs:
           slot-name: 'Production'
           package: myapp
           
-      - name: Debug - List myapp directory contents
-        run: ls -la myapp
-
-# Add the following to enable step debug logging if needed
-env:
-  ACTIONS_STEP_DEBUG: true
+      - name: Debug - List directory contents after deployment
+        run: ls -la
