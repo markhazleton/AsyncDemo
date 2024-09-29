@@ -35,7 +35,7 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: .net-app
+          name: asyncdemo-app-artifact # Renamed the artifact here
           path: myapp
 
   deploy:
@@ -54,9 +54,9 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4.1.7
         with:
-          name: .net-app
+          name: asyncdemo-app-artifact # Renamed the artifact here too
           path: myapp
-        continue-on-error: true  # Bypass the failure temporarily to debug further steps
+        continue-on-error: true  # Continue even if download fails to gather more info
 
       - name: Debug - List myapp directory contents
         run: ls -la myapp
