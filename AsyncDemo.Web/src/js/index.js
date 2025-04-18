@@ -21,10 +21,14 @@ toastr.options = {
     timeOut: 5000
 };
 
+// IMPORTANT: All custom scripts must be imported here to be included in the bundle
+// ================================================================================
+
 // Import custom scripts
-import './site';
-import './async-stats';
-import AsyncStatsDashboard from './async-stats-dashboard';
+import './site';                                     // Site-wide functionality
+import './async-stats';                              // Async statistics tracking
+import AsyncStatsDashboard from './async-stats-dashboard'; // Dashboard visualization
+import './theme-switcher';                           // Bootswatch theme switcher
 
 // Initialize components on document ready
 jQuery(document).ready(function () {

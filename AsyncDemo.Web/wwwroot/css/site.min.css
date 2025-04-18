@@ -4207,6 +4207,653 @@ footer {
   color: #5bc0de;
 }
 
+/* Theme Switcher CSS */
+.theme-transition {
+  transition: all 0.3s ease;
+}
+
+/* Default theme styles - these will be overridden by other themes */
+body.theme-default {
+  /* Base colors that should be themed */
+  --navbar-bg: rgba(26, 26, 46, 0.8);
+  --navbar-shadow: rgba(0, 0, 0, 0.1);
+  --brand-gradient-start: #4361ee;
+  --brand-gradient-end: #f72585;
+  --scrollbar-track: rgba(255, 255, 255, 0.1);
+
+  /* Text colors */
+  --text-color: #555555;
+  --text-muted: #999999;
+  --text-primary: #2fa4e7;
+  --text-success: #468847;
+  --text-info: #3a87ad;
+  --text-warning: #c09853;
+  --text-danger: #b94a48;
+
+  /* Background colors */
+  --bg-body: #ffffff;
+  --bg-primary: #2fa4e7;
+  --bg-secondary: #f8f9fa;
+  --bg-success: #73a839;
+  --bg-info: #033c73;
+  --bg-warning: #dd5600;
+  --bg-danger: #c71c22;
+
+  /* Card and panel styling */
+  --card-bg: #ffffff;
+  --card-border: #e5e5e5;
+  --card-shadow: rgba(0, 0, 0, 0.05);
+
+  /* Button styling */
+  --btn-default-bg: #ffffff;
+  --btn-default-border: rgba(0, 0, 0, 0.1);
+  --btn-primary-bg: #2fa4e7;
+  --btn-primary-border: #2fa4e7;
+  --btn-success-bg: #73a839;
+  --btn-success-border: #73a839;
+  --btn-info-bg: #033c73;
+  --btn-info-border: #033c73;
+  --btn-warning-bg: #dd5600;
+  --btn-warning-border: #dd5600;
+  --btn-danger-bg: #c71c22;
+  --btn-danger-border: #c71c22;
+
+  /* Form controls */
+  --input-bg: #ffffff;
+  --input-border: #cccccc;
+  --input-focus-border: #2fa4e7;
+
+  /* Stats Dashboard */
+  --stats-dashboard-bg: #f8f9fa;
+  --stats-card-bg: #ffffff;
+  --stats-label-color: #666;
+
+  /* Animation colors */
+  --fade-in-bg: #ffffff;
+  --content-bg: #ffffff;
+  --animation-color-1: #4361ee;
+  --animation-color-2: #f72585;
+
+  /* Custom gradients */
+  --main-gradient: linear-gradient(
+    90deg,
+    var(--brand-gradient-start),
+    var(--brand-gradient-end)
+  );
+  --button-gradient: linear-gradient(
+    45deg,
+    var(--brand-gradient-start),
+    var(--brand-gradient-end)
+  );
+  --accent-gradient: linear-gradient(
+    135deg,
+    var(--brand-gradient-start),
+    var(--brand-gradient-end)
+  );
+}
+
+/* Apply themed variables to actual elements */
+body {
+  color: var(--text-color);
+  background-color: var(--bg-body);
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.text-primary {
+  color: var(--text-primary) !important;
+}
+
+.text-success {
+  color: var(--text-success) !important;
+}
+
+.text-info {
+  color: var(--text-info) !important;
+}
+
+.text-warning {
+  color: var(--text-warning) !important;
+}
+
+.text-danger {
+  color: var(--text-danger) !important;
+}
+
+.bg-primary {
+  background-color: var(--bg-primary) !important;
+}
+
+.bg-success {
+  background-color: var(--bg-success) !important;
+}
+
+.bg-info {
+  background-color: var(--bg-info) !important;
+}
+
+.bg-warning {
+  background-color: var(--bg-warning) !important;
+}
+
+.bg-danger {
+  background-color: var(--bg-danger) !important;
+}
+
+/* Navbar styling that allows theming */
+.navbar {
+  backdrop-filter: blur(10px);
+  background-color: var(--navbar-bg, rgba(26, 26, 46, 0.8));
+  box-shadow: 0 4px 20px var(--navbar-shadow, rgba(0, 0, 0, 0.1));
+}
+
+.navbar-brand {
+  font-weight: 700;
+  background: linear-gradient(
+    90deg,
+    var(--brand-gradient-start, #4361ee),
+    var(--brand-gradient-end, #f72585)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Button overrides */
+.btn-primary {
+  background-color: var(--btn-primary-bg);
+  border-color: var(--btn-primary-border);
+}
+
+.btn-success {
+  background-color: var(--btn-success-bg);
+  border-color: var(--btn-success-border);
+}
+
+.btn-info {
+  background-color: var(--btn-info-bg);
+  border-color: var(--btn-info-border);
+}
+
+.btn-warning {
+  background-color: var(--btn-warning-bg);
+  border-color: var(--btn-warning-border);
+}
+
+.btn-danger {
+  background-color: var(--btn-danger-bg);
+  border-color: var(--btn-danger-border);
+}
+
+/* Card and panel styling */
+.card,
+.panel {
+  background-color: var(--card-bg);
+  border-color: var(--card-border);
+  box-shadow: 0 0.25rem 0.75rem var(--card-shadow);
+}
+
+/* Stats Dashboard styling */
+.async-stats-dashboard {
+  background-color: var(--stats-dashboard-bg);
+}
+
+.async-stat-card {
+  background-color: var(--stats-card-bg);
+}
+
+.stat-label {
+  color: var(--stats-label-color);
+}
+
+.fade-in {
+  animation: fadeIn 1s ease;
+}
+
+/* Custom scrollbar styling that allows theming */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track, rgba(255, 255, 255, 0.1));
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    45deg,
+    var(--brand-gradient-start, #4361ee),
+    var(--brand-gradient-end, #f72585)
+  );
+  border-radius: 10px;
+}
+
+/* Theme indicator in dropdown that allows theming */
+.dropdown-item.active {
+  background: linear-gradient(
+    90deg,
+    var(--brand-gradient-start, #4361ee),
+    var(--brand-gradient-end, #f72585)
+  );
+}
+
+/* Additional theme-related styles */
+#theme-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#theme-button .bi {
+  margin-right: 0.25rem;
+}
+
+/* Custom dropdown styling */
+#theme-dropdown {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 1000;
+  min-width: 200px;
+  max-height: 350px;
+  overflow-y: auto;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 5px 15px var(--navbar-shadow);
+  padding: 8px 0;
+  margin-top: 5px;
+  display: none;
+}
+
+#theme-dropdown .dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  clear: both;
+  font-weight: 400;
+  color: var(--text-color);
+  text-align: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+  transition: all 0.2s ease;
+}
+
+#theme-dropdown .dropdown-item:hover,
+#theme-dropdown .dropdown-item:focus {
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+}
+
+/* Theme-specific customizations */
+
+/* Cyborg theme */
+body.theme-cyborg {
+  --navbar-bg: rgba(27, 28, 29, 0.9);
+  --navbar-shadow: rgba(0, 0, 0, 0.4);
+  --brand-gradient-start: #00bc8c;
+  --brand-gradient-end: #375a7f;
+  --scrollbar-track: rgba(40, 40, 40, 0.3);
+
+  /* Text colors */
+  --text-color: #ffffff;
+  --text-muted: #888;
+  --text-primary: #00bc8c;
+  --text-success: #00bc8c;
+  --text-info: #375a7f;
+  --text-warning: #f39c12;
+  --text-danger: #e74c3c;
+
+  /* Background colors */
+  --bg-body: #060606;
+  --bg-primary: #375a7f;
+  --bg-secondary: #222222;
+  --bg-success: #00bc8c;
+  --bg-info: #3498db;
+  --bg-warning: #f39c12;
+  --bg-danger: #e74c3c;
+
+  /* Card and panel styling */
+  --card-bg: #222222;
+  --card-border: #444444;
+  --card-shadow: rgba(0, 0, 0, 0.5);
+
+  /* Button styling */
+  --btn-default-bg: #333333;
+  --btn-default-border: #555555;
+  --btn-primary-bg: #375a7f;
+  --btn-primary-border: #2b4764;
+  --btn-success-bg: #00bc8c;
+  --btn-success-border: #00a379;
+  --btn-info-bg: #3498db;
+  --btn-info-border: #2a80b9;
+  --btn-warning-bg: #f39c12;
+  --btn-warning-border: #d2850b;
+  --btn-danger-bg: #e74c3c;
+  --btn-danger-border: #d62c1a;
+
+  /* Form controls */
+  --input-bg: #333333;
+  --input-border: #444444;
+  --input-focus-border: #00bc8c;
+
+  /* Stats Dashboard */
+  --stats-dashboard-bg: #222222;
+  --stats-card-bg: #333333;
+  --stats-label-color: #aaa;
+}
+
+/* Flatly theme */
+body.theme-flatly {
+  --navbar-bg: rgba(68, 157, 143, 0.9);
+  --navbar-shadow: rgba(44, 62, 80, 0.2);
+  --brand-gradient-start: #18bc9c;
+  --brand-gradient-end: #2c3e50;
+  --scrollbar-track: rgba(236, 240, 241, 0.5);
+
+  /* Text colors */
+  --text-color: #2c3e50;
+  --text-muted: #95a5a6;
+  --text-primary: #2c3e50;
+  --text-success: #18bc9c;
+  --text-info: #3498db;
+  --text-warning: #f39c12;
+  --text-danger: #e74c3c;
+
+  /* Background colors */
+  --bg-body: #ffffff;
+  --bg-primary: #2c3e50;
+  --bg-secondary: #ecf0f1;
+  --bg-success: #18bc9c;
+  --bg-info: #3498db;
+  --bg-warning: #f39c12;
+  --bg-danger: #e74c3c;
+
+  /* Card and panel styling */
+  --card-bg: #ffffff;
+  --card-border: #ecf0f1;
+  --card-shadow: rgba(44, 62, 80, 0.1);
+
+  /* Button styling */
+  --btn-default-bg: #ffffff;
+  --btn-default-border: #dce4ec;
+  --btn-primary-bg: #2c3e50;
+  --btn-primary-border: #2c3e50;
+  --btn-success-bg: #18bc9c;
+  --btn-success-border: #18bc9c;
+  --btn-info-bg: #3498db;
+  --btn-info-border: #3498db;
+  --btn-warning-bg: #f39c12;
+  --btn-warning-border: #f39c12;
+  --btn-danger-bg: #e74c3c;
+  --btn-danger-border: #e74c3c;
+
+  /* Form controls */
+  --input-bg: #ffffff;
+  --input-border: #dce4ec;
+  --input-focus-border: #2c3e50;
+
+  /* Stats Dashboard */
+  --stats-dashboard-bg: #ecf0f1;
+  --stats-card-bg: #ffffff;
+  --stats-label-color: #95a5a6;
+}
+
+/* Lumen theme */
+body.theme-lumen {
+  --navbar-bg: rgba(245, 245, 245, 0.9);
+  --navbar-shadow: rgba(158, 158, 158, 0.2);
+  --brand-gradient-start: #ff851b;
+  --brand-gradient-end: #158cba;
+  --scrollbar-track: rgba(245, 245, 245, 0.5);
+
+  /* Text colors */
+  --text-color: #555555;
+  --text-muted: #999999;
+  --text-primary: #158cba;
+  --text-success: #28b62c;
+  --text-info: #75caeb;
+  --text-warning: #ff851b;
+  --text-danger: #ff4136;
+
+  /* Background colors */
+  --bg-body: #ffffff;
+  --bg-primary: #158cba;
+  --bg-secondary: #f8f9fa;
+  --bg-success: #28b62c;
+  --bg-info: #75caeb;
+  --bg-warning: #ff851b;
+  --bg-danger: #ff4136;
+
+  /* Card and panel styling */
+  --card-bg: #ffffff;
+  --card-border: #eeeeee;
+  --card-shadow: rgba(0, 0, 0, 0.05);
+
+  /* Button styling */
+  --btn-default-bg: #ffffff;
+  --btn-default-border: #dddddd;
+  --btn-primary-bg: #158cba;
+  --btn-primary-border: #127ba3;
+  --btn-success-bg: #28b62c;
+  --btn-success-border: #23a127;
+  --btn-info-bg: #75caeb;
+  --btn-info-border: #5fc1e8;
+  --btn-warning-bg: #ff851b;
+  --btn-warning-border: #ff7701;
+  --btn-danger-bg: #ff4136;
+  --btn-danger-border: #ff291c;
+
+  /* Form controls */
+  --input-bg: #ffffff;
+  --input-border: #eeeeee;
+  --input-focus-border: #158cba;
+
+  /* Stats Dashboard */
+  --stats-dashboard-bg: #f8f9fa;
+  --stats-card-bg: #ffffff;
+  --stats-label-color: #999;
+}
+
+/* Minty theme */
+body.theme-minty {
+  --navbar-bg: rgba(127, 216, 193, 0.9);
+  --navbar-shadow: rgba(60, 156, 133, 0.2);
+  --brand-gradient-start: #78c2ad;
+  --brand-gradient-end: #f3969a;
+  --scrollbar-track: rgba(248, 249, 250, 0.3);
+
+  /* Text colors */
+  --text-color: #5a5a5a;
+  --text-muted: #999999;
+  --text-primary: #78c2ad;
+  --text-success: #56cc9d;
+  --text-info: #6cc3d5;
+  --text-warning: #ffce67;
+  --text-danger: #f3969a;
+
+  /* Background colors */
+  --bg-body: #ffffff;
+  --bg-primary: #78c2ad;
+  --bg-secondary: #f8f9fa;
+  --bg-success: #56cc9d;
+  --bg-info: #6cc3d5;
+  --bg-warning: #ffce67;
+  --bg-danger: #f3969a;
+
+  /* Card and panel styling */
+  --card-bg: #ffffff;
+  --card-border: #f3f3f3;
+  --card-shadow: rgba(0, 0, 0, 0.05);
+
+  /* Button styling */
+  --btn-default-bg: #ffffff;
+  --btn-default-border: #f3f3f3;
+  --btn-primary-bg: #78c2ad;
+  --btn-primary-border: #6ab79a;
+  --btn-success-bg: #56cc9d;
+  --btn-success-border: #40c08d;
+  --btn-info-bg: #6cc3d5;
+  --btn-info-border: #57bbce;
+  --btn-warning-bg: #ffce67;
+  --btn-warning-border: #ffc44e;
+  --btn-danger-bg: #f3969a;
+  --btn-danger-border: #f17e83;
+
+  /* Form controls */
+  --input-bg: #ffffff;
+  --input-border: #f3f3f3;
+  --input-focus-border: #78c2ad;
+
+  /* Stats Dashboard */
+  --stats-dashboard-bg: #f8f9fa;
+  --stats-card-bg: #ffffff;
+  --stats-label-color: #999;
+}
+
+/* Slate theme */
+body.theme-slate {
+  --navbar-bg: rgba(50, 56, 62, 0.9);
+  --navbar-shadow: rgba(0, 0, 0, 0.4);
+  --brand-gradient-start: #3498db;
+  --brand-gradient-end: #7b8a8b;
+  --scrollbar-track: rgba(50, 56, 62, 0.3);
+
+  /* Text colors */
+  --text-color: #c8c8c8;
+  --text-muted: #7a8288;
+  --text-primary: #7a8288;
+  --text-success: #62c462;
+  --text-info: #5bc0de;
+  --text-warning: #f89406;
+  --text-danger: #ee5f5b;
+
+  /* Background colors */
+  --bg-body: #272b30;
+  --bg-primary: #3a3f44;
+  --bg-secondary: #32383e;
+  --bg-success: #62c462;
+  --bg-info: #5bc0de;
+  --bg-warning: #f89406;
+  --bg-danger: #ee5f5b;
+
+  /* Card and panel styling */
+  --card-bg: #32383e;
+  --card-border: #3e444c;
+  --card-shadow: rgba(0, 0, 0, 0.3);
+
+  /* Button styling */
+  --btn-default-bg: #3a3f44;
+  --btn-default-border: #2b2e32;
+  --btn-primary-bg: #7a8288;
+  --btn-primary-border: #6c747c;
+  --btn-success-bg: #62c462;
+  --btn-success-border: #4fbd4f;
+  --btn-info-bg: #5bc0de;
+  --btn-info-border: #46b8da;
+  --btn-warning-bg: #f89406;
+  --btn-warning-border: #df8505;
+  --btn-danger-bg: #ee5f5b;
+  --btn-danger-border: #ec4844;
+
+  /* Form controls */
+  --input-bg: #1c1e22;
+  --input-border: #000000;
+  --input-focus-border: #3e444c;
+
+  /* Stats Dashboard */
+  --stats-dashboard-bg: #32383e;
+  --stats-card-bg: #3a3f44;
+  --stats-label-color: #7a8288;
+}
+
+/* Superhero theme */
+body.theme-superhero {
+  --navbar-bg: rgba(68, 76, 96, 0.9);
+  --navbar-shadow: rgba(32, 40, 54, 0.4);
+  --brand-gradient-start: #df691a;
+  --brand-gradient-end: #4e5d6c;
+  --scrollbar-track: rgba(40, 40, 40, 0.3);
+
+  /* Text colors */
+  --text-color: #ebebeb;
+  --text-muted: #8e9dac;
+  --text-primary: #df691a;
+  --text-success: #5cb85c;
+  --text-info: #5bc0de;
+  --text-warning: #f0ad4e;
+  --text-danger: #d9534f;
+
+  /* Background colors */
+  --bg-body: #2b3e50;
+  --bg-primary: #4e5d6c;
+  --bg-secondary: #4e5d6c;
+  --bg-success: #5cb85c;
+  --bg-info: #5bc0de;
+  --bg-warning: #f0ad4e;
+  --bg-danger: #d9534f;
+
+  /* Card and panel styling */
+  --card-bg: #4e5d6c;
+  --card-border: #2b3e50;
+  --card-shadow: rgba(0, 0, 0, 0.2);
+
+  /* Button styling */
+  --btn-default-bg: #4e5d6c;
+  --btn-default-border: #4e5d6c;
+  --btn-primary-bg: #df691a;
+  --btn-primary-border: #c85e17;
+  --btn-success-bg: #5cb85c;
+  --btn-success-border: #4cae4c;
+  --btn-info-bg: #5bc0de;
+  --btn-info-border: #46b8da;
+  --btn-warning-bg: #f0ad4e;
+  --btn-warning-border: #eea236;
+  --btn-danger-bg: #d9534f;
+  --btn-danger-border: #d43f3a;
+
+  /* Form controls */
+  --input-bg: #2b3e50;
+  --input-border: #485563;
+  --input-focus-border: #df691a;
+
+  /* Stats Dashboard */
+  --stats-dashboard-bg: #4e5d6c;
+  --stats-card-bg: #3e4d5c;
+  --stats-label-color: #ebebeb;
+}
+
+/* Additional themeable elements */
+.card {
+  background-color: var(--card-bg, inherit);
+  border-color: var(--card-border, inherit);
+}
+
+.btn-custom {
+  background: linear-gradient(
+    45deg,
+    var(--brand-gradient-start, #4361ee),
+    var(--brand-gradient-end, #f72585)
+  );
+  border: none;
+  color: white;
+}
+
+.toast {
+  background-color: var(--toast-bg, inherit);
+  border-color: var(--toast-border, inherit);
+}
+
+/* Make sure toasts are visible in dark themes */
+body.theme-cyborg #toast-container > div,
+body.theme-slate #toast-container > div,
+body.theme-superhero #toast-container > div {
+  background-color: #2a2a2a;
+  color: #f8f9fa;
+}
+
 /* Import Bootstrap CSS */
 
 /* Import Bootstrap Icons */
