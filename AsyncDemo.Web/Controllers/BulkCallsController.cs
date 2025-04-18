@@ -1,4 +1,5 @@
 ﻿using AsyncDemo.HttpGetCall;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AsyncDemo.Web.Controllers;
 
@@ -74,5 +75,49 @@ public class BulkCallsController(ILogger<BulkCallsController> logger, IHttpGetCa
     {
         var results = await CallEndpointMultipleTimes();
         return View(results);
+    }
+
+    // GET: BulkCallsController/Create
+    /// <summary>
+    /// Action method for creating a new bulk call test.
+    /// </summary>
+    /// <returns>The create view.</returns>
+    public ActionResult Create()
+    {
+        ViewBag.MaxThreads = 5;
+        ViewBag.IterationCount = 10;
+        ViewBag.Endpoint = "https://asyncdemo.markhazleton.com/status";
+        return View();
+    }
+
+    // POST: BulkCallsController/Create
+    /// <summary>
+    /// Action method for handling the form submission to create a new bulk call test.
+    /// </summary>
+    /// <param name="maxThreads">The maximum number of concurrent threads.</param>
+    /// <param name="iterationCount">The number of iterations.</param>
+    /// <param name="endpoint">The endpoint URL.</param>
+    /// <returns>Redirects to the index view with the results of the bulk HTTP GET calls.</returns>
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<ActionResult> Create(int maxThreads, int iterationCount, string endpoint)
+    {
+        try
+        {
+            if (string.IsNullOrEmpty(endpoint))
+            {
+                endpoint = "https://asyncdemo.markhazleton.com/status";
+            }
+
+            var results = await CallEndpointMultipleTimes(maxThreads, iterationCount, endpoint);
+            TempData["BulkCallSuccess"] = $"Successfully completed {results.Count} API calls out of {iterationCount} requested";
+            return RedirectToAction(nameof(Index));
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error performing bulk calls");
+            TempData["BulkCallError"] = $"Error: {ex.Message}";
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

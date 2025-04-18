@@ -1,0 +1,32 @@
+{
+  "name": "asyncdemo.web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node build.js",
+    "watch": "webpack --watch --config webpack.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "datatables.net": "^2.1.1",
+    "datatables.net-bs5": "^2.0.8",
+    "jquery": "^3.7.1",
+    "jquery-validation": "^1.21.0",
+    "jquery-validation-unobtrusive": "^4.0.0",
+    "toastr": "^2.1.4"
+  },
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "mini-css-extract-plugin": "^2.9.2",
+    "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.14",
+    "webpack": "^5.99.6",
+    "webpack-cli": "^6.0.1"
+  }
+}

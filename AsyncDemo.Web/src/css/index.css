@@ -1,0 +1,11 @@
+/* Import Bootstrap CSS */
+@import "bootstrap/dist/css/bootstrap.min.css";
+
+/* Import Bootstrap Icons */
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+/* Import DataTables Bootstrap 5 CSS */
+@import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
+
+/* Import custom site CSS */
+@import "./site.css";

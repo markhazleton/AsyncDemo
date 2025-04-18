@@ -3,15 +3,95 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="jumbotron">
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Async Demo: Read ME</h3>
+<div class="row justify-content-center mb-5">
+    <div class="col-lg-10">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold mb-3" style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                <i class="bi bi-lightning-charge-fill me-2 icon-pulse"></i>Async Programming Demo
+            </h1>
+            <p class="lead" style="color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">
+                Explore asynchronous programming techniques in .NET with interactive examples
+            </p>
         </div>
-        <div class="card-body">
-            @Html.Raw(Model)
+    </div>
+</div>
+
+<div class="row g-4 justify-content-center">
+    <div class="col-lg-10">
+        <div class="content-card p-4">
+            <div class="card-header bg-transparent border-0 mb-3">
+                <h3 class="mb-0 d-flex align-items-center">
+                    <i class="bi bi-file-earmark-text me-2 text-primary"></i>
+                    <span>AsyncDemo Documentation</span>
+                </h3>
+            </div>
+            <div class="card-body">
+                @Html.Raw(Model)
+            </div>
         </div>
-        <div class="card-footer">
+    </div>
+</div>
+
+<div class="row g-4 mt-5 justify-content-center">
+    <div class="col-lg-10">
+        <h2 class="text-center mb-4" style="color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">
+            Explore Demo Features
+        </h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="content-card h-100 p-4 text-center">
+                    <div class="d-inline-block p-3 rounded-circle mb-3" style="background: rgba(67, 97, 238, 0.2);">
+                        <i class="bi bi-shield-shaded fs-1 text-primary"></i>
+                    </div>
+                    <h4>Polly Demo</h4>
+                    <p class="mb-4">Explore resilience patterns with Polly to handle transient failures in your API
+                        calls</p>
+                    <a href="/polly" class="btn btn-custom">
+                        <i class="bi bi-arrow-right-circle me-1"></i> Explore
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="content-card h-100 p-4 text-center">
+                    <div class="d-inline-block p-3 rounded-circle mb-3" style="background: rgba(114, 9, 183, 0.2);">
+                        <i class="bi bi-cloud-sun fs-1 text-secondary"></i>
+                    </div>
+                    <h4>Weather API</h4>
+                    <p class="mb-4">Learn how to fetch and process data from external APIs asynchronously</p>
+                    <a href="/openweather" class="btn btn-custom">
+                        <i class="bi bi-arrow-right-circle me-1"></i> Explore
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="content-card h-100 p-4 text-center">
+                    <div class="d-inline-block p-3 rounded-circle mb-3" style="background: rgba(247, 37, 133, 0.2);">
+                        <i class="bi bi-collection fs-1 text-accent" style="color: #f72585;"></i>
+                    </div>
+                    <h4>Bulk Calls</h4>
+                    <p class="mb-4">See how to efficiently handle multiple asynchronous operations in parallel</p>
+                    <a href="/bulkcalls" class="btn btn-custom">
+                        <i class="bi bi-arrow-right-circle me-1"></i> Explore
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5 g-4 justify-content-center">
+    <div class="col-lg-10">
+        <div class="content-card p-4">
+            <div class="d-flex align-items-center mb-4">
+                <i class="bi bi-code-slash fs-1 me-3 text-primary"></i>
+                <h3 class="mb-0">API Documentation</h3>
+            </div>
+            <p class="lead mb-4">
+                Explore the API endpoints available in this demo application through our Swagger UI documentation.
+            </p>
+            <a href="/swagger" class="btn btn-custom">
+                <i class="bi bi-braces me-1"></i> View API Docs
+            </a>
         </div>
     </div>
 </div>
@@ -19,3 +99,5 @@
 
 
 
+
+                       

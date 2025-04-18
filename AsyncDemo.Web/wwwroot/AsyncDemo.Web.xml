@@ -157,6 +157,21 @@
             </summary>
             <returns>The index view with the results of the bulk HTTP GET calls.</returns>
         </member>
+        <member name="M:AsyncDemo.Web.Controllers.BulkCallsController.Create">
+            <summary>
+            Action method for creating a new bulk call test.
+            </summary>
+            <returns>The create view.</returns>
+        </member>
+        <member name="M:AsyncDemo.Web.Controllers.BulkCallsController.Create(System.Int32,System.Int32,System.String)">
+            <summary>
+            Action method for handling the form submission to create a new bulk call test.
+            </summary>
+            <param name="maxThreads">The maximum number of concurrent threads.</param>
+            <param name="iterationCount">The number of iterations.</param>
+            <param name="endpoint">The endpoint URL.</param>
+            <returns>Redirects to the index view with the results of the bulk HTTP GET calls.</returns>
+        </member>
         <member name="T:AsyncDemo.Web.Controllers.HomeController">
             <summary>
             Home Controller

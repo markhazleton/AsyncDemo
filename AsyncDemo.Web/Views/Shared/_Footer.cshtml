@@ -4,20 +4,58 @@
     var currentYear = DateTime.Now.Year.ToString();
     var status = new ApplicationStatus(Assembly.GetExecutingAssembly());
 }
-<footer class="container-fluid mt-auto border-top footer bg-dark d-print-none">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3 col-md-3 col-sm-12" style="float:left">
-                Version: @status.BuildVersion?.ToString() <br />
-                <a href="https://github.com/markhazleton/asyncdemo" target="_blank">GitHub</a>
+<footer class="mt-auto py-4">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-4 col-md-4 col-sm-12 text-center text-md-start">
+                <div class="d-flex flex-column gap-2">
+                    <div>
+                        <i class="bi bi-code-square me-2"></i>Version: @status.BuildVersion?.ToString()
+                    </div>
+                    <a href="https://github.com/markhazleton/asyncdemo" target="_blank"
+                        class="text-decoration-none text-white">
+                        <i class="bi bi-github me-2"></i>GitHub Repository
+                    </a>
+                </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12" style="text-align:center;">
-                &copy; 2020-@currentYear AsyncDemo.Web <br />
+            <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+                <div class="d-flex flex-column gap-2">
+                    <div class="mb-2">
+                        <span class="fs-5"><i class="bi bi-lightning-charge me-2 icon-pulse"></i>AsyncDemo.Web</span>
+                    </div>
+                    <div>
+                        <i class="bi bi-calendar3 me-2"></i>&copy; 2020-@currentYear
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-3 col-md-3 col-sm-12" style="float:right">
-                Last Built: @status.BuildDate.ToLocalTime().ToLongDateString() <br />
-                <a href="https://markhazleton.com" title="Mark Hazleton, Solutions Architect, Lifelong Learner, not sidetracked by sizzle" target="_blank">Mark Hazleton</a>
+            <div class="col-lg-4 col-md-4 col-sm-12 text-center text-md-end">
+                <div class="d-flex flex-column gap-2">
+                    <div>
+                        <i class="bi bi-clock-history me-2"></i>Last Built:
+                        @status.BuildDate.ToLocalTime().ToString("MMM dd, yyyy")
+                    </div>
+                    <a href="https://markhazleton.com" title="Mark Hazleton, Solutions Architect, Lifelong Learner"
+                        target="_blank" class="text-decoration-none text-white">
+                        <i class="bi bi-person-badge me-2"></i>Mark Hazleton
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="#" class="text-white">
+                        <i class="bi bi-twitter fs-4"></i>
+                    </a>
+                    <a href="#" class="text-white">
+                        <i class="bi bi-linkedin fs-4"></i>
+                    </a>
+                    <a href="#" class="text-white">
+                        <i class="bi bi-envelope fs-4"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </footer>
+           
