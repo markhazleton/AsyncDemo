@@ -4290,6 +4290,35 @@ body.theme-default {
     var(--brand-gradient-start),
     var(--brand-gradient-end)
   );
+
+  /* Animated Gradient Background - only for default theme */
+  position: relative;
+  background: linear-gradient(-45deg, #4361ee, #3a0ca3, #4895ef, #f72585);
+  background-size: 400% 400%;
+  animation: gradient-animation 15s ease infinite;
+}
+
+/* Add animation keyframes for the gradient background - only visible in default theme */
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Make content container have a white background in default theme to ensure readability */
+body.theme-default .container.main-content {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  margin-top: 25px;
+  backdrop-filter: blur(10px);
 }
 
 /* Apply themed variables to actual elements */
@@ -4342,15 +4371,31 @@ body {
   background-color: var(--bg-danger) !important;
 }
 
-/* Navbar styling that allows theming */
+/* Navbar styling that allows theming - moved gradients to theme-specific selectors */
 .navbar {
   backdrop-filter: blur(10px);
   background-color: var(--navbar-bg, rgba(26, 26, 46, 0.8));
   box-shadow: 0 4px 20px var(--navbar-shadow, rgba(0, 0, 0, 0.1));
 }
 
+/* Remove gradient background from global navbar styling */
+body.theme-default .navbar {
+  background-image: -webkit-linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
+  background-image: linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
+  background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff54b4eb', endColorstr='#ff1d9ce5', GradientType=0);
+  border-bottom: 1px solid #178acc;
+  filter: none;
+  -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+}
+
 .navbar-brand {
   font-weight: 700;
+}
+
+/* Move gradient to theme-specific selector */
+body.theme-default .navbar-brand {
   background: linear-gradient(
     90deg,
     var(--brand-gradient-start, #4361ee),
@@ -4360,7 +4405,7 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* Button overrides */
+/* Button overrides - base styling */
 .btn-primary {
   background-color: var(--btn-primary-bg);
   border-color: var(--btn-primary-border);
@@ -4386,15 +4431,78 @@ body {
   border-color: var(--btn-danger-border);
 }
 
-/* Card and panel styling */
+/* Move button gradient backgrounds to theme-specific selectors */
+body.theme-default .btn {
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+body.theme-default .btn-default {
+  background-image: -webkit-linear-gradient(#ffffff, #ffffff 60%, #f5f5f5);
+  background-image: linear-gradient(#ffffff, #ffffff 60%, #f5f5f5);
+  background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff5f5f5', GradientType=0);
+  filter: none;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+body.theme-default .btn-primary {
+  background-image: -webkit-linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
+  background-image: linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
+  background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff54b4eb', endColorstr='#ff1d9ce5', GradientType=0);
+  filter: none;
+  border-bottom: 1px solid #178acc;
+}
+
+body.theme-default .btn-success {
+  background-image: -webkit-linear-gradient(#88c149, #73a839 60%, #699934);
+  background-image: linear-gradient(#88c149, #73a839 60%, #699934);
+  background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff88c149', endColorstr='#ff699934', GradientType=0);
+  filter: none;
+  border-bottom: 1px solid #59822c;
+}
+
+body.theme-default .btn-info {
+  background-image: -webkit-linear-gradient(#04519b, #033c73 60%, #02325f);
+  background-image: linear-gradient(#04519b, #033c73 60%, #02325f);
+  background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff04519b', endColorstr='#ff02325f', GradientType=0);
+  filter: none;
+  border-bottom: 1px solid #022241;
+}
+
+body.theme-default .btn-warning {
+  background-image: -webkit-linear-gradient(#ff6707, #dd5600 60%, #c94e00);
+  background-image: linear-gradient(#ff6707, #dd5600 60%, #c94e00);
+  background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff6707', endColorstr='#ffc94e00', GradientType=0);
+  filter: none;
+  border-bottom: 1px solid #aa4200;
+}
+
+body.theme-default .btn-danger {
+  background-image: -webkit-linear-gradient(#e12b31, #c71c22 60%, #b5191f);
+  background-image: linear-gradient(#e12b31, #c71c22 60%, #b5191f);
+  background-repeat: no-repeat;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffe12b31', endColorstr='#ffb5191f', GradientType=0);
+  filter: none;
+  border-bottom: 1px solid #9a161a;
+}
+
+/* Card and panel styling - move shadows to theme-specific */
 .card,
 .panel {
   background-color: var(--card-bg);
   border-color: var(--card-border);
+}
+
+body.theme-default .card,
+body.theme-default .panel {
   box-shadow: 0 0.25rem 0.75rem var(--card-shadow);
 }
 
-/* Stats Dashboard styling */
+/* Stats Dashboard styling - base properties */
 .async-stats-dashboard {
   background-color: var(--stats-dashboard-bg);
 }
@@ -4407,11 +4515,12 @@ body {
   color: var(--stats-label-color);
 }
 
-.fade-in {
+/* Animation styling - only for default theme */
+body.theme-default .fade-in {
   animation: fadeIn 1s ease;
 }
 
-/* Custom scrollbar styling that allows theming */
+/* Custom scrollbar styling - base */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -4420,7 +4529,8 @@ body {
   background: var(--scrollbar-track, rgba(255, 255, 255, 0.1));
 }
 
-::-webkit-scrollbar-thumb {
+/* Move gradient effect to theme-specific */
+body.theme-default ::-webkit-scrollbar-thumb {
   background: linear-gradient(
     45deg,
     var(--brand-gradient-start, #4361ee),
@@ -4429,13 +4539,24 @@ body {
   border-radius: 10px;
 }
 
-/* Theme indicator in dropdown that allows theming */
-.dropdown-item.active {
+/* Other themes get solid color scrollbar */
+::-webkit-scrollbar-thumb {
+  background: var(--bg-primary, #2fa4e7);
+  border-radius: 10px;
+}
+
+/* Theme indicator in dropdown - move gradient to theme-specific */
+body.theme-default .dropdown-item.active {
   background: linear-gradient(
     90deg,
     var(--brand-gradient-start, #4361ee),
     var(--brand-gradient-end, #f72585)
   );
+}
+
+/* Non-default themes get solid color active state */
+.dropdown-item.active {
+  background-color: var(--bg-primary);
 }
 
 /* Additional theme-related styles */
@@ -4852,6 +4973,69 @@ body.theme-slate #toast-container > div,
 body.theme-superhero #toast-container > div {
   background-color: #2a2a2a;
   color: #f8f9fa;
+}
+
+/* Remove gradient backgrounds from panel headers in global styling */
+.panel-primary .panel-heading,
+.panel-success .panel-heading,
+.panel-warning .panel-heading,
+.panel-danger .panel-heading,
+.panel-info .panel-heading,
+.panel-primary .panel-title,
+.panel-success .panel-title,
+.panel-warning .panel-title,
+.panel-danger .panel-title,
+.panel-info .panel-title {
+  color: #fff;
+}
+
+/* Apply panel header gradients only to default theme */
+body.theme-default .panel-primary > .panel-heading {
+  background-image: -webkit-linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
+  background-image: linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5);
+  background-repeat: no-repeat;
+}
+
+body.theme-default .panel-success > .panel-heading {
+  background-image: -webkit-linear-gradient(#88c149, #73a839 60%, #699934);
+  background-image: linear-gradient(#88c149, #73a839 60%, #699934);
+  background-repeat: no-repeat;
+}
+
+body.theme-default .panel-info > .panel-heading {
+  background-image: -webkit-linear-gradient(#04519b, #033c73 60%, #02325f);
+  background-image: linear-gradient(#04519b, #033c73 60%, #02325f);
+  background-repeat: no-repeat;
+}
+
+body.theme-default .panel-warning > .panel-heading {
+  background-image: -webkit-linear-gradient(#ff6707, #dd5600 60%, #c94e00);
+  background-image: linear-gradient(#ff6707, #dd5600 60%, #c94e00);
+  background-repeat: no-repeat;
+}
+
+body.theme-default .panel-danger > .panel-heading {
+  background-image: -webkit-linear-gradient(#e12b31, #c71c22 60%, #b5191f);
+  background-image: linear-gradient(#e12b31, #c71c22 60%, #b5191f);
+  background-repeat: no-repeat;
+}
+
+/* Custom button with gradient - only for default theme */
+body.theme-default .btn-custom {
+  background: linear-gradient(
+    45deg,
+    var(--brand-gradient-start, #4361ee),
+    var(--brand-gradient-end, #f72585)
+  );
+  border: none;
+  color: white;
+}
+
+/* Non-default themes get solid color custom button */
+.btn-custom {
+  background-color: var(--bg-primary);
+  border: none;
+  color: white;
 }
 
 /* Import Bootstrap CSS */

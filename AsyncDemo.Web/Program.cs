@@ -58,20 +58,25 @@ else
     app.UseExceptionHandler("/Home/Error");
 }
 
-app.UseCustomSwagger();
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.UseMarkdown();
-app.MapControllers();
-app.MapHealthChecks("/health");
-app.UseStaticFiles();
 app.UseSession();
+
+// Add MVC routing first to ensure the default route takes precedence
 app.UseMvc(routes =>
 {
     routes.MapRoute(
         name: "default",
         template: "{controller=Home}/{action=Index}/{id?}");
 });
+
+// Add Swagger after MVC routing so it doesn't take over the root path
+app.UseCustomSwagger();
+
+app.MapControllers();
+app.MapHealthChecks("/health");
 
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
 logger.LogInformation("From Program, running the host now.");
