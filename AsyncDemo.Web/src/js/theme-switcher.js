@@ -8,6 +8,7 @@ class ThemeSwitcher {
         console.log('ThemeSwitcher initializing...');
         this.themesApiUrl = 'https://bootswatch.com/api/5.json';
         this.themeLink = document.getElementById('theme-link');
+        this.customStylesLink = document.getElementById('custom-styles');
         this.themes = [];
         this.currentTheme = localStorage.getItem('selectedTheme') || 'default';
         this.isDropdownOpen = false;
@@ -109,17 +110,19 @@ class ThemeSwitcher {
      */
     async fetchThemes() {
         try {
-            console.log('Fetching themes from', this.themesApiUrl);
             const response = await fetch(this.themesApiUrl);
             if (!response.ok) {
-                throw new Error(`Failed to fetch themes: ${response.status} ${response.statusText}`);
+                throw new Error('Failed to fetch themes');
             }
+            
             const data = await response.json();
-            this.themes = data.themes;
+            this.themes = data.themes || [];
+            
             console.log(`Fetched ${this.themes.length} themes`);
             return this.themes;
         } catch (error) {
             console.error('Error fetching themes:', error);
+            this.themes = [];
             return [];
         }
     }
@@ -219,12 +222,25 @@ class ThemeSwitcher {
         if (themeName === 'default') {
             // Reset to default Bootstrap
             this.themeLink.href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css';
+            
+            // Move custom styles after Bootstrap to apply overrides only for default theme
+            if (this.customStylesLink) {
+                this.customStylesLink.disabled = false;
+                const parent = this.customStylesLink.parentNode;
+                parent.removeChild(this.customStylesLink);
+                parent.appendChild(this.customStylesLink);
+            }
         } else {
             // Apply Bootswatch theme
             const theme = this.themes.find(t => t.name.toLowerCase() === themeName.toLowerCase());
             if (theme) {
                 this.themeLink.href = themeUrl || theme.cssMin;
                 console.log('Set theme URL to:', this.themeLink.href);
+                
+                // For non-default themes, disable custom styles that might override Bootswatch
+                if (this.customStylesLink) {
+                    this.customStylesLink.disabled = true;
+                }
             } else {
                 console.error('Theme not found:', themeName);
             }
@@ -235,9 +251,9 @@ class ThemeSwitcher {
         if (themeButton) {
             themeButton.innerHTML = `<i class="bi bi-palette me-1"></i>${themeName === 'default' ? 'Theme' : themeName}`;
         }
-
-        // Apply theme to custom elements that may not be affected by CSS variables
-        this.applyThemeToCustomElements(themeName);
+        
+        // Update CSS variables for theme-specific styling
+        this.updateThemeSpecificStyles(themeName);
 
         // Dispatch a theme change event
         document.dispatchEvent(new CustomEvent('themeChanged', {
@@ -251,49 +267,45 @@ class ThemeSwitcher {
     }
 
     /**
-     * Apply theme to custom elements that might not be covered by CSS variables
+     * Update theme-specific styling to ensure full theme compatibility
      */
-    applyThemeToCustomElements(themeName) {
-        // Apply to fade-in elements
-        const fadeInElements = document.querySelectorAll('.fade-in');
-        fadeInElements.forEach(el => {
-            el.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--fade-in-bg').trim();
+    updateThemeSpecificStyles(themeName) {
+        // Reset any previous inline styles that might interfere with theme
+        document.querySelectorAll('[style*="background-color"]').forEach(el => {
+            // Only remove inline background-color if it's not a critical element
+            if (!el.classList.contains('preserve-style')) {
+                el.style.removeProperty('background-color');
+            }
         });
-
-        // Apply to main content areas
-        const contentElements = document.querySelectorAll('.container, .container-fluid, main, .content');
-        contentElements.forEach(el => {
-            el.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--content-bg').trim();
+        
+        // Reset any other potential overrides
+        document.querySelectorAll('[style*="color"]').forEach(el => {
+            if (!el.classList.contains('preserve-style')) {
+                el.style.removeProperty('color');
+            }
         });
-
-        // Apply to animations with background color cycling
-        const animatedElements = document.querySelectorAll('[class*="bg-animate"]');
-        if (animatedElements.length > 0) {
-            const color1 = getComputedStyle(document.documentElement).getPropertyValue('--animation-color-1').trim();
-            const color2 = getComputedStyle(document.documentElement).getPropertyValue('--animation-color-2').trim();
+        
+        // Set minimal CSS variables to maintain functionality without overriding theme
+        if (themeName === 'default') {
+            // For default theme only, set brand colors for custom elements
+            const color1 = '#4361ee';
+            const color2 = '#f72585';
             
-            // Update any inline styles or custom properties used for animations
             document.documentElement.style.setProperty('--color-cycle-1', color1);
             document.documentElement.style.setProperty('--color-cycle-2', color2);
-        }
-
-        // Apply to cards and panels
-        const cards = document.querySelectorAll('.card, .panel');
-        cards.forEach(card => {
-            card.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--card-bg').trim();
-            card.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--card-border').trim();
-        });
-
-        // Apply to stats dashboard
-        const statsDashboard = document.querySelector('.async-stats-dashboard');
-        if (statsDashboard) {
-            statsDashboard.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--stats-dashboard-bg').trim();
+        } else {
+            // For Bootswatch themes, use theme-specific primary colors if available
+            // This relies on the theme's CSS variables if they exist
+            const computedStyle = getComputedStyle(document.body);
+            const primaryColor = computedStyle.getPropertyValue('--bs-primary') || 
+                                computedStyle.getPropertyValue('--primary') || 
+                                '#0d6efd';
+                                
+            document.documentElement.style.setProperty('--color-cycle-1', primaryColor);
+            document.documentElement.style.setProperty('--color-cycle-2', primaryColor);
         }
         
-        const statCards = document.querySelectorAll('.async-stat-card');
-        statCards.forEach(card => {
-            card.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--stats-card-bg').trim();
-        });
+        console.log('Theme-specific styles updated');
     }
 
     /**

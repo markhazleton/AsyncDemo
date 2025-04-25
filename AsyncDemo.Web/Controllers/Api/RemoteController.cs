@@ -13,6 +13,7 @@ public class RemoteController(ILogger<RemoteController> _logger, IMemoryCache me
     /// Asynchronously performs the long-running operation and returns the mock results.
     /// </summary>
     /// <param name="loopCount">The loop count.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>The mock results.</returns>
     private async Task<MockResults> MockResultsAsync(int loopCount, CancellationToken cancellationToken)
     {

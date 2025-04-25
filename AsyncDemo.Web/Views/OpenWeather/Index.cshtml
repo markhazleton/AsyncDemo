@@ -3,64 +3,13 @@
     ViewData["Title"] = "Open Weather";
 }
 
-<style>
-    .iframe-container {
-        overflow: hidden;
-        padding-top: 56.25%;
-        position: relative;
-        border-radius: 0.5rem;
-        margin: 1rem 0;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .iframe-container iframe {
-        border: 0;
-        height: 100%;
-        left: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        border-radius: 0.5rem;
-    }
-
-    .weather-card {
-        transition: all 0.3s ease;
-        overflow: hidden;
-    }
-
-    .weather-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    }
-
-    .weather-icon {
-        font-size: 1.8rem;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        margin-right: 1rem;
-    }
-
-    .weather-row {
-        padding: 0.5rem 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    .weather-row:last-child {
-        border-bottom: none;
-    }
-</style>
-
 <div class="row justify-content-center mb-5">
     <div class="col-lg-10">
         <div class="text-center mb-5">
-            <h1 class="display-4 fw-bold mb-3" style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+            <h1 class="display-4 fw-bold mb-3 text-primary">
                 <i class="bi bi-cloud-sun me-2"></i>Weather API Demo
             </h1>
-            <p class="lead" style="color: white; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);">
+            <p class="lead">
                 Explore asynchronous weather data fetching from OpenWeatherMap API
             </p>
         </div>
@@ -69,11 +18,11 @@
 
 <div class="row g-4 justify-content-center">
     <div class="col-lg-10">
-        <div class="content-card p-4 mb-5">
+        <div class="card shadow-sm p-4 mb-5">
             <div class="row">
                 <div class="col-lg-8 col-md-12 mx-auto">
                     <form method="get" class="mb-0">
-                        <div class="card-header bg-transparent border-0 mb-3">
+                        <div class="mb-3">
                             <h3 class="mb-0 d-flex align-items-center">
                                 <i class="bi bi-search me-2 text-primary"></i>
                                 <span>Search Weather</span>
@@ -87,7 +36,7 @@
                                 </span>
                                 <input id="weatherCity" name="location" class="form-control" type="text"
                                     placeholder="Enter city name (e.g., London, New York, Tokyo)" />
-                                <button type="submit" id="getWeather" class="btn btn-custom">
+                                <button type="submit" id="getWeather" class="btn btn-primary">
                                     <i class="bi bi-cloud-download me-2"></i>Get Weather
                                 </button>
                             </div>
@@ -102,11 +51,10 @@
     @foreach (var item in @Model)
     {
         <div class="col-xxl-4 col-xl-4 col-lg-6 col-md-6 col-sm-12">
-            <div class="content-card weather-card">
+            <div class="card shadow-sm h-100 transition">
                 @if (@item.Success)
                 {
-                    <div class="p-4"
-                        style="background: linear-gradient(120deg, var(--primary-color), var(--secondary-color)); border-radius: 1rem 1rem 0 0;">
+                    <div class="p-4 bg-primary text-white rounded-top">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h3 class="text-white m-0">@item.Location.Name</h3>
                             <span class="badge bg-light text-dark">@item.CurrentConditions.Conditions</span>
@@ -150,8 +98,8 @@
                         </div>
                     </div>
 
-                    <div class="iframe-container">
-                        <iframe loading="lazy" frameborder="0"
+                    <div class="ratio ratio-16x9 m-0">
+                        <iframe loading="lazy" class="border-0 rounded-0"
                             src="https://www.bing.com/maps/embed?h=280&w=625&cp=@item.Location.Latitude~@item.Location.Longitude&lvl=11&typ=d&sty=r&src=SHELL&FORM=MBEDV8"
                             scrolling="no">
                         </iframe>
@@ -160,8 +108,8 @@
                     <div class="p-4">
                         <p class="text-muted mb-3">Observed at @item.ObservationTime</p>
 
-                        <div class="weather-row d-flex align-items-center">
-                            <div class="weather-icon bg-primary bg-opacity-10 text-primary">
+                        <div class="d-flex align-items-center py-2 border-bottom">
+                            <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                                 <i class="bi bi-eye"></i>
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
@@ -170,8 +118,8 @@
                             </div>
                         </div>
 
-                        <div class="weather-row d-flex align-items-center">
-                            <div class="weather-icon bg-info bg-opacity-10 text-info">
+                        <div class="d-flex align-items-center py-2 border-bottom">
+                            <div class="bg-info bg-opacity-10 text-info rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                                 <i class="bi bi-cloud"></i>
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
@@ -180,8 +128,8 @@
                             </div>
                         </div>
 
-                        <div class="weather-row d-flex align-items-center">
-                            <div class="weather-icon bg-success bg-opacity-10 text-success">
+                        <div class="d-flex align-items-center py-2 border-bottom">
+                            <div class="bg-success bg-opacity-10 text-success rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                                 <i class="bi bi-droplet"></i>
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
@@ -190,8 +138,8 @@
                             </div>
                         </div>
 
-                        <div class="weather-row d-flex align-items-center">
-                            <div class="weather-icon bg-warning bg-opacity-10 text-warning">
+                        <div class="d-flex align-items-center py-2 border-bottom">
+                            <div class="bg-warning bg-opacity-10 text-warning rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                                 <i class="bi bi-speedometer2"></i>
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
@@ -200,8 +148,8 @@
                             </div>
                         </div>
 
-                        <div class="weather-row d-flex align-items-center">
-                            <div class="weather-icon bg-danger bg-opacity-10 text-danger">
+                        <div class="d-flex align-items-center py-2 border-bottom">
+                            <div class="bg-danger bg-opacity-10 text-danger rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                                 <i class="bi bi-wind"></i>
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
@@ -211,8 +159,8 @@
                             </div>
                         </div>
 
-                        <div class="weather-row d-flex align-items-center">
-                            <div class="weather-icon bg-primary bg-opacity-10 text-primary">
+                        <div class="d-flex align-items-center py-2 border-bottom">
+                            <div class="bg-primary bg-opacity-10 text-primary rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                                 <i class="bi bi-umbrella"></i>
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
@@ -233,7 +181,7 @@
                 }
                 else
                 {
-                    <div class="p-4 bg-danger text-white" style="border-radius: 1rem 1rem 0 0;">
+                    <div class="p-4 bg-danger text-white rounded-top">
                         <div class="d-flex align-items-center">
                             <i class="bi bi-exclamation-triangle-fill fs-1 me-3"></i>
                             <div>
@@ -255,7 +203,7 @@
 {
     <div class="row justify-content-center mt-5">
         <div class="col-lg-10 text-center">
-            <div class="content-card p-5">
+            <div class="card shadow-sm p-5">
                 <i class="bi bi-cloud-moon fs-1 text-primary mb-3"></i>
                 <h3>Search for a city to see weather data</h3>
                 <p class="text-muted">Enter a city name in the search box above to fetch current weather conditions</p>
@@ -264,6 +212,5 @@
     </div>
 }
 
-       
-       
-               
+
+

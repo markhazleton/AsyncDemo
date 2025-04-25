@@ -24,5 +24,14 @@ public class HomeController : BaseController
         var myContent = Markdown.ParseHtmlStringFromFile("~/README.md");
         return View(myContent);
     }
+
+    /// <summary>
+    /// Bootstrap 5 Theme Demo - Kitchen Sink
+    /// </summary>
+    /// <returns>View displaying all Bootstrap 5 components and styles</returns>
+    public IActionResult ThemeDemo()
+    {
+        return View();
+    }
 }
 

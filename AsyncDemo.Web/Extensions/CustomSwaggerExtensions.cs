@@ -1,5 +1,4 @@
-﻿
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 
 namespace AsyncDemo.Web.Extensions;
 
@@ -49,6 +48,11 @@ public static class CustomSwaggerExtensions
         return services;
     }
 
+    /// <summary>
+    /// Configures the application to use Swagger UI
+    /// </summary>
+    /// <param name="app">The application builder</param>
+    /// <returns>The application builder with Swagger configured</returns>
     public static IApplicationBuilder UseCustomSwagger(this IApplicationBuilder app)
     {
         app.UseSwagger()

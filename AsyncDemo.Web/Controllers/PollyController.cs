@@ -17,6 +17,7 @@
         /// Initializes a new instance of the <see cref="PollyController"/> class.
         /// </summary>
         /// <param name="logger">The logger instance for logging information.</param>
+        /// <param name="clientFactory">The HTTP client factory for creating HTTP clients.</param>
         public PollyController(ILogger<PollyController> logger, IHttpClientFactory clientFactory)
         {
             _logger = logger;
@@ -96,7 +97,7 @@
                     }
 
                     mockResults.ResultValue = response.StatusCode.ToString();
-                    
+
                 }
             }
             catch (Exception ex)
