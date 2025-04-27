@@ -1,8 +1,10 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿#nullable enable
+using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Primitives;
 using System.Collections.Concurrent;
 
 namespace AsyncDemo.Services;
+
 public class MemoryCacheManager : IMemoryCacheManager
 {
 
@@ -47,7 +49,7 @@ public class MemoryCacheManager : IMemoryCacheManager
     /// <param name="value">Value of cached item</param>
     /// <param name="reason">Eviction reason</param>
     /// <param name="state">State</param>
-    private void PostEviction(object key, object value, EvictionReason reason, object state)
+    private void PostEviction(object? key, object? value, EvictionReason reason, object? state)
     {
         //if cached item just change, then nothing doing
         if (reason == EvictionReason.Replaced)
@@ -154,17 +156,22 @@ public class MemoryCacheManager : IMemoryCacheManager
     public virtual T Get<T>(string key, Func<T> acquire, int? cacheTime = null)
     {
         //item already is in cache, so return it
-        if (_cache.TryGetValue(key, out T value))
+        if (_cache.TryGetValue(key, out T? value) && value != null)
             return value;
 
         //or create it using passed function
         var result = acquire();
+        if (result == null && default(T) == null)
+        {
+            // Only log this as we need to conform to the interface which doesn't have nullability constraints
+            Console.WriteLine($"Warning: Acquire function returned null for key: {key}");
+        }
 
         //and set in cache (if cache time is defined)
-        if ((cacheTime ?? 30) > 0)
+        if ((cacheTime ?? 30) > 0 && result != null)
             Set(key, result, cacheTime ?? 30);
 
-        return result;
+        return result!;
     }
 
     /// <summary>
@@ -184,21 +191,27 @@ public class MemoryCacheManager : IMemoryCacheManager
     }
 
     /// <summary>
-    /// Perform some action with exclusive in-memory lock
+    /// Explicitly implementing the interface method
     /// </summary>
-    /// <param name="key">The key we are locking on</param>
-    /// <param name="expirationTime">The time after which the lock will automatically be expired</param>
-    /// <param name="action">Action to be performed with locking</param>
-    /// <returns>True if lock was acquired and action was performed; otherwise false</returns>
-    public bool PerformActionWithLock(string key, TimeSpan expirationTime, Action action)
+    bool IMemoryCacheManager.PerformActionWithLock(string key, TimeSpan expirationTime, Action action)
+    {
+        // Forward to our internal implementation
+        return InternalPerformActionWithLock(key, expirationTime, action);
+    }
+
+    /// <summary>
+    /// Internal implementation for exclusive memory lock
+    /// </summary>
+    private bool InternalPerformActionWithLock(string key, TimeSpan expirationTime, Action action)
     {
         //ensure that lock is acquired
-        if (!_allKeys.TryAdd(key, true))
+        if (string.IsNullOrEmpty(key) || !_allKeys.TryAdd(key, true))
             return false;
 
         try
         {
-            _cache.Set(key, key, GetMemoryCacheEntryOptions(expirationTime));
+            // Using a boxed primitive value which cannot be null
+            _cache.Set(key, 1, GetMemoryCacheEntryOptions(expirationTime));
 
             //perform action
             action();
@@ -218,7 +231,10 @@ public class MemoryCacheManager : IMemoryCacheManager
     /// <param name="key">Key of cached item</param>
     public virtual void Remove(string key)
     {
-        _cache.Remove(RemoveKey(key));
+        if (!string.IsNullOrEmpty(key))
+        {
+            _cache.Remove(RemoveKey(key));
+        }
     }
 
     /// <summary>
@@ -227,7 +243,7 @@ public class MemoryCacheManager : IMemoryCacheManager
     /// <param name="key">Key of cached item</param>
     /// <param name="data">Value for caching</param>
     /// <param name="cacheTime">Cache time in minutes</param>
-    public virtual void Set(string key, object data, int cacheTime)
+    public virtual void Set(string key, object? data, int cacheTime)
     {
         if (data != null)
         {

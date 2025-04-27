@@ -24,7 +24,7 @@ public class HttpGetCallServiceTelemetry : IHttpGetCallService
         }
         catch (Exception ex)
         {
-            _logger.LogCritical("Telemetry:GetAsync:Exception", ex.Message);
+            _logger.LogCritical("Telemetry:GetAsync:Exception: {ErrorMessage}", ex.Message);
         }
         sw.Stop();
         response.ElapsedMilliseconds = sw.ElapsedMilliseconds;

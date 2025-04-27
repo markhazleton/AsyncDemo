@@ -27,14 +27,14 @@ public class HttpGetCallService : IHttpGetCallService
             }
             catch (Exception ex)
             {
-                _logger.LogCritical("HttpGetCallService:GetAsync:DeserializeException", ex.Message);
+                _logger.LogCritical("HttpGetCallService:GetAsync:DeserializeException: {ErrorMessage}", ex.Message);
                 statusCall.StatusResults = JsonSerializer.Deserialize<dynamic>(StatusResults);
             }
 
         }
         catch (Exception ex)
         {
-            _logger.LogCritical("HttpGetCallService:GetAsync:Exception", ex.Message);
+            _logger.LogCritical("HttpGetCallService:GetAsync:Exception: {ErrorMessage}", ex.Message);
         }
         return statusCall;
     }
