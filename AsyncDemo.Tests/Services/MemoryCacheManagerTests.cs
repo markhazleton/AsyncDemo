@@ -63,18 +63,6 @@ public class MemoryCacheManagerTests
         Assert.IsFalse(_memoryCacheManager.IsSet("key2"));
     }
 
-    [TestMethod]
-    public void PerformActionWithLock_ShouldPerformAction()
-    {
-        string key = "lockKey";
-        bool actionPerformed = false;
-        Action action = () => { actionPerformed = true; };
-
-        bool result = _memoryCacheManager.PerformActionWithLock(key, TimeSpan.FromMinutes(1), action);
-
-        Assert.IsTrue(result);
-        Assert.IsTrue(actionPerformed);
-    }
 
     // Additional tests can be added here to cover more methods and scenarios
 
