@@ -19,12 +19,12 @@
     <Content Include="favicon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Azure.Identity" Version="1.14.0" />
-    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="9.0.5" />
-    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="9.5.0" />
-    <PackageReference Include="Polly" Version="8.5.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
-    <PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.23.0" />
+    <PackageReference Include="Azure.Identity" Version="1.14.1" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="9.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Http.Resilience" Version="9.6.0" />
+    <PackageReference Include="Polly" Version="8.6.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.1" />
+    <PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.24.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AsyncDemo\AsyncDemo.csproj" />

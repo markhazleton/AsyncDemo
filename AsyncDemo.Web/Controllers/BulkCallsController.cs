@@ -1,5 +1,4 @@
 ﻿using AsyncDemo.HttpGetCall;
-using Microsoft.AspNetCore.Mvc;
 
 namespace AsyncDemo.Web.Controllers;
 
