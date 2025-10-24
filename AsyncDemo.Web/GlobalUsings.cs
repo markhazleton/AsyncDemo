@@ -1,7 +1,9 @@
 ﻿global using AsyncDemo.Models;
 global using AsyncDemo.Services;
 global using AsyncDemo.Web.Extensions;
+global using AsyncDemo.Web.Middleware;
 global using AsyncDemo.Web.Models;
+global using AsyncDemo.Web.Services;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.Extensions.Caching.Memory;
 global using Microsoft.Extensions.DependencyInjection.Extensions;

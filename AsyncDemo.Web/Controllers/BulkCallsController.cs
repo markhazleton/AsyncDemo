@@ -10,7 +10,8 @@ namespace AsyncDemo.Web.Controllers;
 /// </remarks>
 /// <param name="logger">The logger.</param>
 /// <param name="getCallService">The HTTP GET call service.</param>
-public class BulkCallsController(ILogger<BulkCallsController> logger, IHttpGetCallService getCallService) : BaseController
+/// <param name="httpClientFactory">The HTTP client factory.</param>
+public class BulkCallsController(ILogger<BulkCallsController> logger, IHttpGetCallService getCallService, IHttpClientFactory httpClientFactory) : BaseController(logger, httpClientFactory)
 {
     private static readonly object WriteLock = new();
 
@@ -27,7 +28,7 @@ public class BulkCallsController(ILogger<BulkCallsController> logger, IHttpGetCa
         // Create a SemaphoreSlim with a maximum of maxThreads concurrent requests
         SemaphoreSlim semaphore = new(maxThreads);
         List<HttpGetCallResults> results = [];
-        var cts = new CancellationTokenSource(TimeSpan.FromSeconds(2));
+        var cts = CreateCancellationTokenSource(TimeSpan.FromSeconds(2));
 
         // Create a list of tasks to make the GetAsync calls
         List<Task> tasks = [];
@@ -61,7 +62,7 @@ public class BulkCallsController(ILogger<BulkCallsController> logger, IHttpGetCa
         await Task.WhenAll(tasks);
 
         // Log a message when all calls are complete
-        logger.LogInformation("All calls complete");
+        _logger.LogInformation("All calls complete");
         return results;
     }
 
@@ -114,7 +115,7 @@ public class BulkCallsController(ILogger<BulkCallsController> logger, IHttpGetCa
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Error performing bulk calls");
+            _logger.LogError(ex, "Error performing bulk calls");
             TempData["BulkCallError"] = $"Error: {ex.Message}";
             return RedirectToAction(nameof(Index));
         }

@@ -82,46 +82,48 @@
         </member>
         <member name="T:AsyncDemo.Web.Controllers.BaseController">
             <summary>
-            BaseController
+            BaseController - Refactored to follow DI best practices
+            </summary>
+        </member>
+        <member name="F:AsyncDemo.Web.Controllers.BaseController._logger">
+            <summary>
+            Logger for base controller
+            </summary>
+        </member>
+        <member name="F:AsyncDemo.Web.Controllers.BaseController._httpClientFactory">
+            <summary>
+            HTTP Client Factory for creating HTTP clients
             </summary>
         </member>
         <member name="F:AsyncDemo.Web.Controllers.BaseController._httpWeatherPolicy">
             <summary>
-            Retry Count
-            </summary>
-            <summary>
             Weather Policy
-            </summary>
-        </member>
-        <member name="F:AsyncDemo.Web.Controllers.BaseController._httpClient">
-            <summary>
-            Shared Http Client
-            </summary>
-        </member>
-        <member name="F:AsyncDemo.Web.Controllers.BaseController.stopWatch">
-            <summary>
-            Shared Stopwatch
             </summary>
         </member>
         <member name="F:AsyncDemo.Web.Controllers.BaseController.jitter">
             <summary>
-            Shared Jitter
+            Shared Jitter for retry policies
             </summary>
         </member>
-        <member name="F:AsyncDemo.Web.Controllers.BaseController.cts">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:AsyncDemo.Web.Controllers.BaseController.#cctor">
-            <summary>
-            Static Base Constructor
-            </summary>
-        </member>
-        <member name="M:AsyncDemo.Web.Controllers.BaseController.#ctor">
+        <member name="M:AsyncDemo.Web.Controllers.BaseController.#ctor(Microsoft.Extensions.Logging.ILogger,System.Net.Http.IHttpClientFactory)">
             <summary>
             Base Controller Constructor
             </summary>
+            <param name="logger">Logger instance</param>
+            <param name="httpClientFactory">HTTP client factory</param>
+        </member>
+        <member name="M:AsyncDemo.Web.Controllers.BaseController.CreateHttpClient">
+            <summary>
+            Creates a properly configured HTTP client
+            </summary>
+            <returns>HttpClient instance</returns>
+        </member>
+        <member name="M:AsyncDemo.Web.Controllers.BaseController.CreateCancellationTokenSource(System.Nullable{System.TimeSpan})">
+            <summary>
+            Creates a cancellation token source with the specified timeout
+            </summary>
+            <param name="timeout">Timeout duration</param>
+            <returns>CancellationTokenSource</returns>
         </member>
         <member name="T:AsyncDemo.Web.Controllers.BulkCallsController">
             <summary>
@@ -132,8 +134,9 @@
             </remarks>
             <param name="logger">The logger.</param>
             <param name="getCallService">The HTTP GET call service.</param>
+            <param name="httpClientFactory">The HTTP client factory.</param>
         </member>
-        <member name="M:AsyncDemo.Web.Controllers.BulkCallsController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.BulkCallsController},AsyncDemo.HttpGetCall.IHttpGetCallService)">
+        <member name="M:AsyncDemo.Web.Controllers.BulkCallsController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.BulkCallsController},AsyncDemo.HttpGetCall.IHttpGetCallService,System.Net.Http.IHttpClientFactory)">
             <summary>
             Controller for handling bulk HTTP GET calls.
             </summary>
@@ -142,6 +145,7 @@
             </remarks>
             <param name="logger">The logger.</param>
             <param name="getCallService">The HTTP GET call service.</param>
+            <param name="httpClientFactory">The HTTP client factory.</param>
         </member>
         <member name="M:AsyncDemo.Web.Controllers.BulkCallsController.CallEndpointMultipleTimes(System.Int32,System.Int32,System.String)">
             <summary>
@@ -178,6 +182,12 @@
             Home Controller
             </summary>
         </member>
+        <member name="M:AsyncDemo.Web.Controllers.HomeController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.HomeController})">
+            <summary>
+            Constructor for HomeController
+            </summary>
+            <param name="logger">Logger instance</param>
+        </member>
         <member name="M:AsyncDemo.Web.Controllers.HomeController.Error">
             <summary>
             Error
@@ -198,32 +208,34 @@
         </member>
         <member name="T:AsyncDemo.Web.Controllers.OpenWeatherController">
             <summary>
-            
+            OpenWeather Controller for weather data management
             </summary>
             <remarks>
-            
+            Initializes a new instance of the OpenWeatherController
             </remarks>
-            <param name="logger"></param>
-            <param name="weatherService"></param>
-            <param name="cache"></param>
+            <param name="logger">Logger for OpenWeatherController</param>
+            <param name="weatherService">Weather service instance</param>
+            <param name="cache">Memory cache instance</param>
+            <param name="httpClientFactory">HTTP client factory</param>
         </member>
-        <member name="M:AsyncDemo.Web.Controllers.OpenWeatherController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.HomeController},OpenWeatherMapClient.Interfaces.IOpenWeatherMapClient,Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+        <member name="M:AsyncDemo.Web.Controllers.OpenWeatherController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.OpenWeatherController},OpenWeatherMapClient.Interfaces.IOpenWeatherMapClient,Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Net.Http.IHttpClientFactory)">
             <summary>
-            
+            OpenWeather Controller for weather data management
             </summary>
             <remarks>
-            
+            Initializes a new instance of the OpenWeatherController
             </remarks>
-            <param name="logger"></param>
-            <param name="weatherService"></param>
-            <param name="cache"></param>
+            <param name="logger">Logger for OpenWeatherController</param>
+            <param name="weatherService">Weather service instance</param>
+            <param name="cache">Memory cache instance</param>
+            <param name="httpClientFactory">HTTP client factory</param>
         </member>
         <member name="M:AsyncDemo.Web.Controllers.OpenWeatherController.Index(System.String)">
             <summary>
-            
+            Index action for weather display
             </summary>
-            <param name="location"></param>
-            <returns></returns>
+            <param name="location">Location to get weather for</param>
+            <returns>View with weather data</returns>
         </member>
         <member name="T:AsyncDemo.Web.Controllers.PollyController">
             <summary>
@@ -337,6 +349,23 @@
             <summary>
             
             </summary>
+        </member>
+        <member name="T:AsyncDemo.Web.Middleware.RequestLoggingMiddleware">
+            <summary>
+            Middleware for logging HTTP requests and responses
+            </summary>
+        </member>
+        <member name="T:AsyncDemo.Web.Middleware.RequestLoggingMiddlewareExtensions">
+            <summary>
+            Extension methods for registering the request logging middleware
+            </summary>
+        </member>
+        <member name="M:AsyncDemo.Web.Middleware.RequestLoggingMiddlewareExtensions.UseRequestLogging(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Adds request logging middleware to the pipeline
+            </summary>
+            <param name="builder">The application builder</param>
+            <returns>The application builder</returns>
         </member>
         <member name="T:AsyncDemo.Web.Models.ApplicationStatus">
             <summary>
@@ -556,6 +585,54 @@
             <summary>
               Overrides the current thread's CurrentUICulture property for all
               resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="T:AsyncDemo.Web.Services.ConfigurationHealthCheck">
+            <summary>
+            Health check for configuration validation
+            </summary>
+        </member>
+        <member name="T:AsyncDemo.Web.Services.IConfigurationValidationService">
+            <summary>
+            Service for validating application configuration
+            </summary>
+        </member>
+        <member name="M:AsyncDemo.Web.Services.IConfigurationValidationService.ValidateConfiguration">
+            <summary>
+            Validates the application configuration
+            </summary>
+            <returns>Validation result</returns>
+        </member>
+        <member name="T:AsyncDemo.Web.Services.ConfigurationValidationResult">
+            <summary>
+            Configuration validation result
+            </summary>
+        </member>
+        <member name="T:AsyncDemo.Web.Services.ConfigurationValidationService">
+            <summary>
+            Implementation of configuration validation service
+            </summary>
+        </member>
+        <member name="T:AsyncDemo.Web.Services.IStartupService">
+            <summary>
+            Service that runs during application startup to perform initialization tasks
+            </summary>
+        </member>
+        <member name="M:AsyncDemo.Web.Services.IStartupService.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            Executes startup tasks
+            </summary>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Task representing the startup operation</returns>
+        </member>
+        <member name="T:AsyncDemo.Web.Services.StartupService">
+            <summary>
+            Implementation of startup service
+            </summary>
+        </member>
+        <member name="T:AsyncDemo.Web.Services.StartupHostedService">
+            <summary>
+            Hosted service that runs the startup service
             </summary>
         </member>
     </members>
