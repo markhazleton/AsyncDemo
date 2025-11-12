@@ -187,7 +187,7 @@ public class MemoryCacheManager : IMemoryCacheManager
     /// <returns>True if item already is in cache; otherwise false</returns>
     public virtual bool IsSet(string key)
     {
-        return _cache.TryGetValue(key, out object _);
+        return _cache.TryGetValue(key, out object? _);
     }
 
     /// <summary>

@@ -1,5 +1,4 @@
-﻿
-namespace AsyncDemo.Web.Extensions;
+﻿namespace AsyncDemo.Web.Extensions;
 
 /// <summary>
 /// ConfigurationExtensions
@@ -84,7 +83,7 @@ public static class ConfigurationExtensions
     /// <returns></returns>
     public static int GetInt(this IConfiguration _config, string configKey, string? defaultValue = null)
     {
-        return GetInt(_config.GetSection(configKey).Value, defaultValue);
+        return GetInt(_config.GetSection(configKey).Value ?? string.Empty, defaultValue);
     }
     /// <summary>
     /// 
@@ -95,7 +94,7 @@ public static class ConfigurationExtensions
     /// <returns></returns>
     public static int[] GetIntList(this IConfiguration _config, string configKey, string? defaultValue = null)
     {
-        return GetIntList(_config.GetSection(configKey).Value, defaultValue);
+        return GetIntList(_config.GetSection(configKey).Value ?? string.Empty, defaultValue);
     }
     /// <summary>
     /// Get String from Configuration
@@ -106,7 +105,7 @@ public static class ConfigurationExtensions
     /// <returns></returns>
     public static string GetString(this IConfiguration _config, string configKey, string? defaultValue = null)
     {
-        return GetString(_config.GetSection(configKey).Value, defaultValue);
+        return GetString(_config.GetSection(configKey).Value ?? string.Empty, defaultValue);
     }
     /// <summary>
     /// Get a List of string from Configuration
@@ -117,6 +116,6 @@ public static class ConfigurationExtensions
     /// <returns></returns>
     public static string[] GetStringList(this IConfiguration _config, string configKey, string? defaultValue = null)
     {
-        return GetStringList(_config.GetSection(configKey).Value, defaultValue);
+        return GetStringList(_config.GetSection(configKey).Value ?? string.Empty, defaultValue);
     }
 }

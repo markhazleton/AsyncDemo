@@ -78,7 +78,16 @@ public abstract class RestClientBase : IDisposable, IRestClientBase
             {
                 var content = await response.Content.ReadAsStringAsync(token).ConfigureAwait(true);
                 var contentConvert = JsonConvert.DeserializeObject<T>(content);
-                return contentConvert;
+                if (contentConvert != null)
+                {
+                    return contentConvert;
+                }
+                else
+                {
+                    IsError = true;
+                    Status = "Failed to deserialize content.";
+                    _logger.LogError(Status);
+                }
             }
             catch (NotSupportedException) // When content type is not valid
             {
@@ -95,11 +104,11 @@ public abstract class RestClientBase : IDisposable, IRestClientBase
         }
         else
         {
-            _logger.LogError("Bad Response({}) from {}:{}", response.StatusCode, response.RequestMessage.RequestUri, response);
+            _logger.LogError("Bad Response({}) from {}:{}", response.StatusCode, response.RequestMessage?.RequestUri, response);
             IsError = true;
-            Status = response?.ReasonPhrase?.ToString() ?? string.Empty;
+            Status = response?.ReasonPhrase ?? string.Empty;
         }
-        return default;
+        return default!;
     }
 
 

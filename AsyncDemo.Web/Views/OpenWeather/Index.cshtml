@@ -56,37 +56,37 @@
                 {
                     <div class="p-4 bg-primary text-white rounded-top">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h3 class="text-white m-0">@item.Location.Name</h3>
-                            <span class="badge bg-light text-dark">@item.CurrentConditions.Conditions</span>
+                            <h3 class="text-white m-0">@item.Location?.Name</h3>
+                            <span class="badge bg-light text-dark">@item.CurrentConditions?.Conditions</span>
                         </div>
                         <div class="d-flex align-items-center text-white">
                             <div class="me-auto">
-                                <h1 class="display-4 mb-0 fw-bold">@item.CurrentConditions.Temperature.ToString("#0.0")°</h1>
-                                <p class="mb-0">Feels like @(item.CurrentConditions.Temperature - 2)°</p>
+                                <h1 class="display-4 mb-0 fw-bold">@item.CurrentConditions?.Temperature.ToString("#0.0")°</h1>
+                                <p class="mb-0">Feels like @((item.CurrentConditions?.Temperature ?? 0) - 2)°</p>
                             </div>
                             <div>
-                                @if (item.CurrentConditions.Conditions.Contains("Rain"))
+                                @if (item.CurrentConditions?.Conditions?.Contains("Rain") == true)
                                 {
                                     <i class="bi bi-cloud-rain-heavy fs-1"></i>
                                 }
-                                else if (item.CurrentConditions.Conditions.Contains("Cloud"))
+                                else if (item.CurrentConditions?.Conditions?.Contains("Cloud") == true)
                                 {
                                     <i class="bi bi-cloud fs-1"></i>
                                 }
-                                else if (item.CurrentConditions.Conditions.Contains("Clear"))
+                                else if (item.CurrentConditions?.Conditions?.Contains("Clear") == true)
                                 {
                                     <i class="bi bi-sun fs-1"></i>
                                 }
-                                else if (item.CurrentConditions.Conditions.Contains("Snow"))
+                                else if (item.CurrentConditions?.Conditions?.Contains("Snow") == true)
                                 {
                                     <i class="bi bi-snow fs-1"></i>
                                 }
-                                else if (item.CurrentConditions.Conditions.Contains("Mist") ||
-                                item.CurrentConditions.Conditions.Contains("Fog"))
+                                else if (item.CurrentConditions?.Conditions?.Contains("Mist") == true ||
+                                item.CurrentConditions?.Conditions?.Contains("Fog") == true)
                                 {
                                     <i class="bi bi-cloud-fog fs-1"></i>
                                 }
-                                else if (item.CurrentConditions.Conditions.Contains("Thunderstorm"))
+                                else if (item.CurrentConditions?.Conditions?.Contains("Thunderstorm") == true)
                                 {
                                     <i class="bi bi-lightning fs-1"></i>
                                 }
@@ -100,7 +100,7 @@
 
                     <div class="ratio ratio-16x9 m-0">
                         <iframe loading="lazy" class="border-0 rounded-0"
-                            src="https://www.bing.com/maps/embed?h=280&w=625&cp=@item.Location.Latitude~@item.Location.Longitude&lvl=11&typ=d&sty=r&src=SHELL&FORM=MBEDV8"
+                            src="https://www.bing.com/maps/embed?h=280&w=625&cp=@(item.Location?.Latitude ?? 0)~@(item.Location?.Longitude ?? 0)&lvl=11&typ=d&sty=r&src=SHELL&FORM=MBEDV8"
                             scrolling="no">
                         </iframe>
                     </div>
@@ -114,7 +114,7 @@
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
                                 <span>Visibility</span>
-                                <span class="fw-bold">@item.CurrentConditions.Visibility.ToString("#0.00") miles</span>
+                                <span class="fw-bold">@(item.CurrentConditions?.Visibility.ToString("#0.00") ?? "0.00") miles</span>
                             </div>
                         </div>
 
@@ -124,7 +124,7 @@
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
                                 <span>Cloud Cover</span>
-                                <span class="fw-bold">@item.CurrentConditions.CloudCover%</span>
+                                <span class="fw-bold">@(item.CurrentConditions?.CloudCover ?? 0)%</span>
                             </div>
                         </div>
 
@@ -134,7 +134,7 @@
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
                                 <span>Humidity</span>
-                                <span class="fw-bold">@item.CurrentConditions.Humidity.ToString("#0.0")%</span>
+                                <span class="fw-bold">@((item.CurrentConditions?.Humidity ?? 0).ToString("#0.0"))%</span>
                             </div>
                         </div>
 
@@ -144,7 +144,7 @@
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
                                 <span>Pressure</span>
-                                <span class="fw-bold">@item.CurrentConditions.Pressure.ToString("#0.00") in/Hg</span>
+                                <span class="fw-bold">@((item.CurrentConditions?.Pressure ?? 0).ToString("#0.00")) in/Hg</span>
                             </div>
                         </div>
 
@@ -154,8 +154,8 @@
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
                                 <span>Wind</span>
-                                <span class="fw-bold">@item.CurrentConditions.WindDirection.Abbreviation
-                                    @item.CurrentConditions.WindSpeed.ToString("#0.0") mph</span>
+                                <span class="fw-bold">@(item.CurrentConditions?.WindDirection?.Abbreviation ?? "N/A")
+                                    @(item.CurrentConditions?.WindSpeed.ToString("#0.0") ?? "0.0") mph</span>
                             </div>
                         </div>
 
@@ -165,7 +165,7 @@
                             </div>
                             <div class="d-flex justify-content-between flex-grow-1">
                                 <span>Rainfall (1 hour)</span>
-                                <span class="fw-bold">@item.CurrentConditions.RainfallOneHour.ToString("#0.00") in</span>
+                                <span class="fw-bold">@((item.CurrentConditions?.RainfallOneHour ?? 0).ToString("#0.00")) in</span>
                             </div>
                         </div>
 

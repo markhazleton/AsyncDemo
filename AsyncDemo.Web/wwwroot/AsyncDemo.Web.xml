@@ -342,18 +342,32 @@
         </member>
         <member name="P:AsyncDemo.Web.Extensions.MyHttpContext.Current">
             <summary>
-            
+            Gets the current HttpContext
             </summary>
         </member>
         <member name="P:AsyncDemo.Web.Extensions.MyHttpContext.AppBaseUrl">
             <summary>
-            
+            Gets the application base URL
             </summary>
         </member>
         <member name="T:AsyncDemo.Web.Middleware.RequestLoggingMiddleware">
             <summary>
             Middleware for logging HTTP requests and responses
             </summary>
+        </member>
+        <member name="M:AsyncDemo.Web.Middleware.RequestLoggingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Middleware.RequestLoggingMiddleware})">
+            <summary>
+            Initializes a new instance of the <see cref="T:AsyncDemo.Web.Middleware.RequestLoggingMiddleware"/> class
+            </summary>
+            <param name="next">The next middleware in the pipeline</param>
+            <param name="logger">The logger instance</param>
+        </member>
+        <member name="M:AsyncDemo.Web.Middleware.RequestLoggingMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Processes an HTTP request and logs request/response information
+            </summary>
+            <param name="context">The HTTP context for the current request</param>
+            <returns>A task representing the asynchronous operation</returns>
         </member>
         <member name="T:AsyncDemo.Web.Middleware.RequestLoggingMiddlewareExtensions">
             <summary>
@@ -592,6 +606,20 @@
             Health check for configuration validation
             </summary>
         </member>
+        <member name="M:AsyncDemo.Web.Services.ConfigurationHealthCheck.#ctor(AsyncDemo.Web.Services.IConfigurationValidationService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AsyncDemo.Web.Services.ConfigurationHealthCheck"/> class
+            </summary>
+            <param name="configValidationService">The configuration validation service</param>
+        </member>
+        <member name="M:AsyncDemo.Web.Services.ConfigurationHealthCheck.CheckHealthAsync(Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext,System.Threading.CancellationToken)">
+            <summary>
+            Checks the health of the application configuration
+            </summary>
+            <param name="context">The health check context</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>A task representing the health check result</returns>
+        </member>
         <member name="T:AsyncDemo.Web.Services.IConfigurationValidationService">
             <summary>
             Service for validating application configuration
@@ -608,10 +636,38 @@
             Configuration validation result
             </summary>
         </member>
+        <member name="P:AsyncDemo.Web.Services.ConfigurationValidationResult.IsValid">
+            <summary>
+            Gets or sets a value indicating whether the configuration is valid
+            </summary>
+        </member>
+        <member name="P:AsyncDemo.Web.Services.ConfigurationValidationResult.Errors">
+            <summary>
+            Gets or sets the list of configuration errors
+            </summary>
+        </member>
+        <member name="P:AsyncDemo.Web.Services.ConfigurationValidationResult.Warnings">
+            <summary>
+            Gets or sets the list of configuration warnings
+            </summary>
+        </member>
         <member name="T:AsyncDemo.Web.Services.ConfigurationValidationService">
             <summary>
             Implementation of configuration validation service
             </summary>
+        </member>
+        <member name="M:AsyncDemo.Web.Services.ConfigurationValidationService.#ctor(Microsoft.Extensions.Configuration.IConfiguration,Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Services.ConfigurationValidationService})">
+            <summary>
+            Initializes a new instance of the <see cref="T:AsyncDemo.Web.Services.ConfigurationValidationService"/> class
+            </summary>
+            <param name="configuration">The application configuration</param>
+            <param name="logger">The logger instance</param>
+        </member>
+        <member name="M:AsyncDemo.Web.Services.ConfigurationValidationService.ValidateConfiguration">
+            <summary>
+            Validates the application configuration and returns validation results
+            </summary>
+            <returns>A <see cref="T:AsyncDemo.Web.Services.ConfigurationValidationResult"/> containing validation results</returns>
         </member>
         <member name="T:AsyncDemo.Web.Services.IStartupService">
             <summary>
@@ -630,9 +686,50 @@
             Implementation of startup service
             </summary>
         </member>
+        <member name="M:AsyncDemo.Web.Services.StartupService.#ctor(AsyncDemo.Web.Services.IConfigurationValidationService,Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Services.StartupService},Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+            <summary>
+            Initializes a new instance of the <see cref="T:AsyncDemo.Web.Services.StartupService"/> class
+            </summary>
+            <param name="configValidationService">The configuration validation service</param>
+            <param name="logger">The logger instance</param>
+            <param name="memoryCache">The memory cache instance</param>
+        </member>
+        <member name="M:AsyncDemo.Web.Services.StartupService.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            Executes startup tasks including configuration validation and cache pre-warming
+            </summary>
+            <param name="cancellationToken">Cancellation token for the async operation</param>
+            <returns>A task representing the asynchronous startup operation</returns>
+        </member>
         <member name="T:AsyncDemo.Web.Services.StartupHostedService">
             <summary>
             Hosted service that runs the startup service
+            </summary>
+        </member>
+        <member name="M:AsyncDemo.Web.Services.StartupHostedService.#ctor(System.IServiceProvider,Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Services.StartupHostedService})">
+            <summary>
+            Initializes a new instance of the <see cref="T:AsyncDemo.Web.Services.StartupHostedService"/> class
+            </summary>
+            <param name="serviceProvider">The service provider for resolving dependencies</param>
+            <param name="logger">The logger instance</param>
+        </member>
+        <member name="M:AsyncDemo.Web.Services.StartupHostedService.StartAsync(System.Threading.CancellationToken)">
+            <summary>
+            Triggered when the application host is ready to start the service
+            </summary>
+            <param name="cancellationToken">Cancellation token for the async operation</param>
+            <returns>A task representing the asynchronous start operation</returns>
+        </member>
+        <member name="M:AsyncDemo.Web.Services.StartupHostedService.StopAsync(System.Threading.CancellationToken)">
+            <summary>
+            Triggered when the application host is performing a graceful shutdown
+            </summary>
+            <param name="cancellationToken">Cancellation token for the async operation</param>
+            <returns>A task representing the asynchronous stop operation</returns>
+        </member>
+        <member name="T:Program">
+            <summary>
+            Auto-generated public partial Program class for top-level statement apps.
             </summary>
         </member>
     </members>

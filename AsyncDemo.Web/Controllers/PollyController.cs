@@ -81,14 +81,18 @@
 
                 if (response.IsSuccessStatusCode)
                 {
-                    mockResults = await response.Content.ReadFromJsonAsync<MockResults>();
+                    mockResults = await response.Content.ReadFromJsonAsync<MockResults>() ?? mockResults;
                 }
                 else
                 {
                     // wrap in try/catch to handle exceptions when reading the response content
                     try
                     {
-                        mockResults = await response.Content.ReadFromJsonAsync<MockResults>();
+                        var responseData = await response.Content.ReadFromJsonAsync<MockResults>();
+                        if (responseData != null)
+                        {
+                            mockResults = responseData;
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -97,7 +101,6 @@
                     }
 
                     mockResults.ResultValue = response.StatusCode.ToString();
-
                 }
             }
             catch (Exception ex)
@@ -111,9 +114,8 @@
             mockResults.RunTimeMS = StopWatch.ElapsedMilliseconds;
 
             // Retrieve the list of results and store them in the mockResults message
-            if (context.TryGetValue("ResultsList", out var resultsList))
+            if (context.TryGetValue("ResultsList", out var resultsList) && resultsList is List<string> results)
             {
-                var results = resultsList as List<string>;
                 mockResults.Message += "<hr/>" + string.Join(";<br/> ", results);
             }
 

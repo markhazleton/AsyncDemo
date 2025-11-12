@@ -34,16 +34,18 @@ public class WeatherServiceCachingDecorator(IOpenWeatherMapClient weatherService
     public async Task<LocationForecast> GetForecastAsync(string location)
     {
         string cacheKey = $"WeatherForecast::{location}";
-        if (_cache.TryGetValue<LocationForecast>(cacheKey, out var forecast))
+        if (_cache.TryGetValue<LocationForecast>(cacheKey, out var forecast) && forecast != null)
         {
             return forecast;
         }
         else
         {
             var locationForecast = await _innerWeatherService.GetForecastAsync(location);
-            _cache.Set(cacheKey, locationForecast, TimeSpan.FromMinutes(30));
-            return locationForecast;
-
+            if (locationForecast != null)
+            {
+                _cache.Set(cacheKey, locationForecast, TimeSpan.FromMinutes(30));
+            }
+            return locationForecast ?? new LocationForecast();
         }
     }
 }

@@ -19,8 +19,19 @@ public interface IConfigurationValidationService
 /// </summary>
 public class ConfigurationValidationResult
 {
+    /// <summary>
+    /// Gets or sets a value indicating whether the configuration is valid
+    /// </summary>
     public bool IsValid { get; set; }
+    
+    /// <summary>
+    /// Gets or sets the list of configuration errors
+    /// </summary>
     public List<string> Errors { get; set; } = new();
+    
+    /// <summary>
+    /// Gets or sets the list of configuration warnings
+    /// </summary>
     public List<string> Warnings { get; set; } = new();
 }
 
@@ -32,12 +43,21 @@ public class ConfigurationValidationService : IConfigurationValidationService
     private readonly IConfiguration _configuration;
     private readonly ILogger<ConfigurationValidationService> _logger;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ConfigurationValidationService"/> class
+    /// </summary>
+    /// <param name="configuration">The application configuration</param>
+    /// <param name="logger">The logger instance</param>
     public ConfigurationValidationService(IConfiguration configuration, ILogger<ConfigurationValidationService> logger)
     {
-      _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
+    /// <summary>
+    /// Validates the application configuration and returns validation results
+    /// </summary>
+    /// <returns>A <see cref="ConfigurationValidationResult"/> containing validation results</returns>
     public ConfigurationValidationResult ValidateConfiguration()
     {
      var result = new ConfigurationValidationResult { IsValid = true };
