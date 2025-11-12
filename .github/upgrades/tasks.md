@@ -4,7 +4,7 @@
 
 This scenario upgrades the AsyncDemo solution (6 projects) from .NET 9 to .NET 10, updating project files and NuGet packages, addressing breaking changes, and validating with builds and tests. Tasks are organized for automatable execution, referencing plan sections for details.
 
-**Progress**: 4/5 tasks complete (80%) ![80%](https://progress-bar.xyz/80)
+**Progress**: 5/5 tasks complete (100%) ![100%](https://progress-bar.xyz/100)
 
 ## Tasks
 
@@ -36,10 +36,10 @@ This scenario upgrades the AsyncDemo solution (6 projects) from .NET 9 to .NET 1
 - [✓] (3) Address any breaking changes identified during build/test - COMPLETED (No breaking changes found)
 - [✓] (4) Solution builds with 0 errors and all tests pass - VERIFIED
 
-### [ ] TASK-005: Final verification and commit
+### [✓] TASK-005: Final verification and commit *(Completed: 2025-11-12 09:12)*
 **References**: Plan §Phase 5, Plan §Rollback Plan
 
-- [ ] (1) Review build output for warnings
-- [ ] (2) Review breaking changes documentation for .NET 10, EF Core 10, ASP.NET Core 10, System.Text.Json
-- [ ] (3) Commit all upgrade changes with message: "Complete .NET 10 upgrade"
-- [ ] (4) Changes committed successfully (**Verify**)
+- [✓] (1) Review build output for warnings - COMPLETED (88 warnings, all non-blocking)
+- [✓] (2) Review breaking changes documentation - COMPLETED (No breaking changes found)
+- [✓] (3) Commit all upgrade changes - COMPLETED (commit 43072a5)
+- [✓] (4) Changes committed successfully - VERIFIED
