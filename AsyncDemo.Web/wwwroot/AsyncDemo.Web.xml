@@ -342,12 +342,12 @@
         </member>
         <member name="P:AsyncDemo.Web.Extensions.MyHttpContext.Current">
             <summary>
-            
+            Gets the current HttpContext
             </summary>
         </member>
         <member name="P:AsyncDemo.Web.Extensions.MyHttpContext.AppBaseUrl">
             <summary>
-            
+            Gets the application base URL
             </summary>
         </member>
         <member name="T:AsyncDemo.Web.Middleware.RequestLoggingMiddleware">

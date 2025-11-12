@@ -90,9 +90,10 @@ public class CompassDirection
     }
 
 
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
-        CompassDirection other = obj as CompassDirection;
+        if (obj is not CompassDirection other)
+            return false;
         return Abbreviation.Equals(other.Abbreviation);
     }
 

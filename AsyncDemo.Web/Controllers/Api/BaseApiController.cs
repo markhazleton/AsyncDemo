@@ -25,7 +25,7 @@ public abstract class BaseApiController : Controller
     /// <returns></returns>
     protected ApplicationStatus GetApplicationStatus()
     {
-        if (!_memoryCache.TryGetValue(CacheKey, out ApplicationStatus applicationStatus))
+        if (!_memoryCache.TryGetValue(CacheKey, out ApplicationStatus? applicationStatus) || applicationStatus == null)
         {
             applicationStatus = new ApplicationStatus(Assembly.GetExecutingAssembly());
             _memoryCache.Set(CacheKey, applicationStatus, TimeSpan.FromHours(24));

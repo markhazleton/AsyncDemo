@@ -44,26 +44,26 @@ public class OpenWeatherController(ILogger<OpenWeatherController> logger, IOpenW
         return theList ?? [];
     }
     
-  private List<CurrentWeather> AddCurrentWeatherList(CurrentWeather currentWeather)
+    private List<CurrentWeather> AddCurrentWeatherList(CurrentWeather currentWeather)
     {
-   List<CurrentWeather>? theList;
-        if (cache.TryGetValue<List<CurrentWeather>>("CurrentWeatherList", out theList))
+        List<CurrentWeather>? theList;
+        if (cache.TryGetValue<List<CurrentWeather>>("CurrentWeatherList", out theList) && theList != null)
         {
         }
         else
- {
-         theList = [];
+        {
+            theList = [];
         }
         if (theList.Where(w => w.Location?.Name == currentWeather?.Location?.Name).Any())
         {
             // Location is already in list
-    }
+        }
         else
         {
-       theList.Add(currentWeather);
+            theList.Add(currentWeather);
         }
-        cache.Set<List<CurrentWeather>>("CurrentWeatherList", theList ?? [], TimeSpan.FromMinutes(30));
-        return theList ?? [];
+        cache.Set<List<CurrentWeather>>("CurrentWeatherList", theList, TimeSpan.FromMinutes(30));
+        return theList;
     }
 
     /// <summary>
@@ -78,18 +78,18 @@ public class OpenWeatherController(ILogger<OpenWeatherController> logger, IOpenW
 
         if (myList.Where(w => w.Location?.Name == theLocation).Any())
         {
-  _logger.LogInformation("Location {theLocation} is already in the list", theLocation);
+            _logger.LogInformation("Location {theLocation} is already in the list", theLocation);
         }
         else
         {
             CurrentWeather conditions = await weatherService.GetCurrentWeatherAsync(theLocation);
             if (!conditions.Success)
             {
-   conditions.ErrorMessage = $"{conditions.ErrorMessage} received for location:{theLocation}";
-           _logger.LogError(conditions.ErrorMessage);
-  }
-         myList = AddCurrentWeatherList(conditions);
-     }
-  return View(myList);
+                conditions.ErrorMessage = $"{conditions.ErrorMessage} received for location:{theLocation}";
+                _logger.LogError(conditions.ErrorMessage);
+            }
+            myList = AddCurrentWeatherList(conditions);
+        }
+        return View(myList);
     }
 }
