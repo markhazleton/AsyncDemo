@@ -1,10 +1,11 @@
 ﻿namespace AsyncDemo.Web.Controllers.Api;
 
 /// <summary>
-/// Remote Server MOCK
+/// Remote Server MOCK - Demonstrates timeout and cancellation patterns
 /// </summary>
 [ApiController]
 [Route("api/remote")]
+[Tags("4. Resilience & Timeouts")]
 public class RemoteController(ILogger<RemoteController> _logger, IMemoryCache memoryCache) : BaseApiController(memoryCache)
 {
     private readonly AsyncMockService _asyncMock = new();
@@ -43,10 +44,25 @@ public class RemoteController(ILogger<RemoteController> _logger, IMemoryCache me
 
 
     /// <summary>
-    /// Posts the results.
+    /// Mock long-running operation with timeout handling
     /// </summary>
-    /// <param name="model">The instance of the request model.</param>
-    /// <returns>The action result.</returns>
+    /// <param name="model">Request model with LoopCount and MaxTimeMS</param>
+    /// <returns>Results or timeout response</returns>
+    /// <remarks>
+    /// **Pattern**: Timeout with CancellationTokenSource
+    ///
+    /// **What this shows**: How to set operation-specific timeouts using `CancellationTokenSource(TimeSpan)`.
+    ///
+    /// **Key technique**: Pass `MaxTimeMS` to create a timeout-based cancellation token,
+    /// then wire it through the async operation.
+    ///
+    /// **Returns**:
+    /// - 200: Operation completed within timeout
+    /// - 408: Operation exceeded timeout (Request Timeout)
+    /// - 500: Other errors
+    ///
+    /// **Try it**: Set MaxTimeMS lower than LoopCount to trigger timeout.
+    /// </remarks>
     /// <response code="200">Request processed successfully.</response>
     /// <response code="408">Request Timeout.</response>
     [ProducesResponseType(typeof(MockResults), 200)]

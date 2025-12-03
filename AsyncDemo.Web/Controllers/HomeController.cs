@@ -55,5 +55,14 @@ public class HomeController : Controller
     {
       return View();
     }
+
+    /// <summary>
+    /// Learn Async/Await - Educational landing page
+    /// </summary>
+    /// <returns>View with structured learning modules and paths</returns>
+    public IActionResult Learn()
+    {
+      return View();
+    }
 }
 

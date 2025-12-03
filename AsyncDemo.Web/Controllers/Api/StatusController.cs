@@ -2,14 +2,15 @@
 namespace AsyncDemo.Web.Controllers.Api;
 
 /// <summary>
-/// Status Controller
+/// Application Status and Health Endpoints
 /// </summary>
 /// <remarks>
-/// Status Controller
+/// Provides application status and configuration information for monitoring and diagnostics.
 /// </remarks>
 /// <param name="configuration"></param>
 /// <param name="memoryCache"></param>
 [Route("/status")]
+[Tags("5. Monitoring & Health")]
 public class StatusController(IConfiguration configuration, IMemoryCache memoryCache) : BaseApiController(memoryCache)
 {
     /// <summary>

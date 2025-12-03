@@ -52,23 +52,30 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/polly">
-                            <i class="bi bi-shield-shaded me-1"></i>Polly Demo
+                        <a class="nav-link" href="/home/learn">
+                            <i class="bi bi-mortarboard-fill me-1"></i>Learn
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/openweather">
-                            <i class="bi bi-cloud-sun me-1"></i>Open Weather
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="demosDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-stars me-1"></i>Demos
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/bulkcalls">
-                            <i class="bi bi-collection me-1"></i>Bulk Calls
-                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="demosDropdown">
+                            <li><a class="dropdown-item" href="/polly">
+                                <i class="bi bi-shield-shaded me-2"></i>Polly Resilience
+                            </a></li>
+                            <li><a class="dropdown-item" href="/openweather">
+                                <i class="bi bi-cloud-sun me-2"></i>Weather API
+                            </a></li>
+                            <li><a class="dropdown-item" href="/bulkcalls">
+                                <i class="bi bi-collection me-2"></i>Bulk Calls
+                            </a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/scalar/v1">
-                            <i class="bi bi-braces me-1"></i>API
+                            <i class="bi bi-braces me-1"></i>API Docs
                         </a>
                     </li>
                     <!-- Theme Switcher Dropdown -->
