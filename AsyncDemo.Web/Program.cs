@@ -49,7 +49,7 @@ builder.Services.AddHealthChecks()
 
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.TryAddSingleton<IMemoryCacheManager, MemoryCacheManager>();
-builder.Services.AddCustomSwagger();
+builder.Services.AddCustomScalar();
 builder.Services.AddMarkdown();
 builder.Services.AddSession(options =>
 {
@@ -137,8 +137,8 @@ app.UseMvc(routes =>
         template: "{controller=Home}/{action=Index}/{id?}");
 });
 
-// Add Swagger after MVC routing so it doesn't take over the root path
-app.UseCustomSwagger();
+// Add Scalar API documentation after MVC routing so it doesn't take over the root path
+app.UseCustomScalar();
 
 app.MapControllers();
 app.MapHealthChecks("/health");

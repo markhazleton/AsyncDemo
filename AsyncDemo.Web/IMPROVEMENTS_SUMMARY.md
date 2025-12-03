@@ -127,7 +127,7 @@ This document outlines the comprehensive review and improvements made to the Asy
 7. **Add OpenTelemetry**: Implement distributed tracing for microservices scenarios
 8. **Add Circuit Breaker Pattern**: Implement circuit breakers for external service calls
 9. **Add Input Validation**: Enhance model validation with custom validators
-10. **Add Swagger Authentication**: Add API key or OAuth support in Swagger documentation
+10. **Add API Documentation Authentication**: Add API key or OAuth support in Scalar API documentation
 
 ## Conclusion
 

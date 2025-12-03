@@ -1,45 +1,61 @@
-# AsyncDemo
-Various demos, tips and tricks for using async in C#
+# AsyncDemo.Web
+Modern .NET 10 web application demonstrating async programming patterns with beautiful API documentation.
 
-Sample code for making and canceling Async Calls. 
+## ?? Features
 
-Cancellation Token Article
-[https://markhazleton.com/cancellation-token.html](https://markhazleton.com/cancellation-token.html)
+- **?? Beautiful API Documentation** - Powered by [Scalar](https://github.com/scalar/scalar)
+- **? Async/Await Patterns** - Real-world examples of asynchronous programming
+- **??? Polly Resilience** - Retry policies, circuit breakers, and fallback strategies
+- **??? Weather API Integration** - Live OpenWeatherMap data
+- **?? Clean Architecture** - Decorator pattern and dependency injection
 
-Sample source code for the following blog post 
-[https://johnthiriet.com/cancel-asynchronous-operation-in-csharp/](https://johnthiriet.com/cancel-asynchronous-operation-in-csharp/)
+## ?? API Documentation with Scalar
 
-Another async blog post from John Thiriet
-[https://johnthiriet.com/mvvm-going-async-with-async-command/](https://johnthiriet.com/mvvm-going-async-with-async-command/)
+Explore the interactive API documentation at:
+- **Scalar UI**: `/scalar/v1`
+- **OpenAPI Spec**: `/openapi/v1.json`
+- **Live Demo**: [https://asyncdemo.azurewebsites.net/scalar/v1](https://asyncdemo.azurewebsites.net/scalar/v1)
 
-# Hosting
-Current Hosted at [https://asyncdemo.azurewebsites.net/](https://asyncdemo.azurewebsites.net/)
-# Other Links
+### Why Scalar?
+- ? Modern, beautiful interface
+- ?? Multi-language code generation (C#, JS, Python, cURL, etc.)
+- ? Fast and responsive
+- ?? Dark mode support
+- ?? Mobile-friendly
 
-[https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/?WT.mc_id=friends-0000-jamont](https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/?WT.mc_id=friends-0000-jamont)
+## ??? Technologies
 
-[https://montemagno.com/c-sharp-developers-stop-calling-dot-result/](https://montemagno.com/c-sharp-developers-stop-calling-dot-result/)
+- **.NET 10** - Latest framework
+- **ASP.NET Core** - Web framework
+- **Scalar** - API documentation UI
+- **Microsoft.AspNetCore.OpenApi** - OpenAPI generation
+- **Polly** - Resilience patterns
+- **Bootstrap 5** - UI framework
 
-[https://codereview.stackexchange.com/questions/113108/async-task-with-timeout](https://codereview.stackexchange.com/questions/113108/async-task-with-timeout)
+## ?? Learning Resources
 
-Souce of CancelAsyncWithToken project:
+### Async Programming
+- [Cancellation Tokens in C#](https://markhazleton.com/cancellation-token.html)
+- [Async and Decorator Pattern](https://markhazleton.com/decorator-pattern-http-client.html)
+- [Cancel Asynchronous Operations](https://johnthiriet.com/cancel-asynchronous-operation-in-csharp/)
+- [Going Async with Async Command](https://johnthiriet.com/mvvm-going-async-with-async-command/)
+- [Await, UI, and Deadlocks](https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/?WT.mc_id=friends-0000-jamont)
+- [Stop Calling .Result](https://montemagno.com/c-sharp-developers-stop-calling-dot-result/)
+- [Async Task with Timeout](https://codereview.stackexchange.com/questions/113108/async-task-with-timeout)
+- [Cancel Async Tasks After Period](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/cancel-async-tasks-after-a-period-of-time)
+- [Crafting Task.TimeoutAfter](https://devblogs.microsoft.com/pfxteam/crafting-a-task-timeoutafter-method/)
+- [Async Wait with Timeout](https://stackoverflow.com/questions/4238345/asynchronously-wait-for-taskt-to-complete-with-timeout)
 
-[https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/cancel-async-tasks-after-a-period-of-time](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/cancel-async-tasks-after-a-period-of-time)
+### Polly Resilience
+- [The Polly Project](http://www.thepollyproject.org/) - .NET resilience library
+- [Retry Count Diagnostics](https://www.stevejgordon.co.uk/polly-using-context-to-obtain-retry-count-diagnostics)
+- [Retry & Circuit Breaker Patterns](https://medium.com/@therealjordanlee/retry-circuit-breaker-patterns-in-c-with-polly-9aa24c5fe23a)
 
-Article on Crafting a Task.Timeout
-[https://devblogs.microsoft.com/pfxteam/crafting-a-task-timeoutafter-method/](https://devblogs.microsoft.com/pfxteam/crafting-a-task-timeoutafter-method/)
+## ?? Live Demo
 
-Related Stack Overflow Question
-[https://stackoverflow.com/questions/4238345/asynchronously-wait-for-taskt-to-complete-with-timeout](https://stackoverflow.com/questions/4238345/asynchronously-wait-for-taskt-to-complete-with-timeout)
+Visit the live application: [https://asyncdemo.azurewebsites.net/](https://asyncdemo.azurewebsites.net/)
 
-Blog post on surfacing retry count for diagnostics
-[https://www.stevejgordon.co.uk/polly-using-context-to-obtain-retry-count-diagnostics](https://www.stevejgordon.co.uk/polly-using-context-to-obtain-retry-count-diagnostics)
+---
 
-Blog post on Polly Retry and Circuit Breaker Pattern
-[https://medium.com/@therealjordanlee/retry-circuit-breaker-patterns-in-c-with-polly-9aa24c5fe23a](https://medium.com/@therealjordanlee/retry-circuit-breaker-patterns-in-c-with-polly-9aa24c5fe23a)
-
-
-# Polly Project
-[http://www.thepollyproject.org/](http://www.thepollyproject.org/)
-Polly is a .NET resilience and transient-fault-handling library that allows developers to express policies such as Retry, Circuit Breaker, Timeout, Bulkhead Isolation, and Fallback in a fluent and thread-safe manner.
+**Built with ?? on .NET 10 | API Documentation powered by Scalar**
 
