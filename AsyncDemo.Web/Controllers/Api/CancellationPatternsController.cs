@@ -11,6 +11,10 @@ public class CancellationPatternsController : ControllerBase
     private readonly ILogger<CancellationPatternsController> _logger;
     private readonly AsyncMockService _mockService;
 
+    /// <summary>
+    /// Initializes a new instance of the CancellationPatternsController
+    /// </summary>
+    /// <param name="logger">Logger for diagnostic output</param>
     public CancellationPatternsController(ILogger<CancellationPatternsController> logger)
     {
         _logger = logger;

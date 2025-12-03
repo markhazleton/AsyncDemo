@@ -136,14 +136,21 @@ public class PollyResilienceTests
         // Act & Assert
         cts.CancelAfter(150); // Cancel after first attempt
 
-        await Assert.ThrowsExceptionAsync<OperationCanceledException>(async () =>
+        bool exceptionThrown = false;
+        try
         {
             await retryPolicy.ExecuteAsync(async (ct) =>
             {
                 await Task.Delay(100, ct);
                 throw new HttpRequestException("Simulated failure");
             }, cts.Token);
-        });
+        }
+        catch (OperationCanceledException)
+        {
+            exceptionThrown = true;
+        }
+
+        Assert.IsTrue(exceptionThrown, "Should have thrown OperationCanceledException");
     }
 
     /// <summary>
@@ -163,14 +170,21 @@ public class PollyResilienceTests
         var timeoutPolicy = Policy.TimeoutAsync(TimeSpan.FromMilliseconds(200));
 
         // Act & Assert - Operation takes 500ms, timeout is 200ms
-        await Assert.ThrowsExceptionAsync<TimeoutRejectedException>(async () =>
+        bool exceptionThrown = false;
+        try
         {
-            await timeoutPolicy.ExecuteAsync(async (ct) =>
+            await timeoutPolicy.ExecuteAsync(async () =>
             {
-                await Task.Delay(500, ct); // Slow operation
+                await Task.Delay(500); // Slow operation
                 return "Should not complete";
             });
-        });
+        }
+        catch (TimeoutRejectedException)
+        {
+            exceptionThrown = true;
+        }
+
+        Assert.IsTrue(exceptionThrown, "Should have thrown TimeoutRejectedException");
     }
 
     /// <summary>
@@ -203,10 +217,10 @@ public class PollyResilienceTests
         var combinedPolicy = Policy.WrapAsync(retryPolicy, timeoutPolicy);
 
         // Act - Fast enough to succeed on retry
-        var result = await combinedPolicy.ExecuteAsync(async (ct) =>
+        var result = await combinedPolicy.ExecuteAsync(async () =>
         {
             attemptCount++;
-            await Task.Delay(100, ct);
+            await Task.Delay(100);
 
             if (attemptCount < 2)
             {
@@ -298,7 +312,8 @@ public class PollyResilienceTests
                 sleepDurationProvider: retryAttempt => TimeSpan.FromMilliseconds(50));
 
         // Act & Assert - Throw ArgumentException (not retried)
-        await Assert.ThrowsExceptionAsync<ArgumentException>(async () =>
+        bool exceptionThrown = false;
+        try
         {
             await retryPolicy.ExecuteAsync(async () =>
             {
@@ -306,9 +321,13 @@ public class PollyResilienceTests
                 await Task.Delay(10);
                 throw new ArgumentException("Validation error - should not retry");
             });
-        });
+        }
+        catch (ArgumentException)
+        {
+            exceptionThrown = true;
+        }
 
-        // Assert - Should fail immediately without retries
+        Assert.IsTrue(exceptionThrown, "Should have thrown ArgumentException");
         Assert.AreEqual(1, attemptCount, "Should not retry ArgumentException, only tried once");
     }
 }

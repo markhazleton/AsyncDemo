@@ -6,40 +6,40 @@ public class CurrentConditionsResponse
     /// A description of any error that occurred
     /// </summary>
     [JsonProperty("message")]
-    public string Message { get; set; }
+    public required string Message { get; set; }
 
     [JsonProperty("id")]
     public int CityId { get; set; }
 
     [JsonProperty("name")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [JsonProperty("coord")]
-    public Coordinates Coordintates { get; set; }
+    public required Coordinates Coordintates { get; set; }
 
     [JsonProperty("dt")]
     public int ObservationTime { get; set; }
 
     [JsonProperty("weather")]
-    public ObservedConditions[] ObservedConditions { get; set; }
+    public required ObservedConditions[] ObservedConditions { get; set; }
 
     [JsonProperty("visibility")]
     public int Visibility { get; set; }
 
     [JsonProperty("clouds")]
-    public Clouds Clouds { get; set; }
+    public required Clouds Clouds { get; set; }
 
     [JsonProperty("rain")]
-    public RainData Rain { get; set; }
+    public required RainData Rain { get; set; }
 
     [JsonProperty("main")]
-    public ObservationData ObservationData { get; set; }
+    public required ObservationData ObservationData { get; set; }
 
     [JsonProperty("wind")]
-    public WindData WindData { get; set; }
+    public required WindData WindData { get; set; }
 
     [JsonProperty("sys")]
-    public LocationDetails LocationDetails { get; set; }
+    public required LocationDetails LocationDetails { get; set; }
 
     [JsonProperty("timezone")]
     public int TimezoneOffset { get; set; }
@@ -97,7 +97,7 @@ public class RainData
 public class LocationDetails
 {
     [JsonProperty("country")]
-    public string country { get; set; }
+    public required string country { get; set; }
 
     [JsonProperty("sunrise")]
     public int Sunrise { get; set; }
@@ -112,12 +112,12 @@ public class ObservedConditions
     public int DescriptionId { get; set; }
 
     [JsonProperty("main")]
-    public string Conditions { get; set; }
+    public required string Conditions { get; set; }
 
     [JsonProperty("description")]
-    public string ConditionsDetail { get; set; }
+    public required string ConditionsDetail { get; set; }
 
     [JsonProperty("icon")]
-    public string Icon { get; set; }
+    public required string Icon { get; set; }
 }
 

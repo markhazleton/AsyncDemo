@@ -26,6 +26,12 @@
             API Controller demonstrating cancellation token patterns
             </summary>
         </member>
+        <member name="M:AsyncDemo.Web.Controllers.Api.CancellationPatternsController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.Api.CancellationPatternsController})">
+            <summary>
+            Initializes a new instance of the CancellationPatternsController
+            </summary>
+            <param name="logger">Logger for diagnostic output</param>
+        </member>
         <member name="M:AsyncDemo.Web.Controllers.Api.CancellationPatternsController.NoCancellation(System.Int32)">
              <summary>
              Long-running operation WITHOUT cancellation support
@@ -133,6 +139,12 @@
             <summary>
             API Controller demonstrating concurrency patterns and parallel execution
             </summary>
+        </member>
+        <member name="M:AsyncDemo.Web.Controllers.Api.ConcurrencyPatternsController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.Api.ConcurrencyPatternsController})">
+            <summary>
+            Initializes a new instance of the ConcurrencyPatternsController
+            </summary>
+            <param name="logger">Logger for diagnostic output</param>
         </member>
         <member name="M:AsyncDemo.Web.Controllers.Api.ConcurrencyPatternsController.Sequential(System.Int32,System.Int32)">
              <summary>
@@ -323,6 +335,14 @@
             This controller provides focused examples of cancellation, timeouts, and resilience patterns
             using real-world weather API scenarios.
             </remarks>
+        </member>
+        <member name="M:AsyncDemo.Web.Controllers.Api.WeatherPatternsController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Controllers.Api.WeatherPatternsController},OpenWeatherMapClient.Interfaces.IOpenWeatherMapClient,System.Net.Http.IHttpClientFactory)">
+            <summary>
+            Initializes a new instance of the WeatherPatternsController
+            </summary>
+            <param name="logger">Logger for diagnostic output</param>
+            <param name="weatherService">Weather API client service</param>
+            <param name="httpClientFactory">HTTP client factory for making requests</param>
         </member>
         <member name="M:AsyncDemo.Web.Controllers.Api.WeatherPatternsController.GetWeatherSlow(System.String)">
              <summary>

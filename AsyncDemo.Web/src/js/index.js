@@ -4,7 +4,8 @@ window.$ = window.jQuery = jQuery;
 
 import 'jquery-validation';
 import 'jquery-validation-unobtrusive';
-import 'bootstrap/dist/js/bootstrap.bundle';
+// Bootstrap is loaded from CDN in _Layout.cshtml - do not import here to avoid conflicts
+// import 'bootstrap/dist/js/bootstrap.bundle';
 import 'datatables.net';
 import 'datatables.net-bs5';
 import toastr from 'toastr';

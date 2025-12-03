@@ -16,6 +16,12 @@ public class WeatherPatternsController : ControllerBase
     private readonly IOpenWeatherMapClient _weatherService;
     private readonly IHttpClientFactory _httpClientFactory;
 
+    /// <summary>
+    /// Initializes a new instance of the WeatherPatternsController
+    /// </summary>
+    /// <param name="logger">Logger for diagnostic output</param>
+    /// <param name="weatherService">Weather API client service</param>
+    /// <param name="httpClientFactory">HTTP client factory for making requests</param>
     public WeatherPatternsController(
         ILogger<WeatherPatternsController> logger,
         IOpenWeatherMapClient weatherService,

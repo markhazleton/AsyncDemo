@@ -11,6 +11,10 @@ public class ConcurrencyPatternsController : ControllerBase
     private readonly ILogger<ConcurrencyPatternsController> _logger;
     private readonly AsyncMockService _mockService;
 
+    /// <summary>
+    /// Initializes a new instance of the ConcurrencyPatternsController
+    /// </summary>
+    /// <param name="logger">Logger for diagnostic output</param>
     public ConcurrencyPatternsController(ILogger<ConcurrencyPatternsController> logger)
     {
         _logger = logger;

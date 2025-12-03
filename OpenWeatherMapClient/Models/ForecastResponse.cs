@@ -4,14 +4,14 @@ namespace OpenWeatherMapClient.Models;
 
 public class ForecastResponse
 {
-    public string cod { get; set; }
+    public required string cod { get; set; }
     public float message { get; set; }
 
     [JsonProperty("list")]
-    public OpenWeatherForecastData[] ForecastPoints { get; set; }
+    public required OpenWeatherForecastData[] ForecastPoints { get; set; }
 
     [JsonProperty("city")]
-    public OpenWeatherForecastLocation Location { get; set; }
+    public required OpenWeatherForecastLocation Location { get; set; }
 }
 
 
@@ -21,23 +21,23 @@ public class OpenWeatherForecastData
     public int Date { get; set; }
 
     [JsonProperty("main")]
-    public OpenWeatherForecastWeatherData WeatherData { get; set; }
+    public required OpenWeatherForecastWeatherData WeatherData { get; set; }
 
     [JsonProperty("weather")]
-    public OpenWeatherForecastConditions[] Conditions { get; set; }
+    public required OpenWeatherForecastConditions[] Conditions { get; set; }
 
     [JsonProperty("clouds")]
-    public OpenWeatherForecastClouds Clouds { get; set; }
+    public required OpenWeatherForecastClouds Clouds { get; set; }
 
     [JsonProperty("wind")]
-    public OpenWeatherForecastWind Wind { get; set; }
-    public string dt_txt { get; set; }
+    public required OpenWeatherForecastWind Wind { get; set; }
+    public required string dt_txt { get; set; }
 
     [JsonProperty("rain")]
-    public OpenWeatherForecastRain Rain { get; set; }
+    public required OpenWeatherForecastRain Rain { get; set; }
 
     [JsonProperty("snow")]
-    public OpenWeatherForecastSnow Snow { get; set; }
+    public required OpenWeatherForecastSnow Snow { get; set; }
 }
 
 
@@ -47,13 +47,13 @@ public class OpenWeatherForecastLocation
     public int Id { get; set; }
 
     [JsonProperty("name")]
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     [JsonProperty("coord")]
-    public OpenWeatherForecastCoordinates Coordinates { get; set; }
+    public required OpenWeatherForecastCoordinates Coordinates { get; set; }
 
     [JsonProperty("country")]
-    public string Country { get; set; }
+    public required string Country { get; set; }
 
     [JsonProperty("timezone")]
     public int TimezoneOffset { get; set; }
@@ -117,8 +117,8 @@ public class OpenWeatherForecastSnow
 public class OpenWeatherForecastConditions
 {
     public int id { get; set; }
-    public string main { get; set; }
-    public string description { get; set; }
-    public string icon { get; set; }
+    public required string main { get; set; }
+    public required string description { get; set; }
+    public required string icon { get; set; }
 }
 #pragma warning restore IDE1006 // Naming Styles
