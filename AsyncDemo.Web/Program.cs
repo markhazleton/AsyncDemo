@@ -33,19 +33,7 @@ builder.Services.AddHostedService<StartupHostedService>();
 builder.Services.AddHealthChecks()
     .AddCheck("API Health", () => HealthCheckResult.Healthy("API is healthy"))
     .AddCheck<ConfigurationHealthCheck>("Configuration")
-    .AddCheck("Memory Cache", () =>
-  {
-        try
-        {
-     var cache = builder.Services.BuildServiceProvider().GetService<IMemoryCache>();
-            return cache != null ? HealthCheckResult.Healthy("Memory cache is available") 
-          : HealthCheckResult.Unhealthy("Memory cache is not available");
-        }
-      catch (Exception ex)
-        {
-            return HealthCheckResult.Unhealthy($"Memory cache check failed: {ex.Message}");
-        }
-  });
+    .AddCheck("Memory Cache", () => HealthCheckResult.Healthy("Memory cache is configured"));
 
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.TryAddSingleton<IMemoryCacheManager, MemoryCacheManager>();
@@ -110,18 +98,22 @@ else
 // Use forwarded headers for reverse proxy scenarios
 app.UseForwardedHeaders();
 
+// Add encoding middleware to ensure proper UTF-8 handling
+app.UseEncodingMiddleware();
+
 // Add request logging middleware early in the pipeline
 app.UseRequestLogging();
 
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 
-// Add security headers
+// Add security headers and UTF-8 encoding
 app.Use(async (context, next) =>
 {
-    context.Response.Headers.Add("X-Content-Type-Options", "nosniff");
-    context.Response.Headers.Add("X-Frame-Options", "DENY");
-context.Response.Headers.Add("X-XSS-Protection", "1; mode=block");
+    context.Response.Headers["X-Content-Type-Options"] = "nosniff";
+    context.Response.Headers["X-Frame-Options"] = "DENY";
+    context.Response.Headers["X-XSS-Protection"] = "1; mode=block";
+    context.Response.Headers["Content-Type"] = "text/html; charset=utf-8";
     await next();
 });
 

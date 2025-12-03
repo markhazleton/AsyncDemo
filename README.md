@@ -5,16 +5,16 @@ Various demos, tips and tricks for using async in C#
 
 Sample code for making and canceling Async Calls with beautiful API documentation powered by **[Scalar](https://github.com/scalar/scalar)**.
 
-## ?? Features
+## Features
 
-- **?? Modern API Documentation** - Beautiful, interactive API docs using Scalar
-- **? Async Programming Patterns** - Real-world examples of async/await best practices
-- **??? Resilience with Polly** - Retry policies, circuit breakers, and fallback strategies
-- **?? Decorator Pattern** - Clean, maintainable code architecture
-- **??? OpenWeather Integration** - Live API integration examples
-- **?? .NET 10** - Built on the latest .NET framework
+- **[?] Modern API Documentation** - Beautiful, interactive API docs using Scalar
+- **[>] Async Programming Patterns** - Real-world examples of async/await best practices
+- **[!] Resilience with Polly** - Retry policies, circuit breakers, and fallback strategies
+- **[+] Decorator Pattern** - Clean, maintainable code architecture
+- **[*] OpenWeather Integration** - Live API integration examples
+- **[#] .NET 10** - Built on the latest .NET framework
 
-## ?? API Documentation with Scalar
+## API Documentation with Scalar
 
 This project features stunning API documentation powered by **Scalar**. After running the application, explore:
 
@@ -23,13 +23,13 @@ This project features stunning API documentation powered by **Scalar**. After ru
 - **Live Demo**: [https://asyncdemo.azurewebsites.net/scalar/v1](https://asyncdemo.azurewebsites.net/scalar/v1)
 
 Scalar provides:
-- ? Beautiful, modern UI with dark/light mode
-- ?? Auto-generated code examples in multiple languages (C#, JavaScript, Python, cURL, and more)
-- ? Fast, responsive interface
-- ?? Advanced search and filtering
-- ?? Mobile-friendly design
+- [?] Beautiful, modern UI with dark/light mode
+- [>] Auto-generated code examples in multiple languages (C#, JavaScript, Python, cURL, and more)
+- [?] Fast, responsive interface
+- [+] Advanced search and filtering
+- [+] Mobile-friendly design
 
-## ?? Articles & Resources
+## Articles & Resources
 
 ### Async Programming Articles
 - [Cancellation Tokens in C#](https://markhazleton.com/cancellation-token.html)
@@ -37,9 +37,9 @@ Scalar provides:
 - [Cancel Asynchronous Operations](https://johnthiriet.com/cancel-asynchronous-operation-in-csharp/)
 - [Going Async with Async Command](https://johnthiriet.com/mvvm-going-async-with-async-command/)
 
-## ?? Hosting
+## Hosting
 Live demo hosted at [https://asyncdemo.azurewebsites.net/](https://asyncdemo.azurewebsites.net/)
-## ?? Additional Resources
+## Additional Resources
 
 ### Async & Await Best Practices
 - [Await and UI and Deadlocks](https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/?WT.mc_id=friends-0000-jamont)
@@ -59,7 +59,7 @@ Live demo hosted at [https://asyncdemo.azurewebsites.net/](https://asyncdemo.azu
 - [Scalar NuGet Package](https://www.nuget.org/packages/Scalar.AspNetCore)
 - [Microsoft OpenAPI Documentation](https://learn.microsoft.com/aspnet/core/fundamentals/openapi)
 
-## ?? Getting Started
+## Getting Started
 
 1. **Clone the repository**
    ```bash
@@ -82,7 +82,7 @@ Live demo hosted at [https://asyncdemo.azurewebsites.net/](https://asyncdemo.azu
    - View the beautiful Scalar-powered API documentation
    - Try out the interactive examples
 
-## ?? Technologies
+## Technologies
 
 - **.NET 10** - Latest .NET framework
 - **ASP.NET Core** - Web framework
@@ -90,11 +90,11 @@ Live demo hosted at [https://asyncdemo.azurewebsites.net/](https://asyncdemo.azu
 - **Polly** - Resilience and transient-fault-handling
 - **OpenWeatherMap API** - Weather data integration
 
-## ?? License
+## License
 
 MIT License - see LICENSE file for details
 
-## ?? Author
+## Author
 
 **Mark Hazleton**
 - Website: [markhazleton.com](https://markhazleton.com)
@@ -102,5 +102,5 @@ MIT License - see LICENSE file for details
 
 ---
 
-**Built with ?? on .NET 10 | Powered by Scalar API Documentation**
+**Built with [love] on .NET 10 | Powered by Scalar API Documentation**
 

@@ -48,5 +48,10 @@ module.exports = {
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin()]
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
   }
 };

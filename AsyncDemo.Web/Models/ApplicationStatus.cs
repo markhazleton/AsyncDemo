@@ -50,7 +50,7 @@ public sealed class ApplicationStatus
     /// <summary>
     /// BuildVersion
     /// </summary>
-    public BuildVersion BuildVersion { get; }
+    public BuildVersion? BuildVersion { get; }
     /// <summary>
     /// Features
     /// </summary>

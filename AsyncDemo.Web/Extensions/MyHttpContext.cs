@@ -5,7 +5,7 @@
 /// </summary>
 public class MyHttpContext
 {
-    private static IHttpContextAccessor m_httpContextAccessor;
+    private static IHttpContextAccessor m_httpContextAccessor = null!;
 
     /// <summary>
     /// Gets the current HttpContext

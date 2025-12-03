@@ -1,15 +1,15 @@
 # AsyncDemo.Web
 Modern .NET 10 web application demonstrating async programming patterns with beautiful API documentation.
 
-## ?? Features
+## Features
 
-- **?? Beautiful API Documentation** - Powered by [Scalar](https://github.com/scalar/scalar)
-- **? Async/Await Patterns** - Real-world examples of asynchronous programming
-- **??? Polly Resilience** - Retry policies, circuit breakers, and fallback strategies
-- **??? Weather API Integration** - Live OpenWeatherMap data
-- **?? Clean Architecture** - Decorator pattern and dependency injection
+- **[?] Beautiful API Documentation** - Powered by [Scalar](https://github.com/scalar/scalar)
+- **[>] Async/Await Patterns** - Real-world examples of asynchronous programming
+- **[!] Polly Resilience** - Retry policies, circuit breakers, and fallback strategies
+- **[*] Weather API Integration** - Live OpenWeatherMap data
+- **[+] Clean Architecture** - Decorator pattern and dependency injection
 
-## ?? API Documentation with Scalar
+## API Documentation with Scalar
 
 Explore the interactive API documentation at:
 - **Scalar UI**: `/scalar/v1`
@@ -17,13 +17,13 @@ Explore the interactive API documentation at:
 - **Live Demo**: [https://asyncdemo.azurewebsites.net/scalar/v1](https://asyncdemo.azurewebsites.net/scalar/v1)
 
 ### Why Scalar?
-- ? Modern, beautiful interface
-- ?? Multi-language code generation (C#, JS, Python, cURL, etc.)
-- ? Fast and responsive
-- ?? Dark mode support
-- ?? Mobile-friendly
+- [?] Modern, beautiful interface
+- [>] Multi-language code generation (C#, JS, Python, cURL, etc.)
+- [?] Fast and responsive
+- [+] Dark mode support
+- [+] Mobile-friendly
 
-## ??? Technologies
+## Technologies
 
 - **.NET 10** - Latest framework
 - **ASP.NET Core** - Web framework
@@ -32,7 +32,7 @@ Explore the interactive API documentation at:
 - **Polly** - Resilience patterns
 - **Bootstrap 5** - UI framework
 
-## ?? Learning Resources
+## Learning Resources
 
 ### Async Programming
 - [Cancellation Tokens in C#](https://markhazleton.com/cancellation-token.html)
@@ -51,11 +51,11 @@ Explore the interactive API documentation at:
 - [Retry Count Diagnostics](https://www.stevejgordon.co.uk/polly-using-context-to-obtain-retry-count-diagnostics)
 - [Retry & Circuit Breaker Patterns](https://medium.com/@therealjordanlee/retry-circuit-breaker-patterns-in-c-with-polly-9aa24c5fe23a)
 
-## ?? Live Demo
+## Live Demo
 
 Visit the live application: [https://asyncdemo.azurewebsites.net/](https://asyncdemo.azurewebsites.net/)
 
 ---
 
-**Built with ?? on .NET 10 | API Documentation powered by Scalar**
+**Built with [love] on .NET 10 | API Documentation powered by Scalar**
 

@@ -350,6 +350,37 @@
             Gets the application base URL
             </summary>
         </member>
+        <member name="T:AsyncDemo.Web.Middleware.EncodingMiddleware">
+            <summary>
+            Middleware to ensure proper UTF-8 encoding for all responses
+            </summary>
+        </member>
+        <member name="M:AsyncDemo.Web.Middleware.EncodingMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger{AsyncDemo.Web.Middleware.EncodingMiddleware})">
+            <summary>
+            Initializes a new instance of the <see cref="T:AsyncDemo.Web.Middleware.EncodingMiddleware"/> class
+            </summary>
+            <param name="next">The next middleware in the pipeline</param>
+            <param name="logger">The logger instance</param>
+        </member>
+        <member name="M:AsyncDemo.Web.Middleware.EncodingMiddleware.InvokeAsync(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            Processes an HTTP request and ensures UTF-8 encoding
+            </summary>
+            <param name="context">The HTTP context for the current request</param>
+            <returns>A task representing the asynchronous operation</returns>
+        </member>
+        <member name="T:AsyncDemo.Web.Middleware.EncodingMiddlewareExtensions">
+            <summary>
+            Extension methods for registering the encoding middleware
+            </summary>
+        </member>
+        <member name="M:AsyncDemo.Web.Middleware.EncodingMiddlewareExtensions.UseEncodingMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Adds encoding middleware to the pipeline
+            </summary>
+            <param name="builder">The application builder</param>
+            <returns>The application builder</returns>
+        </member>
         <member name="T:AsyncDemo.Web.Middleware.RequestLoggingMiddleware">
             <summary>
             Middleware for logging HTTP requests and responses

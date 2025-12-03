@@ -30,7 +30,7 @@ public class RequestLoggingMiddleware
         var requestId = Guid.NewGuid().ToString();
 
         // Add request ID to response headers for tracing
-        context.Response.Headers.Add("X-Request-ID", requestId);
+        context.Response.Headers["X-Request-ID"] = requestId;
 
         _logger.LogInformation(
             "Request {RequestId} started: {Method} {Path} from {RemoteIpAddress}",
