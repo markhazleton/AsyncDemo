@@ -76,8 +76,18 @@
             try
             {
                 // Execute the HTTP request with retry logic
-                response = await _httpIndexPolicy.ExecuteAsync(ctx =>
-                    HttpClientJsonExtensions.PostAsJsonAsync(_httpClient, "remote/Results", mockResults, Cts.Token), context);
+                response = await _httpIndexPolicy.ExecuteAsync(async ctx =>
+                {
+                    var json = JsonSerializer.Serialize(mockResults);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    
+                    // Log the request details for debugging
+                    _logger.LogInformation("POST Request to: {Url}", _httpClient.BaseAddress + "remote/Results");
+                    _logger.LogInformation("Content-Type: {ContentType}", content.Headers.ContentType);
+                    _logger.LogInformation("Request Body: {Body}", json);
+                    
+                    return await _httpClient.PostAsync("remote/Results", content, Cts.Token);
+                }, context);
 
                 if (response.IsSuccessStatusCode)
                 {

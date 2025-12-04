@@ -15,22 +15,6 @@ if (!fs.existsSync(libDir)) {
 }
 
 // Copy specific vendor files that should be available directly
-console.log('Copying library files...');
-
-// Bootstrap Icons fonts
-const bootstrapIconsDir = path.join(__dirname, 'node_modules', 'bootstrap-icons', 'font', 'fonts');
-const bootstrapIconsDestDir = path.join(__dirname, 'wwwroot', 'fonts');
-
-if (!fs.existsSync(bootstrapIconsDestDir)) {
-  fs.mkdirSync(bootstrapIconsDestDir, { recursive: true });
-}
-
-// Copy bootstrap-icons fonts
-fs.readdirSync(bootstrapIconsDir).forEach(file => {
-  fs.copyFileSync(
-    path.join(bootstrapIconsDir, file),
-    path.join(bootstrapIconsDestDir, file)
-  );
-});
+// Note: Bootstrap Icons are loaded from CDN, no local copy needed
 
 console.log('Build completed successfully!');

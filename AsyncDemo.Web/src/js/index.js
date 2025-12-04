@@ -4,8 +4,6 @@ window.$ = window.jQuery = jQuery;
 
 import 'jquery-validation';
 import 'jquery-validation-unobtrusive';
-// Bootstrap is loaded from CDN in _Layout.cshtml - do not import here to avoid conflicts
-// import 'bootstrap/dist/js/bootstrap.bundle';
 import 'datatables.net';
 import 'datatables.net-bs5';
 import toastr from 'toastr';
@@ -24,12 +22,12 @@ toastr.options = {
 
 // IMPORTANT: All custom scripts must be imported here to be included in the bundle
 // ================================================================================
+// NOTE: Bootstrap and theme switching are now handled by WebSpark.Bootswatch NuGet package
 
 // Import custom scripts
 import './site';                                     // Site-wide functionality
 import './async-stats';                              // Async statistics tracking
 import AsyncStatsDashboard from './async-stats-dashboard'; // Dashboard visualization
-import './theme-switcher';                           // Bootswatch theme switcher
 
 // Initialize components on document ready
 jQuery(document).ready(function () {

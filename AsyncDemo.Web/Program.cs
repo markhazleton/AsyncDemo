@@ -3,6 +3,8 @@ using AsyncDemo.Web.Services;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Westwind.AspNetCore.Markdown;
 using Microsoft.AspNetCore.HttpOverrides;
+using WebSpark.Bootswatch;
+using WebSpark.HttpClientUtility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,14 @@ builder.Logging.AddDebug();
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
+
+// Add WebSpark.Bootswatch theme switcher services
+Microsoft.Extensions.DependencyInjection.HttpServiceCollectionExtensions.AddHttpContextAccessor(builder.Services);
+
+// Register WebSpark.HttpClientUtility services (required by Bootswatch)
+builder.Services.AddHttpClientUtility();
+
+builder.Services.AddBootswatchThemeSwitcher();
 
 // Configure HttpClient with default timeout and retry policies
 builder.Services.AddHttpClient("default", client =>
@@ -35,7 +45,6 @@ builder.Services.AddHealthChecks()
     .AddCheck<ConfigurationHealthCheck>("Configuration")
     .AddCheck("Memory Cache", () => HealthCheckResult.Healthy("Memory cache is configured"));
 
-builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.TryAddSingleton<IMemoryCacheManager, MemoryCacheManager>();
 builder.Services.AddCustomScalar();
 builder.Services.AddMarkdown();
@@ -104,17 +113,28 @@ app.UseEncodingMiddleware();
 // Add request logging middleware early in the pipeline
 app.UseRequestLogging();
 
+// Add WebSpark.Bootswatch middleware (must be before UseStaticFiles)
+app.UseBootswatchAll();
+
 app.UseStaticFiles();
 app.UseHttpsRedirection();
 
-// Add security headers and UTF-8 encoding
+// Add security headers (but don't override Content-Type for API responses)
 app.Use(async (context, next) =>
 {
     context.Response.Headers["X-Content-Type-Options"] = "nosniff";
     context.Response.Headers["X-Frame-Options"] = "DENY";
     context.Response.Headers["X-XSS-Protection"] = "1; mode=block";
-    context.Response.Headers["Content-Type"] = "text/html; charset=utf-8";
+    
+    // Only set Content-Type to text/html for non-API routes
+    // API routes will set their own Content-Type
     await next();
+    
+    // After the request is processed, check if it's an HTML response
+    if (context.Response.ContentType == null && !context.Request.Path.StartsWithSegments("/api"))
+    {
+        context.Response.Headers["Content-Type"] = "text/html; charset=utf-8";
+    }
 });
 
 app.UseAuthorization();

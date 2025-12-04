@@ -5,6 +5,7 @@
 /// </summary>
 [ApiController]
 [Route("api/remote")]
+[Consumes("application/json")]
 [Tags("4. Resilience & Timeouts")]
 public class RemoteController(ILogger<RemoteController> _logger, IMemoryCache memoryCache) : BaseApiController(memoryCache)
 {
@@ -67,9 +68,10 @@ public class RemoteController(ILogger<RemoteController> _logger, IMemoryCache me
     /// <response code="408">Request Timeout.</response>
     [ProducesResponseType(typeof(MockResults), 200)]
     [ProducesResponseType(typeof(MockResults), 408)]
+    [Consumes("application/json")]
     [HttpPost]
     [Route("Results")]
-    public async Task<IActionResult> GetResults(MockResults model)
+    public async Task<IActionResult> GetResults([FromBody] MockResults model)
     {
         var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(model.MaxTimeMS));
         var watch = Stopwatch.StartNew();
