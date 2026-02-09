@@ -1,0 +1,386 @@
+@{
+    ViewData["Title"] = "WebSpark NuGet Packages";
+}
+
+<div class="row justify-content-center mb-4">
+    <div class="col-lg-10">
+        <div class="text-center mb-4">
+            <h1 class="display-4 fw-bold mb-3">
+                <i class="bi bi-box-seam-fill me-2"></i>WebSpark NuGet Packages
+            </h1>
+            <p class="lead">
+                Production-ready libraries that power AsyncSpark &mdash; saving you from writing boilerplate so you can focus on your application
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Package Overview Cards -->
+<div class="row g-4 mb-5 justify-content-center">
+    <div class="col-lg-10">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">
+                            <i class="bi bi-palette-fill me-2"></i>WebSpark.Bootswatch
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge bg-primary mb-3">v1.34.0</span>
+                        <p>A drop-in ASP.NET Core library that gives your application a <strong>full theme switcher</strong> powered by Bootswatch themes. Users can switch between 25+ professionally designed Bootstrap themes in real time.</p>
+                        <h6 class="mt-3 mb-2">What it provides:</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Tag Helper for theme switcher UI</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Theme stylesheet caching &amp; serving</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Light/dark color mode support</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Cookie-based user preference persistence</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Middleware for static asset serving</li>
+                        </ul>
+                        <a href="https://www.nuget.org/packages/WebSpark.Bootswatch" class="btn btn-outline-primary" target="_blank" rel="noopener">
+                            <i class="bi bi-box-arrow-up-right me-1"></i>View on NuGet
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm border-secondary">
+                    <div class="card-header bg-secondary text-white">
+                        <h4 class="mb-0">
+                            <i class="bi bi-globe2 me-2"></i>WebSpark.HttpClientUtility
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <span class="badge bg-secondary mb-3">v2.2.0</span>
+                        <p>A utility library built on top of <code>IHttpClientFactory</code> that provides <strong>structured HTTP client services</strong> with built-in telemetry, result tracking, and proper lifecycle management.</p>
+                        <h6 class="mt-3 mb-2">What it provides:</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>One-line DI registration</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Proper HttpClient lifecycle via factory</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Structured result objects with timing</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Ready-made telemetry decorators</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i>Foundation for Bootswatch theme fetching</li>
+                        </ul>
+                        <a href="https://www.nuget.org/packages/WebSpark.HttpClientUtility" class="btn btn-outline-secondary" target="_blank" rel="noopener">
+                            <i class="bi bi-box-arrow-up-right me-1"></i>View on NuGet
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How Bootswatch is Used -->
+<div class="row g-4 mb-5 justify-content-center">
+    <div class="col-lg-10">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h2 class="mb-4">
+                    <i class="bi bi-palette-fill me-2 text-primary"></i>How WebSpark.Bootswatch Powers AsyncSpark
+                </h2>
+
+                <p class="lead">
+                    The theme switcher you see in the top navigation bar? That's WebSpark.Bootswatch at work.
+                    Try clicking it now to see 25+ themes applied in real time.
+                </p>
+
+                <h5 class="mt-4 mb-3">Setup: Three Lines of Code</h5>
+                <p>Adding full theme-switching to any ASP.NET Core application requires only three registrations:</p>
+
+                <div class="card bg-body-secondary mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-file-earmark-code me-2"></i><strong>Program.cs</strong> &mdash; Service &amp; Middleware Registration
+                    </div>
+                    <div class="card-body">
+<pre class="mb-0"><code>// 1. Register the HttpClientUtility services (dependency)
+builder.Services.AddHttpClientUtility();
+
+// 2. Register the Bootswatch theme switcher services
+builder.Services.AddBootswatchThemeSwitcher();
+
+// 3. Add the middleware (must be before UseStaticFiles)
+app.UseBootswatchAll();</code></pre>
+                    </div>
+                </div>
+
+                <h5 class="mt-4 mb-3">Layout Integration</h5>
+                <p>In <code>_Layout.cshtml</code>, WebSpark.Bootswatch provides helpers and a tag helper that handle everything:</p>
+
+                <div class="card bg-body-secondary mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-file-earmark-code me-2"></i><strong>_Layout.cshtml</strong> &mdash; Theme Stylesheet &amp; Switcher
+                    </div>
+                    <div class="card-body">
+<pre class="mb-0"><code>@@using WebSpark.Bootswatch.Services
+@@using WebSpark.Bootswatch.Helpers
+@@inject StyleCache StyleCache
+
+&lt;!-- Dynamic theme URL based on user selection --&gt;
+@@{
+    var themeName = BootswatchThemeHelper.GetCurrentThemeName(Context);
+    var themeUrl = BootswatchThemeHelper.GetThemeUrl(StyleCache, themeName);
+}
+&lt;link rel="stylesheet" href="@@themeUrl" /&gt;
+
+&lt;!-- Drop-in theme switcher UI --&gt;
+&lt;bootswatch-theme-switcher /&gt;</code></pre>
+                    </div>
+                </div>
+
+                <h5 class="mt-4 mb-3">Light/Dark Mode Support</h5>
+                <p>The HTML element automatically gets the correct color mode attribute:</p>
+                <div class="card bg-body-secondary mb-4">
+                    <div class="card-body">
+<pre class="mb-0"><code>&lt;html lang="en" data-bs-theme="@@(BootswatchThemeHelper.GetCurrentColorMode(Context))"&gt;</code></pre>
+                    </div>
+                </div>
+
+                <div class="alert alert-info mt-4">
+                    <i class="bi bi-lightbulb-fill me-2"></i>
+                    <strong>Tag Helper Registration:</strong> The <code>&lt;bootswatch-theme-switcher /&gt;</code> tag helper is registered via a single line in <code>_ViewImports.cshtml</code>:
+                    <code>@@addTagHelper *, WebSpark.Bootswatch</code>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How HttpClientUtility is Used -->
+<div class="row g-4 mb-5 justify-content-center">
+    <div class="col-lg-10">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h2 class="mb-4">
+                    <i class="bi bi-globe2 me-2 text-secondary"></i>How WebSpark.HttpClientUtility Powers AsyncSpark
+                </h2>
+
+                <p class="lead">
+                    WebSpark.HttpClientUtility provides the HTTP infrastructure that both Bootswatch and the application's async demos depend on.
+                </p>
+
+                <h5 class="mt-4 mb-3">One-Line Registration</h5>
+                <div class="card bg-body-secondary mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-file-earmark-code me-2"></i><strong>Program.cs</strong>
+                    </div>
+                    <div class="card-body">
+<pre class="mb-0"><code>// Registers IHttpClientFactory and related services properly
+builder.Services.AddHttpClientUtility();</code></pre>
+                    </div>
+                </div>
+
+                <h5 class="mt-4 mb-3">Used in AsyncSpark's Bulk Calls Demo</h5>
+                <p>
+                    The <a href="/bulkcalls">Bulk Calls</a> demo uses <code>IHttpGetCallService</code>, which is built on top of
+                    <code>IHttpClientFactory</code> registered by <code>AddHttpClientUtility()</code>.
+                    The service is wrapped with a telemetry decorator that automatically tracks elapsed time for every HTTP call:
+                </p>
+
+                <div class="card bg-body-secondary mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-file-earmark-code me-2"></i><strong>Program.cs</strong> &mdash; Decorator Chain with Telemetry
+                    </div>
+                    <div class="card-body">
+<pre class="mb-0"><code>builder.Services.AddScoped&lt;IHttpGetCallService&gt;(serviceProvider =>
+{
+    var httpClientFactory = serviceProvider
+        .GetRequiredService&lt;IHttpClientFactory&gt;();
+
+    // Base service: makes HTTP GET calls
+    IHttpGetCallService baseService =
+        new HttpGetCallService(logger, httpClientFactory);
+
+    // Telemetry decorator: tracks timing automatically
+    IHttpGetCallService telemetryService =
+        new HttpGetCallServiceTelemetry(telemetryLogger, baseService);
+
+    return telemetryService;
+});</code></pre>
+                    </div>
+                </div>
+
+                <h5 class="mt-4 mb-3">Used in the Weather Service</h5>
+                <p>
+                    The <a href="/openweather">Weather API</a> demo uses <code>IHttpClientFactory</code> through a <code>RestClientBase</code>
+                    class. The weather service is further decorated with logging and caching layers &mdash; a textbook example of the
+                    <strong>Decorator Pattern</strong> for async HTTP operations:
+                </p>
+                <div class="card bg-body-secondary mb-4">
+                    <div class="card-header">
+                        <i class="bi bi-file-earmark-code me-2"></i><strong>Program.cs</strong> &mdash; Weather Service Decorator Chain
+                    </div>
+                    <div class="card-body">
+<pre class="mb-0"><code>IOpenWeatherMapClient concreteService =
+    new WeatherServiceClient(apiKey, httpClientFactory, logger);
+
+// Wrap with logging
+IOpenWeatherMapClient withLogging =
+    new WeatherServiceLoggingDecorator(concreteService, loggerLogging);
+
+// Wrap with caching
+IOpenWeatherMapClient withCaching =
+    new WeatherServiceCachingDecorator(withLogging, memoryCache, loggerCaching);</code></pre>
+                    </div>
+                </div>
+
+                <div class="alert alert-success mt-4">
+                    <i class="bi bi-trophy-fill me-2"></i>
+                    <strong>Key Benefit:</strong> <code>IHttpClientFactory</code> manages HttpClient lifetimes correctly, preventing socket exhaustion &mdash;
+                    a common pitfall when creating <code>new HttpClient()</code> instances manually.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Code You Don't Have to Write -->
+<div class="row g-4 mb-5 justify-content-center">
+    <div class="col-lg-10">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h2 class="mb-4">
+                    <i class="bi bi-scissors me-2 text-danger"></i>Code You Don't Have to Write
+                </h2>
+                <p class="lead">
+                    Here's what WebSpark packages handle so you can focus on your application logic:
+                </p>
+
+                <div class="row g-4 mt-2">
+                    <div class="col-md-6">
+                        <h5 class="text-primary"><i class="bi bi-palette-fill me-2"></i>Without WebSpark.Bootswatch</h5>
+                        <ul>
+                            <li class="mb-2">Download and host 25+ Bootswatch CSS files</li>
+                            <li class="mb-2">Build a theme-switcher dropdown UI component</li>
+                            <li class="mb-2">Write JavaScript for real-time theme swapping</li>
+                            <li class="mb-2">Implement cookie management for user preferences</li>
+                            <li class="mb-2">Handle light/dark color mode toggling</li>
+                            <li class="mb-2">Cache stylesheets for performance</li>
+                            <li class="mb-2">Configure static file middleware for theme assets</li>
+                            <li class="mb-2">Keep themes updated when Bootswatch releases new versions</li>
+                        </ul>
+                        <div class="alert alert-warning">
+                            <i class="bi bi-clock-history me-2"></i>
+                            <strong>Estimated effort:</strong> 2&ndash;4 days of custom development, plus ongoing maintenance
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="text-secondary"><i class="bi bi-globe2 me-2"></i>Without WebSpark.HttpClientUtility</h5>
+                        <ul>
+                            <li class="mb-2">Configure <code>IHttpClientFactory</code> registration manually</li>
+                            <li class="mb-2">Build structured HTTP result objects with status tracking</li>
+                            <li class="mb-2">Implement elapsed-time telemetry for every call</li>
+                            <li class="mb-2">Handle JSON deserialization with proper error handling</li>
+                            <li class="mb-2">Write decorator infrastructure for logging/caching</li>
+                            <li class="mb-2">Manage HttpClient lifetimes to prevent socket exhaustion</li>
+                            <li class="mb-2">Build cancellation token plumbing into every service</li>
+                        </ul>
+                        <div class="alert alert-warning">
+                            <i class="bi bi-clock-history me-2"></i>
+                            <strong>Estimated effort:</strong> 1&ndash;2 days of boilerplate, plus risk of HttpClient misuse bugs
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- See It in Action -->
+<div class="row g-4 mb-5 justify-content-center">
+    <div class="col-lg-10">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h2 class="mb-4">
+                    <i class="bi bi-play-circle-fill me-2 text-success"></i>See It in Action
+                </h2>
+                <p class="lead mb-4">Experience these packages working together throughout AsyncSpark:</p>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="card bg-body-secondary h-100">
+                            <div class="card-body text-center p-4">
+                                <i class="bi bi-palette-fill fs-1 text-primary mb-3 d-block"></i>
+                                <h5>Theme Switcher</h5>
+                                <p class="small">Click the theme dropdown in the navbar to see WebSpark.Bootswatch swap themes instantly</p>
+                                <a href="/home/themedemo" class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-brush me-1"></i>Theme Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-body-secondary h-100">
+                            <div class="card-body text-center p-4">
+                                <i class="bi bi-collection fs-1 text-secondary mb-3 d-block"></i>
+                                <h5>Bulk API Calls</h5>
+                                <p class="small">Watch HttpClientUtility make concurrent API calls with telemetry tracking</p>
+                                <a href="/bulkcalls" class="btn btn-sm btn-outline-secondary">
+                                    <i class="bi bi-collection me-1"></i>Bulk Calls Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-body-secondary h-100">
+                            <div class="card-body text-center p-4">
+                                <i class="bi bi-cloud-sun fs-1 text-info mb-3 d-block"></i>
+                                <h5>Weather API</h5>
+                                <p class="small">See HttpClientFactory with decorator pattern for logging and caching</p>
+                                <a href="/openweather" class="btn btn-sm btn-outline-info">
+                                    <i class="bi bi-cloud-sun me-1"></i>Weather Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Get Started -->
+<div class="row g-4 mb-5 justify-content-center">
+    <div class="col-lg-10">
+        <div class="card p-4">
+            <h2 class="mb-4">
+                <i class="bi bi-rocket-takeoff-fill me-2"></i>Get Started with WebSpark Packages
+            </h2>
+            <p class="lead mb-4">Add these packages to your own ASP.NET Core project:</p>
+            <div class="card bg-body-secondary mb-4">
+                <div class="card-header">
+                    <i class="bi bi-terminal me-2"></i><strong>.NET CLI</strong>
+                </div>
+                <div class="card-body">
+<pre class="mb-0"><code>dotnet add package WebSpark.Bootswatch
+dotnet add package WebSpark.HttpClientUtility</code></pre>
+                </div>
+            </div>
+            <div class="card bg-body-secondary mb-4">
+                <div class="card-header">
+                    <i class="bi bi-file-earmark-code me-2"></i><strong>PackageReference (csproj)</strong>
+                </div>
+                <div class="card-body">
+<pre class="mb-0"><code>&lt;PackageReference Include="WebSpark.Bootswatch" Version="1.34.0" /&gt;
+&lt;PackageReference Include="WebSpark.HttpClientUtility" Version="2.2.0" /&gt;</code></pre>
+                </div>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <a href="https://www.nuget.org/packages/WebSpark.Bootswatch" class="btn btn-primary w-100" target="_blank" rel="noopener">
+                        <i class="bi bi-box-arrow-up-right me-1"></i>Bootswatch on NuGet
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="https://www.nuget.org/packages/WebSpark.HttpClientUtility" class="btn btn-secondary w-100" target="_blank" rel="noopener">
+                        <i class="bi bi-box-arrow-up-right me-1"></i>HttpClientUtility on NuGet
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="https://github.com/markhazleton/WebSpark" class="btn btn-outline-dark w-100" target="_blank" rel="noopener">
+                        <i class="bi bi-github me-1"></i>WebSpark on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

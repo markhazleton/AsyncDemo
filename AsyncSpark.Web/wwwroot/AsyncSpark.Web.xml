@@ -570,6 +570,12 @@
             </summary>
             <returns>View with structured learning modules and paths</returns>
         </member>
+        <member name="M:AsyncSpark.Web.Controllers.HomeController.WebSpark">
+            <summary>
+            WebSpark NuGet Packages - Information and promotion page
+            </summary>
+            <returns>View showcasing WebSpark.Bootswatch and WebSpark.HttpClientUtility</returns>
+        </member>
         <member name="T:AsyncSpark.Web.Controllers.OpenWeatherController">
             <summary>
             OpenWeather Controller for weather data management

@@ -64,5 +64,14 @@ public class HomeController : Controller
     {
       return View();
     }
+
+    /// <summary>
+    /// WebSpark NuGet Packages - Information and promotion page
+    /// </summary>
+    /// <returns>View showcasing WebSpark.Bootswatch and WebSpark.HttpClientUtility</returns>
+    public IActionResult WebSpark()
+    {
+      return View();
+    }
 }
 
