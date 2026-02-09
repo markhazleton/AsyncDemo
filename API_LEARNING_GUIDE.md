@@ -1,6 +1,6 @@
-# AsyncDemo API Learning Guide
+# AsyncSpark API Learning Guide
 
-This guide helps you navigate the AsyncDemo API documentation to learn async/await patterns systematically.
+This guide helps you navigate the AsyncSpark API documentation to learn async/await patterns systematically.
 
 ## 📚 API Organization by Learning Concept
 
@@ -168,12 +168,12 @@ public async Task RetryPolicy_SucceedsAfterTransientFailures()
 ## 📖 Additional Resources
 
 ### Code References
-- **Avoiding Deadlocks**: [AsyncMockService.cs:96](AsyncDemo/Services/AsyncMockService.cs#L96)
-- **Cancellation Tokens**: [RemoteController.cs:58-78](AsyncDemo.Web/Controllers/Api/RemoteController.cs#L58-L78)
-- **Task.WhenAll**: [BulkCallsController.cs:62](AsyncDemo.Web/Controllers/BulkCallsController.cs#L62)
-- **Polly Retries**: [PollyController.cs:32-53](AsyncDemo.Web/Controllers/PollyController.cs#L32-L53)
-- **Semaphore Throttling**: [BulkCallsController.cs:28-58](AsyncDemo.Web/Controllers/BulkCallsController.cs#L28-L58)
-- **Decorator Pattern**: [Program.cs:68-82](AsyncDemo.Web/Program.cs#L68-L82)
+- **Avoiding Deadlocks**: [AsyncMockService.cs:96](AsyncSpark/Services/AsyncMockService.cs#L96)
+- **Cancellation Tokens**: [RemoteController.cs:58-78](AsyncSpark.Web/Controllers/Api/RemoteController.cs#L58-L78)
+- **Task.WhenAll**: [BulkCallsController.cs:62](AsyncSpark.Web/Controllers/BulkCallsController.cs#L62)
+- **Polly Retries**: [PollyController.cs:32-53](AsyncSpark.Web/Controllers/PollyController.cs#L32-L53)
+- **Semaphore Throttling**: [BulkCallsController.cs:28-58](AsyncSpark.Web/Controllers/BulkCallsController.cs#L28-L58)
+- **Decorator Pattern**: [Program.cs:68-82](AsyncSpark.Web/Program.cs#L68-L82)
 
 ### Articles
 See the [main README](README.md#articles--resources) for curated articles on:
@@ -189,7 +189,7 @@ See the [main README](README.md#articles--resources) for curated articles on:
 
 1. **Run the application:**
    ```bash
-   dotnet run --project AsyncDemo.Web
+   dotnet run --project AsyncSpark.Web
    ```
 
 2. **Open Scalar documentation:**

@@ -1,7 +1,7 @@
-# AsyncDemo
+# AsyncSpark
 Various demos, tips and tricks for using async in C#
 
-[![Build and deploy ASP.Net Core app to Azure Web App - asyncdemo](https://github.com/markhazleton/AsyncDemo/actions/workflows/main_asyncdemo.yml/badge.svg)](https://github.com/markhazleton/AsyncDemo/actions/workflows/main_asyncdemo.yml)
+[![Build and deploy ASP.Net Core app to Azure Web App - AsyncSpark](https://github.com/markhazleton/AsyncSpark/actions/workflows/main_AsyncSpark.yml/badge.svg)](https://github.com/markhazleton/AsyncSpark/actions/workflows/main_AsyncSpark.yml)
 
 Sample code for making and canceling Async Calls with beautiful API documentation powered by **[Scalar](https://github.com/scalar/scalar)**.
 
@@ -10,32 +10,32 @@ Sample code for making and canceling Async Calls with beautiful API documentatio
 This demo teaches critical async/await patterns through focused, real-world examples. Each concept links directly to specific code you can explore:
 
 ### 1. Avoiding Deadlocks
-**Where to look**: [AsyncMockService.cs:96](AsyncDemo/Services/AsyncMockService.cs#L96) - Notice the `.ConfigureAwait(false)` usage
+**Where to look**: [AsyncMockService.cs:96](AsyncSpark/Services/AsyncMockService.cs#L96) - Notice the `.ConfigureAwait(false)` usage
 **What to learn**: How to prevent deadlocks in library code by not capturing the synchronization context
 **What can go wrong**: Omitting `ConfigureAwait(false)` in library code can cause deadlocks when called from UI threads. Never use `.Result` or `.Wait()` - always use `await`.
 
 ### 2. Cancellation Tokens End-to-End
-**Where to look**: [RemoteController.cs:58-78](AsyncDemo.Web/Controllers/Api/RemoteController.cs#L58-L78) and [AsyncMockService.cs:80-109](AsyncDemo/Services/AsyncMockService.cs#L80-L109)
+**Where to look**: [RemoteController.cs:58-78](AsyncSpark.Web/Controllers/Api/RemoteController.cs#L58-L78) and [AsyncMockService.cs:80-109](AsyncSpark/Services/AsyncMockService.cs#L80-L109)
 **What to learn**: How to pass cancellation tokens from HTTP requests through the entire call chain
 **What can go wrong**: Ignoring cancellation means wasting resources on work that nobody needs anymore. Always wire `CancellationToken` through your async methods.
 
 ### 3. Task.WhenAll for Concurrency
-**Where to look**: [BulkCallsController.cs:62](AsyncDemo.Web/Controllers/BulkCallsController.cs#L62)
+**Where to look**: [BulkCallsController.cs:62](AsyncSpark.Web/Controllers/BulkCallsController.cs#L62)
 **What to learn**: How to execute multiple async operations concurrently and wait for all to complete
 **What can go wrong**: Using a `foreach` loop with `await` inside runs operations sequentially. Use `Task.WhenAll` to run them in parallel.
 
 ### 4. Timeouts with Polly
-**Where to look**: [PollyController.cs:32-53](AsyncDemo.Web/Controllers/PollyController.cs#L32-L53)
+**Where to look**: [PollyController.cs:32-53](AsyncSpark.Web/Controllers/PollyController.cs#L32-L53)
 **What to learn**: How to implement retry policies with exponential backoff and jitter
 **What can go wrong**: Without timeouts and retries, transient failures become permanent failures. Always protect external calls.
 
 ### 5. Semaphore for Throttling
-**Where to look**: [BulkCallsController.cs:28-58](AsyncDemo.Web/Controllers/BulkCallsController.cs#L28-L58)
+**Where to look**: [BulkCallsController.cs:28-58](AsyncSpark.Web/Controllers/BulkCallsController.cs#L28-L58)
 **What to learn**: How to limit concurrent operations using `SemaphoreSlim`
 **What can go wrong**: Unbounded concurrency can overwhelm downstream services or exhaust connection pools.
 
 ### 6. Decorator Pattern for Cross-Cutting Concerns
-**Where to look**: [Program.cs:68-82](AsyncDemo.Web/Program.cs#L68-L82)
+**Where to look**: [Program.cs:68-82](AsyncSpark.Web/Program.cs#L68-L82)
 **What to learn**: How to compose behavior (logging, caching) around async operations cleanly
 **What can go wrong**: Mixing cross-cutting concerns into business logic creates unmaintainable code.
 
@@ -54,7 +54,7 @@ This project features stunning API documentation powered by **Scalar**, organize
 
 - **Interactive API Docs**: Visit `/scalar/v1` for the beautiful Scalar UI
 - **OpenAPI Specification**: Access `/openapi/v1.json` for the spec
-- **Live Demo**: [https://asyncdemo.azurewebsites.net/scalar/v1](https://asyncdemo.azurewebsites.net/scalar/v1)
+- **Live Demo**: [https://AsyncSpark.azurewebsites.net/scalar/v1](https://AsyncSpark.azurewebsites.net/scalar/v1)
 - **Learning Guide**: See [API_LEARNING_GUIDE.md](API_LEARNING_GUIDE.md) for a structured learning path
 
 ### API Endpoints by Learning Concept
@@ -86,7 +86,7 @@ Scalar provides:
 - [Going Async with Async Command](https://johnthiriet.com/mvvm-going-async-with-async-command/)
 
 ## Hosting
-Live demo hosted at [https://asyncdemo.azurewebsites.net/](https://asyncdemo.azurewebsites.net/)
+Live demo hosted at [https://AsyncSpark.azurewebsites.net/](https://AsyncSpark.azurewebsites.net/)
 ## Additional Resources
 
 ### Async & Await Best Practices
@@ -111,8 +111,8 @@ Live demo hosted at [https://asyncdemo.azurewebsites.net/](https://asyncdemo.azu
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/markhazleton/AsyncDemo.git
-   cd AsyncDemo
+   git clone https://github.com/markhazleton/AsyncSpark.git
+   cd AsyncSpark
    ```
 
 2. **Build the solution**
@@ -122,7 +122,7 @@ Live demo hosted at [https://asyncdemo.azurewebsites.net/](https://asyncdemo.azu
 
 3. **Run the web application**
    ```bash
-   dotnet run --project AsyncDemo.Web
+   dotnet run --project AsyncSpark.Web
    ```
 
 4. **Explore the API documentation**

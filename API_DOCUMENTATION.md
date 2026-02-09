@@ -1,6 +1,6 @@
 # ?? API Documentation with Scalar
 
-AsyncDemo.Web features beautiful, modern API documentation powered by **[Scalar](https://github.com/scalar/scalar)**.
+AsyncSpark.Web features beautiful, modern API documentation powered by **[Scalar](https://github.com/scalar/scalar)**.
 
 ## ?? Quick Start
 
@@ -17,7 +17,7 @@ https://localhost:{port}/openapi/v1.json
 ```
 
 ### Live Demo
-Visit the live demo at: [https://asyncdemo.azurewebsites.net/scalar/v1](https://asyncdemo.azurewebsites.net/scalar/v1)
+Visit the live demo at: [https://AsyncSpark.azurewebsites.net/scalar/v1](https://AsyncSpark.azurewebsites.net/scalar/v1)
 
 ## ? Features
 
@@ -54,7 +54,7 @@ Scalar automatically generates code examples in multiple languages:
 
 ## ?? Customization
 
-The API documentation can be customized in `AsyncDemo.Web\Extensions\CustomScalarExtensions.cs`:
+The API documentation can be customized in `AsyncSpark.Web\Extensions\CustomScalarExtensions.cs`:
 
 ### Change Theme
 ```csharp

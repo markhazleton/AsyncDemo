@@ -29,8 +29,8 @@ This document summarizes ALL fixes applied to resolve the Polly demo Unsupported
 **Problem**: The API endpoint wasn't explicitly configured to accept JSON
 
 **Files Modified**:
-1. `AsyncDemo.Web/Controllers/Api/BaseApiController.cs`
-2. `AsyncDemo.Web/Controllers/Api/RemoteController.cs`
+1. `AsyncSpark.Web/Controllers/Api/BaseApiController.cs`
+2. `AsyncSpark.Web/Controllers/Api/RemoteController.cs`
 
 **Changes**:
 - Added `[Consumes("application/json")]` attribute
@@ -41,8 +41,8 @@ This document summarizes ALL fixes applied to resolve the Polly demo Unsupported
 **Problem**: PollyController wasn't properly setting Content-Type header
 
 **Files Modified**:
-1. `AsyncDemo.Web/Controllers/PollyController.cs`
-2. `AsyncDemo.Web/GlobalUsings.cs`
+1. `AsyncSpark.Web/Controllers/PollyController.cs`
+2. `AsyncSpark.Web/GlobalUsings.cs`
 
 **Changes**:
 - Changed from `PostAsJsonAsync` to explicit `StringContent` with JSON
@@ -53,7 +53,7 @@ This document summarizes ALL fixes applied to resolve the Polly demo Unsupported
 **Problem**: npm build failing due to missing Bootstrap Icons
 
 **Files Modified**:
-1. `AsyncDemo.Web/build.js`
+1. `AsyncSpark.Web/build.js`
 
 **Changes**:
 - Removed Bootstrap Icons font copying (loaded from CDN)
@@ -203,12 +203,12 @@ Press: Shift + F5 in Visual Studio
 
 ### 2. Clean the Solution
 ```bash
-dotnet clean AsyncDemo.Web
+dotnet clean AsyncSpark.Web
 ```
 
 ### 3. Rebuild the Solution
 ```bash
-dotnet build AsyncDemo.Web
+dotnet build AsyncSpark.Web
 ```
 
 ### 4. Start Debugging
@@ -365,20 +365,20 @@ Only copy files that are truly needed locally. Use CDNs for:
 
 1. **Check Build Output**:
    ```bash
-   dotnet build AsyncDemo.Web --verbosity detailed
+   dotnet build AsyncSpark.Web --verbosity detailed
    ```
    Look for: "Build succeeded"
 
 2. **Verify DLL Timestamp**:
    Check file modification time of:
    ```
-   AsyncDemo.Web/bin/Debug/net10.0/AsyncDemo.Web.dll
+   AsyncSpark.Web/bin/Debug/net10.0/AsyncSpark.Web.dll
    ```
    Should be recent (after your rebuild)
 
 3. **Check Running Processes**:
    ```powershell
-   Get-Process | Where-Object {$_.ProcessName -like "*AsyncDemo*"}
+   Get-Process | Where-Object {$_.ProcessName -like "*AsyncSpark*"}
    ```
    Kill any orphaned processes
 

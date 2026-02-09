@@ -21,7 +21,7 @@ This approach uses .NET's built-in OpenAPI support (introduced in .NET 9) combin
 - Faster startup
 - Less complexity
 
-## Setup for AsyncDemo.Web
+## Setup for AsyncSpark.Web
 
 ### Step 1: Update Package References
 
@@ -40,7 +40,7 @@ This approach uses .NET's built-in OpenAPI support (introduced in .NET 9) combin
 Replace with this simplified version:
 
 ```csharp
-namespace AsyncDemo.Web.Extensions;
+namespace AsyncSpark.Web.Extensions;
 
 /// <summary>
 /// Custom OpenAPI configuration using built-in .NET OpenAPI + Scalar UI
@@ -56,9 +56,9 @@ public static class CustomSwaggerExtensions
         {
             options.AddDocumentTransformer((document, context, cancellationToken) =>
             {
-                document.Info.Title = "AsyncDemo.Web API";
+                document.Info.Title = "AsyncSpark.Web API";
                 document.Info.Version = "v1";
-                document.Info.Description = "AsyncDemo.Web API built with ASP.NET to show how to create RESTful services using a decoupled, maintainable architecture.";
+                document.Info.Description = "AsyncSpark.Web API built with ASP.NET to show how to create RESTful services using a decoupled, maintainable architecture.";
                 
                 document.Info.Contact = new()
                 {
@@ -90,7 +90,7 @@ public static class CustomSwaggerExtensions
         // Serves the beautiful Scalar UI at /scalar/v1
         app.MapScalarApiReference(options =>
         {
-            options.Title = "AsyncDemo.Web API";
+            options.Title = "AsyncSpark.Web API";
             options.Theme = ScalarTheme.Default;
             options.DefaultHttpClient = new(ScalarTarget.CSharp, ScalarClient.HttpClient);
             options.ShowSidebar = true;
@@ -163,7 +163,7 @@ To include XML documentation comments:
 ```csharp
 services.AddOpenApi(options =>
 {
-    var xmlFile = "AsyncDemo.Web.xml";
+    var xmlFile = "AsyncSpark.Web.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, "wwwroot", xmlFile);
     if (!File.Exists(xmlPath))
     {
@@ -178,7 +178,7 @@ services.AddOpenApi(options =>
 Your project already has this configured:
 ```xml
 <GenerateDocumentationFile>True</GenerateDocumentationFile>
-<DocumentationFile>wwwroot\AsyncDemo.Web.xml</DocumentationFile>
+<DocumentationFile>wwwroot\AsyncSpark.Web.xml</DocumentationFile>
 ```
 
 ## Advanced Configuration

@@ -1,0 +1,231 @@
+﻿@model AsyncSpark.Models.MockResults
+@{
+    ViewData["Title"] = "Polly Resilience Patterns";
+    var bgColorClass = Model?.ResultValue == "-1" ? "bg-danger" : "bg-success";
+}
+
+<div class="row justify-content-center mb-5">
+    <div class="col-lg-10">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold mb-3 text-primary">
+                <i class="bi bi-shield-shaded me-2"></i>Polly Resilience Demo
+            </h1>
+            <p class="lead">
+                Test timeout policies and resilience patterns with Polly
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 justify-content-center">
+    <div class="col-lg-10">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="@bgColorClass text-white rounded p-4 mb-4 shadow-sm">
+                            <h3 class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-clipboard-data me-2"></i>
+                                Results
+                            </h3>
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="d-flex flex-column">
+                                        <span class="fs-6 text-white-50">Loop Count</span>
+                                        <span class="fs-4">@Model?.LoopCount</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex flex-column">
+                                        <span class="fs-6 text-white-50">Max Time (ms)</span>
+                                        <span class="fs-4">@Model?.MaxTimeMS</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex flex-column">
+                                        <span class="fs-6 text-white-50">Result</span>
+                                        <span class="fs-4">@Model?.ResultValue</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex flex-column">
+                                        <span class="fs-6 text-white-50">RunTime (ms)</span>
+                                        <span class="fs-4">@Model?.RunTimeMS</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <span class="fs-6 text-white-50">Message</span>
+                                <div class="p-2 bg-white bg-opacity-10 rounded mt-1">
+                                    @Html.Raw(Model?.Message)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-body-tertiary p-4 rounded shadow-sm">
+                            <h4 class="mb-3 d-flex align-items-center">
+                                <i class="bi bi-lightning-charge me-2 text-primary"></i>
+                                Quick Tests
+                            </h4>
+                            <div class="d-flex flex-column gap-2">
+                                <a class="btn btn-primary d-flex align-items-center justify-content-between"
+                                    href="/polly?loopCount=40&maxTimeMs=1500">
+                                    <span>40 Loops, max 1.5 seconds</span>
+                                    <i class="bi bi-arrow-right-circle"></i>
+                                </a>
+                                <a class="btn btn-primary d-flex align-items-center justify-content-between"
+                                    href="/polly?loopCount=40&maxTimeMs=1000">
+                                    <span>40 Loops, max 1 second</span>
+                                    <i class="bi bi-arrow-right-circle"></i>
+                                </a>
+                                <a class="btn btn-primary d-flex align-items-center justify-content-between"
+                                    href="/polly?loopCount=40&maxTimeMs=500">
+                                    <span>40 Loops, max 0.5 second</span>
+                                    <i class="bi bi-arrow-right-circle"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <form action="/polly" method="get">
+                            <div class="mb-3">
+                                <h3 class="mb-0 d-flex align-items-center">
+                                    <i class="bi bi-sliders me-2 text-primary"></i>
+                                    <span>Customize Timeout Test</span>
+                                </h3>
+                                <p class="text-muted mt-2">
+                                    Configure the number of loops and maximum response time to test Polly's timeout policy
+                                </p>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="loopCount" class="form-label fw-bold">Number of Loops</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-repeat"></i>
+                                    </span>
+                                    <select id="loopCount" name="loopCount" class="form-select">
+                                        @for (int i = 10; i <= 100; i += 10)
+                                        {
+                                            if (Model?.LoopCount == i)
+                                            {
+                                                <option value="@i" selected>@i loops</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@i">@i loops</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-text">More loops increase processing time</div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="maxTimeMs" class="form-label fw-bold">Maximum Response Time</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-alarm"></i>
+                                    </span>
+                                    <select id="maxTimeMs" name="maxTimeMs" class="form-select">
+                                        @foreach (var time in new[] { 100, 200, 500, 750, 1000, 1500, 3000, 5000 })
+                                        {
+                                            if (Model?.MaxTimeMS == time)
+                                            {
+                                                <option value="@time" selected>@time milliseconds</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@time">@time milliseconds</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-text">Polly will timeout if processing exceeds this time</div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="bi bi-play-circle me-2"></i>Run Test
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mt-5 justify-content-center">
+    <div class="col-lg-10">
+        <div class="card shadow-sm">
+            <div class="card-header bg-transparent">
+                <h3 class="mb-0 d-flex align-items-center">
+                    <i class="bi bi-info-circle me-2 text-primary"></i>
+                    <span>About Polly</span>
+                </h3>
+            </div>
+            <div class="card-body">
+                <p>
+                    Polly is a .NET resilience and transient-fault-handling library that allows developers to express
+                    policies such as Retry, Circuit Breaker, Timeout, Bulkhead Isolation, and Fallback in a fluent and thread-safe
+                    manner.
+                </p>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="d-flex mb-3">
+                            <div class="me-3">
+                                <i class="bi bi-clock-history fs-2 text-primary"></i>
+                            </div>
+                            <div>
+                                <h5>Timeout Policy</h5>
+                                <p>Cancel operations if they take longer than the specified time.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex mb-3">
+                            <div class="me-3">
+                                <i class="bi bi-arrow-repeat fs-2 text-primary"></i>
+                            </div>
+                            <div>
+                                <h5>Retry Policy</h5>
+                                <p>Automatically retry failed operations with customizable attempts.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex mb-3">
+                            <div class="me-3">
+                                <i class="bi bi-toggle-on fs-2 text-primary"></i>
+                            </div>
+                            <div>
+                                <h5>Circuit Breaker</h5>
+                                <p>Prevent cascading failures by breaking the circuit after failures.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex mb-3">
+                            <div class="me-3">
+                                <i class="bi bi-box-arrow-in-down-right fs-2 text-primary"></i>
+                            </div>
+                            <div>
+                                <h5>Fallback</h5>
+                                <p>Provide alternative values when operations fail.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="https://github.com/App-vNext/Polly" target="_blank" class="btn btn-primary">
+                        <i class="bi bi-github me-2"></i>Learn More on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

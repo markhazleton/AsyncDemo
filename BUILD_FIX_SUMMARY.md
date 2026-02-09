@@ -1,7 +1,7 @@
 # Build Fix Summary
 
 **Date**: January 2025  
-**Project**: AsyncDemo.Web (.NET 10)  
+**Project**: AsyncSpark.Web (.NET 10)  
 **Issue**: npm build failing due to missing Bootstrap Icons font files  
 **Status**: ? RESOLVED
 
@@ -11,7 +11,7 @@ The `npm run build` command was failing with:
 
 ```
 Error: ENOENT: no such file or directory, scandir 
-'C:\GitHub\MarkHazleton\AsyncDemo\AsyncDemo.Web\node_modules\bootstrap-icons\font\fonts'
+'C:\GitHub\MarkHazleton\AsyncSpark\AsyncSpark.Web\node_modules\bootstrap-icons\font\fonts'
 ```
 
 ## Root Cause
@@ -27,7 +27,7 @@ The `build.js` script was trying to copy Bootstrap Icons font files from `node_m
 
 ## The Fix
 
-### File: `AsyncDemo.Web/build.js`
+### File: `AsyncSpark.Web/build.js`
 
 **Before (BROKEN)**:
 ```javascript
@@ -72,7 +72,7 @@ The entire Bootstrap Icons font copying section because:
 ## Build Output (Success)
 
 ```
-> asyncdemo.web@1.0.0 build
+> AsyncSpark.web@1.0.0 build
 > node build.js
 
 Bundling JavaScript and CSS files...
@@ -199,10 +199,10 @@ npm run build
 
 ## Related Files
 
-- ? `AsyncDemo.Web/build.js` - Fixed (removed Bootstrap Icons copying)
-- ? `AsyncDemo.Web/package.json` - Correct (no bootstrap-icons dependency)
-- ? `AsyncDemo.Web/Views/Shared/_Layout.cshtml` - Correct (CDN link)
-- ? `AsyncDemo.Web/webpack.config.js` - No changes needed
+- ? `AsyncSpark.Web/build.js` - Fixed (removed Bootstrap Icons copying)
+- ? `AsyncSpark.Web/package.json` - Correct (no bootstrap-icons dependency)
+- ? `AsyncSpark.Web/Views/Shared/_Layout.cshtml` - Correct (CDN link)
+- ? `AsyncSpark.Web/webpack.config.js` - No changes needed
 
 ## Prevention
 

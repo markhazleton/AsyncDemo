@@ -2,7 +2,7 @@
 
 ## Overview
 
-This scenario upgrades the AsyncDemo solution (6 projects) from .NET 9 to .NET 10, updating project files and NuGet packages, addressing breaking changes, and validating with builds and tests. Tasks are organized for automatable execution, referencing plan sections for details.
+This scenario upgrades the AsyncSpark solution (6 projects) from .NET 9 to .NET 10, updating project files and NuGet packages, addressing breaking changes, and validating with builds and tests. Tasks are organized for automatable execution, referencing plan sections for details.
 
 **Progress**: 5/5 tasks complete (100%) ![100%](https://progress-bar.xyz/100)
 
@@ -32,7 +32,7 @@ This scenario upgrades the AsyncDemo solution (6 projects) from .NET 9 to .NET 1
 **References**: Plan §Phase 4, Plan §Phase 5
 
 - [✓] (1) Build each project incrementally per Plan §Phase 4 - COMPLETED
-- [✓] (2) Run test suite in AsyncDemo.Tests project - COMPLETED (11 tests passed)
+- [✓] (2) Run test suite in AsyncSpark.Tests project - COMPLETED (11 tests passed)
 - [✓] (3) Address any breaking changes identified during build/test - COMPLETED (No breaking changes found)
 - [✓] (4) Solution builds with 0 errors and all tests pass - VERIFIED
 

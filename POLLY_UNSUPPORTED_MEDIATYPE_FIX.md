@@ -2,7 +2,7 @@
 
 **Date**: January 2025  
 **Issue**: Polly demo returning HTTP 415 (UnsupportedMediaType) errors  
-**Project**: AsyncDemo.Web (.NET 10)  
+**Project**: AsyncSpark.Web (.NET 10)  
 **Status**: ? RESOLVED
 
 ## Problem Summary
@@ -38,7 +38,7 @@ The `PollyController` was using `HttpClientJsonExtensions.PostAsJsonAsync()` whi
 
 ### Part 1: Update API Endpoint to Accept JSON
 
-**File**: `AsyncDemo.Web/Controllers/Api/BaseApiController.cs`
+**File**: `AsyncSpark.Web/Controllers/Api/BaseApiController.cs`
 
 Added `[Consumes("application/json")]` to the base controller:
 
@@ -49,7 +49,7 @@ Added `[Consumes("application/json")]` to the base controller:
 public abstract class BaseApiController : Controller
 ```
 
-**File**: `AsyncDemo.Web/Controllers/Api/RemoteController.cs`
+**File**: `AsyncSpark.Web/Controllers/Api/RemoteController.cs`
 
 Added `[Consumes]` and `[FromBody]` attributes:
 
@@ -62,7 +62,7 @@ public async Task<IActionResult> GetResults([FromBody] MockResults model)  // ? 
 
 ### Part 2: Fix HTTP Client POST Request
 
-**File**: `AsyncDemo.Web/Controllers/PollyController.cs`
+**File**: `AsyncSpark.Web/Controllers/PollyController.cs`
 
 **Before (BROKEN)**:
 ```csharp
@@ -80,7 +80,7 @@ response = await _httpIndexPolicy.ExecuteAsync(async ctx =>
 }, context);
 ```
 
-**File**: `AsyncDemo.Web/GlobalUsings.cs`
+**File**: `AsyncSpark.Web/GlobalUsings.cs`
 
 Added required namespaces:
 
@@ -132,10 +132,10 @@ Message: Task Complete (or "Time Out Occurred")
 
 ## Related Files Modified
 
-1. `AsyncDemo.Web/Controllers/Api/BaseApiController.cs` - Added `[Consumes]` attribute
-2. `AsyncDemo.Web/Controllers/Api/RemoteController.cs` - Added `[Consumes]` and `[FromBody]`
-3. `AsyncDemo.Web/Controllers/PollyController.cs` - Fixed POST request to explicitly set Content-Type
-4. `AsyncDemo.Web/GlobalUsings.cs` - Added `System.Text` and `System.Text.Json` namespaces
+1. `AsyncSpark.Web/Controllers/Api/BaseApiController.cs` - Added `[Consumes]` attribute
+2. `AsyncSpark.Web/Controllers/Api/RemoteController.cs` - Added `[Consumes]` and `[FromBody]`
+3. `AsyncSpark.Web/Controllers/PollyController.cs` - Fixed POST request to explicitly set Content-Type
+4. `AsyncSpark.Web/GlobalUsings.cs` - Added `System.Text` and `System.Text.Json` namespaces
 
 ## Key Lessons Learned
 

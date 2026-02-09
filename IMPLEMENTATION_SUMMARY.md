@@ -1,8 +1,8 @@
-# AsyncDemo Implementation Summary
+# AsyncSpark Implementation Summary
 
 ## Overview
 
-This document summarizes the comprehensive improvements made to transform AsyncDemo from a feature showcase into a structured educational platform for learning async/await patterns in C#.
+This document summarizes the comprehensive improvements made to transform AsyncSpark from a feature showcase into a structured educational platform for learning async/await patterns in C#.
 
 ## Objectives Achieved
 
@@ -49,12 +49,12 @@ The implementation serves **both audiences** effectively:
 
 | Concept | Code Reference | What Can Go Wrong |
 |---------|---------------|-------------------|
-| Avoiding Deadlocks | [AsyncMockService.cs:96](AsyncDemo/Services/AsyncMockService.cs#L96) | Omitting `ConfigureAwait(false)` causes deadlocks |
-| Cancellation Tokens | [RemoteController.cs:58-78](AsyncDemo.Web/Controllers/Api/RemoteController.cs#L58-L78) | Ignoring cancellation wastes resources |
-| Task.WhenAll | [BulkCallsController.cs:62](AsyncDemo.Web/Controllers/BulkCallsController.cs#L62) | `foreach` with `await` runs sequentially (slow) |
-| Polly Timeouts | [PollyController.cs:32-53](AsyncDemo.Web/Controllers/PollyController.cs#L32-L53) | No retries = transient failures become permanent |
-| Semaphore Throttling | [BulkCallsController.cs:28-58](AsyncDemo.Web/Controllers/BulkCallsController.cs#L28-L58) | Unbounded concurrency exhausts resources |
-| Decorator Pattern | [Program.cs:68-82](AsyncDemo.Web/Program.cs#L68-L82) | Mixing concerns creates unmaintainable code |
+| Avoiding Deadlocks | [AsyncMockService.cs:96](AsyncSpark/Services/AsyncMockService.cs#L96) | Omitting `ConfigureAwait(false)` causes deadlocks |
+| Cancellation Tokens | [RemoteController.cs:58-78](AsyncSpark.Web/Controllers/Api/RemoteController.cs#L58-L78) | Ignoring cancellation wastes resources |
+| Task.WhenAll | [BulkCallsController.cs:62](AsyncSpark.Web/Controllers/BulkCallsController.cs#L62) | `foreach` with `await` runs sequentially (slow) |
+| Polly Timeouts | [PollyController.cs:32-53](AsyncSpark.Web/Controllers/PollyController.cs#L32-L53) | No retries = transient failures become permanent |
+| Semaphore Throttling | [BulkCallsController.cs:28-58](AsyncSpark.Web/Controllers/BulkCallsController.cs#L28-L58) | Unbounded concurrency exhausts resources |
+| Decorator Pattern | [Program.cs:68-82](AsyncSpark.Web/Program.cs#L68-L82) | Mixing concerns creates unmaintainable code |
 
 Each concept includes:
 - ✅ Direct link to implementation code
@@ -82,7 +82,7 @@ Each concept includes:
 Three new controllers demonstrate focused async patterns:
 
 ##### WeatherPatternsController.cs
-**Location**: [AsyncDemo.Web/Controllers/Api/WeatherPatternsController.cs](AsyncDemo.Web/Controllers/Api/WeatherPatternsController.cs)
+**Location**: [AsyncSpark.Web/Controllers/Api/WeatherPatternsController.cs](AsyncSpark.Web/Controllers/Api/WeatherPatternsController.cs)
 **Tag**: "1. Async Basics"
 
 | Endpoint | Pattern Demonstrated | Key Teaching |
@@ -95,7 +95,7 @@ Three new controllers demonstrate focused async patterns:
 **Real-world scenario**: Weather API calls with timeout, cancellation, retry, and parallel execution
 
 ##### CancellationPatternsController.cs
-**Location**: [AsyncDemo.Web/Controllers/Api/CancellationPatternsController.cs](AsyncDemo.Web/Controllers/Api/CancellationPatternsController.cs)
+**Location**: [AsyncSpark.Web/Controllers/Api/CancellationPatternsController.cs](AsyncSpark.Web/Controllers/Api/CancellationPatternsController.cs)
 **Tag**: "2. Cancellation Patterns"
 
 | Endpoint | Pattern Demonstrated | Key Teaching |
@@ -108,7 +108,7 @@ Three new controllers demonstrate focused async patterns:
 **Real-world scenario**: Long-running operations with proper cancellation handling
 
 ##### ConcurrencyPatternsController.cs
-**Location**: [AsyncDemo.Web/Controllers/Api/ConcurrencyPatternsController.cs](AsyncDemo.Web/Controllers/Api/ConcurrencyPatternsController.cs)
+**Location**: [AsyncSpark.Web/Controllers/Api/ConcurrencyPatternsController.cs](AsyncSpark.Web/Controllers/Api/ConcurrencyPatternsController.cs)
 **Tag**: "3. Concurrency & Parallelism"
 
 | Endpoint | Pattern Demonstrated | Performance Impact |
@@ -123,7 +123,7 @@ Three new controllers demonstrate focused async patterns:
 #### Test Suites Created
 
 ##### CancellationPatternsControllerTests.cs
-**Location**: [AsyncDemo.Tests/Controllers/CancellationPatternsControllerTests.cs](AsyncDemo.Tests/Controllers/CancellationPatternsControllerTests.cs)
+**Location**: [AsyncSpark.Tests/Controllers/CancellationPatternsControllerTests.cs](AsyncSpark.Tests/Controllers/CancellationPatternsControllerTests.cs)
 
 Tests demonstrate:
 - ✅ Operations without cancellation continue running
@@ -132,7 +132,7 @@ Tests demonstrate:
 - ✅ Cleanup execution despite cancellation
 
 ##### ConcurrencyPatternsControllerTests.cs
-**Location**: [AsyncDemo.Tests/Controllers/ConcurrencyPatternsControllerTests.cs](AsyncDemo.Tests/Controllers/ConcurrencyPatternsControllerTests.cs)
+**Location**: [AsyncSpark.Tests/Controllers/ConcurrencyPatternsControllerTests.cs](AsyncSpark.Tests/Controllers/ConcurrencyPatternsControllerTests.cs)
 
 Tests demonstrate:
 - ✅ Parallel is significantly faster than sequential
@@ -141,7 +141,7 @@ Tests demonstrate:
 - ✅ Performance comparisons with actual timing
 
 ##### PollyResilienceTests.cs
-**Location**: [AsyncDemo.Tests/Resilience/PollyResilienceTests.cs](AsyncDemo.Tests/Resilience/PollyResilienceTests.cs)
+**Location**: [AsyncSpark.Tests/Resilience/PollyResilienceTests.cs](AsyncSpark.Tests/Resilience/PollyResilienceTests.cs)
 
 Tests demonstrate:
 - ✅ Retry succeeds after transient failures (fail 2x, succeed on 3rd)
@@ -192,7 +192,7 @@ Every endpoint now includes extensive `<remarks>` sections with:
 /// </remarks>
 ```
 
-**Example**: [WeatherPatternsController.cs:42-73](AsyncDemo.Web/Controllers/Api/WeatherPatternsController.cs#L42-L73)
+**Example**: [WeatherPatternsController.cs:42-73](AsyncSpark.Web/Controllers/Api/WeatherPatternsController.cs#L42-L73)
 
 #### Updated Existing Controllers
 
@@ -210,7 +210,7 @@ Every endpoint now includes extensive `<remarks>` sections with:
 ### 🌐 Web Experience Enhancements
 
 #### New Learning Page
-**Location**: [AsyncDemo.Web/Views/Home/Learn.cshtml](AsyncDemo.Web/Views/Home/Learn.cshtml)
+**Location**: [AsyncSpark.Web/Views/Home/Learn.cshtml](AsyncSpark.Web/Views/Home/Learn.cshtml)
 **Route**: `/home/learn`
 
 **Features**:
@@ -236,7 +236,7 @@ Every endpoint now includes extensive `<remarks>` sections with:
 6. Decorator Pattern - Cross-cutting concerns composition
 
 #### Updated Home Page
-**Location**: [AsyncDemo.Web/Views/Home/Index.cshtml](AsyncDemo.Web/Views/Home/Index.cshtml)
+**Location**: [AsyncSpark.Web/Views/Home/Index.cshtml](AsyncSpark.Web/Views/Home/Index.cshtml)
 
 **Changes**:
 - Title changed from "Async Programming Demo" to "Master Async/Await in C#"
@@ -246,7 +246,7 @@ Every endpoint now includes extensive `<remarks>` sections with:
 - Links to both demos AND learning modules
 
 #### Updated Navigation
-**Location**: [AsyncDemo.Web/Views/Shared/_Layout.cshtml](AsyncDemo.Web/Views/Shared/_Layout.cshtml)
+**Location**: [AsyncSpark.Web/Views/Shared/_Layout.cshtml](AsyncSpark.Web/Views/Shared/_Layout.cshtml)
 
 **Changes**:
 - Added **"Learn"** link (prominent, first in navigation)
@@ -263,21 +263,21 @@ Every endpoint now includes extensive `<remarks>` sections with:
 ### New Files Created
 
 **API Controllers**:
-- `AsyncDemo.Web/Controllers/Api/WeatherPatternsController.cs`
-- `AsyncDemo.Web/Controllers/Api/CancellationPatternsController.cs`
-- `AsyncDemo.Web/Controllers/Api/ConcurrencyPatternsController.cs`
+- `AsyncSpark.Web/Controllers/Api/WeatherPatternsController.cs`
+- `AsyncSpark.Web/Controllers/Api/CancellationPatternsController.cs`
+- `AsyncSpark.Web/Controllers/Api/ConcurrencyPatternsController.cs`
 
 **Test Files**:
-- `AsyncDemo.Tests/Controllers/CancellationPatternsControllerTests.cs`
-- `AsyncDemo.Tests/Controllers/ConcurrencyPatternsControllerTests.cs`
-- `AsyncDemo.Tests/Resilience/PollyResilienceTests.cs`
+- `AsyncSpark.Tests/Controllers/CancellationPatternsControllerTests.cs`
+- `AsyncSpark.Tests/Controllers/ConcurrencyPatternsControllerTests.cs`
+- `AsyncSpark.Tests/Resilience/PollyResilienceTests.cs`
 
 **Documentation**:
 - `API_LEARNING_GUIDE.md`
 - `IMPLEMENTATION_SUMMARY.md` (this file)
 
 **Web Views**:
-- `AsyncDemo.Web/Views/Home/Learn.cshtml`
+- `AsyncSpark.Web/Views/Home/Learn.cshtml`
 
 ### Modified Files
 
@@ -285,17 +285,17 @@ Every endpoint now includes extensive `<remarks>` sections with:
 - `README.md` - Added Learning Objectives, updated API Documentation section
 
 **Controllers**:
-- `AsyncDemo.Web/Controllers/HomeController.cs` - Added Learn() action
-- `AsyncDemo.Web/Controllers/Api/RemoteController.cs` - Added tags and better docs
-- `AsyncDemo.Web/Controllers/Api/StatusController.cs` - Added tags and better docs
+- `AsyncSpark.Web/Controllers/HomeController.cs` - Added Learn() action
+- `AsyncSpark.Web/Controllers/Api/RemoteController.cs` - Added tags and better docs
+- `AsyncSpark.Web/Controllers/Api/StatusController.cs` - Added tags and better docs
 
 **Views**:
-- `AsyncDemo.Web/Views/Home/Index.cshtml` - Emphasis on learning
-- `AsyncDemo.Web/Views/Shared/_Layout.cshtml` - Updated navigation
+- `AsyncSpark.Web/Views/Home/Index.cshtml` - Emphasis on learning
+- `AsyncSpark.Web/Views/Shared/_Layout.cshtml` - Updated navigation
 
 **Tests**:
-- `AsyncDemo.Tests/AsyncDemo.Tests.csproj` - Added Polly package and Web project reference
-- `AsyncDemo.Tests/Usings.cs` - Added global usings for new tests
+- `AsyncSpark.Tests/AsyncSpark.Tests.csproj` - Added Polly package and Web project reference
+- `AsyncSpark.Tests/Usings.cs` - Added global usings for new tests
 
 ---
 
@@ -418,7 +418,7 @@ Every endpoint now includes extensive `<remarks>` sections with:
 
 ### Dependencies Added
 - `Polly 8.6.5` - For resilience test patterns
-- `AsyncDemo.Web` project reference in tests
+- `AsyncSpark.Web` project reference in tests
 
 ### API Versioning
 - All endpoints documented with OpenAPI/Scalar
@@ -442,7 +442,7 @@ While the current implementation fully addresses all feedback, potential enhance
 
 ## Conclusion
 
-The AsyncDemo has been successfully transformed from a **feature showcase** into a **comprehensive educational platform**. Both GitHub repository visitors and demo website visitors now have a structured, concept-driven learning experience that:
+The AsyncSpark has been successfully transformed from a **feature showcase** into a **comprehensive educational platform**. Both GitHub repository visitors and demo website visitors now have a structured, concept-driven learning experience that:
 
 ✅ Makes learning goals explicit with clear code mapping
 ✅ Provides focused, real-world scenarios for cancellation and resilience

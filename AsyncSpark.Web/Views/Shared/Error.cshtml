@@ -1,0 +1,70 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h1 class="h3 mb-0">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>Error
+                    </h1>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger d-flex align-items-start" role="alert">
+                        <i class="bi bi-x-circle-fill fs-4 me-3"></i>
+                        <div>
+                            <h2 class="h5 alert-heading">An error occurred while processing your request.</h2>
+                            @if (Model.ShowRequestId)
+                            {
+                                <hr>
+                                <p class="mb-0">
+                                    <strong><i class="bi bi-fingerprint me-1"></i>Request ID:</strong> 
+                                    <code class="text-danger">@Model.RequestId</code>
+                                </p>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="card bg-body-secondary mt-4">
+                        <div class="card-body">
+                            <h3 class="h5 card-title">
+                                <i class="bi bi-info-circle me-2 text-info"></i>Development Mode
+                            </h3>
+                            <p class="card-text">
+                                Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning mt-4 d-flex align-items-start" role="alert">
+                        <i class="bi bi-shield-exclamation fs-4 me-3"></i>
+                        <div>
+                            <h4 class="alert-heading h6">
+                                <i class="bi bi-exclamation-diamond me-1"></i>Security Warning
+                            </h4>
+                            <p class="mb-2">
+                                <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
+                                It can result in displaying sensitive information from exceptions to end users.
+                            </p>
+                            <hr>
+                            <p class="mb-0">
+                                For local debugging, enable the <strong>Development</strong> environment by setting the 
+                                <code>ASPNETCORE_ENVIRONMENT</code> environment variable to <code>Development</code>
+                                and restarting the app.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <a href="/" class="btn btn-primary">
+                            <i class="bi bi-house-door me-2"></i>Return to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

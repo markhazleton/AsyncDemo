@@ -4,7 +4,7 @@
 
 NSwag is the most feature-complete alternative to Swashbuckle and doesn't have the v10 breaking change issues.
 
-## Migration Steps for AsyncDemo.Web
+## Migration Steps for AsyncSpark.Web
 
 ### Step 1: Update Package Reference
 
@@ -26,7 +26,7 @@ Replace the entire file with:
 using NSwag;
 using NSwag.Generation.Processors.Security;
 
-namespace AsyncDemo.Web.Extensions;
+namespace AsyncSpark.Web.Extensions;
 
 /// <summary>
 /// Custom OpenAPI/Swagger configuration using NSwag
@@ -42,9 +42,9 @@ public static class CustomSwaggerExtensions
     {
         services.AddOpenApiDocument(config =>
         {
-            config.Title = "AsyncDemo.Web API";
+            config.Title = "AsyncSpark.Web API";
             config.Version = "v1";
-            config.Description = "AsyncDemo.Web API built with ASP.NET to show how to create RESTful services using a decoupled, maintainable architecture. <br/><a href='/'>Back To Home</a>";
+            config.Description = "AsyncSpark.Web API built with ASP.NET to show how to create RESTful services using a decoupled, maintainable architecture. <br/><a href='/'>Back To Home</a>";
             
             config.PostProcess = document =>
             {
@@ -62,7 +62,7 @@ public static class CustomSwaggerExtensions
             };
 
             // Include XML comments
-            var xmlFile = "AsyncDemo.Web.xml";
+            var xmlFile = "AsyncSpark.Web.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, "wwwroot", xmlFile);
             if (!File.Exists(xmlPath))
             {
@@ -126,7 +126,7 @@ app.UseCustomSwagger();
 
 2. **Run the application:**
    ```bash
-   dotnet run --project AsyncDemo.Web
+   dotnet run --project AsyncSpark.Web
    ```
 
 3. **Verify Swagger UI:**

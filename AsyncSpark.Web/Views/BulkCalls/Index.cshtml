@@ -1,0 +1,240 @@
+﻿@model IEnumerable<AsyncSpark.HttpGetCall.HttpGetCallResults>
+
+@{
+    ViewData["Title"] = "Bulk API Calls";
+}
+
+<div class="row justify-content-center mb-5">
+    <div class="col-lg-10">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold mb-3 text-primary">
+                <i class="bi bi-collection me-2"></i>Bulk API Calls Demo
+            </h1>
+            <p class="lead">
+                Efficiently handling multiple asynchronous operations in parallel
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 justify-content-center">
+    <div class="col-lg-10">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3 class="mb-0 d-flex align-items-center">
+                        <i class="bi bi-list-columns-reverse me-2 text-primary"></i>
+                        <span>API Call Results</span>
+                    </h3>
+                    <a href="@Url.Action("Create")" id="runNewTestBtn" class="btn btn-primary">
+                        <i class="bi bi-plus-circle me-2"></i>Run New Test
+                    </a>
+                </div>
+                <p class="text-muted mb-4">
+                    View the results of multiple asynchronous API calls executed in parallel
+                </p>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-123 me-2 text-primary"></i>
+                                        <span>@Html.DisplayNameFor(model => model.Iteration)</span>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-stopwatch me-2 text-primary"></i>
+                                        <span>@Html.DisplayNameFor(model => model.ElapsedMilliseconds)</span>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-calendar-check me-2 text-primary"></i>
+                                        <span>@Html.DisplayNameFor(model => model.CompletionDate)</span>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Any())
+                            {
+                                @foreach (var item in Model)
+                                {
+                                    <tr class="align-middle">
+                                        <td>
+                                            <span class="badge rounded-pill bg-primary">@item.Iteration</span>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="me-2">
+                                                    @if (item.ElapsedMilliseconds < 500)
+                                                    {
+                                                        <i class="bi bi-lightning-charge text-success"></i>
+                                                    }
+                                                    else if (item.ElapsedMilliseconds < 1000)
+                                                    {
+                                                        <i class="bi bi-speedometer text-warning"></i>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="bi bi-hourglass-split text-danger"></i>
+                                                    }
+                                                </div>
+                                                <span>@item.ElapsedMilliseconds ms</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @(item.CompletionDate != null ? String.Format("{0:yyyy-MM-dd HH:mm:ss.fff}",
+                                            item.CompletionDate) : String.Empty)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="3" class="text-center p-5">
+                                        <i class="bi bi-info-circle fs-1 text-muted mb-3"></i>
+                                        <p>No data available. Click 'Run New Test' to generate bulk API call results.</p>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Async Stats Dashboard Container -->
+<div class="row g-4 mt-4 justify-content-center">
+    <div class="col-lg-10">
+        <div id="async-stats-container"></div>
+    </div>
+</div>
+
+<div class="row g-4 mt-5 justify-content-center">
+    <div class="col-lg-10">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h3 class="mb-3 d-flex align-items-center">
+                    <i class="bi bi-info-circle me-2 text-primary"></i>
+                    <span>About Bulk API Calls</span>
+                </h3>
+                <p>
+                    This demo demonstrates how to efficiently handle multiple API calls concurrently using
+                    asynchronous programming techniques in .NET. Instead of making API calls sequentially,
+                    which would take the sum of all individual call times, parallel execution allows for
+                    significant performance improvements.
+                </p>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="d-flex mb-3">
+                            <div class="me-3">
+                                <i class="bi bi-speedometer2 fs-2 text-primary"></i>
+                            </div>
+                            <div>
+                                <h5>Improved Performance</h5>
+                                <p>Execute multiple operations simultaneously for faster total completion time.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex mb-3">
+                            <div class="me-3">
+                                <i class="bi bi-cpu fs-2 text-primary"></i>
+                            </div>
+                            <div>
+                                <h5>Resource Efficiency</h5>
+                                <p>Better utilize system resources by avoiding idle waiting time.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex mb-3">
+                            <div class="me-3">
+                                <i class="bi bi-award fs-2 text-primary"></i>
+                            </div>
+                            <div>
+                                <h5>Better Responsiveness</h5>
+                                <p>Keep your application responsive even when performing multiple operations.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex mb-3">
+                            <div class="me-3">
+                                <i class="bi bi-code-slash fs-2 text-primary"></i>
+                            </div>
+                            <div>
+                                <h5>Modern Patterns</h5>
+                                <p>Learn Task-based programming with async/await patterns in C#.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Show a notification that the page is ready
+            if (window.asyncStats) {
+                const readyOpId = window.asyncStats.startOperation('Page Load');
+                window.asyncStats.completeOperation(readyOpId, true, 'Bulk Calls Page Loaded Successfully');
+            }
+
+            // Add click handler for the Run New Test button
+            $('#runNewTestBtn').on('click', function (e) {
+                if (window.asyncStats) {
+                    const opId = window.asyncStats.startOperation('Bulk API Test');
+
+                    // Show an info toast
+                    toastr.info('Starting bulk API test...');
+
+                    // We'll let the actual operation complete normally
+                    // The button navigates to the Create action
+                }
+            });
+
+            // Simulate some demo operations for illustration purposes
+            setTimeout(function () {
+                if (window.asyncStats) {
+                    // Simulate API call 1
+                    const op1 = window.asyncStats.startOperation('Demo API Call 1');
+                    setTimeout(function () {
+                        window.asyncStats.completeOperation(op1, true, 'Demo API Call 1 Completed');
+                    }, 500);
+
+                    // Simulate API call 2
+                    const op2 = window.asyncStats.startOperation('Demo API Call 2');
+                    setTimeout(function () {
+                        window.asyncStats.completeOperation(op2, true, 'Demo API Call 2 Completed');
+                    }, 1200);
+
+                    // Simulate API call 3 with failure
+                    const op3 = window.asyncStats.startOperation('Demo API Call 3');
+                    setTimeout(function () {
+                        window.asyncStats.completeOperation(op3, false, 'Demo API Call 3 Failed: Timeout');
+                    }, 1800);
+                }
+            }, 2000);
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+

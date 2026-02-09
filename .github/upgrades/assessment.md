@@ -7,10 +7,10 @@ This document provides a comprehensive overview of the projects and their depend
 - [Projects Relationship Graph](#projects-relationship-graph)
 - [Project Details](#project-details)
 
-  - [AsyncDemo.Console\AsyncDemo.Console.csproj](#asyncdemoconsoleasyncdemoconsolecsproj)
-  - [AsyncDemo.Tests\AsyncDemo.Tests.csproj](#asyncdemotestsasyncdemotestscsproj)
-  - [AsyncDemo.Web\AsyncDemo.Web.csproj](#asyncdemowebasyncdemowebcsproj)
-  - [AsyncDemo\AsyncDemo.csproj](#asyncdemoasyncdemocsproj)
+  - [AsyncSpark.Console\AsyncSpark.Console.csproj](#AsyncSparkconsoleAsyncSparkconsolecsproj)
+  - [AsyncSpark.Tests\AsyncSpark.Tests.csproj](#AsyncSparktestsAsyncSparktestscsproj)
+  - [AsyncSpark.Web\AsyncSpark.Web.csproj](#AsyncSparkwebAsyncSparkwebcsproj)
+  - [AsyncSpark\AsyncSpark.csproj](#AsyncSparkAsyncSparkcsproj)
   - [CancelAsyncWithToken\CancelAsyncWithToken.csproj](#cancelasyncwithtokencancelasyncwithtokencsproj)
   - [OpenWeatherMapClient\OpenWeatherMapClient.csproj](#openweathermapclientopenweathermapclientcsproj)
 - [Aggregate NuGet packages details](#aggregate-nuget-packages-details)
@@ -24,29 +24,29 @@ Legend:
 
 ```mermaid
 flowchart LR
-    P1["<b>📦&nbsp;AsyncDemo.csproj</b><br/><small>net9.0</small>"]
-    P2["<b>📦&nbsp;AsyncDemo.Tests.csproj</b><br/><small>net9.0</small>"]
-    P3["<b>📦&nbsp;AsyncDemo.Console.csproj</b><br/><small>net9.0</small>"]
+    P1["<b>📦&nbsp;AsyncSpark.csproj</b><br/><small>net9.0</small>"]
+    P2["<b>📦&nbsp;AsyncSpark.Tests.csproj</b><br/><small>net9.0</small>"]
+    P3["<b>📦&nbsp;AsyncSpark.Console.csproj</b><br/><small>net9.0</small>"]
     P4["<b>📦&nbsp;OpenWeatherMapClient.csproj</b><br/><small>net9.0</small>"]
     P5["<b>📦&nbsp;CancelAsyncWithToken.csproj</b><br/><small>net9.0</small>"]
-    P6["<b>📦&nbsp;AsyncDemo.Web.csproj</b><br/><small>net9.0</small>"]
+    P6["<b>📦&nbsp;AsyncSpark.Web.csproj</b><br/><small>net9.0</small>"]
     P2 --> P1
     P3 --> P1
     P6 --> P1
     P6 --> P4
-    click P1 "#asyncdemoasyncdemocsproj"
-    click P2 "#asyncdemotestsasyncdemotestscsproj"
-    click P3 "#asyncdemoconsoleasyncdemoconsolecsproj"
+    click P1 "#AsyncSparkAsyncSparkcsproj"
+    click P2 "#AsyncSparktestsAsyncSparktestscsproj"
+    click P3 "#AsyncSparkconsoleAsyncSparkconsolecsproj"
     click P4 "#openweathermapclientopenweathermapclientcsproj"
     click P5 "#cancelasyncwithtokencancelasyncwithtokencsproj"
-    click P6 "#asyncdemowebasyncdemowebcsproj"
+    click P6 "#AsyncSparkwebAsyncSparkwebcsproj"
 
 ```
 
 ## Project Details
 
-<a id="asyncdemoconsoleasyncdemoconsolecsproj"></a>
-### AsyncDemo.Console\AsyncDemo.Console.csproj
+<a id="AsyncSparkconsoleAsyncSparkconsolecsproj"></a>
+### AsyncSpark.Console\AsyncSpark.Console.csproj
 
 #### Project Info
 
@@ -67,13 +67,13 @@ Legend:
 
 ```mermaid
 flowchart TB
-    subgraph current["AsyncDemo.Console.csproj"]
-        MAIN["<b>📦&nbsp;AsyncDemo.Console.csproj</b><br/><small>net9.0</small>"]
-        click MAIN "#asyncdemoconsoleasyncdemoconsolecsproj"
+    subgraph current["AsyncSpark.Console.csproj"]
+        MAIN["<b>📦&nbsp;AsyncSpark.Console.csproj</b><br/><small>net9.0</small>"]
+        click MAIN "#AsyncSparkconsoleAsyncSparkconsolecsproj"
     end
     subgraph downstream["Dependencies (1"]
-        P1["<b>📦&nbsp;AsyncDemo.csproj</b><br/><small>net9.0</small>"]
-        click P1 "#asyncdemoasyncdemocsproj"
+        P1["<b>📦&nbsp;AsyncSpark.csproj</b><br/><small>net9.0</small>"]
+        click P1 "#AsyncSparkAsyncSparkcsproj"
     end
     MAIN --> P1
 
@@ -84,8 +84,8 @@ flowchart TB
 | Package | Type | Current Version | Suggested Version | Description |
 | :--- | :---: | :---: | :---: | :--- |
 
-<a id="asyncdemotestsasyncdemotestscsproj"></a>
-### AsyncDemo.Tests\AsyncDemo.Tests.csproj
+<a id="AsyncSparktestsAsyncSparktestscsproj"></a>
+### AsyncSpark.Tests\AsyncSpark.Tests.csproj
 
 #### Project Info
 
@@ -106,13 +106,13 @@ Legend:
 
 ```mermaid
 flowchart TB
-    subgraph current["AsyncDemo.Tests.csproj"]
-        MAIN["<b>📦&nbsp;AsyncDemo.Tests.csproj</b><br/><small>net9.0</small>"]
-        click MAIN "#asyncdemotestsasyncdemotestscsproj"
+    subgraph current["AsyncSpark.Tests.csproj"]
+        MAIN["<b>📦&nbsp;AsyncSpark.Tests.csproj</b><br/><small>net9.0</small>"]
+        click MAIN "#AsyncSparktestsAsyncSparktestscsproj"
     end
     subgraph downstream["Dependencies (1"]
-        P1["<b>📦&nbsp;AsyncDemo.csproj</b><br/><small>net9.0</small>"]
-        click P1 "#asyncdemoasyncdemocsproj"
+        P1["<b>📦&nbsp;AsyncSpark.csproj</b><br/><small>net9.0</small>"]
+        click P1 "#AsyncSparkAsyncSparkcsproj"
     end
     MAIN --> P1
 
@@ -131,8 +131,8 @@ flowchart TB
 | MSTest.TestAdapter | Explicit | 4.0.1 |  | ✅Compatible |
 | MSTest.TestFramework | Explicit | 4.0.1 |  | ✅Compatible |
 
-<a id="asyncdemowebasyncdemowebcsproj"></a>
-### AsyncDemo.Web\AsyncDemo.Web.csproj
+<a id="AsyncSparkwebAsyncSparkwebcsproj"></a>
+### AsyncSpark.Web\AsyncSpark.Web.csproj
 
 #### Project Info
 
@@ -153,14 +153,14 @@ Legend:
 
 ```mermaid
 flowchart TB
-    subgraph current["AsyncDemo.Web.csproj"]
-        MAIN["<b>📦&nbsp;AsyncDemo.Web.csproj</b><br/><small>net9.0</small>"]
-        click MAIN "#asyncdemowebasyncdemowebcsproj"
+    subgraph current["AsyncSpark.Web.csproj"]
+        MAIN["<b>📦&nbsp;AsyncSpark.Web.csproj</b><br/><small>net9.0</small>"]
+        click MAIN "#AsyncSparkwebAsyncSparkwebcsproj"
     end
     subgraph downstream["Dependencies (2"]
-        P1["<b>📦&nbsp;AsyncDemo.csproj</b><br/><small>net9.0</small>"]
+        P1["<b>📦&nbsp;AsyncSpark.csproj</b><br/><small>net9.0</small>"]
         P4["<b>📦&nbsp;OpenWeatherMapClient.csproj</b><br/><small>net9.0</small>"]
-        click P1 "#asyncdemoasyncdemocsproj"
+        click P1 "#AsyncSparkAsyncSparkcsproj"
         click P4 "#openweathermapclientopenweathermapclientcsproj"
     end
     MAIN --> P1
@@ -179,8 +179,8 @@ flowchart TB
 | Swashbuckle.AspNetCore | Explicit | 9.0.6 |  | ✅Compatible |
 | Westwind.AspNetCore.Markdown | Explicit | 3.24.0 |  | ✅Compatible |
 
-<a id="asyncdemoasyncdemocsproj"></a>
-### AsyncDemo\AsyncDemo.csproj
+<a id="AsyncSparkAsyncSparkcsproj"></a>
+### AsyncSpark\AsyncSpark.csproj
 
 #### Project Info
 
@@ -202,16 +202,16 @@ Legend:
 ```mermaid
 flowchart TB
     subgraph upstream["Dependants (3)"]
-        P2["<b>📦&nbsp;AsyncDemo.Tests.csproj</b><br/><small>net9.0</small>"]
-        P3["<b>📦&nbsp;AsyncDemo.Console.csproj</b><br/><small>net9.0</small>"]
-        P6["<b>📦&nbsp;AsyncDemo.Web.csproj</b><br/><small>net9.0</small>"]
-        click P2 "#asyncdemotestsasyncdemotestscsproj"
-        click P3 "#asyncdemoconsoleasyncdemoconsolecsproj"
-        click P6 "#asyncdemowebasyncdemowebcsproj"
+        P2["<b>📦&nbsp;AsyncSpark.Tests.csproj</b><br/><small>net9.0</small>"]
+        P3["<b>📦&nbsp;AsyncSpark.Console.csproj</b><br/><small>net9.0</small>"]
+        P6["<b>📦&nbsp;AsyncSpark.Web.csproj</b><br/><small>net9.0</small>"]
+        click P2 "#AsyncSparktestsAsyncSparktestscsproj"
+        click P3 "#AsyncSparkconsoleAsyncSparkconsolecsproj"
+        click P6 "#AsyncSparkwebAsyncSparkwebcsproj"
     end
-    subgraph current["AsyncDemo.csproj"]
-        MAIN["<b>📦&nbsp;AsyncDemo.csproj</b><br/><small>net9.0</small>"]
-        click MAIN "#asyncdemoasyncdemocsproj"
+    subgraph current["AsyncSpark.csproj"]
+        MAIN["<b>📦&nbsp;AsyncSpark.csproj</b><br/><small>net9.0</small>"]
+        click MAIN "#AsyncSparkAsyncSparkcsproj"
     end
     P2 --> MAIN
     P3 --> MAIN
@@ -283,8 +283,8 @@ Legend:
 ```mermaid
 flowchart TB
     subgraph upstream["Dependants (1)"]
-        P6["<b>📦&nbsp;AsyncDemo.Web.csproj</b><br/><small>net9.0</small>"]
-        click P6 "#asyncdemowebasyncdemowebcsproj"
+        P6["<b>📦&nbsp;AsyncSpark.Web.csproj</b><br/><small>net9.0</small>"]
+        click P6 "#AsyncSparkwebAsyncSparkwebcsproj"
     end
     subgraph current["OpenWeatherMapClient.csproj"]
         MAIN["<b>📦&nbsp;OpenWeatherMapClient.csproj</b><br/><small>net9.0</small>"]
@@ -311,24 +311,24 @@ flowchart TB
 
 | Package | Current Version | Suggested Version | Projects | Description |
 | :--- | :---: | :---: | :--- | :--- |
-| Azure.Identity | 1.17.0 |  | [AsyncDemo.Web.csproj](#asyncdemowebcsproj)<br/>[OpenWeatherMapClient.csproj](#openweathermapclientcsproj) | ✅Compatible |
-| coverlet.collector | 6.0.4 |  | [AsyncDemo.Tests.csproj](#asyncdemotestscsproj) | ✅Compatible |
+| Azure.Identity | 1.17.0 |  | [AsyncSpark.Web.csproj](#AsyncSparkwebcsproj)<br/>[OpenWeatherMapClient.csproj](#openweathermapclientcsproj) | ✅Compatible |
+| coverlet.collector | 6.0.4 |  | [AsyncSpark.Tests.csproj](#AsyncSparktestscsproj) | ✅Compatible |
 | Microsoft.AspNet.WebApi.Client | 6.0.0 |  | [OpenWeatherMapClient.csproj](#openweathermapclientcsproj) | ✅Compatible |
 | Microsoft.EntityFrameworkCore.SqlServer | 9.0.10 | 10.0.0 | [OpenWeatherMapClient.csproj](#openweathermapclientcsproj) | NuGet package upgrade is recommended |
 | Microsoft.EntityFrameworkCore.Tools | 9.0.10 | 10.0.0 | [OpenWeatherMapClient.csproj](#openweathermapclientcsproj) | NuGet package upgrade is recommended |
-| Microsoft.Extensions.Caching.Abstractions | 9.0.10 | 10.0.0 | [AsyncDemo.Tests.csproj](#asyncdemotestscsproj)<br/>[AsyncDemo.csproj](#asyncdemocsproj) | NuGet package upgrade is recommended |
-| Microsoft.Extensions.Caching.Memory | 9.0.10 | 10.0.0 | [AsyncDemo.Tests.csproj](#asyncdemotestscsproj) | NuGet package upgrade is recommended |
-| Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore | 9.0.10 | 10.0.0 | [AsyncDemo.Web.csproj](#asyncdemowebcsproj) | NuGet package upgrade is recommended |
-| Microsoft.Extensions.Http | 9.0.10 | 10.0.0 | [AsyncDemo.Tests.csproj](#asyncdemotestscsproj)<br/>[AsyncDemo.csproj](#asyncdemocsproj)<br/>[OpenWeatherMapClient.csproj](#openweathermapclientcsproj) | NuGet package upgrade is recommended |
-| Microsoft.Extensions.Http.Resilience | 9.10.0 |  | [AsyncDemo.Web.csproj](#asyncdemowebcsproj) | ✅Compatible |
+| Microsoft.Extensions.Caching.Abstractions | 9.0.10 | 10.0.0 | [AsyncSpark.Tests.csproj](#AsyncSparktestscsproj)<br/>[AsyncSpark.csproj](#AsyncSparkcsproj) | NuGet package upgrade is recommended |
+| Microsoft.Extensions.Caching.Memory | 9.0.10 | 10.0.0 | [AsyncSpark.Tests.csproj](#AsyncSparktestscsproj) | NuGet package upgrade is recommended |
+| Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore | 9.0.10 | 10.0.0 | [AsyncSpark.Web.csproj](#AsyncSparkwebcsproj) | NuGet package upgrade is recommended |
+| Microsoft.Extensions.Http | 9.0.10 | 10.0.0 | [AsyncSpark.Tests.csproj](#AsyncSparktestscsproj)<br/>[AsyncSpark.csproj](#AsyncSparkcsproj)<br/>[OpenWeatherMapClient.csproj](#openweathermapclientcsproj) | NuGet package upgrade is recommended |
+| Microsoft.Extensions.Http.Resilience | 9.10.0 |  | [AsyncSpark.Web.csproj](#AsyncSparkwebcsproj) | ✅Compatible |
 | Microsoft.Extensions.Logging.Debug | 9.0.10 | 10.0.0 | [OpenWeatherMapClient.csproj](#openweathermapclientcsproj) | NuGet package upgrade is recommended |
-| Microsoft.NET.Test.Sdk | 18.0.0 |  | [AsyncDemo.Tests.csproj](#asyncdemotestscsproj) | ✅Compatible |
-| Moq | 4.20.72 |  | [AsyncDemo.Tests.csproj](#asyncdemotestscsproj) | ✅Compatible |
-| MSTest.TestAdapter | 4.0.1 |  | [AsyncDemo.Tests.csproj](#asyncdemotestscsproj) | ✅Compatible |
-| MSTest.TestFramework | 4.0.1 |  | [AsyncDemo.Tests.csproj](#asyncdemotestscsproj) | ✅Compatible |
-| Polly | 8.6.4 |  | [AsyncDemo.Web.csproj](#asyncdemowebcsproj) | ✅Compatible |
-| Swashbuckle.AspNetCore | 9.0.6 |  | [AsyncDemo.Web.csproj](#asyncdemowebcsproj) | ✅Compatible |
+| Microsoft.NET.Test.Sdk | 18.0.0 |  | [AsyncSpark.Tests.csproj](#AsyncSparktestscsproj) | ✅Compatible |
+| Moq | 4.20.72 |  | [AsyncSpark.Tests.csproj](#AsyncSparktestscsproj) | ✅Compatible |
+| MSTest.TestAdapter | 4.0.1 |  | [AsyncSpark.Tests.csproj](#AsyncSparktestscsproj) | ✅Compatible |
+| MSTest.TestFramework | 4.0.1 |  | [AsyncSpark.Tests.csproj](#AsyncSparktestscsproj) | ✅Compatible |
+| Polly | 8.6.4 |  | [AsyncSpark.Web.csproj](#AsyncSparkwebcsproj) | ✅Compatible |
+| Swashbuckle.AspNetCore | 9.0.6 |  | [AsyncSpark.Web.csproj](#AsyncSparkwebcsproj) | ✅Compatible |
 | System.Drawing.Common | 9.0.10 | 10.0.0 | [OpenWeatherMapClient.csproj](#openweathermapclientcsproj) | NuGet package upgrade is recommended |
 | System.Text.Json | 9.0.10 | 10.0.0 | [OpenWeatherMapClient.csproj](#openweathermapclientcsproj) | NuGet package upgrade is recommended |
-| Westwind.AspNetCore.Markdown | 3.24.0 |  | [AsyncDemo.Web.csproj](#asyncdemowebcsproj) | ✅Compatible |
+| Westwind.AspNetCore.Markdown | 3.24.0 |  | [AsyncSpark.Web.csproj](#AsyncSparkwebcsproj) | ✅Compatible |
 

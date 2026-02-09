@@ -2,7 +2,7 @@
 
 ## ? Migration Successfully Completed
 
-AsyncDemo.Web has been successfully migrated from Swashbuckle.AspNetCore to the modern Built-in OpenAPI + Scalar approach.
+AsyncSpark.Web has been successfully migrated from Swashbuckle.AspNetCore to the modern Built-in OpenAPI + Scalar approach.
 
 ---
 
@@ -111,7 +111,7 @@ Scalar automatically shows code examples in multiple languages:
 ### 1. Run the Application
 
 ```bash
-dotnet run --project AsyncDemo.Web
+dotnet run --project AsyncSpark.Web
 ```
 
 ### 2. Access Scalar UI
@@ -244,7 +244,7 @@ app.MapScalarApiReference();  // Will detect all versions
 Your project already has this configured correctly:
 ```xml
 <GenerateDocumentationFile>True</GenerateDocumentationFile>
-<DocumentationFile>wwwroot\AsyncDemo.Web.xml</DocumentationFile>
+<DocumentationFile>wwwroot\AsyncSpark.Web.xml</DocumentationFile>
 ```
 
 Built-in OpenAPI automatically includes these comments.
@@ -255,7 +255,7 @@ Built-in OpenAPI automatically includes these comments.
 
 If you need to revert to Swashbuckle:
 
-1. **Update packages in AsyncDemo.Web.csproj:**
+1. **Update packages in AsyncSpark.Web.csproj:**
    ```xml
    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.2.0" />
    ```
@@ -327,7 +327,7 @@ Now that you have beautiful documentation:
 ? **Modern UI Activated**
 ? **Future-Proof Solution**
 
-**AsyncDemo.Web now has:**
+**AsyncSpark.Web now has:**
 - Beautiful, modern API documentation
 - Microsoft-supported OpenAPI implementation
 - Minimal external dependencies

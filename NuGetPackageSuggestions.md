@@ -2,7 +2,7 @@
 
 **Date**: January 2025  
 **Package Version Tested**: 1.32.0  
-**Testing Project**: AsyncDemo.Web (.NET 10)  
+**Testing Project**: AsyncSpark.Web (.NET 10)  
 **Author**: Mark Hazleton
 
 ## Executive Summary
@@ -902,15 +902,15 @@ Include complete working examples:
 ## Contact
 
 **Package Author**: Mark Hazleton  
-**Testing Project**: AsyncDemo.Web  
-**GitHub**: https://github.com/MarkHazleton/AsyncDemo  
+**Testing Project**: AsyncSpark.Web  
+**GitHub**: https://github.com/MarkHazleton/AsyncSpark  
 **Date**: January 2025
 
 ---
 
 ## Appendix: Complete Working Example
 
-See the AsyncDemo.Web project for a complete working implementation:
+See the AsyncSpark.Web project for a complete working implementation:
 - **Program.cs**: Correct service registration and middleware configuration
 - **appsettings.json**: Complete configuration example
 - **_Layout.cshtml**: Complete layout with theme switching
@@ -919,7 +919,7 @@ See the AsyncDemo.Web project for a complete working implementation:
 
 **Key Files to Reference**:
 ```
-AsyncDemo.Web/
+AsyncSpark.Web/
 ??? Program.cs                          # Service registration
 ??? appsettings.json                    # Configuration
 ??? Views/

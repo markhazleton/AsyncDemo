@@ -1,0 +1,943 @@
+@{
+    ViewData["Title"] = "Bootstrap 5 Kitchen Sink";
+}
+
+<div class="container-fluid py-4">
+    <header class="text-center mb-4">
+        <h1 class="display-4 fw-bold text-primary">
+            <i class="bi bi-palette me-2"></i>Bootstrap 5 Kitchen Sink
+        </h1>
+        <p class="lead">Preview and markup for every Bootstrap 5 component &mdash; switch themes to evaluate</p>
+    </header>
+
+    <!-- Sticky section nav -->
+    <nav class="mb-5">
+        <ul class="nav nav-pills flex-wrap justify-content-center gap-1">
+            <li class="nav-item"><a class="nav-link" href="#typography">Typography</a></li>
+            <li class="nav-item"><a class="nav-link" href="#colors">Colors</a></li>
+            <li class="nav-item"><a class="nav-link" href="#buttons">Buttons</a></li>
+            <li class="nav-item"><a class="nav-link" href="#forms">Forms</a></li>
+            <li class="nav-item"><a class="nav-link" href="#alerts">Alerts</a></li>
+            <li class="nav-item"><a class="nav-link" href="#cards">Cards</a></li>
+            <li class="nav-item"><a class="nav-link" href="#navs">Navigation</a></li>
+            <li class="nav-item"><a class="nav-link" href="#badges">Badges</a></li>
+            <li class="nav-item"><a class="nav-link" href="#progress">Progress</a></li>
+            <li class="nav-item"><a class="nav-link" href="#tables">Tables</a></li>
+            <li class="nav-item"><a class="nav-link" href="#listgroups">List Groups</a></li>
+            <li class="nav-item"><a class="nav-link" href="#accordion">Accordion</a></li>
+            <li class="nav-item"><a class="nav-link" href="#modals">Modals</a></li>
+            <li class="nav-item"><a class="nav-link" href="#breadcrumbs">Breadcrumbs</a></li>
+        </ul>
+    </nav>
+
+    <!-- ============================================================ -->
+    <!-- TYPOGRAPHY -->
+    <!-- ============================================================ -->
+    <section class="mb-5" id="typography">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="bi bi-fonts me-2"></i>Typography</h2>
+                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#codeTypography">
+                    <i class="bi bi-code-slash me-1"></i>Code
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <h1>h1. Bootstrap heading</h1>
+                        <h2>h2. Bootstrap heading</h2>
+                        <h3>h3. Bootstrap heading</h3>
+                        <h4>h4. Bootstrap heading</h4>
+                        <h5>h5. Bootstrap heading</h5>
+                        <h6>h6. Bootstrap heading</h6>
+                    </div>
+                    <div class="col-md-6">
+                        <p>Default paragraph text with <a href="#">an inline link</a>.</p>
+                        <p class="lead">Lead paragraph text</p>
+                        <p class="text-body-secondary">Secondary text (text-body-secondary)</p>
+                        <p><mark>Highlighted text</mark></p>
+                        <p><small>Small text</small></p>
+                        <p><strong>Bold text</strong> and <em>italic text</em></p>
+                        <blockquote class="blockquote">
+                            <p>A blockquote element.</p>
+                        </blockquote>
+                        <figcaption class="blockquote-footer">
+                            Someone famous in <cite title="Source Title">Source Title</cite>
+                        </figcaption>
+                    </div>
+                </div>
+
+                <h5 class="mt-4 mb-3">Semantic Text Colors</h5>
+                <div class="row g-2">
+                    <div class="col-auto"><span class="text-primary">.text-primary</span></div>
+                    <div class="col-auto"><span class="text-secondary">.text-secondary</span></div>
+                    <div class="col-auto"><span class="text-success">.text-success</span></div>
+                    <div class="col-auto"><span class="text-danger">.text-danger</span></div>
+                    <div class="col-auto"><span class="text-warning">.text-warning</span></div>
+                    <div class="col-auto"><span class="text-info">.text-info</span></div>
+                    <div class="col-auto"><span class="text-body">.text-body</span></div>
+                    <div class="col-auto"><span class="text-body-secondary">.text-body-secondary</span></div>
+                </div>
+            </div>
+            <div class="collapse" id="codeTypography">
+                <div class="card-footer"><pre class="mb-0"><code>&lt;h1&gt;h1. Bootstrap heading&lt;/h1&gt;
+&lt;p class="lead"&gt;Lead paragraph text&lt;/p&gt;
+&lt;p class="text-body-secondary"&gt;Secondary text&lt;/p&gt;
+&lt;blockquote class="blockquote"&gt;
+  &lt;p&gt;A blockquote element.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;span class="text-primary"&gt;.text-primary&lt;/span&gt;</code></pre></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- COLORS -->
+    <!-- ============================================================ -->
+    <section class="mb-5" id="colors">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="bi bi-droplet-half me-2"></i>Colors</h2>
+                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#codeColors">
+                    <i class="bi bi-code-slash me-1"></i>Code
+                </button>
+            </div>
+            <div class="card-body">
+                <h5 class="mb-3">Background Colors</h5>
+                <div class="row g-2 mb-4">
+                    <div class="col-md-3"><div class="p-3 rounded bg-primary text-white">.bg-primary</div></div>
+                    <div class="col-md-3"><div class="p-3 rounded bg-secondary text-white">.bg-secondary</div></div>
+                    <div class="col-md-3"><div class="p-3 rounded bg-success text-white">.bg-success</div></div>
+                    <div class="col-md-3"><div class="p-3 rounded bg-danger text-white">.bg-danger</div></div>
+                    <div class="col-md-3"><div class="p-3 rounded bg-warning text-dark">.bg-warning</div></div>
+                    <div class="col-md-3"><div class="p-3 rounded bg-info text-dark">.bg-info</div></div>
+                    <div class="col-md-3"><div class="p-3 rounded bg-light text-dark">.bg-light</div></div>
+                    <div class="col-md-3"><div class="p-3 rounded bg-dark text-white">.bg-dark</div></div>
+                </div>
+
+                <h5 class="mb-3">Theme-Aware Backgrounds</h5>
+                <div class="row g-2 mb-4">
+                    <div class="col-md-4"><div class="p-3 rounded bg-body border">.bg-body</div></div>
+                    <div class="col-md-4"><div class="p-3 rounded bg-body-secondary border">.bg-body-secondary</div></div>
+                    <div class="col-md-4"><div class="p-3 rounded bg-body-tertiary border">.bg-body-tertiary</div></div>
+                </div>
+
+                <h5 class="mb-3">Opacity Variations</h5>
+                <div class="row g-2">
+                    <div class="col"><div class="p-3 rounded bg-primary">.bg-primary</div></div>
+                    <div class="col"><div class="p-3 rounded bg-primary bg-opacity-75">.bg-opacity-75</div></div>
+                    <div class="col"><div class="p-3 rounded bg-primary bg-opacity-50">.bg-opacity-50</div></div>
+                    <div class="col"><div class="p-3 rounded bg-primary bg-opacity-25">.bg-opacity-25</div></div>
+                    <div class="col"><div class="p-3 rounded bg-primary bg-opacity-10">.bg-opacity-10</div></div>
+                </div>
+            </div>
+            <div class="collapse" id="codeColors">
+                <div class="card-footer"><pre class="mb-0"><code>&lt;div class="bg-primary text-white"&gt;.bg-primary&lt;/div&gt;
+&lt;div class="bg-body-tertiary"&gt;.bg-body-tertiary&lt;/div&gt;
+&lt;div class="bg-primary bg-opacity-25"&gt;.bg-opacity-25&lt;/div&gt;</code></pre></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- BUTTONS -->
+    <!-- ============================================================ -->
+    <section class="mb-5" id="buttons">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="bi bi-hand-index me-2"></i>Buttons</h2>
+                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#codeButtons">
+                    <i class="bi bi-code-slash me-1"></i>Code
+                </button>
+            </div>
+            <div class="card-body">
+                <h5 class="mb-3">Solid Buttons</h5>
+                <div class="mb-4">
+                    <button type="button" class="btn btn-primary me-1 mb-2">Primary</button>
+                    <button type="button" class="btn btn-secondary me-1 mb-2">Secondary</button>
+                    <button type="button" class="btn btn-success me-1 mb-2">Success</button>
+                    <button type="button" class="btn btn-danger me-1 mb-2">Danger</button>
+                    <button type="button" class="btn btn-warning me-1 mb-2">Warning</button>
+                    <button type="button" class="btn btn-info me-1 mb-2">Info</button>
+                    <button type="button" class="btn btn-light me-1 mb-2">Light</button>
+                    <button type="button" class="btn btn-dark me-1 mb-2">Dark</button>
+                    <button type="button" class="btn btn-link me-1 mb-2">Link</button>
+                </div>
+
+                <h5 class="mb-3">Outline Buttons</h5>
+                <div class="mb-4">
+                    <button type="button" class="btn btn-outline-primary me-1 mb-2">Primary</button>
+                    <button type="button" class="btn btn-outline-secondary me-1 mb-2">Secondary</button>
+                    <button type="button" class="btn btn-outline-success me-1 mb-2">Success</button>
+                    <button type="button" class="btn btn-outline-danger me-1 mb-2">Danger</button>
+                    <button type="button" class="btn btn-outline-warning me-1 mb-2">Warning</button>
+                    <button type="button" class="btn btn-outline-info me-1 mb-2">Info</button>
+                    <button type="button" class="btn btn-outline-dark me-1 mb-2">Dark</button>
+                </div>
+
+                <h5 class="mb-3">Sizes &amp; States</h5>
+                <div>
+                    <button type="button" class="btn btn-primary btn-lg me-2 mb-2">Large</button>
+                    <button type="button" class="btn btn-primary me-2 mb-2">Default</button>
+                    <button type="button" class="btn btn-primary btn-sm me-2 mb-2">Small</button>
+                    <button type="button" class="btn btn-primary active me-2 mb-2">Active</button>
+                    <button type="button" class="btn btn-primary mb-2" disabled>Disabled</button>
+                </div>
+            </div>
+            <div class="collapse" id="codeButtons">
+                <div class="card-footer"><pre class="mb-0"><code>&lt;button class="btn btn-primary"&gt;Primary&lt;/button&gt;
+&lt;button class="btn btn-outline-primary"&gt;Outline&lt;/button&gt;
+&lt;button class="btn btn-primary btn-lg"&gt;Large&lt;/button&gt;
+&lt;button class="btn btn-primary btn-sm"&gt;Small&lt;/button&gt;
+&lt;button class="btn btn-primary" disabled&gt;Disabled&lt;/button&gt;</code></pre></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- FORMS -->
+    <!-- ============================================================ -->
+    <section class="mb-5" id="forms">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="bi bi-input-cursor-text me-2"></i>Forms</h2>
+                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#codeForms">
+                    <i class="bi bi-code-slash me-1"></i>Code
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="ks-text" class="form-label">Text Input</label>
+                            <input type="text" class="form-control" id="ks-text" placeholder="Standard text input">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ks-email" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="ks-email" placeholder="name@example.com">
+                            <div class="form-text">Helper text below the input.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ks-select" class="form-label">Select</label>
+                            <select class="form-select" id="ks-select">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ks-textarea" class="form-label">Textarea</label>
+                            <textarea class="form-control" id="ks-textarea" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ks-disabled" class="form-label">Disabled Input</label>
+                            <input type="text" class="form-control" id="ks-disabled" placeholder="Disabled" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Input Group</label>
+                            <div class="input-group">
+                                <span class="input-group-text">@@</span>
+                                <input type="text" class="form-control" placeholder="Username">
+                            </div>
+                        </div>
+                        <fieldset class="mb-3">
+                            <legend class="col-form-label">Radios</legend>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ksRadio" id="ksRadio1" checked>
+                                <label class="form-check-label" for="ksRadio1">Selected radio</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="ksRadio" id="ksRadio2">
+                                <label class="form-check-label" for="ksRadio2">Default radio</label>
+                            </div>
+                        </fieldset>
+                        <fieldset class="mb-3">
+                            <legend class="col-form-label">Checkboxes</legend>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ksCheck1" checked>
+                                <label class="form-check-label" for="ksCheck1">Checked</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="ksCheck2">
+                                <label class="form-check-label" for="ksCheck2">Default</label>
+                            </div>
+                        </fieldset>
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="ksSwitch1" checked>
+                                <label class="form-check-label" for="ksSwitch1">Toggle switch</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ksRange" class="form-label">Range</label>
+                            <input type="range" class="form-range" id="ksRange">
+                        </div>
+                        <h6 class="mt-3">Validation States</h6>
+                        <div class="mb-2">
+                            <input type="text" class="form-control is-valid" value="Valid input">
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="mb-2">
+                            <input type="text" class="form-control is-invalid">
+                            <div class="invalid-feedback">Please provide a value.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="codeForms">
+                <div class="card-footer"><pre class="mb-0"><code>&lt;div class="mb-3"&gt;
+  &lt;label for="id" class="form-label"&gt;Label&lt;/label&gt;
+  &lt;input type="text" class="form-control" id="id" placeholder="..."&gt;
+  &lt;div class="form-text"&gt;Helper text.&lt;/div&gt;
+&lt;/div&gt;
+&lt;select class="form-select"&gt;...&lt;/select&gt;
+&lt;div class="form-check form-switch"&gt;
+  &lt;input class="form-check-input" type="checkbox" checked&gt;
+  &lt;label class="form-check-label"&gt;Toggle&lt;/label&gt;
+&lt;/div&gt;
+&lt;input type="text" class="form-control is-valid"&gt;
+&lt;input type="text" class="form-control is-invalid"&gt;</code></pre></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ALERTS -->
+    <!-- ============================================================ -->
+    <section class="mb-5" id="alerts">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="bi bi-bell me-2"></i>Alerts</h2>
+                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#codeAlerts">
+                    <i class="bi bi-code-slash me-1"></i>Code
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-primary" role="alert"><strong>Primary</strong> &mdash; A simple primary alert.</div>
+                <div class="alert alert-secondary" role="alert"><strong>Secondary</strong> &mdash; A simple secondary alert.</div>
+                <div class="alert alert-success" role="alert"><strong>Success</strong> &mdash; A simple success alert.</div>
+                <div class="alert alert-danger" role="alert"><strong>Danger</strong> &mdash; A simple danger alert.</div>
+                <div class="alert alert-warning" role="alert"><strong>Warning</strong> &mdash; A simple warning alert.</div>
+                <div class="alert alert-info" role="alert"><strong>Info</strong> &mdash; A simple info alert.</div>
+                <div class="alert alert-light" role="alert"><strong>Light</strong> &mdash; A simple light alert.</div>
+                <div class="alert alert-dark" role="alert"><strong>Dark</strong> &mdash; A simple dark alert.</div>
+
+                <h5 class="mt-4 mb-3">Dismissible with Content</h5>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <h4 class="alert-heading">Well done!</h4>
+                    <p>This alert has a heading, paragraph, and <a href="#" class="alert-link">a link</a>.</p>
+                    <hr>
+                    <p class="mb-0">Plus a horizontal rule and footer text.</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="collapse" id="codeAlerts">
+                <div class="card-footer"><pre class="mb-0"><code>&lt;div class="alert alert-primary" role="alert"&gt;...&lt;/div&gt;
+&lt;div class="alert alert-success alert-dismissible fade show"&gt;
+  &lt;h4 class="alert-heading"&gt;Title&lt;/h4&gt;
+  &lt;p&gt;Content with &lt;a href="#" class="alert-link"&gt;a link&lt;/a&gt;.&lt;/p&gt;
+  &lt;button class="btn-close" data-bs-dismiss="alert"&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- CARDS -->
+    <!-- ============================================================ -->
+    <section class="mb-5" id="cards">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="bi bi-card-heading me-2"></i>Cards</h2>
+                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#codeCards">
+                    <i class="bi bi-code-slash me-1"></i>Code
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">Featured</div>
+                            <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">Some example text to build on the card title.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                            <div class="card-footer text-body-secondary">2 days ago</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-bg-primary">
+                            <div class="card-header">Primary</div>
+                            <div class="card-body">
+                                <h5 class="card-title">Primary card</h5>
+                                <p class="card-text">Uses text-bg-primary for proper contrast.</p>
+                            </div>
+                        </div>
+                        <div class="card text-bg-danger mt-3">
+                            <div class="card-header">Danger</div>
+                            <div class="card-body">
+                                <h5 class="card-title">Danger card</h5>
+                                <p class="card-text">Uses text-bg-danger for proper contrast.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-primary">
+                            <div class="card-header">Border variant</div>
+                            <div class="card-body text-primary">
+                                <h5 class="card-title">Border primary card</h5>
+                                <p class="card-text">Outlined style, inherits body background.</p>
+                            </div>
+                        </div>
+                        <div class="card border-success mt-3">
+                            <div class="card-header">Border variant</div>
+                            <div class="card-body text-success">
+                                <h5 class="card-title">Border success card</h5>
+                                <p class="card-text">Outlined style, inherits body background.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="codeCards">
+                <div class="card-footer"><pre class="mb-0"><code>&lt;div class="card"&gt;
+  &lt;div class="card-header"&gt;Featured&lt;/div&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h5 class="card-title"&gt;Title&lt;/h5&gt;
+    &lt;p class="card-text"&gt;Text&lt;/p&gt;
+    &lt;a href="#" class="btn btn-primary"&gt;Action&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class="card-footer text-body-secondary"&gt;Footer&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="card text-bg-primary"&gt;...&lt;/div&gt;
+&lt;div class="card border-primary"&gt;...&lt;/div&gt;</code></pre></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- NAVIGATION -->
+    <!-- ============================================================ -->
+    <section class="mb-5" id="navs">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="bi bi-signpost-split me-2"></i>Navigation</h2>
+                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#codeNavs">
+                    <i class="bi bi-code-slash me-1"></i>Code
+                </button>
+            </div>
+            <div class="card-body">
+                <h5 class="mb-3">Navbar (dark)</h5>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded mb-4">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">Brand</a>
+                        <div class="collapse navbar-collapse show">
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item"><a class="nav-link active" href="#">Active</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+                                <li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <h5 class="mb-3">Navbar (primary)</h5>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded mb-4">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">Brand</a>
+                        <div class="collapse navbar-collapse show">
+                            <ul class="navbar-nav me-auto">
+                                <li class="nav-item"><a class="nav-link active" href="#">Active</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+                                <li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+                <h5 class="mb-3">Tabs</h5>
+                <ul class="nav nav-tabs mb-4">
+                    <li class="nav-item"><a class="nav-link active" href="#">Active</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+                    <li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+                </ul>
+
+                <h5 class="mb-3">Pills</h5>
+                <ul class="nav nav-pills mb-4">
+                    <li class="nav-item"><a class="nav-link active" href="#">Active</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+                    <li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>
+                </ul>
+
+                <h5 class="mb-3">Dropdowns</h5>
+                <div class="d-flex gap-2 flex-wrap">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">Dropdown</button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger">Split</button>
+                        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">
+                            <span class="visually-hidden">Toggle</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="codeNavs">
+                <div class="card-footer"><pre class="mb-0"><code>&lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;...&lt;/nav&gt;
+&lt;nav class="navbar navbar-expand-lg navbar-dark bg-primary"&gt;...&lt;/nav&gt;
+&lt;ul class="nav nav-tabs"&gt;
+  &lt;li class="nav-item"&gt;&lt;a class="nav-link active"&gt;Active&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul class="nav nav-pills"&gt;...&lt;/ul&gt;
+&lt;div class="dropdown"&gt;
+  &lt;button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"&gt;...&lt;/button&gt;
+  &lt;ul class="dropdown-menu"&gt;...&lt;/ul&gt;
+&lt;/div&gt;</code></pre></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- BADGES -->
+    <!-- ============================================================ -->
+    <section class="mb-5" id="badges">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="bi bi-tag me-2"></i>Badges &amp; Spinners</h2>
+                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#codeBadges">
+                    <i class="bi bi-code-slash me-1"></i>Code
+                </button>
+            </div>
+            <div class="card-body">
+                <h5 class="mb-3">Badges</h5>
+                <div class="mb-3">
+                    <span class="badge bg-primary me-1">Primary</span>
+                    <span class="badge bg-secondary me-1">Secondary</span>
+                    <span class="badge bg-success me-1">Success</span>
+                    <span class="badge bg-danger me-1">Danger</span>
+                    <span class="badge bg-warning text-dark me-1">Warning</span>
+                    <span class="badge bg-info text-dark me-1">Info</span>
+                </div>
+                <div class="mb-4">
+                    <span class="badge rounded-pill bg-primary me-1">Primary</span>
+                    <span class="badge rounded-pill bg-secondary me-1">Secondary</span>
+                    <span class="badge rounded-pill bg-success me-1">Success</span>
+                    <span class="badge rounded-pill bg-danger me-1">Danger</span>
+                </div>
+
+                <h5 class="mb-3">Spinners</h5>
+                <div class="mb-3">
+                    <div class="spinner-border text-primary me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+                    <div class="spinner-border text-secondary me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+                    <div class="spinner-border text-success me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+                    <div class="spinner-border text-danger me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+                    <div class="spinner-grow text-primary me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+                    <div class="spinner-grow text-info me-2" role="status"><span class="visually-hidden">Loading...</span></div>
+                </div>
+
+                <h5 class="mb-3">Toasts</h5>
+                <div class="toast show" role="alert">
+                    <div class="toast-header">
+                        <strong class="me-auto">Bootstrap</strong>
+                        <small class="text-body-secondary">11 mins ago</small>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">A toast message.</div>
+                </div>
+            </div>
+            <div class="collapse" id="codeBadges">
+                <div class="card-footer"><pre class="mb-0"><code>&lt;span class="badge bg-primary"&gt;Primary&lt;/span&gt;
+&lt;span class="badge rounded-pill bg-success"&gt;Pill&lt;/span&gt;
+&lt;div class="spinner-border text-primary" role="status"&gt;...&lt;/div&gt;
+&lt;div class="spinner-grow text-info" role="status"&gt;...&lt;/div&gt;</code></pre></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- PROGRESS -->
+    <!-- ============================================================ -->
+    <section class="mb-5" id="progress">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="bi bi-bar-chart me-2"></i>Progress Bars</h2>
+                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#codeProgress">
+                    <i class="bi bi-code-slash me-1"></i>Code
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="progress mb-3"><div class="progress-bar" style="width: 25%">25%</div></div>
+                <div class="progress mb-3"><div class="progress-bar bg-success" style="width: 50%">50%</div></div>
+                <div class="progress mb-3"><div class="progress-bar bg-info" style="width: 75%">75%</div></div>
+                <div class="progress mb-3"><div class="progress-bar bg-warning" style="width: 60%">60%</div></div>
+                <div class="progress mb-3"><div class="progress-bar bg-danger" style="width: 40%">40%</div></div>
+                <div class="progress mb-3"><div class="progress-bar progress-bar-striped" style="width: 50%">Striped</div></div>
+                <div class="progress"><div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%">Animated</div></div>
+            </div>
+            <div class="collapse" id="codeProgress">
+                <div class="card-footer"><pre class="mb-0"><code>&lt;div class="progress"&gt;
+  &lt;div class="progress-bar" style="width: 25%"&gt;25%&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="progress"&gt;
+  &lt;div class="progress-bar bg-success" style="width: 50%"&gt;50%&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="progress"&gt;
+  &lt;div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"&gt;Animated&lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- TABLES -->
+    <!-- ============================================================ -->
+    <section class="mb-5" id="tables">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="bi bi-table me-2"></i>Tables</h2>
+                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#codeTables">
+                    <i class="bi bi-code-slash me-1"></i>Code
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <h5 class="mb-3">Default Table</h5>
+                        <table class="table">
+                            <thead><tr><th>#</th><th>Name</th><th>Handle</th></tr></thead>
+                            <tbody>
+                                <tr><td>1</td><td>Mark</td><td>@@mdo</td></tr>
+                                <tr><td>2</td><td>Jacob</td><td>@@fat</td></tr>
+                                <tr><td>3</td><td>Larry</td><td>@@twitter</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="mb-3">Striped &amp; Hover</h5>
+                        <table class="table table-striped table-hover">
+                            <thead><tr><th>#</th><th>Name</th><th>Handle</th></tr></thead>
+                            <tbody>
+                                <tr><td>1</td><td>Mark</td><td>@@mdo</td></tr>
+                                <tr><td>2</td><td>Jacob</td><td>@@fat</td></tr>
+                                <tr><td>3</td><td>Larry</td><td>@@twitter</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <h5 class="mb-3">Bordered Table with Contextual Rows</h5>
+                <table class="table table-bordered">
+                    <thead><tr><th>Class</th><th>Heading</th><th>Heading</th></tr></thead>
+                    <tbody>
+                        <tr><td>Default</td><td>Cell</td><td>Cell</td></tr>
+                        <tr class="table-primary"><td>.table-primary</td><td>Cell</td><td>Cell</td></tr>
+                        <tr class="table-success"><td>.table-success</td><td>Cell</td><td>Cell</td></tr>
+                        <tr class="table-danger"><td>.table-danger</td><td>Cell</td><td>Cell</td></tr>
+                        <tr class="table-warning"><td>.table-warning</td><td>Cell</td><td>Cell</td></tr>
+                        <tr class="table-info"><td>.table-info</td><td>Cell</td><td>Cell</td></tr>
+                        <tr class="table-active"><td>.table-active</td><td>Cell</td><td>Cell</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="collapse" id="codeTables">
+                <div class="card-footer"><pre class="mb-0"><code>&lt;table class="table"&gt;...&lt;/table&gt;
+&lt;table class="table table-striped table-hover"&gt;...&lt;/table&gt;
+&lt;table class="table table-bordered"&gt;
+  &lt;tr class="table-primary"&gt;...&lt;/tr&gt;
+  &lt;tr class="table-success"&gt;...&lt;/tr&gt;
+&lt;/table&gt;</code></pre></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- LIST GROUPS -->
+    <!-- ============================================================ -->
+    <section class="mb-5" id="listgroups">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="bi bi-list-ul me-2"></i>List Groups</h2>
+                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#codeListGroups">
+                    <i class="bi bi-code-slash me-1"></i>Code
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <h5 class="mb-3">Basic</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item active" aria-current="true">Active item</li>
+                            <li class="list-group-item">A second item</li>
+                            <li class="list-group-item">A third item</li>
+                            <li class="list-group-item disabled" aria-disabled="true">Disabled item</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="mb-3">With Badges</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Inbox <span class="badge bg-primary rounded-pill">14</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Drafts <span class="badge bg-primary rounded-pill">2</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Sent <span class="badge bg-primary rounded-pill">1</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5 class="mb-3">Contextual</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-primary">Primary</li>
+                            <li class="list-group-item list-group-item-success">Success</li>
+                            <li class="list-group-item list-group-item-danger">Danger</li>
+                            <li class="list-group-item list-group-item-warning">Warning</li>
+                            <li class="list-group-item list-group-item-info">Info</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="codeListGroups">
+                <div class="card-footer"><pre class="mb-0"><code>&lt;ul class="list-group"&gt;
+  &lt;li class="list-group-item active"&gt;Active&lt;/li&gt;
+  &lt;li class="list-group-item"&gt;Item&lt;/li&gt;
+  &lt;li class="list-group-item disabled"&gt;Disabled&lt;/li&gt;
+&lt;/ul&gt;
+&lt;li class="list-group-item list-group-item-primary"&gt;Primary&lt;/li&gt;</code></pre></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ACCORDION -->
+    <!-- ============================================================ -->
+    <section class="mb-5" id="accordion">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="bi bi-chevron-bar-expand me-2"></i>Accordion</h2>
+                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#codeAccordion">
+                    <i class="bi bi-code-slash me-1"></i>Code
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="ksAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#ksAccOne">
+                                Accordion Item #1
+                            </button>
+                        </h2>
+                        <div id="ksAccOne" class="accordion-collapse collapse show" data-bs-parent="#ksAccordion">
+                            <div class="accordion-body">
+                                <strong>This is the first item's accordion body.</strong> It is shown by default. This shows how the accordion component
+                                adapts to the current theme's colors for backgrounds, borders, and focus states.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ksAccTwo">
+                                Accordion Item #2
+                            </button>
+                        </h2>
+                        <div id="ksAccTwo" class="accordion-collapse collapse" data-bs-parent="#ksAccordion">
+                            <div class="accordion-body">
+                                <strong>This is the second item.</strong> Click to expand and evaluate the transition and collapse styling.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ksAccThree">
+                                Accordion Item #3
+                            </button>
+                        </h2>
+                        <div id="ksAccThree" class="accordion-collapse collapse" data-bs-parent="#ksAccordion">
+                            <div class="accordion-body">
+                                <strong>This is the third item.</strong> Check borders and spacing across themes.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="codeAccordion">
+                <div class="card-footer"><pre class="mb-0"><code>&lt;div class="accordion" id="myAccordion"&gt;
+  &lt;div class="accordion-item"&gt;
+    &lt;h2 class="accordion-header"&gt;
+      &lt;button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#collapseOne"&gt;
+        Item #1
+      &lt;/button&gt;
+    &lt;/h2&gt;
+    &lt;div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#myAccordion"&gt;
+      &lt;div class="accordion-body"&gt;Content&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- MODALS -->
+    <!-- ============================================================ -->
+    <section class="mb-5" id="modals">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="bi bi-window-stack me-2"></i>Modals</h2>
+                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#codeModals">
+                    <i class="bi bi-code-slash me-1"></i>Code
+                </button>
+            </div>
+            <div class="card-body">
+                <button type="button" class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#ksModal">
+                    Launch demo modal
+                </button>
+                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#ksStaticModal">
+                    Static backdrop
+                </button>
+
+                <div class="modal fade" id="ksModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>This modal demonstrates how the theme styles the modal dialog, including header, body, footer, borders, and the close button.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="ksStaticModal" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Static Backdrop</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>This modal won't close when clicking outside. Test the backdrop overlay appearance.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Understood</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="collapse" id="codeModals">
+                <div class="card-footer"><pre class="mb-0"><code>&lt;button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"&gt;Open&lt;/button&gt;
+&lt;div class="modal fade" id="myModal" tabindex="-1"&gt;
+  &lt;div class="modal-dialog"&gt;
+    &lt;div class="modal-content"&gt;
+      &lt;div class="modal-header"&gt;...&lt;/div&gt;
+      &lt;div class="modal-body"&gt;...&lt;/div&gt;
+      &lt;div class="modal-footer"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- BREADCRUMBS & PAGINATION -->
+    <!-- ============================================================ -->
+    <section class="mb-5" id="breadcrumbs">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h2 class="mb-0"><i class="bi bi-three-dots me-2"></i>Breadcrumbs &amp; Pagination</h2>
+                <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#codeBreadcrumbs">
+                    <i class="bi bi-code-slash me-1"></i>Code
+                </button>
+            </div>
+            <div class="card-body">
+                <h5 class="mb-3">Breadcrumbs</h5>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Library</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Current Page</li>
+                    </ol>
+                </nav>
+
+                <h5 class="mb-3">Pagination</h5>
+                <nav>
+                    <ul class="pagination">
+                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
+
+                <h5 class="mb-3">Pagination Sizes</h5>
+                <nav>
+                    <ul class="pagination pagination-lg">
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    </ul>
+                </nav>
+                <nav>
+                    <ul class="pagination pagination-sm">
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="collapse" id="codeBreadcrumbs">
+                <div class="card-footer"><pre class="mb-0"><code>&lt;nav aria-label="breadcrumb"&gt;
+  &lt;ol class="breadcrumb"&gt;
+    &lt;li class="breadcrumb-item"&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li class="breadcrumb-item active" aria-current="page"&gt;Current&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;
+&lt;ul class="pagination"&gt;
+  &lt;li class="page-item active"&gt;&lt;a class="page-link"&gt;1&lt;/a&gt;&lt;/li&gt;
+  &lt;li class="page-item"&gt;&lt;a class="page-link"&gt;2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to top -->
+    <nav class="my-5">
+        <ul class="pagination justify-content-center flex-wrap gap-1">
+            <li class="page-item"><a class="page-link" href="#typography">Typography</a></li>
+            <li class="page-item"><a class="page-link" href="#colors">Colors</a></li>
+            <li class="page-item"><a class="page-link" href="#buttons">Buttons</a></li>
+            <li class="page-item"><a class="page-link" href="#forms">Forms</a></li>
+            <li class="page-item"><a class="page-link" href="#alerts">Alerts</a></li>
+            <li class="page-item"><a class="page-link" href="#cards">Cards</a></li>
+            <li class="page-item"><a class="page-link" href="#navs">Navigation</a></li>
+            <li class="page-item"><a class="page-link" href="#tables">Tables</a></li>
+            <li class="page-item"><a class="page-link" href="#listgroups">List Groups</a></li>
+            <li class="page-item"><a class="page-link" href="#accordion">Accordion</a></li>
+        </ul>
+    </nav>
+</div>

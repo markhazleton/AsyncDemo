@@ -6,26 +6,26 @@ All old Swagger references have been successfully updated to point to the new Sc
 
 ### Files Updated: 5
 
-#### 1. ? AsyncDemo.Web\Views\Home\Index.cshtml
+#### 1. ? AsyncSpark.Web\Views\Home\Index.cshtml
 - **Changed:** API documentation link from `/swagger` ? `/scalar/v1`
 - **Changed:** Description text from "Swagger UI" ? "Scalar API"
 
-#### 2. ? AsyncDemo.Web\Views\Shared\_Layout.cshtml
+#### 2. ? AsyncSpark.Web\Views\Shared\_Layout.cshtml
 - **Changed:** Navigation menu link from `/swagger` ? `/scalar/v1`
 
-#### 3. ? AsyncDemo.Web\Program.cs
+#### 3. ? AsyncSpark.Web\Program.cs
 - **Changed:** Comment from "Add Swagger" ? "Add Scalar API documentation"
 
-#### 4. ? AsyncDemo.Web\Properties\launchSettings.json
+#### 4. ? AsyncSpark.Web\Properties\launchSettings.json
 - **Changed:** Launch URL from `"swagger"` ? `"scalar/v1"`
 - **Impact:** When you press F5 or run the app, it now opens Scalar instead of trying to open the old Swagger URL
 
-#### 5. ? AsyncDemo.Web\IMPROVEMENTS_SUMMARY.md
+#### 5. ? AsyncSpark.Web\IMPROVEMENTS_SUMMARY.md
 - **Changed:** Recommendation from "Add Swagger Authentication" ? "Add API Documentation Authentication"
 
 ### Deleted: 1 Folder
 
-#### ? AsyncDemo.Web\wwwroot\swagger-ui\
+#### ? AsyncSpark.Web\wwwroot\swagger-ui\
 - **Deleted entire folder** including custom.css
 - **Reason:** No longer needed - Scalar manages its own UI
 
@@ -83,7 +83,7 @@ app.UseCustomSwagger();
 To verify no unintended swagger references remain:
 
 ```powershell
-Select-String -Path "C:\GitHub\MarkHazleton\AsyncDemo\AsyncDemo.Web\**" `
+Select-String -Path "C:\GitHub\MarkHazleton\AsyncSpark\AsyncSpark.Web\**" `
   -Pattern "swagger|Swagger" `
   -Exclude "*.dll","*.pdb" | 
   Where-Object { 

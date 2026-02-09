@@ -1,0 +1,344 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AsyncSpark.Web</name>
+    </assembly>
+    <members>
+        <member name="T:AsyncSpark.Web.Controllers.Api.BaseApiController">
+            <summary>
+            Base for all Api Controllers in this project
+            </summary>
+        </member>
+        <member name="M:AsyncSpark.Web.Controllers.Api.BaseApiController.GetApplicationStatus">
+            <summary>
+            GetApplicationStatus
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AsyncSpark.Web.Controllers.Api.RemoteController">
+            <summary>
+            Remote Server MOCK
+            </summary>
+        </member>
+        <member name="M:AsyncSpark.Web.Controllers.Api.RemoteController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncSpark.Web.Controllers.Api.RemoteController})">
+             <summary>
+            
+             </summary>
+             <param name="logger"></param>
+        </member>
+        <member name="M:AsyncSpark.Web.Controllers.Api.RemoteController.GetResults(AsyncSpark.Models.MockResults)">
+            <summary>
+            Post Results
+            </summary>
+            <param name="model">Instance of the requestModel</param>
+            <returns></returns>
+            <response code="200">Request Processed successfully.</response>
+            <response code="200">Request Timeout.</response>
+        </member>
+        <member name="T:AsyncSpark.Web.Controllers.Api.StatusController">
+            <summary>
+            Status Controller
+            </summary>
+        </member>
+        <member name="M:AsyncSpark.Web.Controllers.Api.StatusController.Get">
+            <summary>
+            Returns Current Application Status
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:AsyncSpark.Web.Controllers.BaseController">
+            <summary>
+            BaseController
+            </summary>
+        </member>
+        <member name="F:AsyncSpark.Web.Controllers.BaseController.retryCountKey">
+            <summary>
+            Retry Count
+            </summary>
+        </member>
+        <member name="F:AsyncSpark.Web.Controllers.BaseController._httpIndexPolicy">
+            <summary>
+            Index Policy
+            </summary>
+        </member>
+        <member name="F:AsyncSpark.Web.Controllers.BaseController._httpWeatherPolicy">
+            <summary>
+            Weather Policy
+            </summary>
+        </member>
+        <member name="F:AsyncSpark.Web.Controllers.BaseController._httpClient">
+            <summary>
+            Shared Http Client
+            </summary>
+        </member>
+        <member name="F:AsyncSpark.Web.Controllers.BaseController.stopWatch">
+            <summary>
+            Shared Stopwatch
+            </summary>
+        </member>
+        <member name="F:AsyncSpark.Web.Controllers.BaseController.jitter">
+            <summary>
+            Shared Jitter
+            </summary>
+        </member>
+        <member name="F:AsyncSpark.Web.Controllers.BaseController.cts">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AsyncSpark.Web.Controllers.BaseController.#cctor">
+            <summary>
+            Static Base Constructor
+            </summary>
+        </member>
+        <member name="M:AsyncSpark.Web.Controllers.BaseController.#ctor">
+            <summary>
+            Base Controller Constructor
+            </summary>
+        </member>
+        <member name="T:AsyncSpark.Web.Controllers.HomeController">
+            <summary>
+            Home Controller
+            </summary>
+        </member>
+        <member name="T:AsyncSpark.Web.Controllers.OpenWeatherController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AsyncSpark.Web.Controllers.OpenWeatherController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncSpark.Web.Controllers.HomeController},OpenWeatherMapClient.Interfaces.IWeatherService,Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+            <summary>
+            
+            </summary>
+            <param name="logger"></param>
+            <param name="weatherService"></param>
+            <param name="cache"></param>
+        </member>
+        <member name="M:AsyncSpark.Web.Controllers.OpenWeatherController.Index(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="location"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsyncSpark.Web.Controllers.PollyController">
+            <summary>
+            Polly Controller
+            </summary>
+        </member>
+        <member name="M:AsyncSpark.Web.Controllers.PollyController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncSpark.Web.Controllers.PollyController})">
+             <summary>
+            
+             </summary>
+             <param name="logger"></param>
+        </member>
+        <member name="M:AsyncSpark.Web.Controllers.PollyController.Index(System.Int32,System.Int32)">
+            <summary>
+            Home Page
+            </summary>
+            <param name="loopCount"></param>
+            <param name="maxTimeMs"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsyncSpark.Web.Extensions.CustomSwaggerExtensions">
+            <summary>
+            Custom Swagger
+            </summary>
+        </member>
+        <member name="M:AsyncSpark.Web.Extensions.CustomSwaggerExtensions.AddCustomSwagger(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+             <summary>
+            
+             </summary>
+             <param name="services"></param>
+             <returns></returns>
+        </member>
+        <member name="T:AsyncSpark.Web.Extensions.HttpContextExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:AsyncSpark.Web.Extensions.HttpContextExtensions.AddHttpContextAccessor(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:AsyncSpark.Web.Extensions.HttpContextExtensions.UseHttpContext(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <returns></returns>
+        </member>
+        <member name="T:AsyncSpark.Web.Extensions.MyHttpContext">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Extensions.MyHttpContext.Current">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Extensions.MyHttpContext.AppBaseUrl">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AsyncSpark.Web.Models.ApplicationStatus">
+            <summary>
+            ApplicationStatus
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Models.ApplicationStatus.BuildVersion">
+            <summary>
+            BuildVersion
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Models.ApplicationStatus.Features">
+            <summary>
+            Features
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Models.ApplicationStatus.Messages">
+            <summary>
+            Messages
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Models.ApplicationStatus.Region">
+            <summary>
+            Region
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Models.ApplicationStatus.Status">
+            <summary>
+            Status 
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Models.ApplicationStatus.Tests">
+            <summary>
+            Tests 
+            </summary>
+        </member>
+        <member name="T:AsyncSpark.Web.Models.BuildVersion">
+            <summary>
+            Build Version
+            </summary>
+        </member>
+        <member name="M:AsyncSpark.Web.Models.BuildVersion.#ctor(System.Reflection.Assembly)">
+            <summary>
+            Build Version
+            </summary>
+            <param name="assembly"></param>
+        </member>
+        <member name="M:AsyncSpark.Web.Models.BuildVersion.ToString">
+            <summary>
+            Override the To String Function to Format Version
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:AsyncSpark.Web.Models.BuildVersion.Build">
+            <summary>
+            Build
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Models.BuildVersion.MajorVersion">
+            <summary>
+            Major Version
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Models.BuildVersion.MinorVersion">
+            <summary>
+            Minor Version
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Models.BuildVersion.Revision">
+            <summary>
+            Revision
+            </summary>
+        </member>
+        <member name="T:AsyncSpark.Web.Models.ErrorResource">
+            <summary>
+            Error Resource
+            </summary>
+        </member>
+        <member name="M:AsyncSpark.Web.Models.ErrorResource.#ctor(System.Collections.Generic.List{System.String})">
+             <summary>
+            
+             </summary>
+             <param name="messages"></param>
+        </member>
+        <member name="M:AsyncSpark.Web.Models.ErrorResource.#ctor(System.String)">
+            <summary>
+            Error Resource
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="P:AsyncSpark.Web.Models.ErrorResource.Messages">
+            <summary>
+            Messages
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Models.ErrorResource.Success">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="T:AsyncSpark.Web.Models.ErrorViewModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Models.ErrorViewModel.RequestId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Models.ErrorViewModel.ShowRequestId">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:AsyncSpark.Web.Models.KeyVaultUsage">
+            <summary>
+            Key Vault Usage
+            </summary>
+        </member>
+        <member name="T:AsyncSpark.Web.Models.ServiceStatus">
+            <summary>
+            Service Status Values
+            </summary>
+        </member>
+        <member name="F:AsyncSpark.Web.Models.ServiceStatus.Degraded">
+            <summary>
+            Some sub-set of the system is not working
+            </summary>
+        </member>
+        <member name="F:AsyncSpark.Web.Models.ServiceStatus.Offline">
+            <summary>
+            The system is not available
+            </summary>
+        </member>
+        <member name="F:AsyncSpark.Web.Models.ServiceStatus.Online">
+            <summary>
+            The system is fully online 
+            </summary>
+        </member>
+        <member name="T:AsyncSpark.Web.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:AsyncSpark.Web.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

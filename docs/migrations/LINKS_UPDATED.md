@@ -5,7 +5,7 @@
 ### Changes Made
 
 #### 1. **Homepage (Index.cshtml)** ?
-**File:** `AsyncDemo.Web\Views\Home\Index.cshtml`
+**File:** `AsyncSpark.Web\Views\Home\Index.cshtml`
 
 **Changed:**
 ```html
@@ -29,7 +29,7 @@
 ---
 
 #### 2. **Navigation Menu (_Layout.cshtml)** ?
-**File:** `AsyncDemo.Web\Views\Shared\_Layout.cshtml`
+**File:** `AsyncSpark.Web\Views\Shared\_Layout.cshtml`
 
 **Changed:**
 ```html
@@ -51,7 +51,7 @@
 ---
 
 #### 3. **Program.cs Comment** ?
-**File:** `AsyncDemo.Web\Program.cs`
+**File:** `AsyncSpark.Web\Program.cs`
 
 **Changed:**
 ```csharp
@@ -65,7 +65,7 @@
 ---
 
 #### 4. **Removed Swagger UI Folder** ?
-**Deleted:** `AsyncDemo.Web\wwwroot\swagger-ui\` (entire folder)
+**Deleted:** `AsyncSpark.Web\wwwroot\swagger-ui\` (entire folder)
 
 This folder contained:
 - `custom.css` - Old Swagger UI customizations
@@ -78,7 +78,7 @@ This folder contained:
 ## ?? Files Checked (No Changes Needed)
 
 ? **README.md** - No swagger references  
-? **AsyncDemo.Web\wwwroot\README.md** - No swagger references  
+? **AsyncSpark.Web\wwwroot\README.md** - No swagger references  
 ? **All Controllers** - No swagger references  
 ? **Other View Files** - No swagger references  
 
@@ -136,7 +136,7 @@ These old Swagger endpoints have been removed:
 
 ### 1. Run the Application
 ```bash
-dotnet run --project AsyncDemo.Web
+dotnet run --project AsyncSpark.Web
 ```
 
 ### 2. Test Navigation

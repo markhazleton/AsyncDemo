@@ -28,7 +28,7 @@ The API description now includes:
 ## ?? Technical Implementation
 
 ### Location
-`AsyncDemo.Web\Extensions\CustomSwaggerExtensions.cs`
+`AsyncSpark.Web\Extensions\CustomSwaggerExtensions.cs`
 
 ### Changes Made
 
@@ -46,7 +46,7 @@ document.Info.Description = """
     </div>
     
     <p style="margin: 16px 0; font-size: 16px; line-height: 1.6;">
-        AsyncDemo.Web API built with ASP.NET to show how to create RESTful services using a decoupled, maintainable architecture.
+        AsyncSpark.Web API built with ASP.NET to show how to create RESTful services using a decoupled, maintainable architecture.
     </p>
     
     <p style="margin: 16px 0; font-size: 14px; color: #666;">
@@ -100,7 +100,7 @@ When you visit `/scalar/v1`, you'll see:
 
 ```
 ???????????????????????????????????????????
-? AsyncDemo.Web API                       ?  ? Title
+? AsyncSpark.Web API                       ?  ? Title
 ???????????????????????????????????????????
 ? ?????????????????????????????????????  ?
 ? ?  Purple Gradient Banner           ?  ?
@@ -109,7 +109,7 @@ When you visit `/scalar/v1`, you'll see:
 ? ?  ?????????????????????????????    ?  ?
 ? ?????????????????????????????????????  ?
 ?                                         ?
-? AsyncDemo.Web API built with ASP.NET   ?  ? Description
+? AsyncSpark.Web API built with ASP.NET   ?  ? Description
 ? to show how to create RESTful          ?
 ? services...                             ?
 ?                                         ?
@@ -186,7 +186,7 @@ The button is currently at the top of the description. You could:
 
 ### Before
 ```
-AsyncDemo.Web API built with ASP.NET to show 
+AsyncSpark.Web API built with ASP.NET to show 
 how to create RESTful services using a decoupled, 
 maintainable architecture. <a href='/'>Back To Home</a>
 ```
@@ -218,7 +218,7 @@ Enhanced description with formatting...
 
 1. **Run the app**
    ```bash
-   dotnet run --project AsyncDemo.Web
+   dotnet run --project AsyncSpark.Web
    ```
 
 2. **Navigate to Scalar**
@@ -239,14 +239,14 @@ Enhanced description with formatting...
 ```csharp
 document.Info.Description = """
     <p><a href="/" style="font-weight: 600; color: #4361ee;">? Back to Home</a></p>
-    <p>AsyncDemo.Web API built with ASP.NET...</p>
+    <p>AsyncSpark.Web API built with ASP.NET...</p>
     """;
 ```
 
 ### Example 2: Button at Bottom
 ```csharp
 document.Info.Description = """
-    <p>AsyncDemo.Web API built with ASP.NET...</p>
+    <p>AsyncSpark.Web API built with ASP.NET...</p>
     <hr style="margin: 20px 0;" />
     <div style="text-align: center;">
         <a href="/" style="display: inline-block; padding: 10px 20px; background: #4361ee; color: white; border-radius: 6px; text-decoration: none;">
@@ -273,7 +273,7 @@ document.Info.Description = """
             </a>
         </div>
     </div>
-    <p>AsyncDemo.Web API built with ASP.NET...</p>
+    <p>AsyncSpark.Web API built with ASP.NET...</p>
     """;
 ```
 

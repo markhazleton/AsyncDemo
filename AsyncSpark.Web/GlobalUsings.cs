@@ -1,0 +1,22 @@
+global using AsyncSpark.Models;
+global using AsyncSpark.Services;
+global using AsyncSpark.Web.Extensions;
+global using AsyncSpark.Web.Middleware;
+global using AsyncSpark.Web.Models;
+global using AsyncSpark.Web.Services;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Caching.Memory;
+global using Microsoft.Extensions.DependencyInjection.Extensions;
+global using OpenWeatherMapClient.Interfaces;
+global using OpenWeatherMapClient.Models;
+global using OpenWeatherMapClient.WeatherService;
+global using Polly;
+global using Polly.Retry;
+global using System.Diagnostics;
+global using System.Globalization;
+global using System.Net;
+global using System.Net.Http.Headers;
+global using System.Reflection;
+global using System.Text;
+global using System.Text.Json;
+

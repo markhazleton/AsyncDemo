@@ -74,7 +74,7 @@ using Microsoft.OpenApi.Models;  // ? This namespace no longer exists!
 // Documentation is currently unclear
 ```
 
-### 2. Impact on AsyncDemo.Web
+### 2. Impact on AsyncSpark.Web
 
 The `CustomSwaggerExtensions.cs` file cannot compile with Swashbuckle v10:
 
@@ -90,7 +90,7 @@ public static class CustomSwaggerExtensions
             cfg.SwaggerDoc("v1",
                 new OpenApiInfo  // ? Type not found
                 {
-                    Title = "AsyncDemo.Web API",
+                    Title = "AsyncSpark.Web API",
                     Contact = new OpenApiContact { ... },  // ? Type not found
                     License = new OpenApiLicense { ... },   // ? Type not found
                 });
@@ -119,7 +119,7 @@ To successfully migrate to Swashbuckle v10, we need to determine:
 
 ### Why v7.2 is the Right Choice
 
-**For AsyncDemo.Web and most .NET 10 projects, Swashbuckle.AspNetCore v7.2 is the recommended version:**
+**For AsyncSpark.Web and most .NET 10 projects, Swashbuckle.AspNetCore v7.2 is the recommended version:**
 
 ? **Fully compatible with .NET 10**
 - Works perfectly with .NET 10 SDK
@@ -245,7 +245,7 @@ If you find the migration path and decide to upgrade, test:
 
 ## Conclusion
 
-**For AsyncDemo.Web on .NET 10:**
+**For AsyncSpark.Web on .NET 10:**
 
 ?? **Recommendation: Stay on Swashbuckle.AspNetCore v7.2**
 

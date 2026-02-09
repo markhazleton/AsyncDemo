@@ -2,7 +2,7 @@
 
 ## Migration Complete ?
 
-AsyncDemo.Web has successfully migrated from **Swashbuckle** to **Built-in OpenAPI + Scalar**.
+AsyncSpark.Web has successfully migrated from **Swashbuckle** to **Built-in OpenAPI + Scalar**.
 
 ---
 
@@ -10,7 +10,7 @@ AsyncDemo.Web has successfully migrated from **Swashbuckle** to **Built-in OpenA
 
 ### Run the Application
 ```bash
-dotnet run --project AsyncDemo.Web
+dotnet run --project AsyncSpark.Web
 ```
 
 ### Access Your New Documentation
@@ -44,7 +44,7 @@ https://localhost:{port}/openapi/v1.json
 
 ### Code
 - ? `CustomSwaggerExtensions.cs` - Completely rewritten for Scalar
-- ? `AsyncDemo.Web.csproj` - Updated package references
+- ? `AsyncSpark.Web.csproj` - Updated package references
 - ? `Program.cs` - **NO CHANGES** (still works!)
 
 ---
@@ -75,7 +75,7 @@ Auto-generates code examples in:
 
 ## ?? Customization
 
-Edit `AsyncDemo.Web\Extensions\CustomSwaggerExtensions.cs`:
+Edit `AsyncSpark.Web\Extensions\CustomSwaggerExtensions.cs`:
 
 ### Change Theme
 ```csharp

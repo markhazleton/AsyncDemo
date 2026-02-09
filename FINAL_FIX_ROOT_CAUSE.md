@@ -10,7 +10,7 @@
 
 ### Problem: Middleware Overriding Content-Type
 
-**File**: `AsyncDemo.Web/Program.cs` (Line 121-127)
+**File**: `AsyncSpark.Web/Program.cs` (Line 121-127)
 
 The middleware was setting `Content-Type: text/html; charset=utf-8` on **EVERY response**, including API responses!
 
@@ -250,12 +250,12 @@ Browser/PollyController
 
 ## Files Modified (Complete List)
 
-1. ? `AsyncDemo.Web/Program.cs` - **CRITICAL**: Fixed middleware
-2. ? `AsyncDemo.Web/Controllers/Api/RemoteController.cs` - Added `[Consumes]`
-3. ? `AsyncDemo.Web/Controllers/Api/BaseApiController.cs` - Removed conflicting `[Consumes]`
-4. ? `AsyncDemo.Web/Controllers/PollyController.cs` - Fixed HTTP POST
-5. ? `AsyncDemo.Web/GlobalUsings.cs` - Added namespaces
-6. ? `AsyncDemo.Web/build.js` - Removed Bootstrap Icons copying
+1. ? `AsyncSpark.Web/Program.cs` - **CRITICAL**: Fixed middleware
+2. ? `AsyncSpark.Web/Controllers/Api/RemoteController.cs` - Added `[Consumes]`
+3. ? `AsyncSpark.Web/Controllers/Api/BaseApiController.cs` - Removed conflicting `[Consumes]`
+4. ? `AsyncSpark.Web/Controllers/PollyController.cs` - Fixed HTTP POST
+5. ? `AsyncSpark.Web/GlobalUsings.cs` - Added namespaces
+6. ? `AsyncSpark.Web/build.js` - Removed Bootstrap Icons copying
 
 ---
 
