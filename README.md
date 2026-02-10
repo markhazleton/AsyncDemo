@@ -1,108 +1,141 @@
 # AsyncSpark
-Various demos, tips and tricks for using async in C#
+
+Production-ready reference implementation for async/await patterns in .NET 10 with constitution-driven development practices.
 
 [![Build and deploy ASP.Net Core app to Azure Web App - AsyncSpark](https://github.com/markhazleton/AsyncSpark/actions/workflows/main_AsyncSpark.yml/badge.svg)](https://github.com/markhazleton/AsyncSpark/actions/workflows/main_AsyncSpark.yml)
 
-Sample code for making and canceling Async Calls with beautiful API documentation powered by **[Scalar](https://github.com/scalar/scalar)**.
+## Overview
+
+AsyncSpark demonstrates enterprise-grade async programming patterns with enforced quality standards, automated compliance auditing, and interactive API documentation. Built on .NET 10 with 80% code coverage enforcement in CI/CD.
+
+**Live Demo**: [asyncspark.azurewebsites.net](https://asyncspark.azurewebsites.net/) | **API Docs**: [/scalar/v1](https://asyncspark.azurewebsites.net/scalar/v1)
+
+## Key Features
+
+- **Constitution-Driven Development**: Formalized coding standards enforced through automated audits
+- **80% Code Coverage Enforcement**: CI/CD fails if coverage drops below threshold
+- **Modern .NET 10**: Nullable reference types, implicit usings, file-scoped namespaces, primary constructors
+- **Async Best Practices**: ConfigureAwait(false) in all library code, proper CancellationToken usage, no blocking calls
+- **Resilience Patterns**: Polly integration via WebSpark.HttpClientUtility with retry, timeout, and circuit breaker policies
+- **Clean Architecture**: Dependency injection, decorator pattern, interface-based design
+- **Interactive API Documentation**: Scalar-powered API explorer with live testing
+- **SpecKit Development Workflow**: Constitution validation, automated audits, PR reviews, feature planning
+
+## Project Structure
+
+```
+AsyncSpark/                    # Core library - async utilities and services
+AsyncSpark.Web/               # ASP.NET Core web application with API endpoints
+AsyncSpark.Weather/           # Weather service integration demonstrating external API patterns
+AsyncSpark.Tests/             # MSTest + Moq unit tests
+AsyncSpark.Console/           # Console application demos
+.documentation/               # Constitution, guides, templates, audit reports
+.github/                      # CI/CD workflows, SpecKit agents, Copilot instructions
+.editorconfig                # C# code style enforcement
+```
 
 ## Learning Objectives
 
-This demo teaches critical async/await patterns through focused, real-world examples. Each concept links directly to specific code you can explore:
+Each pattern links to specific code implementing the technique:
 
-### 1. Avoiding Deadlocks
-**Where to look**: [AsyncMockService.cs:96](AsyncSpark/Services/AsyncMockService.cs#L96) - Notice the `.ConfigureAwait(false)` usage
-**What to learn**: How to prevent deadlocks in library code by not capturing the synchronization context
-**What can go wrong**: Omitting `ConfigureAwait(false)` in library code can cause deadlocks when called from UI threads. Never use `.Result` or `.Wait()` - always use `await`.
+### 1. ConfigureAwait(false) in Library Code
+**Implementation**: [HttpGetCallService.cs:24](AsyncSpark/HttpGetCall/HttpGetCallService.cs#L24), [OpenWeatherMapWeatherService.cs:31](AsyncSpark.Weather/Services/OpenWeatherMapWeatherService.cs#L31)  
+**Pattern**: All library async methods use `.ConfigureAwait(false)` to prevent deadlocks when consumed by UI threads.  
+**Test**: [HttpGetCallServiceTests.cs](AsyncSpark.Tests/HttpGetCall/HttpGetCallServiceTests.cs)
 
-### 2. Cancellation Tokens End-to-End
-**Where to look**: [RemoteController.cs:58-78](AsyncSpark.Web/Controllers/Api/RemoteController.cs#L58-L78) and [AsyncMockService.cs:80-109](AsyncSpark/Services/AsyncMockService.cs#L80-L109)
-**What to learn**: How to pass cancellation tokens from HTTP requests through the entire call chain
-**What can go wrong**: Ignoring cancellation means wasting resources on work that nobody needs anymore. Always wire `CancellationToken` through your async methods.
+### 2. CancellationToken Threading
+**Implementation**: [RemoteController.cs:26](AsyncSpark.Web/Controllers/Api/RemoteController.cs#L26), [AsyncMockService.cs:112](AsyncSpark/Services/AsyncMockService.cs#L112)  
+**Pattern**: CancellationToken passed from HTTP request through entire call chain for graceful cancellation.  
+**Test**: [CancellationPatternsControllerTests.cs](AsyncSpark.Tests/Controllers/CancellationPatternsControllerTests.cs)
 
-### 3. Task.WhenAll for Concurrency
-**Where to look**: [BulkCallsController.cs:62](AsyncSpark.Web/Controllers/BulkCallsController.cs#L62)
-**What to learn**: How to execute multiple async operations concurrently and wait for all to complete
-**What can go wrong**: Using a `foreach` loop with `await` inside runs operations sequentially. Use `Task.WhenAll` to run them in parallel.
+### 3. Task.WhenAll for Parallel Execution
+**Implementation**: [BulkCallsController.cs:62](AsyncSpark.Web/Controllers/BulkCallsController.cs#L62), [ConcurrencyPatternsController.cs:149](AsyncSpark.Web/Controllers/Api/ConcurrencyPatternsController.cs#L149)  
+**Pattern**: Execute multiple async operations concurrently and wait for all completions.  
+**Test**: [ConcurrencyPatternsControllerTests.cs](AsyncSpark.Tests/Controllers/ConcurrencyPatternsControllerTests.cs)
 
-### 4. Timeouts with Polly
-**Where to look**: [PollyController.cs:32-53](AsyncSpark.Web/Controllers/PollyController.cs#L32-L53)
-**What to learn**: How to implement retry policies with exponential backoff and jitter
-**What can go wrong**: Without timeouts and retries, transient failures become permanent failures. Always protect external calls.
+### 4. SemaphoreSlim for Throttling
+**Implementation**: [BulkCallsController.cs:28](AsyncSpark.Web/Controllers/BulkCallsController.cs#L28)  
+**Pattern**: Limit concurrent operations with SemaphoreSlim to prevent resource exhaustion.  
+**Test**: Demonstrated in concurrency controller tests
 
-### 5. Semaphore for Throttling
-**Where to look**: [BulkCallsController.cs:28-58](AsyncSpark.Web/Controllers/BulkCallsController.cs#L28-L58)
-**What to learn**: How to limit concurrent operations using `SemaphoreSlim`
-**What can go wrong**: Unbounded concurrency can overwhelm downstream services or exhaust connection pools.
+### 5. Polly Resilience Policies
+**Implementation**: [Program.cs:26](AsyncSpark.Web/Program.cs#L26) via WebSpark.HttpClientUtility  
+**Pattern**: Retry with exponential backoff, timeouts, circuit breakers for external API calls.  
+**Test**: [PollyResilienceTests.cs](AsyncSpark.Tests/Resilience/PollyResilienceTests.cs)
 
 ### 6. Decorator Pattern for Cross-Cutting Concerns
-**Where to look**: [Program.cs:68-82](AsyncSpark.Web/Program.cs#L68-L82)
-**What to learn**: How to compose behavior (logging, caching) around async operations cleanly
-**What can go wrong**: Mixing cross-cutting concerns into business logic creates unmaintainable code.
+**Implementation**: [HttpGetCallServiceTelemetry.cs](AsyncSpark/HttpGetCall/HttpGetCallServiceTelemetry.cs), [Program.cs:74](AsyncSpark.Web/Program.cs#L74)  
+**Pattern**: Wrap services with decorators for logging, telemetry, caching without modifying business logic.  
+**Constitution**: Principle IV mandates decorator pattern for cross-cutting concerns
 
-## Features
+### 7. Fire-and-Forget with Safety
+**Implementation**: [FireAndForgetUtility.cs](AsyncSpark/FireAndForget/FireAndForgetUtility.cs)  
+**Pattern**: Safely execute fire-and-forget tasks with exception handling and logging.  
+**Test**: [AsyncFireAndForgetUtilityTests.cs](AsyncSpark.Tests/FireAndForget/AsyncFireAndForgetUtilityTests.cs)
 
-- **[?] Modern API Documentation** - Beautiful, interactive API docs using Scalar
-- **[>] Async Programming Patterns** - Real-world examples of async/await best practices
-- **[!] Resilience with Polly** - Retry policies, circuit breakers, and fallback strategies
-- **[+] Decorator Pattern** - Clean, maintainable code architecture
-- **[*] OpenWeather Integration** - Live API integration examples
-- **[#] .NET 10** - Built on the latest .NET framework
+### 8. No Blocking Calls
+**All Controllers**: Never use `.Result`, `.Wait()`, or `.GetAwaiter().GetResult()` - always `await`.  
+**Enforcement**: .editorconfig rule CA2007 treats missing async patterns as errors.
+
+## Constitution-Driven Development
+
+AsyncSpark uses a formalized constitution to enforce coding standards and architectural patterns.
+
+**Constitution**: [.documentation/memory/constitution.md](.documentation/memory/constitution.md)  
+**Version**: 1.0.0 | **Ratified**: 2026-02-09
+
+### Five Core Principles
+
+1. **Modern .NET Standards**: .NET 10+, nullable reference types, implicit usings, file-scoped namespaces
+2. **Async/Await Best Practices**: ConfigureAwait(false) in libraries, CancellationToken threading, no blocking calls
+3. **Testing Standards**: MSTest + Moq, 80% code coverage enforced in CI/CD, AAA pattern
+4. **Dependency Injection & Architecture**: Interface-based design, constructor injection with null validation, decorator pattern
+5. **Resilience, Documentation & Logging**: Polly policies, XML documentation, structured logging with ILogger<T>
+
+### Automated Compliance
+
+- **Site Audit**: `/speckit.site-audit` - Comprehensive codebase audit against constitution
+- **PR Review**: `/speckit.pr-review` - Constitution-aware pull request reviews
+- **CI/CD Enforcement**: GitHub Actions fails builds on coverage < 80% or async violations
+- **Audit Reports**: [.documentation/copilot/audit/](.documentation/copilot/audit/)
+
+**Latest Audit**: [2026-02-09_results.md](.documentation/copilot/audit/2026-02-09_results.md) - 90% Constitution compliance
 
 ## API Documentation with Scalar
 
-This project features stunning API documentation powered by **Scalar**, organized by async learning concepts. After running the application, explore:
+Interactive API documentation using Scalar v2.12.36 with OpenAPI 3.1 specification.
 
-- **Interactive API Docs**: Visit `/scalar/v1` for the beautiful Scalar UI
-- **OpenAPI Specification**: Access `/openapi/v1.json` for the spec
-- **Live Demo**: [https://AsyncSpark.azurewebsites.net/scalar/v1](https://AsyncSpark.azurewebsites.net/scalar/v1)
-- **Learning Guide**: See [API_LEARNING_GUIDE.md](API_LEARNING_GUIDE.md) for a structured learning path
+**Endpoints**:
+- Interactive Docs: `/scalar/v1`
+- OpenAPI Spec: `/openapi/v1.json`
+- Live Demo: [asyncspark.azurewebsites.net/scalar/v1](https://asyncspark.azurewebsites.net/scalar/v1)
 
-### API Endpoints by Learning Concept
+**Features**: Dark/light mode, auto-generated code examples (C#, JavaScript, Python, cURL, HTTP), tag-based organization, live request testing, mobile-friendly
 
-The API is organized into **5 learning modules**, each teaching specific async patterns:
+### API Endpoint Categories
 
-1. **Async Basics** (`/api/weather/*`) - Timeouts, cancellation, retry, and parallel calls with real weather data
-2. **Cancellation Patterns** (`/api/cancellation/*`) - Proper cancellation token usage, linked tokens, and cleanup
-3. **Concurrency & Parallelism** (`/api/concurrency/*`) - Sequential vs parallel vs throttled execution
-4. **Resilience & Timeouts** (`/api/remote/*`) - Production-ready timeout and retry patterns
-5. **Monitoring & Health** (`/status`, `/health`) - Application status and health checks
+**Cancellation Patterns** (`/api/cancellation/*`) - Timeout, cancellation, linked tokens, cleanup patterns  
+**Concurrency Patterns** (`/api/concurrency/*`) - Sequential vs parallel vs throttled execution comparisons  
+**Remote Operations** (`/api/remote/*`) - Timeout and retry pattern demonstrations  
+**Weather Patterns** (`/api/weather/*`) - Real OpenWeatherMap API integration with caching, retry, parallel calls  
+**Health & Status** (`/health`, `/status`, `/api/status`) - Health checks, application status, build version
 
-**See the [API Learning Guide](API_LEARNING_GUIDE.md) for detailed endpoint documentation, learning paths, and testing guide.**
+**Detailed Documentation**: [API_LEARNING_GUIDE.md](.documentation/guides/API_LEARNING_GUIDE.md)
 
-Scalar provides:
-- [?] Beautiful, modern UI with dark/light mode
-- [>] Auto-generated code examples in multiple languages (C#, JavaScript, Python, cURL, and more)
-- [?] Fast, responsive interface
-- [+] Advanced search and filtering
-- [+] Mobile-friendly design
-- [>] **Tags for concept-based navigation** - endpoints grouped by learning objective
+## Technology Stack
 
-## Articles & Resources
+**Framework**: .NET 10.0  
+**Web**: ASP.NET Core MVC + Web API  
+**Testing**: MSTest 4.1.0, Moq 4.20.72, coverlet.collector 6.0.4 (80% coverage enforced)  
+**Resilience**: Polly 8.6.5, Microsoft.Extensions.Http.Resilience 10.2.0  
+**HTTP Utilities**: WebSpark.HttpClientUtility 2.2.0 (caching, telemetry, resilience)  
+**API Documentation**: Scalar.AspNetCore 2.12.36, Microsoft.AspNetCore.OpenApi 10.0.2  
+**Azure**: Azure.Identity 1.17.1 (Key Vault integration)  
+**UI**: WebSpark.Bootswatch 1.34.0 (theme switcher)  
+**Markdown**: Westwind.AspNetCore.Markdown 3.31.0  
+**External API**: OpenWeatherMap
 
-### Async Programming Articles
-- [Cancellation Tokens in C#](https://markhazleton.com/cancellation-token.html)
-- [Async and Decorator Pattern](https://markhazleton.com/decorator-pattern-http-client.html)
-- [Cancel Asynchronous Operations](https://johnthiriet.com/cancel-asynchronous-operation-in-csharp/)
-- [Going Async with Async Command](https://johnthiriet.com/mvvm-going-async-with-async-command/)
-
-## Hosting
-Live demo hosted at [https://AsyncSpark.azurewebsites.net/](https://AsyncSpark.azurewebsites.net/)
-## Additional Resources
-
-### Async & Await Best Practices
-- [Await and UI and Deadlocks](https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/?WT.mc_id=friends-0000-jamont)
-- [Stop Calling .Result](https://montemagno.com/c-sharp-developers-stop-calling-dot-result/)
-- [Async Task with Timeout](https://codereview.stackexchange.com/questions/113108/async-task-with-timeout)
-- [Cancel Async Tasks After a Period of Time](https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/async/cancel-async-tasks-after-a-period-of-time)
-- [Crafting a Task.TimeoutAfter Method](https://devblogs.microsoft.com/pfxteam/crafting-a-task-timeoutafter-method/)
-- [Asynchronously Wait for Task with Timeout](https://stackoverflow.com/questions/4238345/asynchronously-wait-for-taskt-to-complete-with-timeout)
-
-### Polly Resilience Resources
-- [Polly Project](http://www.thepollyproject.org/) - .NET resilience and transient-fault-handling library
-- [Using Context to Obtain Retry Count](https://www.stevejgordon.co.uk/polly-using-context-to-obtain-retry-count-diagnostics)
-- [Retry and Circuit Breaker Patterns](https://medium.com/@therealjordanlee/retry-circuit-breaker-patterns-in-c-with-polly-9aa24c5fe23a)
-
-### API Documentation
+**Development Tools**: User Secrets, Docker support (Linux), npm integration for frontend assets, .editorconfig
 - [Scalar Documentation](https://github.com/scalar/scalar) - Modern API documentation tool
 - [Scalar NuGet Package](https://www.nuget.org/packages/Scalar.AspNetCore)
 - [Microsoft OpenAPI Documentation](https://learn.microsoft.com/aspnet/core/fundamentals/openapi)
