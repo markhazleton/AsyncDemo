@@ -136,66 +136,120 @@ Interactive API documentation using Scalar v2.12.36 with OpenAPI 3.1 specificati
 **External API**: OpenWeatherMap
 
 **Development Tools**: User Secrets, Docker support (Linux), npm integration for frontend assets, .editorconfig
-- [Scalar Documentation](https://github.com/scalar/scalar) - Modern API documentation tool
-- [Scalar NuGet Package](https://www.nuget.org/packages/Scalar.AspNetCore)
-- [Microsoft OpenAPI Documentation](https://learn.microsoft.com/aspnet/core/fundamentals/openapi)
-
 ## Getting Started
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/markhazleton/AsyncSpark.git
-   cd AsyncSpark
-   ```
+### Prerequisites
+- .NET 10 SDK
+- Node.js 20+ (for npm build)
+- (Optional) OpenWeatherMap API key for weather endpoints
 
-2. **Build the solution**
-   ```bash
-   dotnet build
-   ```
+### Quick Start
 
-3. **Run the web application**
-   ```bash
-   dotnet run --project AsyncSpark.Web
-   ```
+```bash
+# Clone repository
+git clone https://github.com/markhazleton/AsyncSpark.git
+cd AsyncSpark
 
-4. **Explore the API documentation**
-   - Open your browser to `https://localhost:5001/scalar/v1`
-   - View the beautiful Scalar-powered API documentation organized by learning concepts
-   - Try out the interactive examples in each category
+# Install npm dependencies
+cd AsyncSpark.Web
+npm ci
 
-5. **Follow the learning path**
-   - Read the [API Learning Guide](API_LEARNING_GUIDE.md) for structured learning
-   - Start with "Async Basics" endpoints
-   - Progress through cancellation, concurrency, and resilience patterns
-   - Review the code references linked in endpoint descriptions
+# Configure OpenWeatherMap API key (optional)
+dotnet user-secrets set "OpenWeatherMapApiKey" "your-api-key-here"
+cd ..
 
-6. **Run the tests**
-   ```bash
-   dotnet test
-   ```
-   - Explore tests that demonstrate resilience patterns
-   - See simulated transient failures with Polly
-   - Learn from cancellation and concurrency test examples
+# Build solution
+dotnet build --configuration Release
 
-## Technologies
+# Run tests with coverage
+dotnet test --configuration Release --collect:"XPlat Code Coverage"
 
-- **.NET 10** - Latest .NET framework
-- **ASP.NET Core** - Web framework
-- **Scalar** - Beautiful API documentation
-- **Polly** - Resilience and transient-fault-handling
-- **OpenWeatherMap API** - Weather data integration
+# Run web application
+dotnet run --project AsyncSpark.Web
+```
+
+### Explore the Application
+
+1. **API Documentation**: Navigate to `https://localhost:5001/scalar/v1`
+2. **Test Endpoints**: Use Scalar UI to execute live API requests
+3. **Health Check**: Visit `/health` for application health status
+4. **Status Page**: Visit `/status` for build version and configuration
+
+### Run Constitution Audit
+
+```bash
+# In GitHub Copilot Chat
+/speckit.site-audit
+```
+
+Generates comprehensive audit report in `.documentation/copilot/audit/` validating:
+- Async/await best practices compliance
+- ConfigureAwait(false) usage in library code
+- Code coverage percentages
+- XML documentation coverage
+- Dependency vulnerabilities
+- Constitution principle adherence
+
+## CI/CD Pipeline
+
+**GitHub Actions**: [.github/workflows/main_asyncspark.yml](.github/workflows/main_asyncspark.yml)
+
+**Build Steps**:
+1. Checkout code
+2. Setup .NET 10
+3. Setup Node.js 20
+4. Install npm dependencies (`npm ci`)
+5. Build solution (`dotnet build`)
+6. **Run tests with coverage collection**
+7. **Validate 80% coverage threshold** (build fails if < 80%)
+8. Publish artifacts
+9. Deploy to Azure App Service
+
+**Enforcement**: Pull requests cannot merge without passing coverage threshold.
+
+## SpecKit Development Workflow
+
+SpecKit agents provide constitution-aware development assistance:
+
+- `/speckit.constitution` - Create or update coding standards
+- `/speckit.site-audit` - Comprehensive codebase audit
+- `/speckit.pr-review` - Constitution-aware PR reviews
+- `/speckit.specify` - Create feature specifications
+- `/speckit.plan` - Generate implementation plans
+- `/speckit.tasks` - Break down work into actionable tasks
+- `/speckit.implement` - Execute tasks with validation
+- `/speckit.quickfix` - Rapid fixes with constitution validation
+
+**Documentation**: [.github/agents/](.github/agents/), [.github/prompts/](.github/prompts/)
+
+## Additional Resources
+
+**Async Programming**:
+- [Cancellation Tokens in C#](https://markhazleton.com/cancellation-token.html) - Mark Hazleton
+- [Async and Decorator Pattern](https://markhazleton.com/decorator-pattern-http-client.html) - Mark Hazleton
+- [Await and UI Deadlocks](https://devblogs.microsoft.com/pfxteam/await-and-ui-and-deadlocks-oh-my/) - Microsoft
+- [Stop Calling .Result](https://montemagno.com/c-sharp-developers-stop-calling-dot-result/) - James Montemagno
+
+**Polly Resilience**:
+- [Polly Project](http://www.thepollyproject.org/) - Official documentation
+- [Retry and Circuit Breaker Patterns](https://medium.com/@therealjordanlee/retry-circuit-breaker-patterns-in-c-with-polly-9aa24c5fe23a)
+
+**API Documentation**:
+- [Scalar GitHub](https://github.com/scalar/scalar) - Modern API reference tool
+- [Microsoft OpenAPI Docs](https://learn.microsoft.com/aspnet/core/fundamentals/openapi)
 
 ## License
 
-MIT License - see LICENSE file for details
+MIT License - See [LICENSE.txt](LICENSE.txt) for details
 
 ## Author
 
-**Mark Hazleton**
-- Website: [markhazleton.com](https://markhazleton.com)
-- Email: mark.hazleton@controlorigins.com
+**Mark Hazleton**  
+Website: [markhazleton.com](https://markhazleton.com)  
+Email: mark.hazleton@controlorigins.com  
+GitHub: [@markhazleton](https://github.com/markhazleton)
 
 ---
 
-**Built with [love] on .NET 10 | Powered by Scalar API Documentation**
+**AsyncSpark** - Production-ready async patterns for .NET 10 | Built with constitution-driven development | API documentation powered by Scalar
 

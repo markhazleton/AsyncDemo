@@ -18,7 +18,7 @@ public class AsyncMockService
         {
             ct.ThrowIfCancellationRequested();
             // Simulate work
-            await Task.Delay(1000, ct);
+            await Task.Delay(1000, ct).ConfigureAwait(false);
         }
     }
     /// <summary>
@@ -99,13 +99,13 @@ public class AsyncMockService
         if (completedTask == task)
         {
             // Extract the result, the task is finished and the await will return immediately
-            var result = await task;
+            var result = await task.ConfigureAwait(false);
 
             // Set the taskCompletionSource result
             taskCompletionSource.TrySetResult(result);
         }
         // Return the result of the TaskCompletionSource.Task
-        return await taskCompletionSource.Task;
+        return await taskCompletionSource.Task.ConfigureAwait(false);
     }
     public static async Task LongRunningTask(
         string name,
@@ -125,7 +125,7 @@ public class AsyncMockService
                 try
                 {
                     ct.ThrowIfCancellationRequested();
-                    await PerformTaskAsync(name, delay, throwEx, ct);
+                    await PerformTaskAsync(name, delay, throwEx, ct).ConfigureAwait(false);
                 }
                 catch (TaskCanceledException ex)
                 {
@@ -158,7 +158,7 @@ public class AsyncMockService
     }
     public static async Task PerformTaskAsync(string name, int delay, bool throwEx, CancellationToken ct = default)
     {
-        await Task.Delay(delay, ct);
+        await Task.Delay(delay, ct).ConfigureAwait(false);
         ct.ThrowIfCancellationRequested();
 
         if (throwEx)

@@ -12,7 +12,6 @@
     <AssemblyVersion>10.$([System.DateTime]::UtcNow.ToString(yyMM)).$([System.DateTime]::UtcNow.ToString(ddHH)).$([System.DateTime]::UtcNow.ToString(mmss))</AssemblyVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="WebSpark.HttpClientUtility" Version="2.2.0" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,10 @@
+# AsyncSpark.Console .editorconfig
+# Console apps may run on synchronization contexts
+# Override CA2007 rule for Console project
+
+root = false
+
+[*.cs]
+# Console applications don't typically have synchronization contexts
+# ConfigureAwait is optional but not critical
+dotnet_diagnostic.CA2007.severity = none

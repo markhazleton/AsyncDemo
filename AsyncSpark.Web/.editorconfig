@@ -1,0 +1,9 @@
+# AsyncSpark.Web .editorconfig
+# ASP.NET Core controllers don't need ConfigureAwait(false)
+# Override CA2007 rule for Web project only
+
+root = false
+
+[*.cs]
+# ASP.NET Core has no synchronization context, so ConfigureAwait is unnecessary
+dotnet_diagnostic.CA2007.severity = none

@@ -3,121 +3,124 @@
 public class CurrentConditionsResponse
 {
     /// <summary>
-    /// A description of any error that occurred
+    /// A description of any error that occurred (only present in error responses)
     /// </summary>
-    [JsonProperty("message")]
-    public required string Message { get; set; }
+    [JsonPropertyName("message")]
+    public string? Message { get; set; }
 
-    [JsonProperty("id")]
+    [JsonPropertyName("id")]
     public int CityId { get; set; }
 
-    [JsonProperty("name")]
+    [JsonPropertyName("name")]
     public required string Name { get; set; }
 
-    [JsonProperty("coord")]
+    [JsonPropertyName("coord")]
     public required Coordinates Coordintates { get; set; }
 
-    [JsonProperty("dt")]
+    [JsonPropertyName("dt")]
     public int ObservationTime { get; set; }
 
-    [JsonProperty("weather")]
+    [JsonPropertyName("weather")]
     public required ObservedConditions[] ObservedConditions { get; set; }
 
-    [JsonProperty("visibility")]
+    [JsonPropertyName("visibility")]
     public int Visibility { get; set; }
 
-    [JsonProperty("clouds")]
+    [JsonPropertyName("clouds")]
     public required Clouds Clouds { get; set; }
 
-    [JsonProperty("rain")]
-    public required RainData Rain { get; set; }
+    /// <summary>
+    /// Rain data (only present when it's raining)
+    /// </summary>
+    [JsonPropertyName("rain")]
+    public RainData? Rain { get; set; }
 
-    [JsonProperty("main")]
+    [JsonPropertyName("main")]
     public required ObservationData ObservationData { get; set; }
 
-    [JsonProperty("wind")]
+    [JsonPropertyName("wind")]
     public required WindData WindData { get; set; }
 
-    [JsonProperty("sys")]
+    [JsonPropertyName("sys")]
     public required LocationDetails LocationDetails { get; set; }
 
-    [JsonProperty("timezone")]
+    [JsonPropertyName("timezone")]
     public int TimezoneOffset { get; set; }
 }
 
 
 public class Coordinates
 {
-    [JsonProperty("lon")]
+    [JsonPropertyName("lon")]
     public float Longitude { get; set; }
 
-    [JsonProperty("lat")]
+    [JsonPropertyName("lat")]
     public float Latitude { get; set; }
 }
 
 public class ObservationData
 {
-    [JsonProperty("temp")]
+    [JsonPropertyName("temp")]
     public float Temperature { get; set; }
 
-    [JsonProperty("pressure")]
+    [JsonPropertyName("pressure")]
     public int Pressure { get; set; }
 
-    [JsonProperty("humidity")]
+    [JsonPropertyName("humidity")]
     public int Humidity { get; set; }
 
-    [JsonProperty("temp_min")]
+    [JsonPropertyName("temp_min")]
     public float MinTemperature { get; set; }
 
-    [JsonProperty("temp_max")]
+    [JsonPropertyName("temp_max")]
     public float MaxTemperature { get; set; }
 }
 
 public class WindData
 {
-    [JsonProperty("speed")]
+    [JsonPropertyName("speed")]
     public float Speed { get; set; }
 
-    [JsonProperty("deg")]
+    [JsonPropertyName("deg")]
     public int Degrees { get; set; }
 }
 
 public class Clouds
 {
-    [JsonProperty("all")]
+    [JsonPropertyName("all")]
     public int CloudCover { get; set; }
 }
 
 public class RainData
 {
-    [JsonProperty("1h")]
+    [JsonPropertyName("1h")]
     public double RainfallOneHour { get; set; }
 }
 
 public class LocationDetails
 {
-    [JsonProperty("country")]
+    [JsonPropertyName("country")]
     public required string country { get; set; }
 
-    [JsonProperty("sunrise")]
+    [JsonPropertyName("sunrise")]
     public int Sunrise { get; set; }
 
-    [JsonProperty("sunset")]
+    [JsonPropertyName("sunset")]
     public int Sunset { get; set; }
 }
 
 public class ObservedConditions
 {
-    [JsonProperty("id")]
+    [JsonPropertyName("id")]
     public int DescriptionId { get; set; }
 
-    [JsonProperty("main")]
+    [JsonPropertyName("main")]
     public required string Conditions { get; set; }
 
-    [JsonProperty("description")]
+    [JsonPropertyName("description")]
     public required string ConditionsDetail { get; set; }
 
-    [JsonProperty("icon")]
+    [JsonPropertyName("icon")]
     public required string Icon { get; set; }
 }
 

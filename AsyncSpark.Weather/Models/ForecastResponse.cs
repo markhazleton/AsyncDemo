@@ -7,64 +7,70 @@ public class ForecastResponse
     public required string cod { get; set; }
     public float message { get; set; }
 
-    [JsonProperty("list")]
+    [JsonPropertyName("list")]
     public required OpenWeatherForecastData[] ForecastPoints { get; set; }
 
-    [JsonProperty("city")]
+    [JsonPropertyName("city")]
     public required OpenWeatherForecastLocation Location { get; set; }
 }
 
 
 public class OpenWeatherForecastData
 {
-    [JsonProperty("dt")]
+    [JsonPropertyName("dt")]
     public int Date { get; set; }
 
-    [JsonProperty("main")]
+    [JsonPropertyName("main")]
     public required OpenWeatherForecastWeatherData WeatherData { get; set; }
 
-    [JsonProperty("weather")]
+    [JsonPropertyName("weather")]
     public required OpenWeatherForecastConditions[] Conditions { get; set; }
 
-    [JsonProperty("clouds")]
+    [JsonPropertyName("clouds")]
     public required OpenWeatherForecastClouds Clouds { get; set; }
 
-    [JsonProperty("wind")]
+    [JsonPropertyName("wind")]
     public required OpenWeatherForecastWind Wind { get; set; }
     public required string dt_txt { get; set; }
 
-    [JsonProperty("rain")]
-    public required OpenWeatherForecastRain Rain { get; set; }
+    /// <summary>
+    /// Rain data (only present when rain is forecasted)
+    /// </summary>
+    [JsonPropertyName("rain")]
+    public OpenWeatherForecastRain? Rain { get; set; }
 
-    [JsonProperty("snow")]
-    public required OpenWeatherForecastSnow Snow { get; set; }
+    /// <summary>
+    /// Snow data (only present when snow is forecasted)
+    /// </summary>
+    [JsonPropertyName("snow")]
+    public OpenWeatherForecastSnow? Snow { get; set; }
 }
 
 
 public class OpenWeatherForecastLocation
 {
-    [JsonProperty("id")]
+    [JsonPropertyName("id")]
     public int Id { get; set; }
 
-    [JsonProperty("name")]
+    [JsonPropertyName("name")]
     public required string Name { get; set; }
 
-    [JsonProperty("coord")]
+    [JsonPropertyName("coord")]
     public required OpenWeatherForecastCoordinates Coordinates { get; set; }
 
-    [JsonProperty("country")]
+    [JsonPropertyName("country")]
     public required string Country { get; set; }
 
-    [JsonProperty("timezone")]
+    [JsonPropertyName("timezone")]
     public int TimezoneOffset { get; set; }
 }
 
 public class OpenWeatherForecastCoordinates
 {
-    [JsonProperty("lat")]
+    [JsonPropertyName("lat")]
     public float Latitude { get; set; }
 
-    [JsonProperty("lon")]
+    [JsonPropertyName("lon")]
     public float Longitude { get; set; }
 }
 
@@ -72,45 +78,45 @@ public class OpenWeatherForecastCoordinates
 
 public class OpenWeatherForecastWeatherData
 {
-    [JsonProperty("temp")]
+    [JsonPropertyName("temp")]
     public float Temperature { get; set; }
     public float temp_min { get; set; }
     public float temp_max { get; set; }
 
-    [JsonProperty("Pressure")]
+    [JsonPropertyName("pressure")]
     public float pressure { get; set; }
     public float sea_level { get; set; }
     public float grnd_level { get; set; }
 
-    [JsonProperty("humidity")]
+    [JsonPropertyName("humidity")]
     public int Humidity { get; set; }
 }
 
 public class OpenWeatherForecastClouds
 {
-    [JsonProperty("all")]
+    [JsonPropertyName("all")]
     public int CloudCover { get; set; }
 }
 
 public class OpenWeatherForecastWind
 {
-    [JsonProperty("speed")]
+    [JsonPropertyName("speed")]
     public float WindSpeed { get; set; }
 
-    [JsonProperty("deg")]
+    [JsonPropertyName("deg")]
     public int WindDirectionDegrees { get; set; }
 }
 
 
 public class OpenWeatherForecastRain
 {
-    [JsonProperty("3h")]
+    [JsonPropertyName("3h")]
     public float RainfallThreeHours { get; set; }
 }
 
 public class OpenWeatherForecastSnow
 {
-    [JsonProperty("3h")]
+    [JsonPropertyName("3h")]
     public float SnowfallThreeHours { get; set; }
 }
 
