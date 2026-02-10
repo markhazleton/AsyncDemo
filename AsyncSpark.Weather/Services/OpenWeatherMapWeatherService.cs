@@ -30,7 +30,7 @@ public class OpenWeatherMapWeatherService : IWeatherService
             CacheDurationMinutes = 90
         };
 
-        var result = await _requestService.HttpSendRequestResultAsync(request);
+        var result = await _requestService.HttpSendRequestResultAsync(request).ConfigureAwait(false);
 
         if (!result.IsSuccessStatusCode || result.ResponseResults == null)
         {
@@ -60,7 +60,7 @@ public class OpenWeatherMapWeatherService : IWeatherService
             CacheDurationMinutes = 30
         };
 
-        var result = await _requestService.HttpSendRequestResultAsync(request);
+        var result = await _requestService.HttpSendRequestResultAsync(request).ConfigureAwait(false);
 
         if (!result.IsSuccessStatusCode || result.ResponseResults == null)
         {

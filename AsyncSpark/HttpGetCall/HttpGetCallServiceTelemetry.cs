@@ -3,6 +3,10 @@ using System.Diagnostics;
 
 namespace AsyncSpark.HttpGetCall;
 
+/// <summary>
+/// Telemetry decorator for IHttpGetCallService that adds performance tracking and timing metrics.
+/// Implements the decorator pattern to add cross-cutting telemetry concerns without modifying core business logic.
+/// </summary>
 public class HttpGetCallServiceTelemetry : IHttpGetCallService
 {
     private readonly ILogger<HttpGetCallServiceTelemetry> _logger;
@@ -10,6 +14,8 @@ public class HttpGetCallServiceTelemetry : IHttpGetCallService
 
     public HttpGetCallServiceTelemetry(ILogger<HttpGetCallServiceTelemetry> logger, IHttpGetCallService service)
     {
+        ArgumentNullException.ThrowIfNull(logger);
+        ArgumentNullException.ThrowIfNull(service);
         _logger = logger;
         _service = service;
     }
@@ -20,7 +26,7 @@ public class HttpGetCallServiceTelemetry : IHttpGetCallService
         var response = new HttpGetCallResults(statusCall);
         try
         {
-            response = await _service.GetAsync<T>(statusCall, ct);
+            response = await _service.GetAsync<T>(statusCall, ct).ConfigureAwait(false);
         }
         catch (Exception ex)
         {

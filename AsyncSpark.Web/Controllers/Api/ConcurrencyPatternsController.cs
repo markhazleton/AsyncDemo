@@ -130,16 +130,18 @@ public class ConcurrencyPatternsController : ControllerBase
             var opStopwatch = System.Diagnostics.Stopwatch.StartNew();
 
             var task = _mockService.LongRunningOperation(iterationsPerOperation)
-                .ContinueWith(t =>
+                .ContinueWith(async t =>
                 {
                     opStopwatch.Stop();
+                    var result = await t;
                     return (object)new
                     {
                         operationNumber,
-                        result = t.Result,
+                        result,
                         elapsedMilliseconds = opStopwatch.ElapsedMilliseconds
                     };
-                });
+                }, TaskContinuationOptions.None)
+                .Unwrap();
 
             tasks.Add(task);
         }

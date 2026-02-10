@@ -34,10 +34,15 @@ namespace AsyncSpark.Web.Controllers
                     3,
                     retryAttempt => TimeSpan.FromSeconds(Math.Pow(1, retryAttempt) / 2)
                                     + TimeSpan.FromSeconds(Jitter.Next(0, 1)),
-                    onRetry: (response, timespan, retryCount, context) =>
+                    onRetry: async (response, timespan, retryCount, context) =>
                     {
                         context[RetryCountKey] = retryCount;
-                        var message = response.Result?.StatusCode.ToString() ?? "Request failed without response.";
+                        var message = "Request failed without response.";
+                        if (response.Result != null)
+                        {
+                            var statusCode = await response.Result.Content.ReadAsStringAsync();
+                            message = response.Result.StatusCode.ToString();
+                        }
                         if (response.Exception != null)
                         {
                             message += $" Exception: {response.Exception.Message}";
@@ -49,7 +54,8 @@ namespace AsyncSpark.Web.Controllers
                             results?.Add($"Retry {retryCount}: {message}");
                         }
 
-                        _logger.LogWarning($"Request failed with {response.Result?.StatusCode}. Waiting {timespan} before next retry. Retry attempt {retryCount}.");
+                        _logger.LogWarning("Request failed with status. Waiting {Timespan} before next retry. Retry attempt {RetryCount}", timespan, retryCount);
+                        await Task.CompletedTask;
                     });
         }
 
