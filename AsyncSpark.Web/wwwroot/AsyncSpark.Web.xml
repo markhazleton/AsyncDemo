@@ -336,7 +336,7 @@
             using real-world weather API scenarios.
             </remarks>
         </member>
-        <member name="M:AsyncSpark.Web.Controllers.Api.WeatherPatternsController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncSpark.Web.Controllers.Api.WeatherPatternsController},OpenWeatherMapClient.Interfaces.IOpenWeatherMapClient,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AsyncSpark.Web.Controllers.Api.WeatherPatternsController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncSpark.Web.Controllers.Api.WeatherPatternsController},AsyncSpark.Weather.Interfaces.IWeatherService,System.Net.Http.IHttpClientFactory)">
             <summary>
             Initializes a new instance of the WeatherPatternsController
             </summary>
@@ -588,7 +588,7 @@
             <param name="cache">Memory cache instance</param>
             <param name="httpClientFactory">HTTP client factory</param>
         </member>
-        <member name="M:AsyncSpark.Web.Controllers.OpenWeatherController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncSpark.Web.Controllers.OpenWeatherController},OpenWeatherMapClient.Interfaces.IOpenWeatherMapClient,Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Net.Http.IHttpClientFactory)">
+        <member name="M:AsyncSpark.Web.Controllers.OpenWeatherController.#ctor(Microsoft.Extensions.Logging.ILogger{AsyncSpark.Web.Controllers.OpenWeatherController},AsyncSpark.Weather.Interfaces.IWeatherService,Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Net.Http.IHttpClientFactory)">
             <summary>
             OpenWeather Controller for weather data management
             </summary>

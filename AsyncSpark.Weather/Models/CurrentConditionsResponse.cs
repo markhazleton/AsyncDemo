@@ -1,4 +1,4 @@
-﻿namespace OpenWeatherMapClient.Models;
+﻿namespace AsyncSpark.Weather.Models;
 
 public class CurrentConditionsResponse
 {

@@ -9,7 +9,7 @@ namespace AsyncSpark.Web.Controllers;
 /// <param name="weatherService">Weather service instance</param>
 /// <param name="cache">Memory cache instance</param>
 /// <param name="httpClientFactory">HTTP client factory</param>
-public class OpenWeatherController(ILogger<OpenWeatherController> logger, IOpenWeatherMapClient weatherService, IMemoryCache cache, IHttpClientFactory httpClientFactory) : BaseController(logger, httpClientFactory)
+public class OpenWeatherController(ILogger<OpenWeatherController> logger, IWeatherService weatherService, IMemoryCache cache, IHttpClientFactory httpClientFactory) : BaseController(logger, httpClientFactory)
 {
     private const string LocationCacheKey = "LocationCacheKey";
 

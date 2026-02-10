@@ -1,5 +1,5 @@
 ﻿
-namespace OpenWeatherMapClient.Models;
+namespace AsyncSpark.Weather.Models;
 public class ForecastLocation
 {
     public String? Name { get; set; }

@@ -1,5 +1,5 @@
 ﻿
-namespace OpenWeatherMapClient.Models;
+namespace AsyncSpark.Weather.Models;
 
 
 /// <summary>

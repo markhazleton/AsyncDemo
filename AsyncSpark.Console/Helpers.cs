@@ -9,13 +9,13 @@ public static class Helpers
 {
     public static async Task CancelANonCancellableTaskAsync(this AsyncMockService asyncMock)
     {
-        Console.WriteLine(nameof(CancelANonCancellableTaskAsync));
+        System.Console.WriteLine(nameof(CancelANonCancellableTaskAsync));
         using var cancellationTokenSource = new CancellationTokenSource();
         // Listening to key press to cancel
         var keyBoardTask = Task.Run(() =>
         {
-            Console.WriteLine("Press enter to cancel");
-            Console.ReadKey();
+            System.Console.WriteLine("Press enter to cancel");
+            System.Console.ReadKey();
             // Sending the cancellation message
             cancellationTokenSource.Cancel();
         });
@@ -26,25 +26,25 @@ public static class Helpers
             var longRunningTask = asyncMock.LongRunningOperationWithCancellationTokenAsync(100,
                                                                                            cancellationTokenSource.Token).ConfigureAwait(false);
             var result = await longRunningTask;
-            Console.WriteLine("Result {0}", result);
-            Console.WriteLine("Press enter to continue");
+            System.Console.WriteLine("Result {0}", result);
+            System.Console.WriteLine("Press enter to continue");
         }
         catch (TaskCanceledException)
         {
-            Console.WriteLine("Task was cancelled");
+            System.Console.WriteLine("Task was cancelled");
         }
         await keyBoardTask;
     }
 
     public static async Task ExecuteManuallyCancellableTaskAsync(this AsyncMockService asyncMock)
     {
-        Console.WriteLine(nameof(ExecuteManuallyCancellableTaskAsync));
+        System.Console.WriteLine(nameof(ExecuteManuallyCancellableTaskAsync));
         using var cancellationTokenSource = new CancellationTokenSource();
         // Creating a task to listen to keyboard key press
         var keyBoardTask = Task.Run(() =>
         {
-            Console.WriteLine("Press enter to cancel");
-            Console.ReadKey();
+            System.Console.WriteLine("Press enter to cancel");
+            System.Console.ReadKey();
             // Cancel the task
             cancellationTokenSource.Cancel();
         });
@@ -53,40 +53,40 @@ public static class Helpers
         {
             var longRunningTask = AsyncMockService.LongRunningCancellableOperation(500, cancellationTokenSource.Token).ConfigureAwait(false);
             var result = await longRunningTask;
-            Console.WriteLine("Result {0}", result);
-            Console.WriteLine("Press enter to continue");
+            System.Console.WriteLine("Result {0}", result);
+            System.Console.WriteLine("Press enter to continue");
         }
         catch (TaskCanceledException)
         {
-            Console.WriteLine("Task was cancelled");
+            System.Console.WriteLine("Task was cancelled");
         }
         await keyBoardTask;
     }
 
     public static async Task ExecuteTaskAsync(this AsyncMockService asyncMock, bool ConfigureAwait)
     {
-        Console.WriteLine($"{nameof(ExecuteTaskAsync)} START ConfigureAwait:{ConfigureAwait}  Thread:{Environment.CurrentManagedThreadId}");
-        Console.WriteLine("Result {0}", await asyncMock.LongRunningOperation(1000).ConfigureAwait(ConfigureAwait));
-        Console.WriteLine($"{nameof(ExecuteTaskAsync)} END ConfigureAwait:{ConfigureAwait}  Thread:{Environment.CurrentManagedThreadId}\n");
+        System.Console.WriteLine($"{nameof(ExecuteTaskAsync)} START ConfigureAwait:{ConfigureAwait}  Thread:{Environment.CurrentManagedThreadId}");
+        System.Console.WriteLine("Result {0}", await asyncMock.LongRunningOperation(1000).ConfigureAwait(ConfigureAwait));
+        System.Console.WriteLine($"{nameof(ExecuteTaskAsync)} END ConfigureAwait:{ConfigureAwait}  Thread:{Environment.CurrentManagedThreadId}\n");
     }
 
     public static async Task ExecuteTaskWithTimeoutAsync(this AsyncMockService asyncMock, TimeSpan timeSpan)
     {
-        Console.WriteLine(nameof(ExecuteTaskWithTimeoutAsync));
+        System.Console.WriteLine(nameof(ExecuteTaskWithTimeoutAsync));
         using (var cancellationTokenSource = new CancellationTokenSource(timeSpan))
         {
             try
             {
                 var result = await AsyncMockService.LongRunningCancellableOperation(500, cancellationTokenSource.Token).ConfigureAwait(false);
-                Console.WriteLine("Result {0}", result);
+                System.Console.WriteLine("Result {0}", result);
             }
             catch (TaskCanceledException)
             {
-                Console.WriteLine("Task was cancelled");
+                System.Console.WriteLine("Task was cancelled");
             }
         }
-        Console.WriteLine("Press enter to continue");
-        Console.ReadLine();
+        System.Console.WriteLine("Press enter to continue");
+        System.Console.ReadLine();
     }
 }
 public class LoggerAdapter<T> : ILogger<T>

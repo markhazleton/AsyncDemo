@@ -1,6 +1,9 @@
 # Autosave files
 *~
 
+# Windows reserved filenames
+nul
+
 # Visual Studio
 .vs/
 

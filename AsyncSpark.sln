@@ -17,9 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F7553FB1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncSpark.Console", "AsyncSpark.Console\AsyncSpark.Console.csproj", "{A2862922-D76B-48BC-86C0-430CD7690F2F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenWeatherMapClient", "OpenWeatherMapClient\OpenWeatherMapClient.csproj", "{7DFDACA1-F6BE-4CF2-8AF9-2C50E4373EC5}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CancelAsyncWithToken", "CancelAsyncWithToken\CancelAsyncWithToken.csproj", "{4A0FA018-06E3-4E29-8FC6-B1CA5EE40444}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncSpark.Weather", "AsyncSpark.Weather\AsyncSpark.Weather.csproj", "{7DFDACA1-F6BE-4CF2-8AF9-2C50E4373EC5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncSpark.Web", "AsyncSpark.Web\AsyncSpark.Web.csproj", "{F5CEE012-A665-41AC-AE39-7CBE8543934B}"
 EndProject
@@ -45,10 +43,6 @@ Global
 		{7DFDACA1-F6BE-4CF2-8AF9-2C50E4373EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DFDACA1-F6BE-4CF2-8AF9-2C50E4373EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DFDACA1-F6BE-4CF2-8AF9-2C50E4373EC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A0FA018-06E3-4E29-8FC6-B1CA5EE40444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A0FA018-06E3-4E29-8FC6-B1CA5EE40444}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A0FA018-06E3-4E29-8FC6-B1CA5EE40444}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A0FA018-06E3-4E29-8FC6-B1CA5EE40444}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F5CEE012-A665-41AC-AE39-7CBE8543934B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F5CEE012-A665-41AC-AE39-7CBE8543934B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5CEE012-A665-41AC-AE39-7CBE8543934B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -60,7 +54,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{73876C56-8E74-4B8A-9BB7-20420B2A9A25} = {F7553FB1-47B5-4592-848A-01C1476D296E}
 		{A2862922-D76B-48BC-86C0-430CD7690F2F} = {F7553FB1-47B5-4592-848A-01C1476D296E}
-		{4A0FA018-06E3-4E29-8FC6-B1CA5EE40444} = {F7553FB1-47B5-4592-848A-01C1476D296E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2E37BD0A-C762-4810-B82A-CBF7252816F1}

@@ -13,7 +13,7 @@ namespace AsyncSpark.Web.Controllers.Api;
 public class WeatherPatternsController : ControllerBase
 {
     private readonly ILogger<WeatherPatternsController> _logger;
-    private readonly IOpenWeatherMapClient _weatherService;
+    private readonly IWeatherService _weatherService;
     private readonly IHttpClientFactory _httpClientFactory;
 
     /// <summary>
@@ -24,7 +24,7 @@ public class WeatherPatternsController : ControllerBase
     /// <param name="httpClientFactory">HTTP client factory for making requests</param>
     public WeatherPatternsController(
         ILogger<WeatherPatternsController> logger,
-        IOpenWeatherMapClient weatherService,
+        IWeatherService weatherService,
         IHttpClientFactory httpClientFactory)
     {
         _logger = logger;

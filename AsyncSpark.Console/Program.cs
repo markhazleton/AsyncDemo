@@ -1,19 +1,23 @@
-// See https://aka.ms/new-console-template for more information
 using AsyncSpark;
+using AsyncSpark.Console.Demos;
 using AsyncSpark.FireAndForget;
 using Microsoft.Extensions.Logging;
 
+Console.WriteLine($"Program Start: Thread:{Environment.CurrentManagedThreadId}");
+Console.WriteLine();
 
+// Demo 1: Cancellation Token with timeout
+await CancellationTokenDemo.RunAsync(timeoutMilliseconds: 2000);
+
+// Demo 2: Fire and Forget patterns
+Console.WriteLine("=== Fire and Forget Demo ===");
 var logger = new ConsoleLogger();
 var adapterLogger = new LoggerAdapter<FireAndForgetUtility>(logger);
 var cts = new CancellationTokenSource();
 var fireAndForget = new FireAndForgetUtility(adapterLogger);
 
-Console.WriteLine($"Program Start: Thread:{Environment.CurrentManagedThreadId}");
-
 try
 {
-    // Fire off multiple tasks
     fireAndForget.SafeFireAndForget(AsyncMockService.LongRunningTask("A.", delay: 5000, iterations: 1, throwEx: false, logger, cts.Token), cts.Token);
     fireAndForget.SafeFireAndForget(AsyncMockService.LongRunningTask("B.", delay: 4000, iterations: 1, throwEx: false, logger, cts.Token), cts.Token);
     fireAndForget.SafeFireAndForget(AsyncMockService.LongRunningTask("C.", delay: 3000, iterations: 1, throwEx: false, logger, cts.Token), cts.Token);
@@ -41,21 +45,5 @@ finally
     logger.LogInformation("Execution has reached the final block.");
 }
 
-
-
 Console.WriteLine("Program End.");
 Console.ReadLine();
-//var asyncMock = new AsyncMockService();
-//await asyncMock.ExecuteTaskAsync(true).ConfigureAwait(true);
-//Console.WriteLine($"Program After Configure Await True:  Thread:{Environment.CurrentManagedThreadId}");
-//await asyncMock.ExecuteTaskAsync(false).ConfigureAwait(false);
-//Console.WriteLine($"Program After Configure Await False:  Thread:{Environment.CurrentManagedThreadId}");
-//await asyncMock.ExecuteTaskWithTimeoutAsync(TimeSpan.FromSeconds(2));
-//await asyncMock.ExecuteTaskWithTimeoutAsync(TimeSpan.FromSeconds(10));
-//await asyncMock.ExecuteManuallyCancellableTaskAsync();
-//await asyncMock.ExecuteManuallyCancellableTaskAsync();
-//await asyncMock.CancelANonCancellableTaskAsync();
-
-
-
-

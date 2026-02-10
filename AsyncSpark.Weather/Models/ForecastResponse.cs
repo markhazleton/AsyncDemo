@@ -1,5 +1,5 @@
 ﻿
-namespace OpenWeatherMapClient.Models;
+namespace AsyncSpark.Weather.Models;
 #pragma warning disable IDE1006 // Naming Styles
 
 public class ForecastResponse

@@ -5,6 +5,7 @@ using Westwind.AspNetCore.Markdown;
 using Microsoft.AspNetCore.HttpOverrides;
 using WebSpark.Bootswatch;
 using WebSpark.HttpClientUtility;
+using WebSpark.HttpClientUtility.RequestResult;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +22,14 @@ builder.Services.AddEndpointsApiExplorer();
 // Add WebSpark.Bootswatch theme switcher services
 Microsoft.Extensions.DependencyInjection.HttpServiceCollectionExtensions.AddHttpContextAccessor(builder.Services);
 
-// Register WebSpark.HttpClientUtility services (required by Bootswatch)
-builder.Services.AddHttpClientUtility();
+// Register WebSpark.HttpClientUtility services with caching, telemetry, and Newtonsoft.Json
+// This powers both Bootswatch theme fetching and the AsyncSpark.Weather service
+builder.Services.AddHttpClientUtility(options =>
+{
+    options.EnableCaching = true;
+    options.EnableTelemetry = true;
+    options.UseNewtonsoftJson = true;
+});
 
 builder.Services.AddBootswatchThemeSwitcher();
 
@@ -74,20 +81,14 @@ builder.Services.AddScoped<IHttpGetCallService>(serviceProvider =>
     return telemetryService;
 });
 
-// Register the OpenWeatherMapClient with Decorator Pattern
-builder.Services.AddScoped<IOpenWeatherMapClient>(serviceProvider =>
+// Register AsyncSpark.Weather service using WebSpark.HttpClientUtility
+// Caching, telemetry, and resilience are handled by the HttpClientUtility decorator stack
+builder.Services.AddScoped<IWeatherService>(serviceProvider =>
 {
-  string apiKey = builder.Configuration["OpenWeatherMapApiKey"] ?? "KEYMISSING";
-    var logger = serviceProvider.GetRequiredService<ILogger<WeatherServiceClient>>();
-    var loggerLogging = serviceProvider.GetRequiredService<ILogger<WeatherServiceLoggingDecorator>>();
-    var loggerCaching = serviceProvider.GetRequiredService<ILogger<WeatherServiceCachingDecorator>>();
-    var memoryCache = serviceProvider.GetRequiredService<IMemoryCache>();
-    var httpClientFactory = serviceProvider.GetRequiredService<IHttpClientFactory>();
-
-  IOpenWeatherMapClient concreteService = new WeatherServiceClient(apiKey, httpClientFactory, logger);
-    IOpenWeatherMapClient withLoggingDecorator = new WeatherServiceLoggingDecorator(concreteService, loggerLogging);
-    IOpenWeatherMapClient withCachingDecorator = new WeatherServiceCachingDecorator(withLoggingDecorator, memoryCache, loggerCaching);
-    return withCachingDecorator;
+    string apiKey = builder.Configuration["OpenWeatherMapApiKey"] ?? "KEYMISSING";
+    var requestService = serviceProvider.GetRequiredService<IHttpRequestResultService>();
+    var weatherLogger = serviceProvider.GetRequiredService<ILogger<OpenWeatherMapWeatherService>>();
+    return new OpenWeatherMapWeatherService(apiKey, requestService, weatherLogger);
 });
 
 var app = builder.Build();
